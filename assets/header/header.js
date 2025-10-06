@@ -1,0 +1,1 @@
+(()=>{const link=document.getElementById('brandLink');link&&link.addEventListener('click',e=>{const href=link.getAttribute('data-href')||link.getAttribute('href');if(href){e.preventDefault();location.href=href;}});})();

@@ -1,0 +1,1 @@
+(()=>{const y=document.getElementById('yearFooter');if(y)y.textContent=new Date().getFullYear();const b=document.getElementById('backToTop');b&&b.addEventListener('click',e=>{e.preventDefault();try{(document.getElementById('top')||document.body).scrollIntoView({behavior:'smooth',block:'start'})}catch{location.hash='#top'}});})();

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#56ABFF"/>
+      <stop offset="100%" stop-color="#60CDFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1024" height="1024" rx="236" ry="236" fill="url(#g)"/>
+  <text x="512" y="630" text-anchor="middle" font-family="Nunito, -apple-system, system-ui, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif"
+        font-weight="800" font-size="720" fill="#0A1F1A">M</text>
+</svg>

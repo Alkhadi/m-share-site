@@ -1,0 +1,82 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "locale": "en-UK",
+    "brand": "M Share"
+  },
+  "flows": [
+    {
+      "id": "comm",
+      "title": "Communication booster",
+      "minutes": 5,
+      "steps": [
+        {
+          "type": "text",
+          "title": "Warm-up",
+          "body": "Follow the child's lead. Mirror play for 30–60 seconds."
+        },
+        {
+          "type": "multi-select",
+          "title": "Your targets today",
+          "options": [
+            "Request (more/help)",
+            "Choice (A/B)",
+            "Comment (look/uh‑oh)",
+            "Social game (again!)"
+          ],
+          "saveAs": "comm.targets"
+        },
+        {
+          "type": "timer",
+          "seconds": 180,
+          "title": "Play & model",
+          "body": "Model 1–2 word phrases. Pause 5–10 s. Accept all attempts (speech/sign/AAC)."
+        },
+        {
+          "type": "log",
+          "metric": "attempts",
+          "title": "Log attempts",
+          "body": "Count communication attempts (any modality).",
+          "saveAs": "comm.attempts"
+        },
+        {
+          "type": "text",
+          "title": "Wrap",
+          "body": "Celebrate. Snapshot: attempts = {{comm.attempts}}."
+        }
+      ]
+    },
+    {
+      "id": "abc",
+      "title": "Behaviour: ABC coach",
+      "minutes": 6,
+      "steps": [
+        {
+          "type": "text",
+          "title": "Pick one behaviour",
+          "body": "Describe it in plain words (observable)."
+        },
+        {
+          "type": "abc",
+          "title": "Record ABC",
+          "saveAs": "abc.row"
+        },
+        {
+          "type": "checklist",
+          "title": "Teach replacement",
+          "items": [
+            "Give simple way to ask (picture/word)",
+            "Reduce trigger (noise, unclear demand)",
+            "Reinforce calm/ask quickly"
+          ]
+        },
+        {
+          "type": "log",
+          "metric": "abc.count",
+          "title": "How many events today?",
+          "saveAs": "abc.count"
+        }
+      ]
+    }
+  ]
+}
