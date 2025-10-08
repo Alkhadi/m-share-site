@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>Autism Support • M Share</title>
+  <meta name="description" content="Autism support (UK): parent/adult/later‑life guides, clinic checklists & references, and an in‑app coach module you can import into M Share. A4, print‑optimised PDFs with brand header/footer."/>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .hero{background:linear-gradient(180deg,rgba(14,23,42,.65),rgba(14,23,42,.35));border:1px solid var(--b);border-radius:16px;padding:16px 16px 12px;box-shadow:var(--shadow-1)}
+    .row-actions{display:flex;gap:8px;flex-wrap:wrap}
+    .cols-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    .cols-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+    .about p,.card p{max-width:78ch}
+    .muted small{opacity:.9}
+    pre{background:rgba(148,163,184,.12);border:1px solid var(--b);border-radius:12px;padding:10px;overflow:auto}
+    #flowViewer{display:none;margin-top:10px}
+    #flowViewer .tile{border:1px solid var(--b);border-radius:12px;padding:10px}
+    @media print { .no-print{display:none!important} }
+  </style>
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+
+  <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+<link rel="stylesheet" href="assets/css/responsive-fixes.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+</head>
+<body>
+<a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
+<header class="site-header">
+  <div class="container navbar">
+    <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span><span class="brand-text">M Share</span></a>
+    <nav class="main-nav" id="mainNav">
+  <a data-href="index.html">Wellbeing</a>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Neurodevelopmental</div>
+      <a data-href="autism.html">Autism</a>
+      <a data-href="adhd.html">ADHD</a>
+      <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+      <div class="menu-label">Mental Health</div>
+      <a data-href="anxiety.html">Anxiety</a>
+      <a data-href="depression.html">Depression</a>
+      <a data-href="stress.html">Stress</a>
+      <a data-href="sleep.html">Sleep</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Guides</div>
+      <a data-href="breath.html">Breath (how‑to)</a>
+      <a data-href="focus.html">Focus</a>
+      <a data-href="mindfulness.html">Mindfulness</a>
+      <div class="menu-label">Techniques</div>
+      <a data-href="sos-60.html">60‑second Reset</a>
+      <a data-href="box-breathing.html">Box Breathing</a>
+      <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+      <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">General</div>
+      <a data-href="sleep-tools.html">Sleep Tools</a>
+      <a data-href="breath-tools.html">Breath Tools</a>
+      <a data-href="mood-tools.html">Mood Tools</a>
+      <div class="menu-label">Condition‑specific</div>
+      <a data-href="adhd-tools.html">ADHD Tools</a>
+      <a data-href="autism-tools.html">Autism Tools</a>
+      <a data-href="depression-tools.html">Depression Tools</a>
+      <a data-href="anxiety-tools.html">Anxiety Tools</a>
+      <a data-href="stress-tools.html">Stress Tools</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+    <div class="submenu">
+      <a data-href="about.html">About</a>
+      <a data-href="coffee.html">Support Us</a>
+      <a data-href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+    <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+  </div>
+</header>
+
+
+
+
+<main class="container" id="howto">
+  <!-- HERO -->
+  <section class="hero card">
+    <h1>Autism Support (UK)</h1>
+    <p class="muted">Everything in one place: <b>Parent</b>, <b>Adult</b> & <b>Later‑life</b> guides, a <b>Clinic guide</b> with checklists & references, plus an <b>in‑app coach module</b> you can import into M Share. A4 PDFs are print‑optimised with brand header/footer.</p>
+    <div class="row-actions" style="margin-top:8px">
+      <button id="btnPdfParent" class="btn btn-success" type="button">⬇ Parent quick guide (PDF)</button>
+      <button id="btnPdfAdult" class="btn" type="button">⬇ Adult support (PDF)</button>
+      <button id="btnPdfLater" class="btn" type="button">⬇ Later life &amp; carer (PDF)</button>
+      <button id="btnPdfClinic" class="btn" type="button">⬇ Clinic guide (PDF)</button>
+      <button id="btnZipAll" class="btn" type="button">⬇ All PDFs (ZIP)</button>
+      <button id="btnDownloadJson" class="btn" type="button">⬇ Coach module (JSON)</button>
+      <a class="btn" href="#use">How to use</a>
+    </div>
+  </section>
+
+  <!-- HOW TO USE -->
+  <section id="use" class="card">
+    <h2>How to use each deliverable in M Share</h2>
+    <div class="cols-3">
+      <div class="tile">
+        <h3>Parent / Adult / Later‑life PDFs</h3>
+        <ul>
+          <li>Link as “<b>Download (PDF)</b>” on your Autism landing page.</li>
+          <li>Add to onboarding emails and your <em>Share</em> sheet.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h3>Clinic Guide (PDF)</h3>
+        <ul>
+          <li>Place under “<b>For Clinicians</b>” or an “Advanced” toggle.</li>
+          <li>Use to standardise school/clinic conversations.</li>
+        </ul>
+      </div>
+      <div class="tile">
+        <h3>In‑App Module JSON</h3>
+        <ul>
+          <li>Import and render as a coach that adapts to selected goals.</li>
+          <li>Log metrics locally (or secure cloud) for progress graphs.</li>
+        </ul>
+      </div>
+    </div>
+    <h4 style="margin-top:8px">What you have now</h4>
+    <p class="muted">
+      ✅ Four Autism PDFs (Parent, Adult, Later‑life, Clinic) · ✅ Three Dyslexia PDFs (Adult, Parent, Practice Pack) · ✅ In‑app module (JSON).
+    </p>
+  </section>
+
+  <!-- EVIDENCE SNAPSHOT -->
+  <section class="card">
+    <h2>Evidence snapshot (UK)</h2>
+    <p><b>Children/young people:</b> structured, communication‑focused interventions, environmental adaptations and co‑occurring problem management; consider melatonin via specialists if behavioural sleep approaches fail. Sources: NICE CG170 (support & management). <em>Educational only; not medical advice.</em></p>
+    <p><b>Adults:</b> adapted CBT for anxiety/depression, structured support plans, and workplace/healthcare reasonable adjustments. Sources: NICE autism guidance (adults). <em>Educational only.</em></p>
+  </section>
+
+  <!-- PRACTICAL SECTIONS -->
+  <section class="card">
+    <h2>Children &amp; Adolescents</h2>
+    <ul>
+      <li><b>Naturalistic, caregiver‑mediated coaching (NDBI style):</b> 3–5 min play bursts, copy/expand/celebrate, many times daily.</li>
+      <li><b>AAC is speech‑friendly:</b> pictures/PECS/core boards/apps reduce frustration; keep AAC available everywhere.</li>
+      <li><b>Visual &amp; structured teaching:</b> First/Then, visual schedules, clear work systems; teach in small steps.</li>
+      <li><b>Behaviour → ABC:</b> track antecedent–behaviour–consequence; teach an easier way to ask; reinforce quickly.</li>
+      <li><b>Sleep:</b> regularity, routine, light/noise/temperature; discuss melatonin only with a clinician if insomnia persists.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Adults</h2>
+    <ul>
+      <li><b>Employment:</b> reasonable adjustments (Equality Act), clear written instructions, low‑sensory spaces, flexible hours/hybrid.</li>
+      <li><b>Access to Work:</b> workplace assessment, job coach, assistive tech, travel support.</li>
+      <li><b>Mental health:</b> adapted CBT (visual structure, concrete goals, graded exposure with sensory planning); monitor medication with clinicians.</li>
+      <li><b>Regulation:</b> micro‑breaks, noise management, meltdown/shutdown plans.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Later Life</h2>
+    <ul>
+      <li>Anticipate sensory/hearing/vision changes; schedule quieter appointments.</li>
+      <li>Use pill organisers, checklists, and carer prompts; prepare hospital passports.</li>
+      <li>Ask the local authority about adult social care and carers’ assessments.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Neurodevelopmental: ADHD (quick pointers)</h2>
+    <ul>
+      <li>Core features: inattention, impulsivity, hyperactivity across settings.</li>
+      <li>Supports: behavioural strategies, executive‑function scaffolds, environmental cues; review sleep, anxiety.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Mental Health: Anxiety • Depression • Stress • Sleep</h2>
+    <ul>
+      <li><b>CBT (adapted):</b> visual agendas, concrete skills practice, stepwise exposure with sensory planning.</li>
+      <li><b>Sleep:</b> consistent timing, low light, screens off ≥1h; record latency; escalate to clinician if persistent.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Breathing &amp; Focus (2‑minute reset)</h2>
+    <ol>
+      <li>Sit comfortably; relax shoulders and jaw.</li>
+      <li>Inhale quietly through the nose ~4 s; exhale ~6 s.</li>
+      <li>Repeat 10 cycles; notice shoulders lowering and heart rate easing.</li>
+    </ol>
+    <p class="muted">Use before transitions, meetings or bedtime wind‑down.</p>
+  </section>
+
+  <!-- In‑app coach -->
+  <section class="card">
+    <h2>In‑App Coach Module (JSON)</h2>
+    <p class="muted">Download and import. The preview below lets you inspect flows and steps.</p>
+    <div class="row-actions">
+      <button id="btnPreviewFlows" class="btn" type="button">Preview flows</button>
+      <button id="btnClearPreview" class="btn" type="button">Clear</button>
+    </div>
+    <div id="flowViewer" class="card">
+      <div class="cols-2">
+        <div class="tile">
+          <label for="flowPick">Select a flow</label>
+          <select id="flowPick" title="Select option"></select>
+        </div>
+        <div class="tile">
+          <label>JSON (selected flow)</label>
+          <pre id="jsonPreview" aria-live="polite" style="min-height:88px"></pre>
+        </div>
+      </div>
+      <div class="tile" style="margin-top:8px">
+        <h4 id="flowTitle" style="margin:.2rem 0">Flow</h4>
+        <div id="flowSteps" class="muted"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer-2025" id="footer2025">
+  <div class="wrap">
+    <div class="grid">
+      <section class="col brand">
+        <div class="brandline"><span class="logo">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="theme-controls">
+          <label>Background<input id="themeColor" type="color" value="#0f172a"></label>
+          <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1"></label>
+        </div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div>
+      </section>
+      <section class="col">
+        <h4>Explore</h4>
+        <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p>
+      </section>
+      <section class="col">
+        <h4>Toolkits</h4>
+        <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p>
+      </section>
+      <section class="col">
+        <h4>Contact</h4>
+        <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info.com">info.com</a></p>
+      </section>
+    </div>
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>document.getElementById("yearFooter")&&(document.getElementById("yearFooter").textContent=(new Date).getFullYear());document.getElementById("backToTop")&&document.getElementById("backToTop").addEventListener("click",function(e){e.preventDefault();try{(document.getElementById("top")||document.body).scrollIntoView({behavior:"smooth",block:"start"})}catch{location.hash="#top"}})</script>
+</footer>
+
+
+
+
+
+
+
+<!-- =================== TEMPLATES & DATA =================== -->
+<template id="parentHandout"><article><h1>Autism: Parent Quick Guide (UK)</h1><p>See download above for full A4 PDF (brand header/footer).</p></article></template>
+
+<template id="clinicGuide"><article><h1>Autism: Clinic Guide &amp; Checklists (UK)</h1><p>See download above for full A4 PDF.</p></article></template>
+
+<script type="application/json" id="asd_coach_json">
+{
+  "meta": { "version": "1.1.0", "locale": "en-UK", "brand": "M Share" },
+  "flows": [
+    {
+      "id": "comm",
+      "title": "Communication booster",
+      "minutes": 5,
+      "steps": [
+        { "type": "text", "title": "Warm-up", "body": "Follow the child's lead. Mirror play for 30–60 seconds." },
+        { "type": "multi-select", "title": "Targets", "options": ["Request (more/help)", "Choice (A/B)", "Comment (look/uh‑oh)", "Social game (again!)"], "saveAs": "comm.targets" },
+        { "type": "timer", "seconds": 180, "title": "Play & model", "body": "Model 1–2 word phrases. Pause 5–10 s. Accept all attempts (speech/sign/AAC)." },
+        { "type": "log", "metric": "attempts", "title": "Attempts today", "saveAs": "comm.attempts" },
+        { "type": "text", "title": "Wrap", "body": "Celebrate. Snapshot: attempts = {{comm.attempts}}." }
+      ]
+    },
+    {
+      "id": "abc",
+      "title": "Behaviour: ABC coach",
+      "minutes": 6,
+      "steps": [
+        { "type": "text", "title": "Pick one behaviour", "body": "Describe it in observable words." },
+        { "type": "abc", "title": "Record ABC", "saveAs": "abc.row" },
+        { "type": "checklist", "title": "Teach replacement", "items": ["Give simple way to ask (picture/word)", "Reduce trigger (noise, unclear demand)", "Reinforce calm/ask quickly"] },
+        { "type": "log", "metric": "abc.count", "title": "Events today", "saveAs": "abc.count" }
+      ]
+    },
+    {
+      "id": "sleep",
+      "title": "Sleep routine",
+      "minutes": 5,
+      "steps": [
+        { "type": "planner", "title": "Bed routine", "body": "Choose 3–4 calming steps (bath, book, music).", "saveAs": "sleep.plan" },
+        { "type": "timer", "seconds": 60, "title": "Lights down", "body": "Dim lights; no screens. Breathe slowly together." },
+        { "type": "survey", "title": "Latency last night", "scale": [0,120], "unit": "min", "saveAs": "sleep.latency" }
+      ]
+    },
+    {
+      "id": "sensory",
+      "title": "Sensory regulation",
+      "minutes": 4,
+      "steps": [
+        { "type": "picker", "title": "Need → tool", "options": ["Noise->headphones", "Movement->walk/trampoline", "Deep pressure->weighted lap (if liked)"], "saveAs": "sens.pick" },
+        { "type": "timer", "seconds": 120, "title": "Do the tool", "body": "Stay curious about comfort; stop if disliked." }
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="autism.js" defer></script>
+<script src="app.js"></script>
+<script src="coach.js"></script>
+<script src="assets/js/ux-fixes.js"></script>
+<script src="assets/js/paylinks.js"></script>
+<script src="assets/js/site-core.js"></script>
+<script src="assets/js/a11y-fix.js"></script>
+<script src="assets/js/start-fix.js"></script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
+<script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
+<script src="assets/header/header.js"></script>
+<script src="assets/footer/footer.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+</body>
+</html>

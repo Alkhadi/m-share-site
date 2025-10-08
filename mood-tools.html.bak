@@ -1,0 +1,207 @@
+<!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Mood Tools • M Share</title>
+      <meta name="description" content="Quick check‑ins, values‑to‑actions, and gratitude prompts." />
+      <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+
+      <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+<link rel="stylesheet" href="assets/css/responsive-fixes.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+</head>
+    <body>
+<a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
+      <header class="site-header">
+  <div class="container navbar">
+    <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span><span class="brand-text">M Share</span></a>
+    <nav class="main-nav" id="mainNav">
+  <a data-href="index.html">Wellbeing</a>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Neurodevelopmental</div>
+      <a data-href="autism.html">Autism</a>
+      <a data-href="adhd.html">ADHD</a>
+      <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+      <div class="menu-label">Mental Health</div>
+      <a data-href="anxiety.html">Anxiety</a>
+      <a data-href="depression.html">Depression</a>
+      <a data-href="stress.html">Stress</a>
+      <a data-href="sleep.html">Sleep</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Guides</div>
+      <a data-href="breath.html">Breath (how‑to)</a>
+      <a data-href="focus.html">Focus</a>
+      <a data-href="mindfulness.html">Mindfulness</a>
+      <div class="menu-label">Techniques</div>
+      <a data-href="sos-60.html">60‑second Reset</a>
+      <a data-href="box-breathing.html">Box Breathing</a>
+      <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+      <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">General</div>
+      <a data-href="sleep-tools.html">Sleep Tools</a>
+      <a data-href="breath-tools.html">Breath Tools</a>
+      <a data-href="mood-tools.html">Mood Tools</a>
+      <div class="menu-label">Condition‑specific</div>
+      <a data-href="adhd-tools.html">ADHD Tools</a>
+      <a data-href="autism-tools.html">Autism Tools</a>
+      <a data-href="depression-tools.html">Depression Tools</a>
+      <a data-href="anxiety-tools.html">Anxiety Tools</a>
+      <a data-href="stress-tools.html">Stress Tools</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+    <div class="submenu">
+      <a data-href="about.html">About</a>
+      <a data-href="coffee.html">Support Us</a>
+      <a data-href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+    <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+  </div>
+</header>
+
+
+
+      <main class="container">
+
+      <h1>Mood Tools</h1>
+      <div class="grid cols-3">
+  <div class="card">
+    <h3>Mood Check‑in</h3>
+    <div class="kv-grid">
+      <div><label>Before (0–10)</label><input id="mBefore" type="number" min="0" max="10" value="4"/ title="Input" placeholder=" "></div>
+      <div><label>After (0–10)</label><input id="mAfter" type="number" min="0" max="10" value="6"/ title="Input" placeholder=" "></div>
+      <div><label>Note</label><input id="mNote" type="text" placeholder="What helped?"/></div>
+    </div>
+    <div class="actions"><button type="button" class="btn" id="mSave">Save</button></div>
+    <div class="muted" id="mList" style="margin-top:8px"></div>
+    <script>
+      (function(){
+        const LS='mshare_mood_log_v1';
+        const b=document.getElementById('mBefore'), a=document.getElementById('mAfter'), n=document.getElementById('mNote'), s=document.getElementById('mSave'), list=document.getElementById('mList');
+        function load(){ try{ return JSON.parse(localStorage.getItem(LS)||'[]'); }catch{return [];} }
+        function save(arr){ try{ localStorage.setItem(LS, JSON.stringify(arr)); }catch{} }
+        function render(){ const arr=load(); list.innerHTML = arr.length? '<ul>'+arr.map(x=>'<li>'+x+'</li>').join('')+'</ul>' : '<span class="muted">No entries yet.</span>'; }
+        s.addEventListener('click',()=>{ const entry = new Date().toLocaleString()+': '+b.value+'→'+a.value+' — '+(n.value||''); const arr=load(); arr.unshift(entry); save(arr); n.value=''; render(); });
+        render();
+      })();
+    </script>
+  </div>
+  <div class="card">
+    <h3>Values → Actions</h3>
+    <ul>
+      <li>Pick 1 value (e.g., health, learning, kindness).</li>
+      <li>Write 1 small action you can do today.</li>
+      <li>Do it before noon; celebrate the win.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Gratitude (micro)</h3>
+    <ul><li>Name 1 good thing today and why it mattered.</li><li>Say it out loud if you can.</li></ul>
+  </div>
+</div>
+      <div class="card">
+        <h3>Evidence & UK resources</h3>
+        <ul>
+          <li><a href="https://www.nice.org.uk/guidance/ng222" target="_blank" rel="noopener">NICE — Depression in adults (NG222)</a></li><li><a href="https://www.nhs.uk/mental-health/conditions/depression-in-adults/treatment/" target="_blank" rel="noopener">NHS — Treatment for depression (incl. BA)</a></li><li><a href="https://www.nhsinform.scot/illnesses-and-conditions/mental-health/mental-health-self-help-guides/depression-self-help-guide/" target="_blank" rel="noopener">NHS Inform — Depression self‑help guide</a></li><li><a href="https://www.gmmh.nhs.uk/behavioural-activation/" target="_blank" rel="noopener">GMMH — Behavioural Activation resources</a></li><li><a href="https://www.nhs.uk/every-mind-matters/mental-wellbeing-tips/self-help-cbt-techniques/" target="_blank" rel="noopener">Every Mind Matters — Self‑help CBT techniques</a></li>
+        </ul>
+
+      <div class="actions" style="margin-top:10px">
+        <button class="btn btn-success" id="resPdf_depression" type="button">Download: Mood Tools — Resources (PDF)</button>
+      </div>
+      <script>
+        (function(){
+          const btn = document.getElementById('resPdf_depression');
+          if(!btn) return;
+          btn.addEventListener('click', function(){
+            MSCoach.downloadLinksPdf('Mood Tools — Resources', window.__RES__ && window.__RES__['depression'] ? window.__RES__['depression'] : []);
+          });
+        })();
+      </script>
+
+      </div>
+      <script src="res.manifest.js"></script>
+
+        <div class="card">
+          <h3>Emergency & urgent help (UK)</h3>
+          <p class="muted">
+            If you are at immediate risk of harming yourself or someone else, call <strong>999</strong> or go to A&amp;E.
+            For urgent mental health support call <strong>NHS 111</strong> (select the mental health option).
+            You can talk 24/7 to <strong>Samaritans on 116 123</strong> (free). This site is educational and is <em>not</em> medical advice.
+          </p>
+        </div>
+      </main>
+      <footer class="footer-2025" id="footer2025">
+  <div class="wrap">
+    <div class="grid">
+      <section class="col brand">
+        <div class="brandline"><span class="logo">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="theme-controls">
+          <label>Background<input id="themeColor" type="color" value="#0f172a"></label>
+          <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1"></label>
+        </div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div>
+      </section>
+      <section class="col">
+        <h4>Explore</h4>
+        <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p>
+      </section>
+      <section class="col">
+        <h4>Toolkits</h4>
+        <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p>
+      </section>
+      <section class="col">
+        <h4>Contact</h4>
+        <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info.com">info.com</a></p>
+      </section>
+    </div>
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>document.getElementById("yearFooter")&&(document.getElementById("yearFooter").textContent=(new Date).getFullYear());document.getElementById("backToTop")&&document.getElementById("backToTop").addEventListener("click",function(e){e.preventDefault();try{(document.getElementById("top")||document.body).scrollIntoView({behavior:"smooth",block:"start"})}catch{location.hash="#top"}})</script>
+</footer>
+<script src="app.js"></script>
+<script src="coach.js"></script>
+<script src="assets/js/ux-fixes.js"></script>
+<script src="assets/js/paylinks.js"></script>
+<script src="assets/js/site-core.js"></script>
+<script src="assets/js/a11y-fix.js"></script>
+<script src="assets/js/start-fix.js"></script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
+<script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
+<script src="assets/header/header.js"></script>
+<script src="assets/footer/footer.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+</body>
+</html>

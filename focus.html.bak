@@ -1,0 +1,183 @@
+<!doctype html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Focus — Sprints with Recovery • M Share</title>
+      <meta name="description" content="A minimal Focus Sprint timer aligned to ADHD/time‑boxing best practice." />
+      <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+
+      <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+<link rel="stylesheet" href="assets/css/responsive-fixes.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+</head>
+    <body>
+<a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
+      <header class="site-header">
+  <div class="container navbar">
+    <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span><span class="brand-text">M Share</span></a>
+    <nav class="main-nav" id="mainNav">
+  <a data-href="index.html">Wellbeing</a>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Neurodevelopmental</div>
+      <a data-href="autism.html">Autism</a>
+      <a data-href="adhd.html">ADHD</a>
+      <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+      <div class="menu-label">Mental Health</div>
+      <a data-href="anxiety.html">Anxiety</a>
+      <a data-href="depression.html">Depression</a>
+      <a data-href="stress.html">Stress</a>
+      <a data-href="sleep.html">Sleep</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Guides</div>
+      <a data-href="breath.html">Breath (how‑to)</a>
+      <a data-href="focus.html">Focus</a>
+      <a data-href="mindfulness.html">Mindfulness</a>
+      <div class="menu-label">Techniques</div>
+      <a data-href="sos-60.html">60‑second Reset</a>
+      <a data-href="box-breathing.html">Box Breathing</a>
+      <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+      <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">General</div>
+      <a data-href="sleep-tools.html">Sleep Tools</a>
+      <a data-href="breath-tools.html">Breath Tools</a>
+      <a data-href="mood-tools.html">Mood Tools</a>
+      <div class="menu-label">Condition‑specific</div>
+      <a data-href="adhd-tools.html">ADHD Tools</a>
+      <a data-href="autism-tools.html">Autism Tools</a>
+      <a data-href="depression-tools.html">Depression Tools</a>
+      <a data-href="anxiety-tools.html">Anxiety Tools</a>
+      <a data-href="stress-tools.html">Stress Tools</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+    <div class="submenu">
+      <a data-href="about.html">About</a>
+      <a data-href="coffee.html">Support Us</a>
+      <a data-href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+    <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+  </div>
+</header>
+
+
+
+      <main class="container">
+
+      <h1>Focus — Sprints with Recovery</h1>
+      <div class="card">
+  <p>Make focus kinder: short sprints, clear goals, and recovery breaks. Works well alongside ADHD routines and reasonable adjustments at work.</p>
+</div>
+
+<div class="card">
+  <div id="pomoFocus"></div>
+  <script>document.addEventListener('DOMContentLoaded',()=>MSCoach.mountPomo('#pomoFocus',{work:25*60, break:5*60}));</script>
+</div>
+      <div class="card">
+        <h3>Evidence & UK resources</h3>
+        <ul>
+          <li><a href="https://www.acas.org.uk/reasonable-adjustments/adjustments-for-neurodiversity" target="_blank" rel="noopener">Acas — Adjustments for neurodiversity</a></li><li><a href="https://www.nhs.uk/mental-health/talking-therapies-medicine-treatments/talking-therapies-and-counselling/nhs-talking-therapies/" target="_blank" rel="noopener">NHS — Talking therapies (work stress)</a></li>
+        </ul>
+
+      <div class="actions" style="margin-top:10px">
+        <button class="btn btn-success" id="resPdf_focus" type="button">Download: Focus — Sprints with Recovery — Resources (PDF)</button>
+      </div>
+      <script>
+        (function(){
+          const btn = document.getElementById('resPdf_focus');
+          if(!btn) return;
+          btn.addEventListener('click', function(){
+            MSCoach.downloadLinksPdf('Focus — Sprints with Recovery — Resources', window.__RES__ && window.__RES__['focus'] ? window.__RES__['focus'] : []);
+          });
+        })();
+      </script>
+
+      </div>
+      <script src="res.manifest.js"></script>
+
+        <div class="card">
+          <h3>Emergency & urgent help (UK)</h3>
+          <p class="muted">
+            If you are at immediate risk of harming yourself or someone else, call <strong>999</strong> or go to A&amp;E.
+            For urgent mental health support call <strong>NHS 111</strong> (select the mental health option).
+            You can talk 24/7 to <strong>Samaritans on 116 123</strong> (free). This site is educational and is <em>not</em> medical advice.
+          </p>
+        </div>
+      
+<section class="card" id="focus-3x5"><h2>Focus Drill (3×5)</h2><p class="muted" data-excerpt="3">Single‑task focus: 3 blocks × 5 minutes. Pick one small outcome. Notifications off; one tab only.</p><div class="actions" data-tech="focus-3x5" style="margin-top:8px"><button type="button" class="btn" data-act="start">Start</button><button type="button" class="btn" data-act="stop" disabled>Stop</button></div></section>
+
+</main>
+      <footer class="footer-2025" id="footer2025">
+  <div class="wrap">
+    <div class="grid">
+      <section class="col brand">
+        <div class="brandline"><span class="logo">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="theme-controls">
+          <label>Background<input id="themeColor" type="color" value="#0f172a"></label>
+          <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1"></label>
+        </div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div>
+      </section>
+      <section class="col">
+        <h4>Explore</h4>
+        <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p>
+      </section>
+      <section class="col">
+        <h4>Toolkits</h4>
+        <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p>
+      </section>
+      <section class="col">
+        <h4>Contact</h4>
+        <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info.com">info.com</a></p>
+      </section>
+    </div>
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>document.getElementById("yearFooter")&&(document.getElementById("yearFooter").textContent=(new Date).getFullYear());document.getElementById("backToTop")&&document.getElementById("backToTop").addEventListener("click",function(e){e.preventDefault();try{(document.getElementById("top")||document.body).scrollIntoView({behavior:"smooth",block:"start"})}catch{location.hash="#top"}})</script>
+</footer>
+<script src="app.js"></script>
+<script src="coach.js"></script>
+<script src="assets/js/ux-fixes.js"></script>
+<script src="assets/js/paylinks.js"></script>
+<script src="assets/js/site-core.js"></script>
+<script src="assets/js/a11y-fix.js"></script>
+<script src="assets/js/start-fix.js"></script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
+<script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
+<script src="assets/header/header.js"></script>
+<script src="assets/footer/footer.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+</body>
+</html>

@@ -8,11 +8,159 @@
     <meta name="theme-color" content="#0b2a22" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
-<link rel="stylesheet" href="assets/css/pages/box-breathing.inline.css" />
+<style>
+        .wrap {
+            max-width: 980px;
+            margin: 0 auto
+        }
+
+        .ui {
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid var(--b);
+            border-radius: 16px;
+            box-shadow: var(--shadow-1);
+            padding: 16px
+        }
+
+        .session {
+            display: grid;
+            place-items: center;
+            gap: 18px;
+            text-align: center
+        }
+
+        .orb-wrap {
+            position: relative;
+            width: min(84vw, 380px);
+            aspect-ratio: 1/1
+        }
+
+        .orb {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: radial-gradient(120px 180px at 30% 30%, rgba(255, 255, 255, .15), transparent 55%),
+                radial-gradient(100px 100px at 70% 70%, rgba(255, 255, 255, .08), transparent 70%),
+                linear-gradient(180deg, rgba(160, 255, 218, .25), rgba(90, 200, 170, .18));
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, .25), 0 30px 50px rgba(0, 0, 0, .35);
+            border: 1px solid rgba(255, 255, 255, .14);
+            transform: scale(.82);
+            transition: transform 280ms cubic-bezier(.22, .8, .24, 1)
+        }
+
+        .orb.inhale {
+            transform: scale(1.08)
+        }
+
+        .orb.exhale {
+            transform: scale(.78)
+        }
+
+        .phase {
+            font-weight: 800;
+            font-size: clamp(22px, 3.2vw, 28px)
+        }
+
+        .count {
+            font-weight: 900;
+            font-size: clamp(48px, 7.5vw, 56px);
+            line-height: 1;
+            margin-top: 4px;
+            text-shadow: 0 6px 22px rgba(0, 0, 0, .35)
+        }
+
+        .mini {
+            margin-top: 6px;
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        svg.radial {
+            position: absolute;
+            inset: 0;
+            transform: rotate(-90deg)
+        }
+
+        .ring {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round
+        }
+
+        .ring.base {
+            stroke: rgba(255, 255, 255, .08)
+        }
+
+        .ring.progress {
+            stroke: rgba(170, 240, 209, .9)
+        }
+
+        body.focus-mode header.site-header,
+        .stage-nav,
+        .footer {
+            display: none !important
+        }
+
+        body.focus-mode main .card.setup,
+        body.focus-mode #done {
+            display: none !important
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .kv3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px
+        }
+
+        @media(max-width:760px) {
+            .kv3 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .hint {
+            font-size: .9rem;
+            color: var(--muted)
+        }
+    </style>
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+
+<style id="coach-controls-css">
+  /* Keep the new controls exactly where the old button lived by inheriting its layout context */
+  .coach-controls-top{ display:inline-flex; gap:.5rem; align-items:center; }
+  .coach-controls-top .btn{
+    -webkit-appearance: none; appearance: none; cursor: pointer;
+    padding:.45rem .85rem; border-radius:.65rem; border:1px solid rgba(255,255,255,.16);
+    background: rgba(22,27,34,.85); color:#fff; font:inherit; line-height:1.2;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+  }
+  .coach-controls-top .btn:focus{ outline:2px solid #6AE6B7; outline-offset:2px; }
+  /* Make the visible focus panel fully opaque so any old/legacy background UI cannot bleed through */
+  .focus-panel, .focus-screen, .breathing-card, .breathing-panel {
+    background-color: rgba(6,14,22,1) !important;
+  }
+</style>
+
+<style id="nav-chevrons-style-v2">
+  /* Ensure [hidden] actually hides menus even if a theme doesn't style it. */
+  nav .submenu[hidden] { display: none !important; }
+  /* Improve focus ring targets */
+  .menu-toggle { outline-offset: 2px; }
+</style>
 </head>
 
 <body>
@@ -213,7 +361,7 @@
             }
             let bgm = null;
 
-            function speak(){}  catch { } }
+            function speak(text) { if (tts.value !== 'on') return; try { const u = new SpeechSynthesisUtterance(text); u.rate = 0.95; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch { } }
             function vibrate(ms) { if (vib.value === 'on' && navigator.vibrate) try { navigator.vibrate(ms); } catch { } }
             function rmEnabled() { if (rm.value === 'on') return true; if (rm.value === 'off') return false; return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches; }
             function applyFocus(on) { document.body.classList.toggle('focus-mode', !!on); }
@@ -301,14 +449,326 @@
                 if (q.get('tts') === 'on') tts.value = 'on';
             })();
         })();
-    </script><script src="assets/js/core/nav-autofix.js"></script><script src="assets/header/header.js"></script>
-<script src="assets/footer/footer.js"></script>
-<script src="assets/js/core/nav-core.js"></script>
+    </script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
 <script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
 <script src="assets/header/header.js"></script>
 <script src="assets/footer/footer.js"></script>
-<script src="assets/js/core/voice-coach.js"></script>
-<script src="assets/js/core/sound-kit.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+
+<script id="coach-controls-logic">
+(function(){
+  // Run after DOM is ready
+  var onReady = function(fn){ if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn, {once:true}); };
+
+  onReady(function(){
+    var topGroup = document.getElementById('coach-controls-top');
+    if(!topGroup){ return; }
+
+    // Find the ORIGINAL working Start/Pause/Stop buttons (usually bottom left in your UI).
+    function findOriginal(label){
+      var rx = new RegExp('^\\s*' + label + '\\s*$', 'i');
+      var all = Array.prototype.slice.call(document.querySelectorAll('button, [role="button"], a'));
+      for (var i=0;i<all.length;i++){
+        var el = all[i];
+        if (topGroup.contains(el)) continue; // skip our new buttons
+        var text = (el.textContent || '').trim();
+        if (rx.test(text)) return el;
+      }
+      return null;
+    }
+
+    var origStart = findOriginal('Start');
+    var origPause = findOriginal('Pause');
+    var origStop  = findOriginal('Stop');
+
+    function proxyClick(target){
+      try { if (target) { target.click(); return true; } } catch(e){}
+      // If no original button exists, emit semantic custom events as a safe fallback.
+      try { window.dispatchEvent(new CustomEvent('breathing:'+ (target===origStart?'start':target===origPause?'pause':'stop'))); } catch(e){}
+      return false;
+    }
+
+    // Wire the new controls to the originals (so behavior is unchanged).
+    var btnStart = document.getElementById('coachStartTop');
+    var btnPause = document.getElementById('coachPauseTop');
+    var btnStop  = document.getElementById('coachStopTop');
+
+    if (btnStart) btnStart.addEventListener('click', function(){ proxyClick(origStart); }, {passive:true});
+    if (btnPause) btnPause.addEventListener('click', function(){ proxyClick(origPause); }, {passive:true});
+    if (btnStop)  btnStop .addEventListener('click', function(){ proxyClick(origStop ); }, {passive:true});
+
+    /**
+     * Remove/hide any extra "round" focus UI running behind the current focus screen.
+     * We do this *non-destructively* at runtime to avoid touching unrelated markup:
+     *   1) Anchor to the same container that held the old "Back to hub/section" button (i.e., where *this* control now sits).
+     *   2) Inside that container, if we detect multiple large canvases/SVGs (typical of the legacy round focus),
+     *      we keep the one nearest to our controls and hide any others.
+     */
+    var panel = topGroup.closest('section, article, .card, .panel, .breathing-card, .focus-screen, .focus-panel, .wrapper, .container') || document.body;
+
+    function isLargeVisual(el){
+      var r = el.getBoundingClientRect();
+      return (r.width >= 220 && r.height >= 220); // large round visuals meet this
+    }
+
+    // Prefer big canvas/SVG inside the same panel; hide extras.
+    var visuals = Array.prototype.slice.call(panel.querySelectorAll('canvas, svg'));
+    visuals = visuals.filter(isLargeVisual);
+
+    if (visuals.length > 1){
+      // Keep the last one in DOM order (usually the visible one on top) and hide the rest.
+      visuals.slice(0, -1).forEach(function(el){
+        el.setAttribute('data-removed-by-fix', 'true');
+        el.style.display = 'none';
+      });
+    }
+
+    // Also hide common legacy classes/ids if they exist (no-ops if absent).
+    var extraSelectors = [
+      '.breathing-circle','.focus-circle','.visual-circle','#breathCanvas','#voiceCoachCircle',
+      '.circle-bg','.coach-circle','.bg-breath','.legacy-breathing'
+    ];
+    extraSelectors.forEach(function(sel){
+      var nodes = panel.querySelectorAll(sel);
+      if (!nodes || !nodes.length) return;
+      for (var i=0;i<nodes.length;i++){ nodes[i].style.display = 'none'; nodes[i].setAttribute('data-removed-by-fix','true'); }
+    });
+  });
+})();
+<\/script>
+
+<script id="menu-chevron-fix">
+(function(){
+  var onReady = function(fn){ if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn, {once:true}); };
+  onReady(function(){
+    // Click or keyboard on a chevron-like control opens/closes the adjacent submenu.
+    function toggleFrom(trigger, prevent){
+      var btn = trigger.closest('[data-chevron], .chevron, .menu-chevron, .accordion-toggle, .has-children > button, .has-children > a, .hamburger, [aria-haspopup="menu"]');
+      if(!btn) return false;
+
+      // Find the submenu: aria-controls target, the next sibling UL/.submenu, or a nested [role="menu"].
+      var submenu = null;
+      var ctrl = btn.getAttribute('aria-controls');
+      if (ctrl) submenu = document.getElementById(ctrl);
+      if (!submenu) {
+        var li = btn.closest('li, .has-children, nav, .menu, .accordion');
+        if (li) submenu = li.querySelector(':scope > ul, :scope > .submenu, :scope > [role="menu"]');
+      }
+      if (!submenu) return false;
+
+      if (prevent) prevent.preventDefault();
+
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+
+      // Hide/show with both the hidden attribute and display style — covers most CSS frameworks.
+      if (!open) {
+        submenu.removeAttribute('hidden');
+        submenu.style.display = submenu.style.display || 'block';
+      } else {
+        submenu.setAttribute('hidden', '');
+        submenu.style.display = 'none';
+      }
+
+      // If the UI uses a class toggle for transitions:
+      var host = btn.closest('.has-children, li, .accordion-item');
+      if (host) host.classList.toggle('open', !open);
+
+      return true;
+    }
+
+    document.addEventListener('click', function(e){
+      if (toggleFrom(e.target, e)) return;
+    }, {passive:false});
+
+    document.addEventListener('keydown', function(e){
+      // Space or Enter should also toggle when the chevron has keyboard focus
+      if ((e.key === 'Enter' || e.key === ' ') && toggleFrom(e.target, e)) {
+        e.preventDefault();
+      }
+    }, {passive:false});
+  });
+})();
+<\/script>
+
+<script id="nav-chevrons-patch-v2">
+(function(){
+  var onReady = function(fn){
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn, {once:true});
+  };
+
+  onReady(function(){
+
+    // ---- Mobile hamburger (#navToggle controls #mainNav) ----
+    var nav = document.getElementById('mainNav') || document.querySelector('nav.main-nav');
+    var toggle = document.getElementById('navToggle') || document.querySelector('.nav-toggle');
+
+    function openNav(){
+      if (!nav || !toggle) return;
+      toggle.setAttribute('aria-expanded','true');
+      nav.removeAttribute('hidden');
+      // If CSS hides it via display, ensure visible on mobile:
+      var cs = window.getComputedStyle(nav);
+      if (cs.display === 'none') nav.style.display = 'block';
+      document.body.classList.add('nav-open');
+    }
+    function closeNav(){
+      if (!nav || !toggle) return;
+      toggle.setAttribute('aria-expanded','false');
+      nav.setAttribute('hidden','');
+      // Respect themes that rely on display toggling:
+      nav.style.display = 'none';
+      document.body.classList.remove('nav-open');
+    }
+    function isOpen(){ return toggle && toggle.getAttribute('aria-expanded') === 'true'; }
+
+    if (toggle && nav){
+      toggle.setAttribute('aria-controls', nav.id || 'mainNav');
+      if (!toggle.hasAttribute('aria-expanded')) toggle.setAttribute('aria-expanded','false');
+
+      toggle.addEventListener('click', function(e){
+        e.preventDefault();
+        isOpen() ? closeNav() : openNav();
+      }, {passive:false});
+
+      // Close on outside click (mobile)
+      document.addEventListener('click', function(e){
+        if (!isOpen()) return;
+        if (e.target.closest('#mainNav, #navToggle, .nav-toggle')) return;
+        closeNav();
+      }, {passive:true});
+
+      // Close on Escape
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && isOpen()) closeNav();
+      }, {passive:true});
+    }
+
+    // ---- Chevron submenus (.menu-group -> .menu-toggle + .submenu) ----
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.menu-group'));
+    var finePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+
+    function closeOthers(except){
+      groups.forEach(function(g){
+        if (g === except) return;
+        var b = g.querySelector('.menu-toggle, [data-chevron]');
+        var m = g.querySelector('.submenu, [role="menu"], :scope > ul');
+        if (!b || !m) return;
+        b.setAttribute('aria-expanded','false');
+        m.setAttribute('hidden','');
+        g.classList.remove('open');
+      });
+    }
+
+    groups.forEach(function(g){
+      var btn = g.querySelector('.menu-toggle, [data-chevron]');
+      var menu = g.querySelector('.submenu, [role="menu"], :scope > ul');
+      if (!btn || !menu) return;
+
+      btn.setAttribute('aria-haspopup','menu');
+      if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded','false');
+      // initial hidden state
+      if (btn.getAttribute('aria-expanded') !== 'true') menu.setAttribute('hidden','');
+
+      function open(){
+        closeOthers(g);
+        btn.setAttribute('aria-expanded','true');
+        menu.removeAttribute('hidden');
+        g.classList.add('open');
+      }
+      function close(){
+        btn.setAttribute('aria-expanded','false');
+        menu.setAttribute('hidden','');
+        g.classList.remove('open');
+      }
+      function toggle(){
+        (btn.getAttribute('aria-expanded') === 'true') ? close() : open();
+      }
+
+      // Click / tap on chevron
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        toggle();
+      }, {passive:false});
+
+      // Keyboard toggle
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        if (e.key === 'Escape') { close(); btn.focus(); }
+      }, {passive:false});
+
+      // Hover/focus open (desktop only; won't fire on touch-only devices)
+      if (finePointer){
+        g.addEventListener('mouseenter', open, {passive:true});
+        g.addEventListener('mouseleave', close, {passive:true});
+        g.addEventListener('focusin', open, {passive:true});
+        g.addEventListener('focusout', function(ev){
+          if (!g.contains(ev.relatedTarget)) close();
+        }, {passive:true});
+      }
+    });
+
+    // Close open submenu on outside click (desktop)
+    document.addEventListener('click', function(e){
+      var hitGroup = e.target.closest('.menu-group');
+      if (!hitGroup) closeOthers(null);
+    }, {passive:true});
+
+  });
+})();
+<\/script>
+
+<script id="focus-overlay-dedupe-v2">
+(function(){
+  var onReady = function(fn){
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn, {once:true});
+  };
+  onReady(function(){
+    // Keep the visible "square" focus panel if present:
+    var keep = document.querySelector('#focusModal, .focus-screen, .focus-panel, .breathing-panel');
+    // Potential legacy/round visuals to remove:
+    var extraSel = [
+      '#vc-focus', '.vc-focus', '.breathing-circle', '.focus-circle',
+      '#breathCanvas', '#voiceCoachCircle', '.circle-bg', '.legacy-breathing', '.coach-circle'
+    ].join(',');
+
+    function hide(node){ try{ node.style.display='none'; node.setAttribute('data-removed-by-fix','true'); }catch{} }
+
+    if (keep){
+      // Hide large canvases/SVGs NOT inside the keep panel (the behind layer).
+      Array.prototype.slice.call(document.querySelectorAll('canvas,svg')).forEach(function(n){
+        if (keep.contains(n)) return;
+        var r; try{ r = n.getBoundingClientRect(); }catch(e){}
+        if (r && r.width >= 180 && r.height >= 180) hide(n);
+      });
+      // Hide known legacy containers not in keep
+      Array.prototype.slice.call(document.querySelectorAll(extraSel)).forEach(function(n){
+        if (!keep.contains(n)) hide(n);
+      });
+    } else {
+      // If no "square" panel exists, but both a ring + some other panel exist, keep the top-most by z-index and hide others
+      var layers = Array.prototype.slice.call(document.querySelectorAll('#vc-focus, .vc-focus, .focus-panel, .breathing-panel, #focusModal, .focus-screen, canvas, svg'));
+      if (!layers.length) return;
+      // Pick the visible one with largest z-index
+      var top = null, topZ = -Infinity;
+      layers.forEach(function(el){
+        var cs = window.getComputedStyle(el);
+        if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return;
+        var z = parseInt(cs.zIndex || '0', 10); if (isNaN(z)) z = 0;
+        if (z >= topZ) { topZ = z; top = el; }
+      });
+      layers.forEach(function(el){ if (el !== top) hide(el); });
+    }
+  });
+})();
+<\/script>
 </body>
 
 </html>

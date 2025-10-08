@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mood • M Share</title>
+    <meta
+      name="description"
+      content="Breathing and tiny habits to help regulate arousal and mood for youths, adults, and older adults."
+    />
+    <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+
+    <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+<link rel="stylesheet" href="assets/css/responsive-fixes.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+</head>
+  <body>
+<a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
+    <header class="site-header">
+  <div class="container navbar">
+    <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span><span class="brand-text">M Share</span></a>
+    <nav class="main-nav" id="mainNav">
+  <a data-href="index.html">Wellbeing</a>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Neurodevelopmental</div>
+      <a data-href="autism.html">Autism</a>
+      <a data-href="adhd.html">ADHD</a>
+      <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+      <div class="menu-label">Mental Health</div>
+      <a data-href="anxiety.html">Anxiety</a>
+      <a data-href="depression.html">Depression</a>
+      <a data-href="stress.html">Stress</a>
+      <a data-href="sleep.html">Sleep</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Guides</div>
+      <a data-href="breath.html">Breath (how‑to)</a>
+      <a data-href="focus.html">Focus</a>
+      <a data-href="mindfulness.html">Mindfulness</a>
+      <div class="menu-label">Techniques</div>
+      <a data-href="sos-60.html">60‑second Reset</a>
+      <a data-href="box-breathing.html">Box Breathing</a>
+      <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+      <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">General</div>
+      <a data-href="sleep-tools.html">Sleep Tools</a>
+      <a data-href="breath-tools.html">Breath Tools</a>
+      <a data-href="mood-tools.html">Mood Tools</a>
+      <div class="menu-label">Condition‑specific</div>
+      <a data-href="adhd-tools.html">ADHD Tools</a>
+      <a data-href="autism-tools.html">Autism Tools</a>
+      <a data-href="depression-tools.html">Depression Tools</a>
+      <a data-href="anxiety-tools.html">Anxiety Tools</a>
+      <a data-href="stress-tools.html">Stress Tools</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+    <div class="submenu">
+      <a data-href="about.html">About</a>
+      <a data-href="coffee.html">Support Us</a>
+      <a data-href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+    <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+  </div>
+</header>
+
+
+
+
+    <main class="container" id="moodPage">
+      <h1>Mood Regulation</h1>
+
+      <div class="card">
+        <p>
+          Use breathing as a speed‑control knob for the nervous system. Long exhales nudge toward
+          calm; slightly quicker inhales raise energy. Keep sessions short and repeatable.
+        </p>
+        <p class="muted">Educational information only; not medical advice or a diagnosis.</p>
+      </div>
+
+      <!-- Three tools (with buttons as requested) -->
+      <h2>Three tools</h2>
+      <ol>
+        <li>
+          <strong>60‑second SOS</strong> for spikes; 6–10 slow breaths focusing on the exhale.
+        </li>
+        <li>
+          <strong>Coherent 5‑5</strong> for balance; 3–10 minutes most days.
+        </li>
+        <li>
+          <strong>Physiological sigh</strong>: two short inhales + long exhale, 1–3 times.
+        </li>
+      </ol>
+      <div class="actions" style="margin: 8px 0 14px 0">
+        <a class="btn btn-success" href="sos.html">Start 60‑second SOS</a>
+        <a class="btn btn-success" href="coherent-5-5.html">Start Coherent 5‑5</a>
+        <a class="btn" href="#physSigh" id="psJump">Physiological Sigh Coach</a>
+      </div>
+
+      <h2>Track what helps</h2>
+      <ul>
+        <li>Note which technique works in which situation.</li>
+        <li>Keep it tiny; consistency beats intensity.</li>
+      </ul>
+
+      <!-- Micro‑tool: Physiological Sigh Coach -->
+      <div id="physSigh" class="card" aria-labelledby="psH">
+        <h3 id="psH">Physiological Sigh Coach</h3>
+        <p class="muted">
+          Two short inhales through the nose, then a long, easy exhale through the mouth. Repeat
+          1–3 times. Use when tense or stuck.
+        </p>
+        <div class="grid cols-3" style="gap: 10px">
+          <div class="tile">
+            <label for="psCycles">Cycles</label>
+            <select id="psCycles" title="Select option">
+              <option>1</option>
+              <option selected>3</option>
+              <option>5</option>
+            </select>
+          </div>
+          <div class="tile">
+            <label for="psVoice">Voice (optional)</label>
+            <select id="psVoice" title="Select option"><option value="off" selected>Off</option></select>
+          </div>
+          <div class="tile">
+            <label>&nbsp;</label>
+            <div class="actions">
+              <button id="psStart" class="btn btn-success" type="button">Start</button>
+              <button id="psStop" class="btn" type="button" disabled>Stop</button>
+            </div>
+          </div>
+        </div>
+        <div
+          id="psStage"
+          style="min-height: 60px; margin-top: 8px; border: 1px solid var(--b); border-radius: 10px; padding: 10px"
+          aria-live="polite"
+        >
+          Idle — choose cycles and press Start.
+        </div>
+        <div class="muted" id="psStat" style="margin-top: 6px">0/0 done</div>
+      </div>
+
+      <!-- Micro‑tool: Mood Technique Tracker -->
+      <div id="moodTrack" class="card" aria-labelledby="mtH">
+        <h3 id="mtH">Mood Technique Tracker</h3>
+        <p class="muted">
+          Log what you tried and how you felt before/after. The summary shows what helps most for
+          you. Data stays on this device.
+        </p>
+        <div class="grid cols-3" style="gap: 10px">
+          <div class="tile">
+            <label for="mtTech">Technique</label>
+            <select id="mtTech" title="Select option">
+              <option>60‑second SOS</option>
+              <option>Coherent 5‑5</option>
+              <option>Physiological sigh</option>
+              <option>Short walk</option>
+              <option>Light stretch</option>
+              <option>Hydration</option>
+              <option>Social check‑in</option>
+            </select>
+          </div>
+          <div class="tile">
+            <label for="mtBefore">Mood before (0–10)</label>
+            <input id="mtBefore" type="number" min="0" max="10" value="4" / title="Input" placeholder=" ">
+          </div>
+          <div class="tile">
+            <label for="mtAfter">Mood after (0–10)</label>
+            <input id="mtAfter" type="number" min="0" max="10" value="6" / title="Input" placeholder=" ">
+          </div>
+        </div>
+        <div class="grid" style="gap: 10px; grid-template-columns: 1fr">
+          <div class="tile">
+            <label for="mtNote">Note (optional)</label>
+            <input id="mtNote" type="text" placeholder="Where/when/how you used it" />
+          </div>
+        </div>
+        <div class="actions" style="margin-top: 8px">
+          <button id="mtAdd" class="btn btn-success" type="button">Add entry</button>
+          <button id="mtClear" class="btn" type="button">Clear all</button>
+          <span id="mtMsg" class="muted" style="margin-left: 8px" aria-live="polite"></span>
+        </div>
+        <div id="mtSummary" class="muted" style="margin-top: 8px"></div>
+      </div>
+
+      <!-- Audience tabs -->
+      <div class="card" id="audTabs" aria-label="Audience sections">
+        <div class="actions" style="flex-wrap: wrap; gap: 6px">
+          <button type="button" class="btn btn-success" data-aud="bpadhd">Bipolar + ADHD</button>
+          <button type="button" class="btn" data-aud="autistic">Autistic adults</button>
+          <button type="button" class="btn" data-aud="peri">Perimenopause</button>
+        </div>
+        <div id="aud-bpadhd" class="aud-panel" style="margin-top: 10px">
+          <h2 style="margin-top: 0">Bipolar disorder with ADHD</h2>
+          <p class="muted">
+            Focus on regular sleep and daily anchors first. Add ADHD tools once mood is steady.
+          </p>
+          <ul>
+            <li>
+              <strong>Social rhythm:</strong> fixed wake time, meals, daylight, movement, wind‑down.
+            </li>
+            <li>
+              <strong>Sleep guard:</strong> protect 7–9h opportunity; use Coherent 5‑5 if keyed up.
+            </li>
+            <li>
+              <strong>ADHD scaffolds:</strong> one task timer (10–20 min), 3‑item list, hide
+              distractions, calendar nudges.
+            </li>
+            <li>
+              <strong>Watch‑outs:</strong> sleep loss, alcohol/cannabis, night shifts.
+            </li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="#rhythm">Open Rhythm Builder</a>
+            <a class="btn" href="#focusTimer">Open Focus Timer</a>
+          </div>
+        </div>
+
+        <div id="aud-autistic" class="aud-panel" style="display: none; margin-top: 10px">
+          <h2 style="margin-top: 0">Autistic adults</h2>
+          <p class="muted">Minimize overload. Make routines predictable. Use direct, concrete cues.</p>
+          <ul>
+            <li>
+              <strong>Sensory kit:</strong> headphones, visor/tinted lens, soft clothing, low‑glare
+              theme.
+            </li>
+            <li>
+              <strong>Energy budgeting:</strong> match demands to fuel; schedule recovery blocks.
+            </li>
+            <li>
+              <strong>Scripts:</strong> “If meeting is noisy, I’ll use headphones and camera‑off.”
+            </li>
+            <li>
+              <strong>Sleep:</strong> fixed wake; calming breath set before bed.
+            </li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="#sensory">Open Sensory Planner</a>
+            <a class="btn" href="#focusTimer">Open Focus Timer</a>
+          </div>
+        </div>
+
+        <div id="aud-peri" class="aud-panel" style="display: none; margin-top: 10px">
+          <h2 style="margin-top: 0">Perimenopause</h2>
+          <p class="muted">
+            Track vasomotor symptoms and sleep; combine lifestyle, behavioral strategies, and
+            clinician‑guided options if needed.
+          </p>
+          <ul>
+            <li>
+              <strong>Heat triggers:</strong> moderate alcohol/spicy food; breathable layers; cool
+              room.
+            </li>
+            <li>
+              <strong>Night‑waking coach:</strong> short exhale‑focused breath on waking; minimal
+              light; back to bed.
+            </li>
+            <li>
+              <strong>Discuss options:</strong> MHT or nonhormonal supports where appropriate.
+            </li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="#flushDiary">Open Flush &amp; Mood Diary</a>
+            <a class="btn" href="#nightCoach">Open Night‑Waking Coach</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Micro‑tool: Rhythm Builder -->
+      <div id="rhythm" class="card" aria-labelledby="rhH">
+        <h3 id="rhH">Rhythm Builder</h3>
+        <p class="muted">Pick anchor times. Aim for small day‑to‑day variation.</p>
+        <div class="grid cols-3" style="gap: 10px">
+          <div class="tile">
+            <label for="rhWake">Wake time</label>
+            <input id="rhWake" type="time" value="07:00" / title="Input" placeholder=" ">
+          </div>
+          <div class="tile">
+            <label for="rhLunch">Mid‑day meal</label>
+            <input id="rhLunch" type="time" value="12:30" / title="Input" placeholder=" ">
+          </div>
+          <div class="tile">
+            <label for="rhWind">Wind‑down start</label>
+            <input id="rhWind" type="time" value="21:30" / title="Input" placeholder=" ">
+          </div>
+        </div>
+        <div class="actions" style="margin-top: 8px">
+          <button id="rhLog" class="btn btn-success" type="button">Log today</button>
+          <button id="rhClear" class="btn" type="button">Clear log</button>
+          <span id="rhMsg" class="muted" style="margin-left: 8px" aria-live="polite"></span>
+        </div>
+        <div id="rhOut" class="muted" style="margin-top: 6px">
+          0 days logged • Regularity score —.
+        </div>
+      </div>
+
+      <!-- Micro‑tool: Focus Timer (Pomodoro‑style with breath breaks) -->
+      <div id="focusTimer" class="card" aria-labelledby="ftH">
+        <h3 id="ftH">Focus Timer</h3>
+        <p class="muted">
+          Short, repeatable focus blocks with a brief breath break. Stop while it’s still going
+          well.
+        </p>
+        <div class="grid cols-3" style="gap: 10px">
+          <div class="tile">
+            <label for="ftWork">Focus (min)</label>
+            <input id="ftWork" type="number" min="5" max="45" value="15" / title="Input" placeholder=" ">
+          </div>
+          <div class="tile">
+            <label for="ftBreak">Break (min)</label>
+            <input id="ftBreak" type="number" min="2" max="10" value="3" / title="Input" placeholder=" ">
+          </div>
+          <div class="tile">
+            <label>&nbsp;</label>
+            <div class="actions">
+              <button id="ftStart" class="btn btn-success" type="button">Start</button>
+              <button id="ftStop" class="btn" type="button" disabled>Stop</button>
+            </div>
+          </div>
+        </div>
+        <div
+          id="ftOut"
+          style="min-height: 48px; margin-top: 8px; border: 1px solid var(--b); border-radius: 10px; padding: 10px"
+          aria-live="polite"
+        >
+          Idle — set minutes and press Start.
+        </div>
+      </div>
+
+      <!-- Micro‑tool: Sensory Planner -->
+      <div id="sensory" class="card" aria-labelledby="snH">
+        <h3 id="snH">Sensory Planner</h3>
+        <p class="muted">Choose supports for common contexts and save your card.</p>
+        <div class="grid cols-3" style="gap: 10px">
+          <div class="tile">
+            <label for="snCtx">Context</label>
+            <select id="snCtx" title="Select option">
+              <option>Travel</option>
+              <option>Work/Study</option>
+              <option>Store/Errands</option>
+              <option>Home wind‑down</option>
+            </select>
+          </div>
+          <div class="tile">
+            <label for="snPick">Supports (comma‑separated)</label>
+            <input id="snPick" type="text" placeholder="e.g., headphones, tinted lens, fidget" />
+          </div>
+          <div class="tile">
+            <label>&nbsp;</label>
+            <div class="actions">
+              <button id="snSave" class="btn btn-success" type="button">Save</button>
+              <button id="snClear" class="btn" type="button">Clear all</button>
+            </div>
+          </div>
+        </div>
+        <div id="snOut" class="muted" style="margin-top: 8px"></div>
+      </div>
+
+      <!-- Micro‑tool: Flush & Mood Diary -->
+      <div id="flushDiary" class="card" aria-labelledby="fdH">
+        <h3 id="fdH">Flush &amp; Mood Diary</h3>
+        <p class="muted">30‑second log to spot triggers and timing patterns.</p>
+        <div class="grid cols-3" style="gap: 10px">
+          <div class="tile">
+            <label for="fdHeat">Heat (0–10)</label>
+            <input id="fdHeat" type="number" min="0" max="10" value="5" / title="Input" placeholder=" ">
+          </div>
+          <div class="tile">
+            <label for="fdMood">Mood (0–10)</label>
+            <input id="fdMood" type="number" min="0" max="10" value="5" / title="Input" placeholder=" ">
+          </div>
+          <div class="tile">
+            <label for="fdTrig">Trigger (optional)</label>
+            <input id="fdTrig" type="text" placeholder="e.g., wine, stress, room heat" />
+          </div>
+        </div>
+        <div class="actions" style="margin-top: 8px">
+          <button id="fdAdd" class="btn btn-success" type="button">Add</button>
+          <button id="fdClear" class="btn" type="button">Clear</button>
+          <span id="fdMsg" class="muted" style="margin-left: 8px" aria-live="polite"></span>
+        </div>
+        <div id="fdOut" class="muted" style="margin-top: 6px">0 entries.</div>
+      </div>
+
+      <!-- Micro‑tool: Night‑Waking Coach -->
+      <div id="nightCoach" class="card" aria-labelledby="nwH">
+        <h3 id="nwH">Night‑Waking Coach</h3>
+        <p class="muted">
+          If you wake at night: keep lights low, one minute of gentle exhale‑focused breathing, then
+          back to bed.
+        </p>
+        <div class="actions">
+          <button id="nwStart" class="btn btn-success" type="button">Begin 1‑minute calm</button>
+          <button id="nwStop" class="btn" type="button" disabled>Stop</button>
+          <span id="nwStat" class="muted" style="margin-left: 8px" aria-live="polite">Idle</span>
+        </div>
+        <div
+          id="nwOut"
+          style="min-height: 48px; margin-top: 8px; border: 1px solid var(--b); border-radius: 10px; padding: 10px"
+        ></div>
+      </div>
+
+      <hr />
+      <p class="muted" style="font-size: 0.9rem">
+        This site is educational only and not medical advice. If you notice severe mood changes,
+        safety concerns, or sleep/wake reversal, seek local clinical help.
+      </p>
+    </main>
+<footer class="footer-2025" id="footer2025">
+  <div class="wrap">
+    <div class="grid">
+      <section class="col brand">
+        <div class="brandline"><span class="logo">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="theme-controls">
+          <label>Background<input id="themeColor" type="color" value="#0f172a"></label>
+          <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1"></label>
+        </div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div>
+      </section>
+      <section class="col">
+        <h4>Explore</h4>
+        <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p>
+      </section>
+      <section class="col">
+        <h4>Toolkits</h4>
+        <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p>
+      </section>
+      <section class="col">
+        <h4>Contact</h4>
+        <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info.com">info.com</a></p>
+      </section>
+    </div>
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>document.getElementById("yearFooter")&&(document.getElementById("yearFooter").textContent=(new Date).getFullYear());document.getElementById("backToTop")&&document.getElementById("backToTop").addEventListener("click",function(e){e.preventDefault();try{(document.getElementById("top")||document.body).scrollIntoView({behavior:"smooth",block:"start"})}catch{location.hash="#top"}})</script>
+</footer>
+
+
+
+
+
+
+
+    <script>
+      /* Highlight active link */
+      (function () {
+        var path = location.pathname.split("/").pop() || "index.html";
+        document.querySelectorAll("nav a").forEach(function (a) {
+          if (a.getAttribute("href") === path) a.classList.add("active");
+        });
+      })();
+
+      /* Reduced motion flag */
+      var prefersReduce =
+        window.matchMedia &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* Focus helper (hide header during tool focus) */
+      const Focus = (function () {
+        let prevHeaderDisplay = "";
+        return {
+          enter(el) {
+            const header = document.querySelector("header.site-header");
+            if (header) {
+              prevHeaderDisplay = header.style.display || "";
+              header.style.display = "none";
+            }
+            try {
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            } catch {}
+          },
+          exit() {
+            const header = document.querySelector("header.site-header");
+            if (header) header.style.display = prevHeaderDisplay;
+          },
+        };
+      })();
+
+      /* Small chime for timers */
+      function chime(vol) {
+        try {
+          const AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return;
+          const ac = new AC();
+          const g = ac.createGain();
+          g.gain.value = typeof vol === "number" ? vol : 0.15;
+          g.connect(ac.destination);
+          const o = ac.createOscillator();
+          o.type = "sine";
+          o.frequency.value = 528;
+          o.connect(g);
+          o.start();
+          setTimeout(() => {
+            o.stop();
+            ac.close();
+          }, 500);
+        } catch {}
+      }
+
+      /* Jump to Physiological Sigh card */
+      (function () {
+        const j = document.getElementById("psJump");
+        const card = document.getElementById("physSigh");
+        if (!j || !card) return;
+        j.addEventListener("click", function () {
+          Focus.enter(card);
+        });
+      })();
+
+      /* Physiological Sigh Coach */
+      (function () {
+        const card = document.getElementById("physSigh");
+        if (!card) return;
+        const stage = document.getElementById("psStage");
+        const stat = document.getElementById("psStat");
+        const cyclesSel = document.getElementById("psCycles");
+        const voiceSel = document.getElementById("psVoice");
+        const start = document.getElementById("psStart");
+        const stop = document.getElementById("psStop");
+
+        let timer = null,
+          running = false,
+          done = 0,
+          total = 0,
+          voice = null;
+
+        /* Populate voices (aim for British options if available) */
+        function pickVoices() {
+          const list = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+          const gb = list.filter((v) =>
+            /en-GB|Great Britain|United Kingdom/i.test(v.lang + " " + v.name)
+          );
+          const fallback = list.filter((v) => /en-/i.test(v.lang));
+          voiceSel.innerHTML = '<option value="off">Off</option>';
+          gb.concat(fallback).forEach((v, i) => {
+            const opt = document.createElement("option");
+            opt.value = v.name;
+            opt.textContent = v.name + " (" + v.lang + ")";
+            voiceSel.appendChild(opt);
+          });
+        }
+        try {
+          if (window.speechSynthesis) {
+            speechSynthesis.onvoiceschanged = pickVoices;
+            pickVoices();
+          }
+        } catch {}
+
+        function speak(text) {
+          const name = voiceSel.value;
+          if (!window.speechSynthesis || name === "off") return;
+          try {
+            const u = new SpeechSynthesisUtterance(text);
+            const found =
+              speechSynthesis.getVoices().find((v) => v.name === name) || null;
+            if (found) u.voice = found;
+            u.rate = 0.95;
+            speechSynthesis.cancel();
+            speechSynthesis.speak(u);
+          } catch {}
+        }
+
+        function setStage(text) {
+          stage.textContent = text;
+        }
+        function setStat() {
+          stat.textContent = done + "/" + total + " done";
+        }
+
+        function runOne() {
+          if (!running) return;
+          // 1) Inhale
+          setStage("Inhale (short) …");
+          speak("Inhale");
+          chime(0.08);
+          let t = 700;
+          if (prefersReduce) t = 600;
+          timer = setTimeout(() => {
+            // 2) Top‑up inhale
+            if (!running) return;
+            setStage("Top‑up inhale …");
+            speak("Top up");
+            chime(0.07);
+            let t2 = 600;
+            if (prefersReduce) t2 = 500;
+            timer = setTimeout(() => {
+              // 3) Long exhale
+              if (!running) return;
+              setStage("Exhale (long) …");
+              speak("Exhale");
+              chime(0.12);
+              let t3 = 1800;
+              if (prefersReduce) t3 = 1400;
+              timer = setTimeout(() => {
+                done++;
+                setStat();
+                if (done >= total) {
+                  finish();
+                } else {
+                  runOne();
+                }
+              }, t3);
+            }, t2);
+          }, t);
+        }
+
+        function startRun() {
+          Focus.enter(card);
+          if (running) return;
+          done = 0;
+          total = parseInt(cyclesSel.value || "3", 10);
+          setStat();
+          running = true;
+          start.disabled = true;
+          stop.disabled = false;
+          runOne();
+        }
+
+        function finish() {
+          running = false;
+          start.disabled = false;
+          stop.disabled = true;
+          setStage("Complete — notice how your body feels.");
+          chime(0.2);
+          Focus.exit();
+          // log to localStorage simple count
+          try {
+            const K = "mshare_mood_psigh_total";
+            const n = parseInt(localStorage.getItem(K) || "0", 10);
+            localStorage.setItem(K, String(n + total));
+          } catch {}
+        }
+
+        function halt() {
+          running = false;
+          start.disabled = false;
+          stop.disabled = true;
+          clearTimeout(timer);
+          try {
+            speechSynthesis && speechSynthesis.cancel();
+          } catch {}
+          setStage("Stopped.");
+          Focus.exit();
+        }
+
+        start.addEventListener("click", startRun);
+        stop.addEventListener("click", halt);
+      })();
+
+      /* Mood Technique Tracker */
+      (function () {
+        const tech = document.getElementById("mtTech");
+        const before = document.getElementById("mtBefore");
+        const after = document.getElementById("mtAfter");
+        const note = document.getElementById("mtNote");
+        const add = document.getElementById("mtAdd");
+        const clearBtn = document.getElementById("mtClear");
+        const msg = document.getElementById("mtMsg");
+        const out = document.getElementById("mtSummary");
+        const KEY = "mshare_mood_log_v1";
+
+        function load() {
+          try {
+            return JSON.parse(localStorage.getItem(KEY) || "[]");
+          } catch {
+            return [];
+          }
+        }
+        function save(arr) {
+          localStorage.setItem(KEY, JSON.stringify(arr));
+        }
+
+        function render() {
+          const rows = load();
+          if (!rows.length) {
+            out.textContent = "No entries yet.";
+            return;
+          }
+          const map = {};
+          rows.forEach((r) => {
+            const d = (parseFloat(r.after) || 0) - (parseFloat(r.before) || 0);
+            map[r.tech] = map[r.tech] || { n: 0, sum: 0 };
+            map[r.tech].n += 1;
+            map[r.tech].sum += d;
+          });
+          const parts = Object.keys(map).map(function (k) {
+            const m = map[k];
+            const avg = (m.sum / Math.max(1, m.n)).toFixed(2);
+            return k + ": +" + avg + " (" + m.n + ")";
+          });
+          out.textContent = "Average mood change • " + parts.join(" • ");
+        }
+
+        add.addEventListener("click", function () {
+          const b = parseFloat(before.value);
+          const a = parseFloat(after.value);
+          if (isNaN(b) || isNaN(a)) {
+            msg.textContent = "Enter before/after values.";
+            return;
+          }
+          const rows = load();
+          rows.push({
+            t: Date.now(),
+            tech: tech.value,
+            before: b,
+            after: a,
+            note: note.value || "",
+          });
+          save(rows);
+          msg.textContent = "Saved.";
+          render();
+          setTimeout(() => (msg.textContent = ""), 1000);
+        });
+
+        clearBtn.addEventListener("click", function () {
+          if (!confirm("Clear all mood tracker entries on this device?")) return;
+          save([]);
+          render();
+          msg.textContent = "Cleared.";
+          setTimeout(() => (msg.textContent = ""), 1000);
+        });
+
+        render();
+      })();
+
+      /* Audience tabs */
+      (function () {
+        const wrap = document.getElementById("audTabs");
+        if (!wrap) return;
+        const btns = wrap.querySelectorAll("button[data-aud]");
+        const panels = {
+          bpadhd: document.getElementById("aud-bpadhd"),
+          autistic: document.getElementById("aud-autistic"),
+          peri: document.getElementById("aud-peri"),
+        };
+        btns.forEach((b) =>
+          b.addEventListener("click", function () {
+            const id = b.getAttribute("data-aud");
+            Object.keys(panels).forEach((k) => {
+              panels[k].style.display = k === id ? "" : "none";
+            });
+            btns.forEach((x) =>
+              x.classList.toggle("btn-success", x === b)
+            );
+            try {
+              wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+            } catch {}
+          })
+        );
+      })();
+
+      /* Rhythm Builder */
+      (function () {
+        const wake = document.getElementById("rhWake");
+        const lunch = document.getElementById("rhLunch");
+        const wind = document.getElementById("rhWind");
+        const logBtn = document.getElementById("rhLog");
+        const clearBtn = document.getElementById("rhClear");
+        const msg = document.getElementById("rhMsg");
+        const out = document.getElementById("rhOut");
+        const KEY = "mshare_rhythm_v1";
+
+        function load() {
+          try {
+            return JSON.parse(localStorage.getItem(KEY) || "[]");
+          } catch {
+            return [];
+          }
+        }
+        function save(arr) {
+          localStorage.setItem(KEY, JSON.stringify(arr));
+        }
+
+        function mins(hhmm) {
+          const [h, m] = (hhmm || "00:00").split(":").map((x) => parseInt(x, 10) || 0);
+          return h * 60 + m;
+        }
+
+        function score(rows) {
+          if (rows.length < 2) return 0;
+          // Regularity = % of anchors within 45 min of the median for that anchor
+          const A = ["w", "l", "d"];
+          let ok = 0,
+            total = 0;
+          A.forEach((k) => {
+            const vals = rows.map((r) => r[k]).filter((v) => typeof v === "number");
+            if (!vals.length) return;
+            const med = vals.sort((a, b) => a - b)[Math.floor(vals.length / 2)];
+            vals.forEach((v) => {
+              total++;
+              if (Math.abs(v - med) <= 45) ok++;
+            });
+          });
+          return Math.round((ok / Math.max(1, total)) * 100);
+        }
+
+        function render() {
+          const rows = load();
+          out.textContent =
+            rows.length +
+            " days logged • Regularity score " +
+            (rows.length ? score(rows) + "%" : "—") +
+            ".";
+        }
+
+        logBtn.addEventListener("click", function () {
+          const rows = load();
+          rows.push({ t: Date.now(), w: mins(wake.value), l: mins(lunch.value), d: mins(wind.value) });
+          save(rows);
+          render();
+          msg.textContent = "Logged.";
+          setTimeout(() => (msg.textContent = ""), 1000);
+        });
+
+        clearBtn.addEventListener("click", function () {
+          if (!confirm("Clear rhythm log on this device?")) return;
+          save([]);
+          render();
+        });
+
+        render();
+      })();
+
+      /* Focus Timer */
+      (function () {
+        const work = document.getElementById("ftWork");
+        const brk = document.getElementById("ftBreak");
+        const start = document.getElementById("ftStart");
+        const stop = document.getElementById("ftStop");
+        const out = document.getElementById("ftOut");
+        const KEY = "mshare_focus_best_v1";
+        let timer = null,
+          phase = "idle",
+          endAt = 0;
+
+        function fmt(ms) {
+          const s = Math.max(0, Math.ceil(ms / 1000));
+          const m = Math.floor(s / 60);
+          const r = String(s % 60).padStart(2, "0");
+          return m + ":" + r;
+        }
+
+        function tick() {
+          const left = endAt - Date.now();
+          out.textContent =
+            (phase === "focus" ? "Focus" : "Break") + " — " + fmt(left) + " remaining";
+          if (left <= 0) {
+            if (phase === "focus") {
+              chime(0.2);
+              phase = "break";
+              endAt = Date.now() + (parseInt(brk.value || "3", 10) * 60 * 1000);
+              out.textContent = "Break — breathe or stretch.";
+            } else {
+              stopRun(true);
+            }
+          } else {
+            timer = setTimeout(tick, 500);
+          }
+        }
+
+        function startRun() {
+          Focus.enter(document.getElementById("focusTimer"));
+          clearTimeout(timer);
+          phase = "focus";
+          endAt = Date.now() + (parseInt(work.value || "15", 10) * 60 * 1000);
+          start.disabled = true;
+          stop.disabled = false;
+          tick();
+        }
+
+        function stopRun(done) {
+          clearTimeout(timer);
+          start.disabled = false;
+          stop.disabled = true;
+          if (done) {
+            out.textContent = "Session complete — stop while it’s going well.";
+            chime(0.2);
+            // update best (longest focus minutes)
+            try {
+              const best = parseInt(localStorage.getItem(KEY) || "0", 10);
+              const cur = parseInt(work.value || "15", 10);
+              if (cur > best) localStorage.setItem(KEY, String(cur));
+            } catch {}
+          } else {
+            out.textContent = "Stopped.";
+          }
+          Focus.exit();
+        }
+
+        start.addEventListener("click", startRun);
+        stop.addEventListener("click", function () {
+          stopRun(false);
+        });
+      })();
+
+      /* Sensory Planner */
+      (function () {
+        const ctx = document.getElementById("snCtx");
+        const pick = document.getElementById("snPick");
+        const saveBtn = document.getElementById("snSave");
+        const clearBtn = document.getElementById("snClear");
+        const out = document.getElementById("snOut");
+        const KEY = "mshare_sensory_v1";
+
+        function load() {
+          try {
+            return JSON.parse(localStorage.getItem(KEY) || "{}");
+          } catch {
+            return {};
+          }
+        }
+        function save(map) {
+          localStorage.setItem(KEY, JSON.stringify(map));
+        }
+        function render() {
+          const map = load();
+          const parts = Object.keys(map).map((k) => "<b>" + k + "</b>: " + map[k].join(", "));
+          out.innerHTML = parts.length ? parts.join(" • ") : "No saved cards yet.";
+        }
+
+        saveBtn.addEventListener("click", function () {
+          const map = load();
+          const items = (pick.value || "")
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+          map[ctx.value] = items.slice(0, 6);
+          save(map);
+          render();
+        });
+        clearBtn.addEventListener("click", function () {
+          if (!confirm("Clear all sensory cards on this device?")) return;
+          save({});
+          render();
+        });
+        render();
+      })();
+
+      /* Flush & Mood Diary */
+      (function () {
+        const heat = document.getElementById("fdHeat");
+        const mood = document.getElementById("fdMood");
+        const trig = document.getElementById("fdTrig");
+        const add = document.getElementById("fdAdd");
+        const clearBtn = document.getElementById("fdClear");
+        const msg = document.getElementById("fdMsg");
+        const out = document.getElementById("fdOut");
+        const KEY = "mshare_flush_v1";
+
+        function load() {
+          try {
+            return JSON.parse(localStorage.getItem(KEY) || "[]");
+          } catch {
+            return [];
+          }
+        }
+        function save(arr) {
+          localStorage.setItem(KEY, JSON.stringify(arr));
+        }
+        function render() {
+          const rows = load();
+          if (!rows.length) {
+            out.textContent = "0 entries.";
+            return;
+          }
+          const avg = (k) =>
+            (rows.reduce((a, r) => a + (parseFloat(r[k]) || 0), 0) / rows.length).toFixed(1);
+          out.textContent =
+            rows.length +
+            " entries • avg heat " +
+            avg("heat") +
+            " • avg mood " +
+            avg("mood") +
+            (rows.length >= 3 ? " • look for time‑of‑day patterns." : "");
+        }
+        add.addEventListener("click", function () {
+          const rows = load();
+          rows.push({
+            t: Date.now(),
+            heat: parseFloat(heat.value || "0"),
+            mood: parseFloat(mood.value || "0"),
+            trig: trig.value || "",
+          });
+          save(rows);
+          msg.textContent = "Saved.";
+          render();
+          setTimeout(() => (msg.textContent = ""), 1000);
+        });
+        clearBtn.addEventListener("click", function () {
+          if (!confirm("Clear diary entries on this device?")) return;
+          save([]);
+          render();
+        });
+        render();
+      })();
+
+      /* Night‑Waking Coach */
+      (function () {
+        const start = document.getElementById("nwStart");
+        const stop = document.getElementById("nwStop");
+        const stat = document.getElementById("nwStat");
+        const out = document.getElementById("nwOut");
+        let timer = null,
+          endAt = 0;
+
+        function fmt(ms) {
+          const s = Math.max(0, Math.ceil(ms / 1000));
+          const m = Math.floor(s / 60);
+          const r = String(s % 60).padStart(2, "0");
+          return m + ":" + r;
+        }
+
+        function tick() {
+          const left = endAt - Date.now();
+          stat.textContent = "Calm — " + fmt(left) + " remaining";
+          if (left <= 0) {
+            stopRun(true);
+          } else {
+            timer = setTimeout(tick, 500);
+          }
+        }
+
+        function startRun() {
+          Focus.enter(document.getElementById("nightCoach"));
+          out.textContent =
+            "Breathe softly: count a gentle 4‑second inhale, then a 6‑ to 8‑second exhale through the mouth. Keep lights low.";
+          start.disabled = true;
+          stop.disabled = false;
+          endAt = Date.now() + 60 * 1000;
+          stat.textContent = "Running…";
+          tick();
+        }
+
+        function stopRun(done) {
+          clearTimeout(timer);
+          start.disabled = false;
+          stop.disabled = true;
+          stat.textContent = done ? "Complete — back to bed." : "Stopped.";
+          Focus.exit();
+        }
+
+        start.addEventListener("click", startRun);
+        stop.addEventListener("click", function () {
+          stopRun(false);
+        });
+      })();
+    </script>
+<script src="app.js"></script>
+<script src="coach.js"></script>
+<script src="assets/js/ux-fixes.js"></script>
+<script src="assets/js/paylinks.js"></script>
+<script src="assets/js/site-core.js"></script>
+<script src="assets/js/a11y-fix.js"></script>
+<script src="assets/js/start-fix.js"></script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
+<script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
+<script src="assets/header/header.js"></script>
+<script src="assets/footer/footer.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+</body>
+</html>

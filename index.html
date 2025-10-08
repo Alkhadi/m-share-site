@@ -8,13 +8,26 @@
   <meta name="description"
     content="Measured Breathing. Measurable Relief. Free, evidence-based techniques with sharing, QR, and PDF." />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="assets/css/ux-fixes.css" /><link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+  <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
 <link rel="stylesheet" href="assets/css/responsive-fixes.css" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
   <link rel="manifest" href="manifest.webmanifest" />
   <meta name="theme-color" content="#0f172a" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+
+<style id="nav-chevrons-style-v2">
+  /* Ensure [hidden] actually hides menus even if a theme doesn't style it. */
+  nav .submenu[hidden] { display: none !important; }
+  /* Improve focus ring targets */
+  .menu-toggle { outline-offset: 2px; }
+</style>
 </head>
 
 <body>
@@ -263,14 +276,244 @@
 <script src="assets/js/paylinks.js"></script>
 <script src="assets/js/site-core.js"></script>
 <script src="assets/js/a11y-fix.js"></script>
-<script src="assets/js/start-fix.js"></script><script src="assets/js/core/nav-autofix.js"></script><script src="assets/header/header.js"></script>
-<script src="assets/footer/footer.js"></script>
-<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/start-fix.js"></script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
 <script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
 <script src="assets/header/header.js"></script>
 <script src="assets/footer/footer.js"></script>
-<script src="assets/js/core/voice-coach.js"></script>
-<script src="assets/js/core/sound-kit.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+
+<script id="menu-chevron-fix">
+(function(){
+  var onReady = function(fn){ if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn, {once:true}); };
+  onReady(function(){
+    // Click or keyboard on a chevron-like control opens/closes the adjacent submenu.
+    function toggleFrom(trigger, prevent){
+      var btn = trigger.closest('[data-chevron], .chevron, .menu-chevron, .accordion-toggle, .has-children > button, .has-children > a, .hamburger, [aria-haspopup="menu"]');
+      if(!btn) return false;
+
+      // Find the submenu: aria-controls target, the next sibling UL/.submenu, or a nested [role="menu"].
+      var submenu = null;
+      var ctrl = btn.getAttribute('aria-controls');
+      if (ctrl) submenu = document.getElementById(ctrl);
+      if (!submenu) {
+        var li = btn.closest('li, .has-children, nav, .menu, .accordion');
+        if (li) submenu = li.querySelector(':scope > ul, :scope > .submenu, :scope > [role="menu"]');
+      }
+      if (!submenu) return false;
+
+      if (prevent) prevent.preventDefault();
+
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+
+      // Hide/show with both the hidden attribute and display style — covers most CSS frameworks.
+      if (!open) {
+        submenu.removeAttribute('hidden');
+        submenu.style.display = submenu.style.display || 'block';
+      } else {
+        submenu.setAttribute('hidden', '');
+        submenu.style.display = 'none';
+      }
+
+      // If the UI uses a class toggle for transitions:
+      var host = btn.closest('.has-children, li, .accordion-item');
+      if (host) host.classList.toggle('open', !open);
+
+      return true;
+    }
+
+    document.addEventListener('click', function(e){
+      if (toggleFrom(e.target, e)) return;
+    }, {passive:false});
+
+    document.addEventListener('keydown', function(e){
+      // Space or Enter should also toggle when the chevron has keyboard focus
+      if ((e.key === 'Enter' || e.key === ' ') && toggleFrom(e.target, e)) {
+        e.preventDefault();
+      }
+    }, {passive:false});
+  });
+})();
+<\/script>
+
+<script id="nav-chevrons-patch-v2">
+(function(){
+  var onReady = function(fn){
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn, {once:true});
+  };
+
+  onReady(function(){
+
+    // ---- Mobile hamburger (#navToggle controls #mainNav) ----
+    var nav = document.getElementById('mainNav') || document.querySelector('nav.main-nav');
+    var toggle = document.getElementById('navToggle') || document.querySelector('.nav-toggle');
+
+    function openNav(){
+      if (!nav || !toggle) return;
+      toggle.setAttribute('aria-expanded','true');
+      nav.removeAttribute('hidden');
+      // If CSS hides it via display, ensure visible on mobile:
+      var cs = window.getComputedStyle(nav);
+      if (cs.display === 'none') nav.style.display = 'block';
+      document.body.classList.add('nav-open');
+    }
+    function closeNav(){
+      if (!nav || !toggle) return;
+      toggle.setAttribute('aria-expanded','false');
+      nav.setAttribute('hidden','');
+      // Respect themes that rely on display toggling:
+      nav.style.display = 'none';
+      document.body.classList.remove('nav-open');
+    }
+    function isOpen(){ return toggle && toggle.getAttribute('aria-expanded') === 'true'; }
+
+    if (toggle && nav){
+      toggle.setAttribute('aria-controls', nav.id || 'mainNav');
+      if (!toggle.hasAttribute('aria-expanded')) toggle.setAttribute('aria-expanded','false');
+
+      toggle.addEventListener('click', function(e){
+        e.preventDefault();
+        isOpen() ? closeNav() : openNav();
+      }, {passive:false});
+
+      // Close on outside click (mobile)
+      document.addEventListener('click', function(e){
+        if (!isOpen()) return;
+        if (e.target.closest('#mainNav, #navToggle, .nav-toggle')) return;
+        closeNav();
+      }, {passive:true});
+
+      // Close on Escape
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && isOpen()) closeNav();
+      }, {passive:true});
+    }
+
+    // ---- Chevron submenus (.menu-group -> .menu-toggle + .submenu) ----
+    var groups = Array.prototype.slice.call(document.querySelectorAll('.menu-group'));
+    var finePointer = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+
+    function closeOthers(except){
+      groups.forEach(function(g){
+        if (g === except) return;
+        var b = g.querySelector('.menu-toggle, [data-chevron]');
+        var m = g.querySelector('.submenu, [role="menu"], :scope > ul');
+        if (!b || !m) return;
+        b.setAttribute('aria-expanded','false');
+        m.setAttribute('hidden','');
+        g.classList.remove('open');
+      });
+    }
+
+    groups.forEach(function(g){
+      var btn = g.querySelector('.menu-toggle, [data-chevron]');
+      var menu = g.querySelector('.submenu, [role="menu"], :scope > ul');
+      if (!btn || !menu) return;
+
+      btn.setAttribute('aria-haspopup','menu');
+      if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded','false');
+      // initial hidden state
+      if (btn.getAttribute('aria-expanded') !== 'true') menu.setAttribute('hidden','');
+
+      function open(){
+        closeOthers(g);
+        btn.setAttribute('aria-expanded','true');
+        menu.removeAttribute('hidden');
+        g.classList.add('open');
+      }
+      function close(){
+        btn.setAttribute('aria-expanded','false');
+        menu.setAttribute('hidden','');
+        g.classList.remove('open');
+      }
+      function toggle(){
+        (btn.getAttribute('aria-expanded') === 'true') ? close() : open();
+      }
+
+      // Click / tap on chevron
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        toggle();
+      }, {passive:false});
+
+      // Keyboard toggle
+      btn.addEventListener('keydown', function(e){
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        if (e.key === 'Escape') { close(); btn.focus(); }
+      }, {passive:false});
+
+      // Hover/focus open (desktop only; won't fire on touch-only devices)
+      if (finePointer){
+        g.addEventListener('mouseenter', open, {passive:true});
+        g.addEventListener('mouseleave', close, {passive:true});
+        g.addEventListener('focusin', open, {passive:true});
+        g.addEventListener('focusout', function(ev){
+          if (!g.contains(ev.relatedTarget)) close();
+        }, {passive:true});
+      }
+    });
+
+    // Close open submenu on outside click (desktop)
+    document.addEventListener('click', function(e){
+      var hitGroup = e.target.closest('.menu-group');
+      if (!hitGroup) closeOthers(null);
+    }, {passive:true});
+
+  });
+})();
+<\/script>
+
+<script id="focus-overlay-dedupe-v2">
+(function(){
+  var onReady = function(fn){
+    if (document.readyState !== 'loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn, {once:true});
+  };
+  onReady(function(){
+    // Keep the visible "square" focus panel if present:
+    var keep = document.querySelector('#focusModal, .focus-screen, .focus-panel, .breathing-panel');
+    // Potential legacy/round visuals to remove:
+    var extraSel = [
+      '#vc-focus', '.vc-focus', '.breathing-circle', '.focus-circle',
+      '#breathCanvas', '#voiceCoachCircle', '.circle-bg', '.legacy-breathing', '.coach-circle'
+    ].join(',');
+
+    function hide(node){ try{ node.style.display='none'; node.setAttribute('data-removed-by-fix','true'); }catch{} }
+
+    if (keep){
+      // Hide large canvases/SVGs NOT inside the keep panel (the behind layer).
+      Array.prototype.slice.call(document.querySelectorAll('canvas,svg')).forEach(function(n){
+        if (keep.contains(n)) return;
+        var r; try{ r = n.getBoundingClientRect(); }catch(e){}
+        if (r && r.width >= 180 && r.height >= 180) hide(n);
+      });
+      // Hide known legacy containers not in keep
+      Array.prototype.slice.call(document.querySelectorAll(extraSel)).forEach(function(n){
+        if (!keep.contains(n)) hide(n);
+      });
+    } else {
+      // If no "square" panel exists, but both a ring + some other panel exist, keep the top-most by z-index and hide others
+      var layers = Array.prototype.slice.call(document.querySelectorAll('#vc-focus, .vc-focus, .focus-panel, .breathing-panel, #focusModal, .focus-screen, canvas, svg'));
+      if (!layers.length) return;
+      // Pick the visible one with largest z-index
+      var top = null, topZ = -Infinity;
+      layers.forEach(function(el){
+        var cs = window.getComputedStyle(el);
+        if (cs.display === 'none' || cs.visibility === 'hidden' || cs.opacity === '0') return;
+        var z = parseInt(cs.zIndex || '0', 10); if (isNaN(z)) z = 0;
+        if (z >= topZ) { topZ = z; top = el; }
+      });
+      layers.forEach(function(el){ if (el !== top) hide(el); });
+    }
+  });
+})();
+<\/script>
 </body>
 
 </html>

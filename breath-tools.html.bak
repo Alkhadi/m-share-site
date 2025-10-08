@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Breath Tools • M Share</title>
+  <meta name="description" content="Three guided breathing patterns with voice cues and metronome option." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+  <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+  <link rel="stylesheet" href="assets/css/responsive-fixes.css" />
+  <style>
+    .coach-wrap {
+      display: grid;
+      gap: 14px
+    }
+
+    .coach-controls {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px
+    }
+
+    @media(max-width:760px) {
+      .coach-controls {
+        grid-template-columns: 1fr 1fr
+      }
+    }
+
+    .orb-wrap {
+      position: relative;
+      width: min(84vw, 360px);
+      aspect-ratio: 1/1;
+      margin: auto
+    }
+
+    .orb {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: radial-gradient(120px 180px at 30% 30%, rgba(255, 255, 255, .14), transparent 55%),
+        radial-gradient(100px 100px at 70% 70%, rgba(255, 255, 255, .08), transparent 70%),
+        linear-gradient(180deg, rgba(160, 255, 218, .20), rgba(90, 200, 170, .14));
+      box-shadow: inset 0 0 40px rgba(0, 0, 0, .25), 0 30px 50px rgba(0, 0, 0, .35);
+      border: 1px solid rgba(255, 255, 255, .14);
+      transform: scale(.84);
+      transition: transform 280ms cubic-bezier(.22, .8, .24, 1)
+    }
+
+    .orb.inhale {
+      transform: scale(1.08)
+    }
+
+    .orb.exhale {
+      transform: scale(.78)
+    }
+
+    .phase {
+      font-weight: 800;
+      font-size: clamp(22px, 3.2vw, 28px)
+    }
+
+    .count {
+      font-weight: 900;
+      font-size: clamp(48px, 7.5vw, 56px);
+      line-height: 1;
+      margin-top: 4px;
+      text-shadow: 0 6px 22px rgba(0, 0, 0, .35)
+    }
+
+    .mini {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    svg.radial {
+      position: absolute;
+      inset: 0;
+      transform: rotate(-90deg)
+    }
+
+    .ring {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round
+    }
+
+    .ring.base {
+      stroke: rgba(255, 255, 255, .10)
+    }
+
+    .ring.progress {
+      stroke: rgba(170, 240, 209, .90)
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .muted small {
+      opacity: .8
+    }
+  </style>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+</head>
+
+<body>
+  <a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"></a>
+
+  <header class="site-header">
+    <div class="container navbar">
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html">
+        <span class="logo">M</span><span class="brand-text">M Share</span>
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a data-href="index.html">Wellbeing</a>
+
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Neurodevelopmental</div>
+            <a data-href="autism.html">Autism</a>
+            <a data-href="adhd.html">ADHD</a>
+            <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+            <div class="menu-label">Mental Health</div>
+            <a data-href="anxiety.html">Anxiety</a>
+            <a data-href="depression.html">Depression</a>
+            <a data-href="stress.html">Stress</a>
+            <a data-href="sleep.html">Sleep</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Guides</div>
+            <a data-href="breath.html">Breath (how-to)</a>
+            <a data-href="focus.html">Focus</a>
+            <a data-href="mindfulness.html">Mindfulness</a>
+            <div class="menu-label">Techniques</div>
+            <a data-href="sos-60.html">60-second Reset</a>
+            <a data-href="box-breathing.html">Box Breathing</a>
+            <a data-href="4-7-8-breathing.html">4-7-8 Breathing</a>
+            <a data-href="coherent-5-5.html">Coherent 5-5</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">General</div>
+            <a data-href="sleep-tools.html">Sleep Tools</a>
+            <a data-href="breath-tools.html">Breath Tools</a>
+            <a data-href="mood-tools.html">Mood Tools</a>
+            <div class="menu-label">Condition-specific</div>
+            <a data-href="adhd-tools.html">ADHD Tools</a>
+            <a data-href="autism-tools.html">Autism Tools</a>
+            <a data-href="depression-tools.html">Depression Tools</a>
+            <a data-href="anxiety-tools.html">Anxiety Tools</a>
+            <a data-href="stress-tools.html">Stress Tools</a>
+          </div>
+        </div>
+
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+          <div class="submenu">
+            <a data-href="about.html">About</a>
+            <a data-href="coffee.html">Support Us</a>
+            <a data-href="contact.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Breath Tools</h1>
+
+    <!-- Paced Breathing Coach (with selectable technique) -->
+    <section class="card technique" id="paced-breathing-coach">
+      <div class="coach-wrap">
+        <h2>Paced Breathing Coach</h2>
+        <p class="muted">Choose a pattern (<b>Box 4-4-4-4</b> • <b>Coherent 5-5</b> • <b>4-7-8</b>) and follow the
+          on-screen cue.
+          <small>Tap the orb or press <b>Space</b> to pause/resume.</small>
+        </p>
+
+        <div class="coach-controls">
+          <label class="tile"><span>Technique</span>
+            <select id="pbPattern">
+              <option value="4,4,4,4">Box 4-4-4-4</option>
+              <option value="5,0,5,0">Coherent 5-5</option>
+              <option value="4,7,8,0">4-7-8</option>
+            </select>
+          </label>
+          <label class="tile"><span>Minutes</span>
+            <select id="pbMinutes">
+              <option value="1">1 min</option>
+              <option value="2" selected>2 min</option>
+              <option value="3">3 min</option>
+              <option value="5">5 min</option>
+            </select>
+          </label>
+          <label class="tile"><span>Voice coach (TTS)</span>
+            <select id="pbTts">
+              <option value="on" selected>On</option>
+              <option value="off">Off</option>
+            </select>
+          </label>
+          <label class="tile"><span>Ambience</span>
+            <select id="pbBg">
+              <option value="none">None</option>
+              <option value="cosmic" selected>Cosmic</option>
+              <option value="rain">Soft Rain</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="orb-wrap" id="pbOrb">
+          <svg class="radial" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="ring base" cx="50" cy="50" r="42"></circle>
+            <circle id="pbRing" class="ring progress" cx="50" cy="50" r="42" stroke-dasharray="264"
+              stroke-dashoffset="264"></circle>
+          </svg>
+          <div id="pbOrbBall" class="orb inhale">
+            <div>
+              <div id="pbPhase" class="phase">Ready</div>
+              <div id="pbCount" class="count">–</div>
+              <div class="mini"><span id="pbIdx">0</span>/<span id="pbTotal">0</span> breaths</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-success" id="pbStart">🎧 Start</button>
+          <button type="button" class="btn" id="pbStop">■ Stop</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nasal Breathing Practice (with voice/audio coach) -->
+    <section class="card technique" id="nasal-breathing-practice">
+      <div class="coach-wrap">
+        <h2>Nasal Breathing Practice</h2>
+        <p class="muted">Gentle nasal inhale/exhale to condition diaphragmatic, low-noise breathing.</p>
+
+        <div class="coach-controls">
+          <label class="tile"><span>Pattern</span>
+            <select id="nbPattern">
+              <option value="4,0,4,0" selected>4-4 (calm)</option>
+              <option value="5,0,5,0">5-5 (steady)</option>
+              <option value="6,0,6,0">6-6 (slow)</option>
+            </select>
+          </label>
+          <label class="tile"><span>Minutes</span>
+            <select id="nbMinutes">
+              <option value="1" selected>1 min</option>
+              <option value="2">2 min</option>
+              <option value="3">3 min</option>
+            </select>
+          </label>
+          <label class="tile"><span>Voice coach (TTS)</span>
+            <select id="nbTts">
+              <option value="on" selected>On</option>
+              <option value="off">Off</option>
+            </select>
+          </label>
+          <label class="tile"><span>Ambience</span>
+            <select id="nbBg">
+              <option value="none">None</option>
+              <option value="cosmic">Cosmic</option>
+              <option value="rain" selected>Soft Rain</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="orb-wrap" id="nbOrb">
+          <svg class="radial" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="ring base" cx="50" cy="50" r="42"></circle>
+            <circle id="nbRing" class="ring progress" cx="50" cy="50" r="42" stroke-dasharray="264"
+              stroke-dashoffset="264"></circle>
+          </svg>
+          <div id="nbOrbBall" class="orb inhale">
+            <div>
+              <div id="nbPhase" class="phase">Ready</div>
+              <div id="nbCount" class="count">–</div>
+              <div class="mini"><span id="nbIdx">0</span>/<span id="nbTotal">0</span> breaths</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-success" id="nbStart">Start</button>
+          <button type="button" class="btn" id="nbStop">Stop</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resource cards (kept) -->
+    <div class="grid cols-3">
+      <div class="card">
+        <div id="bt1"></div>
+      </div>
+      <div class="card">
+        <div id="bt2"></div>
+      </div>
+      <div class="card">
+        <div id="bt3"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Evidence & UK resources</h3>
+      <ul>
+        <li><a
+            href="https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/breathing-exercises-for-stress/"
+            target="_blank" rel="noopener">NHS — Breathing exercises for stress</a></li>
+        <li><a href="https://www.cuh.nhs.uk/patient-information/breathing-techniques-to-ease-breathlessness/"
+            target="_blank" rel="noopener">CUH — Breathing techniques (rectangle, pursed lips)</a></li>
+        <li><a
+            href="https://www.nhsinform.scot/healthy-living/mental-wellbeing/stress/breathing-and-relaxation-exercises/"
+            target="_blank" rel="noopener">NHS Inform — Breathing & relaxation (videos)</a></li>
+      </ul>
+
+      <div class="actions" style="margin-top:10px">
+        <button class="btn btn-success" id="resPdf_breath" type="button">Download: Breath Tools — Resources
+          (PDF)</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-2025" id="footer2025">
+    <div class="wrap">
+      <div class="grid">
+        <section class="col brand">
+          <div class="brandline"><span class="logo">M</span>
+            <div><b>M Share</b>
+              <div class="muted">Quiet, practical tools for mental health and wellbeing.</div>
+            </div>
+          </div>
+          <div class="theme-controls">
+            <label>Background<input id="themeColor" type="color" value="#0f172a"></label>
+            <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01"
+                value="1"></label>
+          </div>
+          <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div>
+        </section>
+        <section class="col">
+          <h4>Explore</h4>
+          <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html"
+              href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a
+              data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html"
+              href="about.html">About</a></p>
+        </section>
+        <section class="col">
+          <h4>Toolkits</h4>
+          <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html"
+              href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html"
+              href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html"
+              href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html"
+              href="stress-tools.html">Stress</a></p>
+        </section>
+        <section class="col">
+          <h4>Contact</h4>
+          <p><a data-href="contact.html" href="contact.html">Contact</a> • <a
+              href="mailto:info@mindpaylink.com">info@mindpaylink.com</a></p>
+        </section>
+      </div>
+      <div class="bottom">
+        <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+        <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+      </div>
+    </div>
+    <script>
+      const yf = document.getElementById("yearFooter");
+      if (yf) yf.textContent = (new Date).getFullYear();
+      const btt = document.getElementById("backToTop");
+      if (btt) btt.addEventListener("click", function (e) { e.preventDefault(); try { (document.getElementById("top") || document.body).scrollIntoView({ behavior: "smooth", block: "start" }) } catch { location.hash = "#top" } });
+    </script>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="coach.js"></script>
+  <script src="assets/js/ux-fixes.js"></script>
+  <script src="assets/js/paylinks.js"></script>
+  <script src="assets/js/site-core.js"></script>
+  <script src="assets/js/a11y-fix.js"></script>
+  <script src="assets/js/start-fix.js"></script><script>
+    /* Minimal engine for both sections with audio + TTS */
+    (function () {
+      'use strict';
+
+      function makeCoach(cfg) {
+        const scope = document.getElementById(cfg.scope);
+        const orb = document.getElementById(cfg.ids.orb);
+        const ring = document.getElementById(cfg.ids.ring);
+        const phaseEl = document.getElementById(cfg.ids.phase);
+        const countEl = document.getElementById(cfg.ids.count);
+        const idxEl = document.getElementById(cfg.ids.idx);
+        const totalEl = document.getElementById(cfg.ids.total);
+        const CIRC = 264;
+
+        const getSel = id => document.getElementById(id);
+        const selPattern = getSel(cfg.select.pattern);
+        const selMin = getSel(cfg.select.minutes);
+        const selTts = getSel(cfg.select.tts);
+        const selBg = getSel(cfg.select.bg);
+        const btnStart = getSel(cfg.btn.start);
+        const btnStop = getSel(cfg.btn.stop);
+
+        let ac = null, bgm = null, running = false, paused = false, breathIdx = 0, breathTotal = 0, rafId = 0;
+
+        function ensureAC() { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume(); }
+        function chime(vol = .24) {
+          if (!ac) return;
+          const g = ac.createGain(); g.gain.value = 0;
+          const o = ac.createOscillator(); o.type = 'sine'; o.frequency.value = 528;
+          g.gain.setValueAtTime(0, ac.currentTime);
+          g.gain.linearRampToValueAtTime(vol, ac.currentTime + .01);
+          g.gain.exponentialRampToValueAtTime(.0001, ac.currentTime + 1.05);
+          o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime + 1.1);
+        }
+        function Background(ac, vol) {
+          const master = ac.createGain(); master.gain.value = vol; master.connect(ac.destination);
+          let nodes = [];
+          const clear = () => { nodes.forEach(n => { try { n.stop?.(); n.disconnect?.(); } catch { } }); nodes = []; };
+          const cosmic = () => {
+            const g = ac.createGain(); g.gain.value = .12; g.connect(master);
+            const o1 = ac.createOscillator(), o2 = ac.createOscillator();
+            o1.type = 'sine'; o1.frequency.value = 110; o2.type = 'sine'; o2.frequency.value = 220;
+            const l = ac.createOscillator(), lg = ac.createGain(); l.type = 'sine'; l.frequency.value = .05; lg.gain.value = 15; l.connect(lg); lg.connect(o1.frequency);
+            o1.connect(g); o2.connect(g);[o1, o2, l].forEach(n => n.start()); nodes.push(o1, o2, l, g);
+          };
+          const rain = () => {
+            const buf = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate); const d = buf.getChannelData(0);
+            for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * .55;
+            const src = ac.createBufferSource(); src.buffer = buf; src.loop = true;
+            const lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 1200;
+            const g = ac.createGain(); g.gain.value = .2; src.connect(lp).connect(g).connect(master); src.start(); nodes.push(src, lp, g);
+          };
+          return {
+            setType: (t) => { clear(); if (t === 'cosmic') cosmic(); else if (t === 'rain') rain(); },
+            setVol: (v) => master.gain.setTargetAtTime(v, ac.currentTime, .1),
+            stop: () => clear()
+          };
+        }
+
+        function speak(text) {
+          if (selTts.value !== 'on') return;
+          try { const u = new SpeechSynthesisUtterance(text); u.rate = 0.95; speechSynthesis.cancel(); speechSynthesis.speak(u); } catch { }
+        }
+        function vibrate(ms) { if (navigator.vibrate) try { navigator.vibrate(ms); } catch { } }
+
+        function setProgress(p) { ring.style.strokeDashoffset = String(CIRC * (1 - Math.max(0, Math.min(1, p)))); }
+        function phaseName(key) { return key === 'in' ? 'Inhale' : key === 'h1' ? 'Hold' : key === 'out' ? 'Exhale' : 'Hold'; }
+        function orbClass(key) { orb.classList.remove('inhale', 'exhale'); orb.classList.add(key === 'out' ? 'exhale' : 'inhale'); }
+
+        function parsePattern(str) {
+          const [a, b, c, d] = (str || '4,4,4,4').split(',').map(s => parseFloat(s || 0));
+          return { in: a || 0, h1: b || 0, out: c || 0, h2: d || 0 };
+        }
+
+        function start() {
+          if (running) return;
+          ensureAC();
+          // ambience
+          if (!bgm) bgm = Background(ac, 0.2);
+          bgm.setType(selBg.value);
+          // breaths total ~ minutes * BPM. Derive BPM from pattern length; simple 5.5 default.
+          const mins = Math.max(1, parseInt(selMin.value || '2', 10));
+          const bpm = 5.5;
+          breathTotal = Math.max(1, Math.round(mins * bpm));
+          breathIdx = 1; idxEl.textContent = String(breathIdx); totalEl.textContent = String(breathTotal);
+          running = true; paused = false; runOne();
+          btnStart.disabled = true; btnStop.disabled = false;
+        }
+
+        function stop() {
+          running = false; paused = false; cancelAnimationFrame(rafId); setProgress(0);
+          phaseEl.textContent = 'Ready'; countEl.textContent = '–'; idxEl.textContent = '0'; totalEl.textContent = '0';
+          if (bgm) { bgm.stop(); bgm = null; }
+          btnStart.disabled = false; btnStop.disabled = true;
+        }
+
+        function step(label, dur, next) {
+          phaseEl.textContent = phaseName(label);
+          orbClass(label);
+          speak(phaseEl.textContent);
+          vibrate(label === 'out' ? 18 : 24);
+          chime(0.22);
+          const startT = performance.now();
+
+          (function tick(now) {
+            if (!running) { cancelAnimationFrame(rafId); return; }
+            if (paused) { rafId = requestAnimationFrame(tick); return; }
+            const elapsed = (now - startT) / 1000, remain = Math.max(0, dur - elapsed);
+            countEl.textContent = String(Math.ceil(remain));
+            setProgress(dur ? elapsed / dur : 1);
+            if (remain <= 0) { next(); return; }
+            rafId = requestAnimationFrame(tick);
+          })(performance.now());
+        }
+
+        function runOne() {
+          const pat = parsePattern(selPattern.value);
+          step('in', pat.in || 0, () => step('h1', pat.h1 || 0, () => step('out', pat.out || 0, () => step('h2', pat.h2 || 0, () => {
+            breathIdx++;
+            if (breathIdx <= breathTotal) { idxEl.textContent = String(breathIdx); runOne(); }
+            else { stop(); }
+          }))));
+        }
+
+        // Events
+        btnStart.addEventListener('click', start);
+        btnStop.addEventListener('click', stop);
+        scope.querySelector('.orb-wrap')?.addEventListener('click', () => { if (!running) return; paused = !paused; });
+
+        // Spacebar toggles pause when this section is in view
+        document.addEventListener('keydown', e => {
+          if (e.code === 'Space') {
+            const rect = scope.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              e.preventDefault();
+              if (running) { paused = !paused; } else { start(); }
+            }
+          }
+        });
+      }
+
+      // Build both coaches
+      makeCoach({
+        scope: 'paced-breathing-coach',
+        ids: { orb: 'pbOrbBall', ring: 'pbRing', phase: 'pbPhase', count: 'pbCount', idx: 'pbIdx', total: 'pbTotal' },
+        select: { pattern: 'pbPattern', minutes: 'pbMinutes', tts: 'pbTts', bg: 'pbBg' },
+        btn: { start: 'pbStart', stop: 'pbStop' }
+      });
+
+      makeCoach({
+        scope: 'nasal-breathing-practice',
+        ids: { orb: 'nbOrbBall', ring: 'nbRing', phase: 'nbPhase', count: 'nbCount', idx: 'nbIdx', total: 'nbTotal' },
+        select: { pattern: 'nbPattern', minutes: 'nbMinutes', tts: 'nbTts', bg: 'nbBg' },
+        btn: { start: 'nbStart', stop: 'nbStop' }
+      });
+
+      // Resource mini-widgets (if MSCoach exists, mount; otherwise ignore)
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.MSCoach?.mountBreath) {
+          MSCoach.mountBreath('#bt1', { pattern: [4, 4, 4, 4], minutes: 2, title: 'Box 4-4-4-4' });
+          MSCoach.mountBreath('#bt2', { pattern: [5, 0, 5, 0], minutes: 3, title: 'Coherent 5-5' });
+          MSCoach.mountBreath('#bt3', { pattern: [4, 7, 8, 0], minutes: 2, title: '4-7-8' });
+        }
+        const btn = document.getElementById('resPdf_breath');
+        if (btn) {
+          btn.addEventListener('click', () => {
+            try { MSCoach.downloadLinksPdf('Breath Tools — Resources', (window.__RES__ && window.__RES__.breath) || []); } catch { }
+          });
+        }
+      });
+    })();
+  </script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
+<script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
+<script src="assets/header/header.js"></script>
+<script src="assets/footer/footer.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+</body>
+
+</html>

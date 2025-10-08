@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Wellbeing • M Share</title>
+  <meta name="description"
+    content="Measured Breathing. Measurable Relief. Free, evidence-based techniques with sharing, QR, and PDF." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+  <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+<link rel="stylesheet" href="assets/css/responsive-fixes.css" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0f172a" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+</head>
+
+<body>
+  <a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"></a>
+
+  <header class="site-header">
+    <div class="container navbar">
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> <span
+          class="brand-text">M Share</span></a>
+
+      <nav class="main-nav" id="mainNav">
+  <a data-href="index.html">Wellbeing</a>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Neurodevelopmental</div>
+      <a data-href="autism.html">Autism</a>
+      <a data-href="adhd.html">ADHD</a>
+      <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+      <div class="menu-label">Mental Health</div>
+      <a data-href="anxiety.html">Anxiety</a>
+      <a data-href="depression.html">Depression</a>
+      <a data-href="stress.html">Stress</a>
+      <a data-href="sleep.html">Sleep</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Guides</div>
+      <a data-href="breath.html">Breath (how‑to)</a>
+      <a data-href="focus.html">Focus</a>
+      <a data-href="mindfulness.html">Mindfulness</a>
+      <div class="menu-label">Techniques</div>
+      <a data-href="sos-60.html">60‑second Reset</a>
+      <a data-href="box-breathing.html">Box Breathing</a>
+      <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+      <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">General</div>
+      <a data-href="sleep-tools.html">Sleep Tools</a>
+      <a data-href="breath-tools.html">Breath Tools</a>
+      <a data-href="mood-tools.html">Mood Tools</a>
+      <div class="menu-label">Condition‑specific</div>
+      <a data-href="adhd-tools.html">ADHD Tools</a>
+      <a data-href="autism-tools.html">Autism Tools</a>
+      <a data-href="depression-tools.html">Depression Tools</a>
+      <a data-href="anxiety-tools.html">Anxiety Tools</a>
+      <a data-href="stress-tools.html">Stress Tools</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+    <div class="submenu">
+      <a data-href="about.html">About</a>
+      <a data-href="coffee.html">Support Us</a>
+      <a data-href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+      <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h1>Measured Breathing. Measurable Relief.</h1>
+      <p class="muted">
+        Free, evidence-based breathing & mindfulness techniques designed to reduce stress and anxiety in minutes.
+        Track progress and keep a streak. Export a one-page, clickable PDF of my profile to share anywhere.
+      </p>
+
+      <div class="actions">
+        <a class="btn btn-success" href="box-breathing.html" rel="noopener">🟩 Box Breathing</a>
+        <a class="btn btn-success" href="4-7-8-breathing.html" rel="noopener">🟦 4-7-8 Breathing</a>
+        <a class="btn btn-success" href="coherent-5-5.html" rel="noopener">🟪 Coherent 5-5</a>
+        <button id="sosBtn" class="btn btn-danger" type="button">🆘 60-second SOS</button>
+      </div>
+
+      <div class="actions" style="margin-top:10px">
+        <button id="downloadPdf" class="btn" type="button">⬇ Profile PDF</button>
+        <button id="saveVcf" class="btn" type="button">👤 Add Contact (.vcf)</button>
+      </div>
+    </div>
+
+    <div class="grid cols-3">
+      <div class="card">
+        <h3>Box Breathing</h3>
+        <p class="muted">Square breathing (inhale–hold–exhale–hold) with equal counts for pressure, resets, and focus.
+        </p>
+        <div class="badge">Stress Relief</div>
+        <div class="badge">Clarity</div>
+        <div class="badge">Performance</div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="box-breathing.html" rel="noopener">Open</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>4-7-8 Breathing</h3>
+        <p class="muted">Inhale 4s, hold 7s, exhale 8s. The long exhale cues the relaxation response—great for sleep.
+        </p>
+        <div class="badge">Calm</div>
+        <div class="badge">Sleep Aid</div>
+        <div class="badge">Impulse Control</div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="4-7-8-breathing.html" rel="noopener">Open</a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Coherent 5-5</h3>
+        <p class="muted">In 5s, out 5s (≈5–6 BPM). Resonant pace supports HRV stability and autonomic calm.</p>
+        <div class="badge">HRV</div>
+        <div class="badge">Focus</div>
+        <div class="badge">Recovery</div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="coherent-5-5.html" rel="noopener">Open</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Progress</h2>
+      <div class="badge">Total Minutes: <span id="mTotal">0</span></div>
+      <div class="badge">Streak: <span id="mStreak">0</span> days</div>
+      <div class="badge">Sessions: <span id="mSessions">0</span></div>
+      <div class="badge">Breaths: <span id="mBreaths">0</span></div>
+      <div class="canvas-wrap" style="margin-top:10px"><canvas id="weeklyChart"></canvas></div>
+      <div id="todayLine" class="today"></div>
+      <div id="achWrap" style="margin-top:10px"></div>
+    </div>
+
+    <div class="card">
+      <h2>Share this site</h2>
+      <p class="muted">Share via link, text, PNG card, or a one-page PDF with active links.</p>
+      <div class="actions">
+        <button id="shareOpen" class="btn" type="button">🔗 Quick Share</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer-2025" id="footer2025">
+  <div class="wrap">
+    <div class="grid">
+      <section class="col brand">
+        <div class="brandline"><span class="logo">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="theme-controls">
+          <label>Background<input id="themeColor" type="color" value="#0f172a"></label>
+          <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1"></label>
+        </div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div>
+      </section>
+      <section class="col">
+        <h4>Explore</h4>
+        <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p>
+      </section>
+      <section class="col">
+        <h4>Toolkits</h4>
+        <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p>
+      </section>
+      <section class="col">
+        <h4>Contact</h4>
+        <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info.com">info.com</a></p>
+      </section>
+    </div>
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>document.getElementById("yearFooter")&&(document.getElementById("yearFooter").textContent=(new Date).getFullYear());document.getElementById("backToTop")&&document.getElementById("backToTop").addEventListener("click",function(e){e.preventDefault();try{(document.getElementById("top")||document.body).scrollIntoView({behavior:"smooth",block:"start"})}catch{location.hash="#top"}})</script>
+</footer>
+
+  <!-- Share sheet -->
+  <div id="shareSheet" class="sheet hidden" aria-hidden="true">
+    <div id="shareBackdrop" style="position:absolute; inset:0;"></div>
+    <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
+      <div class="sheet-head">
+        <h2 id="shareTitle" class="sheet-title">Share</h2>
+        <button id="shareClose" class="sheet-close" aria-label="Close">×</button>
+      </div>
+      <textarea id="shareText" class="share-text" readonly></textarea>
+      <div class="share-actions">
+        <button class="btn" id="copyShare" type="button">📋 Copy text</button>
+        <button class="btn" id="shareNative" type="button">🔗 Share…</button>
+        <button class="btn" id="savePng" type="button">🖼️ Save PNG card</button>
+        <button class="btn" id="sharePng" type="button">📤 Share PNG</button>
+        <button class="btn" id="downloadPdf" type="button">⬇ Profile PDF</button>
+        <button class="btn" id="openPdfPage" type="button">🖨️ Open PDF page</button>
+        <button class="btn" id="saveVcf" type="button">👤 Save Contact (.vcf)</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const MS = window.__MSHARE__ || {};
+      const { Stats, drawWeeklyChart } = MS;
+
+      // Year (legacy footer)
+      const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+
+      // VCF + Profile PDF (wire both 'downloadPdf' buttons)
+      document.getElementById('saveVcf')?.addEventListener('click', () => MS.genVCardAndDownload?.());
+      document.querySelectorAll('#downloadPdf').forEach(b => b.addEventListener('click', () => MS.quickDownloadPdf?.()));
+
+      // SOS with robust fallback to sos-60.html
+      const sos = document.getElementById('sosBtn');
+      sos?.addEventListener('click', () => {
+        try {
+          if (MS.CoachPresets?.panic) {
+            const r = MS.CoachPresets.panic();
+            const q = new URLSearchParams(r.q || '');
+            location.href = (r.page || 'sos-60.html') + (q.toString() ? ('?' + q.toString()) : '');
+            return;
+          }
+        } catch { }
+        const q = new URLSearchParams({ pattern: '4,4,4,4', minutes: '1', tts: 'off', vib: 'off' });
+        location.href = 'sos-60.html?' + q.toString();
+      });
+
+      // Dashboard metrics
+      if (Stats) {
+        const s = Stats.summary();
+        const set = (id, key) => { const el = document.getElementById(id); if (el) el.textContent = s[key]; };
+        set('mTotal', 'minutes'); set('mStreak', 'streak'); set('mSessions', 'sessions'); set('mBreaths', 'breaths');
+
+        const ach = s.ach || {}; const wrap = document.getElementById('achWrap'); const chips = [];
+        if (ach.m10) chips.push('<span class="badge ok">10+ min</span>');
+        if (ach.m50) chips.push('<span class="badge ok">50+ min</span>');
+        if (ach.s5) chips.push('<span class="badge ok">5+ sessions</span>');
+        if (ach.b200) chips.push('<span class="badge ok">200+ breaths</span>');
+        if (wrap && chips.length) wrap.innerHTML = '<div>Achievements: ' + chips.join(' ') + '</div>';
+
+        if (typeof drawWeeklyChart === 'function') drawWeeklyChart('weeklyChart', 'todayLine');
+      }
+    })();
+  </script>
+<script src="app.js"></script>
+<script src="coach.js"></script>
+<script src="assets/js/ux-fixes.js"></script>
+<script src="assets/js/paylinks.js"></script>
+<script src="assets/js/site-core.js"></script>
+<script src="assets/js/a11y-fix.js"></script>
+<script src="assets/js/start-fix.js"></script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
+<script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
+<script src="assets/header/header.js"></script>
+<script src="assets/footer/footer.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+</body>
+
+</html>

@@ -5,13 +5,39 @@
   <title>Buy me coffee • M Share</title>
   <meta name="description" content="Copy bank details and open your banking app quickly.">
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="assets/css/pages/bank.inline.css" />
-  <link rel="stylesheet" href="assets/css/ux-fixes.css" /><link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+  <style>
+    .fields { display:grid; gap:8px; grid-template-columns: 1fr auto; }
+    .field { display:grid; grid-template-columns: 1fr auto; align-items:center; gap:8px; }
+    .copy-mini { border:1px solid var(--b); background:#0a1020; border-radius:10px; padding:8px 10px; cursor:pointer; }
+    .copy-mini:focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
+    .chooser { position:fixed; inset:0; background:rgba(3,8,18,.6); display:none; place-items:center; }
+    .chooser.open{ display:grid; }
+    .chooser-card{ width:min(560px,96vw); background:var(--surface); border:1px solid var(--b);
+      border-radius:16px; box-shadow:var(--shadow-1); padding:16px; }
+    .chooser-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px }
+    .chooser .close{ float:right; border:none; background:#0a1020; color:var(--fg); border:1px solid var(--b);
+      border-radius:10px; padding:8px 10px; cursor:pointer; }
+  </style>
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+
+  <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
 <link rel="stylesheet" href="assets/css/responsive-fixes.css"/>
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
 <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+
+<style id="nav-chevrons-style-v2">
+  /* Ensure [hidden] actually hides menus even if a theme doesn't style it. */
+  nav .submenu[hidden] { display: none !important; }
+  /* Improve focus ring targets */
+  .menu-toggle { outline-offset: 2px; }
+</style>
 </head>
 <body>
 <a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
@@ -176,3 +202,105 @@
     <div id="shareBackdrop" style="position:absolute; inset:0;"></div>
     <div class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="shareTitle">
       <div class
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+
+
+<script id="menu-chevron-fix">
+(function(){
+  var onReady = function(fn){
+    if(document.readyState!=='loading') fn();
+    else document.addEventListener('DOMContentLoaded', fn, {once:true});
+  };
+
+  function findSubmenu(btn){
+    if(!btn || !btn.closest) return null;
+    var ctrl = btn.getAttribute && btn.getAttribute('aria-controls');
+    if(ctrl){
+      var el = document.getElementById(ctrl);
+      if(el) return el;
+    }
+    var li = btn.closest('li, .has-children, .accordion-item, nav, .menu, .accordion');
+    if(li){
+      // direct child UL/.submenu/[role="menu"]
+      var q = li.querySelector(':scope > ul, :scope > .submenu, :scope > [role="menu"]');
+      if(q) return q;
+    }
+    return null;
+  }
+
+  function setOpen(btn, submenu, open){
+    if(!btn || !submenu) return;
+    btn.setAttribute('aria-expanded', String(open));
+    submenu.setAttribute('aria-hidden', String(!open));
+    if(open){
+      submenu.removeAttribute('hidden');
+      if(getComputedStyle(submenu).display==='none'){ submenu.style.display = 'block'; }
+    }else{
+      submenu.setAttribute('hidden','');
+      submenu.style.display = 'none';
+    }
+    var host = btn.closest('.has-children, li, .accordion-item');
+    if(host) host.classList.toggle('open', open);
+  }
+
+  function shouldIntercept(btn){
+    if(!btn) return false;
+    if(btn.classList && (btn.classList.contains('hamburger') || btn.classList.contains('menu-chevron') || btn.classList.contains('chevron'))) return true;
+    if(btn.hasAttribute && (btn.hasAttribute('data-chevron') || btn.getAttribute('role') === 'button')) return true;
+    // If it's a link used only as a toggle (href="#"), intercept
+    if(btn.tagName === 'A' && btn.getAttribute('href') && btn.getAttribute('href').trim() === '#') return true;
+    // For button elements, default to intercept
+    if(btn.tagName === 'BUTTON') return true;
+    return false;
+  }
+
+  onReady(function(){
+    // Initialize ARIA to reflect current state
+    var toggles = Array.prototype.slice.call(document.querySelectorAll(
+      '.hamburger, .menu-chevron, .chevron, [data-chevron], [aria-haspopup="menu"], .has-children > a, .has-children > button, .accordion-toggle'
+    ));
+    toggles.forEach(function(btn){
+      var submenu = findSubmenu(btn);
+      if(!submenu) return;
+      var cs = getComputedStyle(submenu);
+      var hiddenNow = submenu.hasAttribute('hidden') || submenu.getAttribute('aria-hidden') === 'true' || cs.display === 'none' || cs.visibility === 'hidden';
+      setOpen(btn, submenu, !hiddenNow);
+    });
+
+    function handleTrigger(target, e){
+      var btn = target && (target.closest
+        ? target.closest('.hamburger, .menu-chevron, .chevron, [data-chevron], [aria-haspopup="menu"], .has-children > a, .has-children > button, .accordion-toggle')
+        : null);
+      if(!btn) return false;
+
+      var submenu = findSubmenu(btn);
+      if(!submenu) return false;
+
+      var intercept = shouldIntercept(btn);
+      if(intercept && e) e.preventDefault();
+
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      setOpen(btn, submenu, !open);
+      return true;
+    }
+
+    document.addEventListener('click', function(e){
+      if(handleTrigger(e.target, e)) return;
+    }, {passive:false});
+
+    document.addEventListener('touchstart', function(e){
+      // Some mobile Safari builds send only touchstart for quick taps
+      handleTrigger(e.target, e);
+    }, {passive:false});
+
+    document.addEventListener('keydown', function(e){
+      var k = e.key;
+      if(k==='Enter' || k===' '){
+        if(handleTrigger(e.target, e)){ e.preventDefault(); }
+      }
+    }, {passive:false});
+  });
+})();
+<\/script>
+

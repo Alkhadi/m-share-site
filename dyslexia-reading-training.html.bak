@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dyslexia Reading Training • M Share</title>
+    <meta name="description" content="Free, structured reading practice ideas paired with calming breath tools and adult‑friendly micro‑exercises." />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Page-specific helpers (safe to keep in this file) */
+      #pOut { transition: font-size .2s ease, line-height .2s ease, letter-spacing .2s ease, background-color .2s ease; }
+      #pOut .pacer-prev { color: var(--fg, #eaeff5); }
+      #pOut .pacer-current { background: rgba(255,255,255,.1); border-radius: 6px; padding: 0 3px; }
+      #pOut .pacer-muted { color: rgba(148,163,184,.72); }
+      #pOut.pacer-masked .pacer-muted { color: transparent; text-shadow: 0 0 0 rgba(148,163,184,.28); }
+      #pMeta { font-size: .95rem; color: var(--muted, #94a3b8); margin-top: 4px; }
+      #pOutWrap.fullscreen { position: fixed; inset: 0; z-index: 9990; background: #0a0f1a; padding: 20px; }
+      #pOutWrap.fullscreen #pOut { height: calc(100vh - 120px); overflow: auto; }
+      .site-footer { margin-top: 32px; padding: 24px 0; border-top: 1px solid var(--b); color: var(--muted); }
+      .site-footer .grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:12px; }
+      .site-footer a { color: inherit; }
+      @media (max-width: 800px){ .site-footer .grid { grid-template-columns: 1fr; } }
+    </style>
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+
+    <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+<link rel="stylesheet" href="assets/css/responsive-fixes.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+</head>
+  <body>
+<a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
+    <!-- ===== REUSABLE HEADER (use this header across all pages) ===== -->
+<header class="site-header">
+  <div class="container navbar">
+    <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span><span class="brand-text">M Share</span></a>
+    <nav class="main-nav" id="mainNav">
+  <a data-href="index.html">Wellbeing</a>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Neurodevelopmental</div>
+      <a data-href="autism.html">Autism</a>
+      <a data-href="adhd.html">ADHD</a>
+      <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+      <div class="menu-label">Mental Health</div>
+      <a data-href="anxiety.html">Anxiety</a>
+      <a data-href="depression.html">Depression</a>
+      <a data-href="stress.html">Stress</a>
+      <a data-href="sleep.html">Sleep</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Guides</div>
+      <a data-href="breath.html">Breath (how‑to)</a>
+      <a data-href="focus.html">Focus</a>
+      <a data-href="mindfulness.html">Mindfulness</a>
+      <div class="menu-label">Techniques</div>
+      <a data-href="sos-60.html">60‑second Reset</a>
+      <a data-href="box-breathing.html">Box Breathing</a>
+      <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+      <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">General</div>
+      <a data-href="sleep-tools.html">Sleep Tools</a>
+      <a data-href="breath-tools.html">Breath Tools</a>
+      <a data-href="mood-tools.html">Mood Tools</a>
+      <div class="menu-label">Condition‑specific</div>
+      <a data-href="adhd-tools.html">ADHD Tools</a>
+      <a data-href="autism-tools.html">Autism Tools</a>
+      <a data-href="depression-tools.html">Depression Tools</a>
+      <a data-href="anxiety-tools.html">Anxiety Tools</a>
+      <a data-href="stress-tools.html">Stress Tools</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+    <div class="submenu">
+      <a data-href="about.html">About</a>
+      <a data-href="coffee.html">Support Us</a>
+      <a data-href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+    <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+  </div>
+</header>
+
+
+
+
+
+    <main class="container" id="dlxPage">
+      <h1>Dyslexia: Reading Training</h1>
+
+      <div class="card">
+        <p>These are practical, low‑pressure routines that blend <strong>paced breathing</strong> with <strong>sound, word, and visual‑scanning practice</strong>. The aim is steadier focus, less overload, and small wins that add up. Adapt minutes, difficulty, and text to suit the person.</p>
+        <p class="muted">Educational information only; not medical advice or a diagnosis.</p>
+      </div>
+
+      <h2>Before practice (1–2 minutes)</h2>
+      <ul>
+        <li>Do one calming breath: <strong>4‑7‑8</strong> (inhale 4s, hold 7s, exhale 8s) or <strong>Coherent 5‑5</strong> (inhale 5s, exhale 5s).</li>
+        <li class="no-list-margin">
+          <div class="actions">
+            <a class="btn btn-success" href="4-7-8-breathing.html">Start 4‑7‑8 Breathing</a>
+            <a class="btn btn-success" href="coherent-5-5.html">Start Coherent 5‑5</a>
+          </div>
+        </li>
+        <li>Pick a <em>tiny</em> goal (e.g., 60 seconds, 3 words, or 2 short lines).</li>
+        <li>Stop while it still feels easy—<em>bank the win</em> and come back tomorrow.</li>
+      </ul>
+
+      <h2>Core drills</h2>
+
+      <!-- 1) Phonological awareness -->
+      <div class="card" id="sec-phon">
+        <h3>1) Phonological awareness</h3>
+        <p class="muted"><strong>Why it helps:</strong> noticing, separating, and blending sounds builds a base for decoding new words.</p>
+
+        <h4>Sound map</h4>
+        <p>Choose 3–5 graphemes (e.g., <em>a, sh, ai</em>). Point to a tile out of order and say its sound. Do 3 slow breaths, then a quick re‑run.</p>
+
+        <h4>Segment → Blend (how to blend slowly)</h4>
+        <ol>
+          <li><strong>Stretch the sounds</strong> with a finger count: <em>/k/</em> (1) — <em>/a/</em> (2) — <em>/t/</em> (3).</li>
+          <li><strong>Blend forward:</strong> say the first two together (<em>ka…</em>), then pull in the last (<em>kat</em> → “<em>cat</em>”).</li>
+          <li><strong>Use a breath cue:</strong> inhale before the first sound, exhale gently through the blend to avoid rushing.</li>
+          <li><strong>Swap roles:</strong> partner segments while you blend.</li>
+        </ol>
+
+        <!-- Voice Coach -->
+        <div id="vcPhon" class="card" aria-labelledby="vcPhonH">
+          <h4 id="vcPhonH">Voice Coach — Segment &amp; Blend</h4>
+          <p class="muted">Type a word and let the coach model slow sounds then the whole word.</p>
+          <div class="grid cols-3 gap-10">
+            <div class="tile"><label for="vcWord">Word</label><input id="vcWord" type="text" value="cat" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="vcPace">Pace</label>
+              <select id="vcPace" title="Select option"><option value="slow">Slow</option><option value="med" selected>Medium</option><option value="fast">Fast</option></select>
+            </div>
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions">
+                <button id="vcPlay" class="btn btn-success" type="button">Model segment→blend</button>
+                <button id="vcStop" class="btn" type="button" disabled>Stop</button>
+              </div>
+            </div>
+          </div>
+          <div id="vcOut" class="muted"></div>
+        </div>
+      </div>
+
+      <!-- 2) GP mapping -->
+      <div class="card" id="sec-gp">
+        <h3>2) Grapheme–phoneme practice (GP mapping)</h3>
+        <p class="muted"><strong>Why it helps:</strong> fluent mapping turns symbols into reliable sounds.</p>
+
+        <p><strong>Rotate sets over the week.</strong> Keep each mini‑set short (3–6 items).</p>
+
+        <div class="grid grid-3-cols">
+          <div class="tile">
+            <h4>Short vowels</h4>
+            <ul>
+              <li><strong>a</strong> /a/ — <em>cat, map</em></li>
+              <li><strong>e</strong> /e/ — <em>bed, hem</em></li>
+              <li><strong>i</strong> /i/ — <em>sit, milk</em></li>
+              <li><strong>o</strong> /o/ — <em>hot, pond</em></li>
+              <li><strong>u</strong> /u/ — <em>sun, drum</em></li>
+            </ul>
+          </div>
+          <div class="tile">
+            <h4>Long vowels</h4>
+            <ul>
+              <li><strong>a</strong> /ā/ — <em>late, paper</em></li>
+              <li><strong>e</strong> /ē/ — <em>tree, even</em></li>
+              <li><strong>i</strong> /ī/ — <em>time, pilot</em></li>
+              <li><strong>o</strong> /ō/ — <em>home, open</em></li>
+              <li><strong>u</strong> /yoo/ — <em>unit, music</em></li>
+            </ul>
+          </div>
+          <div class="tile">
+            <h4>Digraphs / trigraphs</h4>
+            <p class="muted"><em>sh, ch, th, ph, wh, igh, tch, dge</em></p>
+            <ul>
+              <li><strong>sh</strong> — <em>ship, brush</em></li>
+              <li><strong>ch</strong> — <em>chat, teacher</em></li>
+              <li><strong>th</strong> (/θ/ or /ð/) — <em>thin, this</em></li>
+              <li><strong>ph</strong> — <em>phone, graph</em></li>
+              <li><strong>wh</strong> — <em>when, whale</em></li>
+              <li><strong>igh</strong> — <em>high, night</em></li>
+              <li><strong>tch</strong> — <em>catch, match</em></li>
+              <li><strong>dge</strong> — <em>bridge, edge</em></li>
+            </ul>
+          </div>
+          <div class="tile">
+            <h4>Vowel teams</h4>
+            <p class="muted"><em>ai/ay, ee/ea, oa/ow, oi/oy, ou/ow, au/aw</em></p>
+            <ul>
+              <li><strong>ai/ay</strong> — <em>rain / day</em></li>
+              <li><strong>ee/ea</strong> — <em>see / team</em></li>
+              <li><strong>oa/ow</strong> — <em>boat / snow</em></li>
+              <li><strong>oi/oy</strong> — <em>coin / boy</em></li>
+              <li><strong>ou/ow</strong> — <em>sound / cloud</em></li>
+              <li><strong>au/aw</strong> — <em>cause / saw</em></li>
+            </ul>
+          </div>
+          <div class="tile">
+            <h4>R‑controlled vowels</h4>
+            <p class="muted"><em>ar, er, ir, or, ur</em></p>
+            <ul>
+              <li><strong>ar</strong> — <em>car, start</em></li>
+              <li><strong>er/ir/ur</strong> — <em>her, bird, turn</em></li>
+              <li><strong>or</strong> — <em>fork, north</em></li>
+            </ul>
+          </div>
+          <div class="tile">
+            <h4>Silent letters</h4>
+            <p class="muted"><em>kn/gn, wr, mb, igh, tch</em></p>
+            <ul>
+              <li><strong>kn/gn</strong> — <em>knee, gnome</em></li>
+              <li><strong>wr</strong> — <em>write, wrist</em></li>
+              <li><strong>mb</strong> — <em>thumb, comb</em></li>
+              <li><strong>igh</strong> — <em>light</em> (single sound /ī/)</li>
+            </ul>
+          </div>
+        </div>
+
+        <p><strong>How to run (1–3 min):</strong> show the set, speak the sound, read two quick example words, then hide and recall.</p>
+
+        <!-- Sound Training Studio -->
+        <div id="svStudio" class="card" aria-labelledby="svStudioH">
+          <h4 id="svStudioH">Sound Training Studio (Audio • Visual • Mirror)</h4>
+          <p class="muted">Select a topic, click a sound to hear examples, and—if helpful—open the mirror to watch mouth shape.</p>
+          <div class="grid cols-3 grid-gap-10">
+            <div class="tile"><label for="svSelect">Topic</label>
+              <select id="svSelect" title="Select option">
+                <option value="short" selected>Short vowels</option>
+                <option value="long">Long vowels</option>
+                <option value="digraphs">Digraphs / trigraphs</option>
+                <option value="teams">Vowel teams</option>
+                <option value="r">R‑controlled</option>
+                <option value="silent">Silent letters</option>
+              </select>
+            </div>
+            <div class="tile"><label for="ttsVoice">Voice</label>
+              <select id="ttsVoice" title="Select option">
+                <option value="uk-auto" selected>Auto (best UK)</option>
+                <option value="uk-f">British Female</option>
+                <option value="uk-m">British Male</option>
+                <option value="system">System default</option>
+              </select>
+            </div>
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions">
+                <button id="svPractice" class="btn btn-success" type="button" disabled>Practice all</button>
+                <button id="svStop" class="btn" type="button" disabled>Stop</button>
+              </div>
+            </div>
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions">
+                <button id="svCam" class="btn" type="button">Open mirror</button>
+                <button id="svCamOff" class="btn" type="button" disabled>Close mirror</button>
+              </div>
+            </div>
+          </div>
+          <div id="svTiles" class="grid"></div>
+          <div id="svOut" class="muted" style="margin-top:8px"></div>
+          <div id="svMirrorWrap" class="card" style="margin-top:10px;display:none" aria-label="Mirror camera preview">
+            <video id="svMirror" autoplay playsinline muted style="width:100%;border-radius:12px;background:#000"></video>
+            <p class="muted" style="margin-top:6px">Use this as a mirror while you say the sounds.</p>
+          </div>
+        </div>
+
+        <!-- Quick cues -->
+        <div class="card">
+          <h4>Pronunciation coaching (quick cues)</h4>
+          <ul>
+            <li><strong>Mouth shape:</strong> long vowels stretch; short vowels are quick and centred.</li>
+            <li><strong>Voicing:</strong> throat vibrates for voiced sounds (e.g., <em>/z/</em>), not for unvoiced (<em>/s/</em>).</li>
+            <li><strong>Airflow:</strong> <em>sh</em> is a long, quiet stream; <em>ch</em> starts with a tiny stop then a release.</li>
+          </ul>
+        </div>
+
+        <!-- Pronunciation Lab -->
+        <div class="card" id="pronLab" aria-labelledby="pronLabH">
+          <h4 id="pronLabH">Pronunciation Lab (TTS)</h4>
+          <p class="muted">Tap a sound to hear it and see examples.</p>
+          <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px"></div>
+          <div id="pronOut" class="muted" style="margin-top:8px"></div>
+          <div class="actions" style="margin-top:8px">
+            <button id="pronPractice" class="btn" type="button" disabled>Practice examples</button>
+            <button id="pronStop" class="btn" type="button" disabled>Stop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3) Word ladders & morphology -->
+      <div class="card" id="sec-ladders">
+        <h3>3) Word ladders &amp; light morphology</h3>
+        <p class="muted"><strong>Why it helps:</strong> small changes sharpen attention to patterns and “meaning chunks.”</p>
+
+        <div class="grid" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+          <div class="tile">
+            <h4>Letter change ladders</h4>
+            <ul>
+              <li><em>cat → cot → coat → coast → toast → boast</em></li>
+              <li><em>pin → pan → pain → plain → plane</em></li>
+              <li><em>hop → hope → hose → those</em></li>
+              <li><em>light → right → fright → bright</em></li>
+            </ul>
+          </div>
+          <div class="tile">
+            <h4>Prefixes / suffixes</h4>
+            <ul>
+              <li>Base <em>help</em> → <em>rehelp, helpful, helpless, unhelpful</em></li>
+              <li>Base <em>move</em> → <em>remove, improve, movement</em></li>
+              <li>Base <em>use</em> → <em>reuse, useful, useless</em></li>
+              <li>Base <em>clear</em> → <em>unclear, clarify, clearly</em></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h4>Learning the sounds while you build</h4>
+          <ul>
+            <li>Say the <em>new</em> letter or team by itself (<em>oa</em> → /ō/), then the whole word.</li>
+            <li>Keep a mini “sound bank” of the patterns you used today; review tomorrow.</li>
+          </ul>
+        </div>
+
+        <!-- Voice Coach -->
+        <div id="vcLadder" class="card" aria-labelledby="vcLadderH">
+          <h4 id="vcLadderH">Voice Coach — Ladders &amp; Affixes</h4>
+          <div class="grid cols-3" style="gap:10px">
+            <div class="tile">
+              <label for="ladderPick">Ladder set</label>
+              <select id="ladderPick" title="Select option">
+                <option value="cat" selected>cat → cot → coat → coast → toast → boast</option>
+                <option value="pin">pin → pan → pain → plain → plane</option>
+                <option value="hop">hop → hope → hose → those</option>
+                <option value="light">light → right → fright → bright</option>
+              </select>
+            </div>
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions">
+                <button id="ladderPlay" class="btn btn-success" type="button">Play ladder</button>
+                <button id="ladderStop" class="btn" type="button" disabled>Stop</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid cols-3" style="gap:10px;margin-top:8px">
+            <div class="tile"><label for="morphBase">Base word</label><input id="morphBase" type="text" value="help" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="morphAff">Affixes (comma‑separated)</label><input id="morphAff" type="text" value="re-, un-, -ful, -less" / title="Input" placeholder=" "></div>
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions">
+                <button id="morphPlay" class="btn btn-success" type="button">Play affixes</button>
+                <button id="morphStop" class="btn" type="button" disabled>Stop</button>
+              </div>
+            </div>
+          </div>
+          <div id="vcLadderOut" class="muted" style="margin-top:6px"></div>
+        </div>
+      </div>
+
+      <!-- 4) Fluency lines with pacer -->
+      <div class="card" id="sec-fluency">
+        <h3>4) Fluency lines</h3>
+        <p class="muted"><strong>Why it helps:</strong> repeated, smooth reading grows automaticity without pushing speed.</p>
+        <ul>
+          <li>Pick 2–3 short lines at the right level. Re‑read for <em>smoothness</em>, not speed.</li>
+          <li>Use a finger, ruler, or overlay as a pacer.</li>
+        </ul>
+
+        <!-- FLUENCY PACER (enhanced + always shows text on Start) -->
+        <div id="pacer" class="card" aria-labelledby="pacerH">
+          <h4 id="pacerH">Fluency Pacer</h4>
+          <p class="muted">Reveals words at a set pace. Aim for smooth, low‑effort reading.</p>
+
+          <textarea id="pText" rows="4" title="Reading practice text" placeholder="Enter text to practice reading here">Today I will read in a calm, steady voice. I let each breath guide my pace. I notice patterns in words and turn them into easy steps. Small wins add up.</textarea>
+
+          <!-- Content tools -->
+          <div class="grid cols-3" style="gap:10px;margin-top:8px">
+            <div class="tile">
+              <label for="pSamples">Load sample</label>
+              <select id="pSamples" title="Select option">
+                <option value="custom" selected>— My text above —</option>
+                <option value="affirm">Affirmations (calm focus)</option>
+                <option value="story">Short story lines</option>
+                <option value="work">Work email snippet</option>
+              </select>
+            </div>
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions">
+                <button id="pPaste" class="btn" type="button">Paste from clipboard</button>
+                <label class="btn">Import .txt<input id="pImport" type="file" accept=".txt" style="display:none" title="Input" placeholder=" "></label>
+                <button id="pExport" class="btn" type="button">Export .txt</button>
+              </div>
+            </div>
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions">
+                <button id="pClear" class="btn" type="button">Clear text</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls row 1 -->
+          <div class="grid cols-3" style="gap:10px;margin-top:8px">
+            <div class="tile"><label for="wpm">Words per minute</label><input id="wpm" type="number" min="40" max="300" value="110" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="pChunk">Words per tick</label><input id="pChunk" type="number" min="1" max="5" value="1" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="pMode">Mode</label>
+              <select id="pMode" title="Select option"><option value="highlight" selected>Highlight next words</option><option value="mask">Mask rest of text</option></select>
+            </div>
+          </div>
+
+          <!-- Controls row 2 -->
+          <div class="grid cols-3" style="gap:10px;margin-top:8px">
+            <div class="tile"><label for="pFont">Font size <span class="muted" id="pFontVal">18px</span></label><input id="pFont" type="range" min="14" max="36" value="18" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="pLine">Line height <span class="muted" id="pLineVal">1.50</span></label><input id="pLine" type="range" min="1.2" max="2.0" step="0.05" value="1.5" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="pLet">Letter spacing <span class="muted" id="pLetVal">0.04em</span></label><input id="pLet" type="range" min="0" max="0.16" step="0.01" value="0.04" / title="Input" placeholder=" "></div>
+          </div>
+
+          <!-- Controls row 3 -->
+          <div class="grid cols-3" style="gap:10px;margin-top:8px">
+            <div class="tile"><label for="pOverlay">Overlay tint</label>
+              <select id="pOverlay" title="Select option"><option value="none" selected>None</option><option value="yellow">Soft Yellow</option><option value="blue">Soft Blue</option><option value="grey">Soft Grey</option></select>
+            </div>
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions" style="align-items:center">
+                <label class="btn" style="display:flex;align-items:center;gap:8px"><input id="pBeep" type="checkbox" / title="Input" placeholder=" "> Metronome tick</label>
+                <label class="btn" style="display:flex;align-items:center;gap:8px"><input id="pCount" type="checkbox" / title="Input" placeholder=" "> Count‑in 3‑2‑1</label>
+                <label class="btn" style="display:flex;align-items:center;gap:8px"><input id="pFull" type="checkbox" / title="Input" placeholder=" "> Fullscreen</label>
+              </div>
+            </div>
+            <div class="tile"><label class="muted">Timing</label><div id="pTiming" class="muted">Interval: — ms • Chunk: 1</div></div>
+          </div>
+
+          <div class="grid cols-3" style="gap:10px;margin-top:8px">
+            <div class="tile">
+              <label>&nbsp;</label>
+              <div class="actions">
+                <button id="pStart" class="btn btn-success" type="button">Start</button>
+                <button id="pPause" class="btn" type="button" disabled>Pause</button>
+                <button id="pStop" class="btn" type="button" disabled>Stop</button>
+              </div>
+              <p class="muted" style="margin:.4rem 0 0">Shortcuts: <kbd>Space</kbd> Pause/Resume • <kbd>Esc</kbd> Stop • <kbd>±</kbd> WPM • <kbd>[ / ]</kbd> Chunk</p>
+            </div>
+            <div class="tile">
+              <label class="muted">Status</label>
+              <div id="pStat" class="muted" aria-live="polite">Idle</div>
+              <div id="pMeta"></div>
+            </div>
+          </div>
+
+          <div id="pOutWrap" style="margin-top:8px;position:relative">
+            <div id="pCountOverlay" style="position:absolute;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.35);border-radius:10px;z-index:5">
+              <div style="font-size:72px;font-weight:800;color:white;letter-spacing:.02em">3</div>
+            </div>
+            <div id="pOut" style="min-height:72px;border:1px solid var(--b);border-radius:10px;padding:12px;font-size:18px;line-height:1.5;letter-spacing:.04em"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5) Visual scanning & eye‑movement -->
+      <div class="card" id="sec-visual">
+        <h3>5) Visual scanning &amp; eye‑movement</h3>
+        <p class="muted"><strong>Why it helps:</strong> steady eye jumps and wider attention make lines of text easier to track.</p>
+        <ul>
+          <li><strong>Letter/number search:</strong> find targets in a small grid.</li>
+          <li><strong>Schulte mini:</strong> tap 1→25 in order. Aim for calm accuracy.</li>
+        </ul>
+
+        <!-- Letter / Number Search -->
+        <div id="searchTool" class="card" aria-labelledby="searchH">
+          <h4 id="searchH">Letter / Number Search</h4>
+          <div class="grid cols-3" style="gap:10px">
+            <div class="tile"><label for="targets">Targets</label><input id="targets" type="text" value="a" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="size">Grid size</label><select id="size" title="Select option"><option>8</option><option selected>10</option><option>12</option></select></div>
+            <div class="tile"><label for="mix">Characters</label><select id="mix" title="Select option"><option value="letters" selected>Letters</option><option value="digits">Digits</option><option value="both">Both</option></select></div>
+          </div>
+          <div class="actions" style="margin-top:8px">
+            <button id="sStart" class="btn btn-success" type="button">Begin</button>
+            <button id="sStop" class="btn" type="button" disabled>Stop</button>
+            <button id="sAgain" class="btn" type="button" disabled>Again</button>
+            <span class="muted" id="sInfo" style="margin-left:8px" aria-live="polite">Score: 0 • Remaining: 0 • Time: 0s</span>
+          </div>
+          <div id="sBest" class="muted" style="margin-top:6px"></div>
+          <div id="sGrid" style="display:grid;gap:6px;margin-top:10px"></div>
+        </div>
+
+        <!-- Schulte Mini -->
+        <div id="schulte" class="card" aria-labelledby="schulteH">
+          <h4 id="schulteH">Schulte Mini (1→25)</h4>
+          <div class="actions">
+            <button id="schStart" class="btn btn-success" type="button">Start</button>
+            <button id="schStop" class="btn" type="button" disabled>Stop</button>
+            <span class="muted" id="schStats" aria-live="polite">Time: 0.0s • Best: —</span>
+          </div>
+          <div id="schGrid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px"></div>
+        </div>
+      </div>
+
+      <!-- 6) RAN micro‑drill -->
+      <div class="card" id="sec-ran">
+        <h3>6) Rapid naming (RAN) micro‑drill</h3>
+        <p class="muted"><strong>Why it helps:</strong> quicker naming of known items supports fluent decoding.</p>
+        <ul><li>Say highlighted items row by row. Keep voice relaxed; take one breath between rows.</li></ul>
+
+        <!-- RAN Strip -->
+        <div id="ran" class="card" aria-labelledby="ranH">
+          <h4 id="ranH">Rapid Naming Strip</h4>
+          <div class="grid cols-3" style="gap:10px">
+            <div class="tile"><label for="ranSet">Symbols/letters (5 items)</label><input id="ranSet" type="text" value="a, s, 3, @, k" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="ranSpeed">Speed (items/sec)</label><input id="ranSpeed" type="number" min="0.5" max="5" step="0.1" value="1.5" / title="Input" placeholder=" "></div>
+            <div class="tile"><label for="ranRows">Rows</label><select id="ranRows" title="Select option"><option>3</option><option selected>4</option><option>5</option></select></div>
+          </div>
+          <div class="actions" style="margin-top:8px">
+            <button id="ranGo" class="btn btn-success" type="button">Start</button>
+            <button id="ranStop" class="btn" type="button" disabled>Stop</button>
+            <span id="ranStat" class="muted" aria-live="polite" style="margin-left:8px">Items: 0 • Best: —</span>
+          </div>
+          <div id="ranGrid" style="display:grid;gap:6px;margin-top:10px"></div>
+        </div>
+      </div>
+
+      <h2>Resources (Adults)</h2>
+      <div class="card">
+        <ul>
+          <li><a href="https://www.twinkl.com.sg/search?q=dyslexia+resources+adult&amp;c=244&amp;r=parent&amp;fco=0&amp;n=30&amp;fa=9" target="_blank" rel="noopener">Twinkl – adult dyslexia resources</a></li>
+          <li><a href="https://www.bdadyslexia.org.uk/advice/adults" target="_blank" rel="noopener">British Dyslexia Association – Adults</a></li>
+          <li><a href="https://dyslexiaida.org/" target="_blank" rel="noopener">International Dyslexia Association</a></li>
+          <li><a href="https://dyslexia.yale.edu/resources/adults/" target="_blank" rel="noopener">Yale Center for Dyslexia &amp; Creativity – Adults</a></li>
+          <li><a href="https://www.understood.org/en/articles/dyslexia-in-adults" target="_blank" rel="noopener">Understood.org – Dyslexia in adults</a></li>
+          <li><a href="https://improvingliteracy.org/" target="_blank" rel="noopener">National Center on Improving Literacy</a></li>
+          <li><a href="https://readingrockets.org/" target="_blank" rel="noopener">Reading Rockets</a></li>
+          <li><a href="https://www.nidcd.nih.gov/health/voice-speech-and-language" target="_blank" rel="noopener">NIH / NIDCD</a></li>
+          <li><a href="https://www.dyslexia-scotland.org.uk/adults/" target="_blank" rel="noopener">Dyslexia Scotland – Adults</a></li>
+        </ul>
+
+        <!-- Robust download: try asset; if missing, auto-build PDF -->
+        <div class="actions" style="margin-top:10px">
+          <button id="downloadResourcesPdf" class="btn btn-success" type="button">Download: Dyslexia Adult Resources (PDF)</button>
+        </div>
+      </div>
+
+      <hr />
+      <p class="muted">© <span id="year"></span> — Educational information only; not medical advice.</p>
+    </main>
+
+    <!-- ===== REUSABLE FOOTER (use across all pages) ===== -->
+    <footer class="footer-2025" id="footer2025">
+  <div class="wrap">
+    <div class="grid">
+      <section class="col brand">
+        <div class="brandline"><span class="logo">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="theme-controls">
+          <label>Background<input id="themeColor" type="color" value="#0f172a"></label>
+          <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1"></label>
+        </div>
+        <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div>
+      </section>
+      <section class="col">
+        <h4>Explore</h4>
+        <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p>
+      </section>
+      <section class="col">
+        <h4>Toolkits</h4>
+        <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p>
+      </section>
+      <section class="col">
+        <h4>Contact</h4>
+        <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info.com">info.com</a></p>
+      </section>
+    </div>
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>document.getElementById("yearFooter")&&(document.getElementById("yearFooter").textContent=(new Date).getFullYear());document.getElementById("backToTop")&&document.getElementById("backToTop").addEventListener("click",function(e){e.preventDefault();try{(document.getElementById("top")||document.body).scrollIntoView({behavior:"smooth",block:"start"})}catch{location.hash="#top"}})</script>
+</footer>
+
+
+
+
+
+
+
+    <!-- Lightweight modal -->
+    <div id="focusModal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.45);z-index:9999;padding:16px" aria-live="polite" aria-modal="true" role="dialog">
+      <div id="focusModalCard" class="card" style="max-width:720px;width:min(96vw,720px);box-shadow:var(--shadow-1)">
+        <h3 id="fmTitle" style="margin-top:0">Reading Trainer</h3>
+        <div id="fmBody" class="muted" style="margin-top:6px"></div>
+        <div class="actions" style="margin-top:10px">
+          <button id="fmOk" class="btn btn-success" type="button">OK</button>
+          <button id="fmCancel" class="btn" type="button" style="display:none">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pomodoro mini bar -->
+    <div id="pomoBar" style="position:fixed;right:12px;bottom:12px;display:none;z-index:9998;max-width:90vw">
+      <div class="card" style="padding:10px 12px">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <strong id="pomoLabel">Focus</strong>
+          <span id="pomoTime" class="muted">00:00</span>
+          <div class="actions" style="margin-left:auto">
+            <button id="pomoSkip" class="btn" type="button">Skip break</button>
+            <button id="pomoEnd" class="btn" type="button">End</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      /* Active tab + year */
+      (function () {
+        var path = location.pathname.split("/").pop() || "index.html";
+        document.querySelectorAll("nav a").forEach(function (a) {
+          if (a.getAttribute("href") === path) a.classList.add("active");
+        });
+        var y = document.getElementById("year");
+        if (y) y.textContent = new Date().getFullYear();
+      })();
+
+      var prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* --------- Focus helper — FIXED: keep containing section, not only direct child --------- */
+      const Focus = (function () {
+        let prevHeaderDisplay = "";
+        let hidden = [];
+        function sectionKeeper(target) {
+          const main = document.getElementById("dlxPage");
+          if (!main || !target) return target;
+          let keep = target;
+          while (keep && keep.parentElement && keep.parentElement !== main) keep = keep.parentElement;
+          return keep || target;
+        }
+        function hideSiblings(keep) {
+          const main = document.getElementById("dlxPage");
+          if (!main) return;
+          hidden = [];
+          Array.from(main.children).forEach((node) => {
+            if (node === keep) return;
+            const alreadyHidden = node.style && node.style.display === "none";
+            if (!alreadyHidden) { hidden.push(node); node.style.display = "none"; }
+          });
+        }
+        function showAll() { hidden.forEach((n) => (n.style.display = "")); hidden = []; }
+        return {
+          only(el) {
+            const header = document.querySelector("header.site-header");
+            if (header) { prevHeaderDisplay = header.style.display || ""; header.style.display = "none"; }
+            const keep = sectionKeeper(el);
+            hideSiblings(keep);
+            try { keep.scrollIntoView({ behavior: "smooth", block: "start" }); } catch {}
+          },
+          exit() {
+            const header = document.querySelector("header.site-header");
+            if (header) header.style.display = prevHeaderDisplay;
+            showAll();
+          },
+        };
+      })();
+
+      /* Minimal modal (used by Pomodoro breaks) */
+      const Modal = (function () {
+        const wrap = document.getElementById("focusModal");
+        const title = document.getElementById("fmTitle");
+        const body = document.getElementById("fmBody");
+        const ok = document.getElementById("fmOk");
+        const cancel = document.getElementById("fmCancel");
+        let onOk = null, onCancel = null;
+        ok.addEventListener("click", () => { wrap.style.display = "none"; if (onOk) onOk(); onOk = onCancel = null; });
+        cancel.addEventListener("click", () => { wrap.style.display = "none"; if (onCancel) onCancel(); onOk = onCancel = null; });
+        return { show(opts){ title.textContent = opts.title || "Reading Trainer"; body.innerHTML = opts.html || ""; ok.textContent = opts.okText || "OK"; cancel.style.display = opts.cancelText ? "" : "none"; if (opts.cancelText) cancel.textContent = opts.cancelText; onOk = opts.onOk || null; onCancel = opts.onCancel || null; wrap.style.display = "flex"; }, hide(){ wrap.style.display = "none"; } };
+      })();
+
+      /* ------------ Global redirect helpers (Stop/End -> Dyslexia page) ------------ */
+      function goDyslexia(){
+        if (!window.__MSHARE__) window.__MSHARE__ = {};
+        if (window.__MSHARE__.__leaving) return;
+        window.__MSHARE__.__leaving = true;
+        var base = location.pathname.replace(/[^/]*$/,'');
+        location.href = base + 'dyslexia-reading-training.html';
+      }
+      function endAndDyslexia(){ try{ Pomo.stop(); }catch{} try{ Focus.exit(); }catch{} goDyslexia(); }
+
+      /* Pomodoro (End -> Dyslexia page) */
+      const Pomo = (function () {
+        const bar = document.getElementById("pomoBar");
+        const label = document.getElementById("pomoLabel");
+        const time = document.getElementById("pomoTime");
+        const btnSkip = document.getElementById("pomoSkip");
+        const btnEnd = document.getElementById("pomoEnd");
+
+        let mode = "work";
+        let remain = 0;
+        let timer = null;
+        let cfg = { work: 120, break: 30 };
+
+        function fmt(s){ s=Math.max(0,s|0); const m=String((s/60)|0).padStart(2,"0"); const ss=String(s%60).padStart(2,"0"); return m+":"+ss; }
+        function tick(){
+          time.textContent = fmt(remain);
+          if (remain <= 0){
+            if (mode === "work"){
+              mode = "break"; label.textContent = "Break"; remain = cfg.break;
+              Modal.show({ title: "Break time", html: "<p>Rest eyes and shoulders for <strong>"+cfg.break+"s</strong>. Try 1 round of <em>4‑7‑8</em> breathing.</p>", okText: "Resume" });
+            } else { mode = "work"; label.textContent = "Focus"; remain = cfg.work; }
+          } else { remain--; }
+        }
+        btnSkip.addEventListener("click", () => { if (mode === "break"){ mode = "work"; label.textContent = "Focus"; remain = cfg.work; } });
+        btnEnd.addEventListener("click", () => { Pomo.stop(); endAndDyslexia(); });
+
+        return { start(opts){ cfg = Object.assign({work:120, break:30}, opts||{}); mode = "work"; remain = cfg.work; label.textContent = "Focus"; bar.style.display="block"; clearInterval(timer); timer = setInterval(tick,1000); }, stop(){ bar.style.display="none"; clearInterval(timer);} };
+      })();
+
+      /* UK TTS preference (shared) */
+      (function () {
+        const PREF_KEY = "mshare_tts_pref_v1";
+        const sel = document.getElementById("ttsVoice");
+        function getPref(){ return localStorage.getItem(PREF_KEY) || "uk-auto"; }
+        function setPref(v){ localStorage.setItem(PREF_KEY, v); }
+        function scoreVoice(v, want){ let s=0; const name=(v.name||"").toLowerCase(); const lang=(v.lang||"").toLowerCase(); if (lang.startsWith("en-gb")) s+=100; if (want==="uk-f" && name.includes("female")) s+=40; if (want==="uk-m" && name.includes("male")) s+=40; if (want!=="system" && name.includes("google uk english")) s+=60; if (name.includes("google")) s+=8; if (name.includes("microsoft")) s+=6; return s; }
+        function pick(want){ const list = window.speechSynthesis ? speechSynthesis.getVoices() || [] : []; if (!list.length) return null; if (want==="system") return list[0]; let best=null, score=-1; list.forEach(v=>{ const sc=scoreVoice(v, want); if (sc>score){ best=v; score=sc; } }); return best || list[0]; }
+        function applyVoice(u){ try{ const want = sel ? sel.value : getPref(); const v=pick(want); if (v) u.voice=v; }catch{} }
+        window.__MSHARE__ = window.__MSHARE__ || {}; window.__MSHARE__.TTS = { applyVoice };
+        if (sel){ sel.value=getPref(); sel.addEventListener("change",()=>setPref(sel.value)); }
+        if ("speechSynthesis" in window){ speechSynthesis.onvoiceschanged = function(){}; try{ speechSynthesis.getVoices(); }catch{} }
+      })();
+
+      /* Simple local stats */
+      (function () {
+        const STATS_KEY = "mshare_stats_anon_v1";
+        function read(){ try{ return JSON.parse(localStorage.getItem(STATS_KEY)||"{}"); }catch{ return {}; } }
+        function write(o){ localStorage.setItem(STATS_KEY, JSON.stringify(o)); }
+        function add({tool, seconds=0, score=null}){ const s=read(); s.totalSeconds=(s.totalSeconds||0)+(seconds||0); s.totalSessions=(s.totalSessions||0)+1; s.tools=s.tools||{}; const t=s.tools[tool] || {sessions:0,seconds:0,bestScore:null,lastScore:null}; t.sessions+=1; t.seconds+=seconds||0; if (score!=null){ t.lastScore=score; if (t.bestScore==null || score>t.bestScore) t.bestScore=score; } s.tools[tool]=t; write(s); }
+        window.__MSHARE__ = window.__MSHARE__ || {}; window.__MSHARE__.Stats = { add };
+      })();
+
+      function beginTraining(toolId, sectionEl, startFn){ Focus.only(sectionEl); Pomo.start({work:120, break:30}); startFn(); }
+
+      /* ===== Sound Training Studio ===== */
+      (function () {
+        const root = document.getElementById("svStudio"); if (!root) return;
+        const sel = document.getElementById("svSelect"); const tiles = document.getElementById("svTiles"); const out = document.getElementById("svOut"); const btnAll = document.getElementById("svPractice"); const btnStop = document.getElementById("svStop"); const btnCam = document.getElementById("svCam"); const btnCamOff = document.getElementById("svCamOff"); const mirrorWrap = document.getElementById("svMirrorWrap"); const mirror = document.getElementById("svMirror");
+        let loop=null, curSet=[], speakOn = "speechSynthesis" in window;
+        function speak(text, rate){ if (!speakOn) return; try{ const u=new SpeechSynthesisUtterance(text); window.__MSHARE__?.TTS?.applyVoice(u); u.rate=rate||1; speechSynthesis.cancel(); speechSynthesis.speak(u);}catch{} }
+        const SETS = { short:[{g:"a",ex:["cat","map"]},{g:"e",ex:["bed","hem"]},{g:"i",ex:["sit","milk"]},{g:"o",ex:["hot","pond"]},{g:"u",ex:["sun","drum"]}], long:[{g:"a",ex:["late","paper"]},{g:"e",ex:["tree","even"]},{g:"i",ex:["time","pilot"]},{g:"o",ex:["home","open"]},{g:"u",ex:["unit","music"]}], digraphs:[{g:"sh",ex:["ship","brush"]},{g:"ch",ex:["chat","teacher"]},{g:"th",ex:["thin","this"]},{g:"ph",ex:["phone","graph"]},{g:"wh",ex:["when","whale"]},{g:"ck",ex:["back","packet"]},{g:"ng",ex:["sing","ring"]},{g:"nk",ex:["bank","thank"]},{g:"qu",ex:["quick","quiet"]},{g:"tch",ex:["catch","match"]},{g:"dge",ex:["bridge","edge"]},{g:"igh",ex:["high","night"]},{g:"tion",ex:["nation","action"]},{g:"sion",ex:["vision","decision"]},{g:"ture",ex:["picture","nature"]}], teams:[{g:"ai/ay",ex:["rain","day"]},{g:"ee/ea",ex:["see","team"]},{g:"ea (head)",ex:["head","bread"]},{g:"oa/ow",ex:["boat","snow"]},{g:"oi/oy",ex:["coin","boy"]},{g:"ou/ow",ex:["sound","cloud"]},{g:"au/aw",ex:["cause","saw"]},{g:"oo (long)",ex:["moon","food"]},{g:"oo (short)",ex:["book","good"]},{g:"ue/ui/ew",ex:["blue","suit"]},{g:"ie/y (ī)",ex:["pie","try"]},{g:"eigh/ei/ey (ā)",ex:["eight","they"]}], r:[{g:"ar",ex:["car","start"]},{g:"er/ir/ur",ex:["her","bird"]},{g:"or",ex:["fork","north"]},{g:"air",ex:["chair","hair"]},{g:"ear (er)",ex:["learn","earth"]},{g:"ore",ex:["more","shore"]}], silent:[{g:"kn/gn",ex:["knee","gnome"]},{g:"wr",ex:["write","wrist"]},{g:"mb",ex:["thumb","comb"]},{g:"igh",ex:["light"]},{g:"ps-",ex:["psychology","pseudonym"]},{g:"mn-",ex:["mnemonic"]},{g:"bt",ex:["debt","doubt"]},{g:"sc (sce/sci)",ex:["scene","science"]}] };
+        function buildTiles(topic){ tiles.innerHTML=""; out.textContent = speakOn? "Tap a tile to hear the sound and examples." : "Speech not available in this browser."; curSet = SETS[topic]||[]; curSet.forEach(s=>{ const b=document.createElement("button"); b.className="btn"; b.type="button"; b.textContent=s.g; b.style.minWidth="84px"; b.addEventListener("click",()=>beginTraining("soundStudio", root, ()=>{ out.innerHTML = "<strong>"+s.g+"</strong>: "+s.ex.join(", "); if (speakOn){ speak(s.g,.9); setTimeout(()=>s.ex.forEach((w,i)=>setTimeout(()=>speak(w,1),700*(i+1))),400);} btnAll.disabled=false; btnStop.disabled=false; })); tiles.appendChild(b); }); btnAll.disabled = curSet.length===0; btnStop.disabled=true; }
+        sel.addEventListener("change",()=>buildTiles(sel.value)); buildTiles(sel.value);
+        btnAll.addEventListener("click",()=>beginTraining("soundStudio", root, ()=>{ if (!("speechSynthesis" in window) || curSet.length===0) return; clearInterval(loop); let i=0; loop=setInterval(()=>{ const s=curSet[i%curSet.length]; out.innerHTML = "<strong>"+s.g+"</strong>: "+s.ex.join(", "); speechSynthesis.cancel(); const u1=new SpeechSynthesisUtterance(s.g); window.__MSHARE__?.TTS?.applyVoice(u1); u1.rate=.9; const u2=new SpeechSynthesisUtterance(s.ex[0]||""); window.__MSHARE__?.TTS?.applyVoice(u2); const u3=new SpeechSynthesisUtterance(s.ex[1]||""); window.__MSHARE__?.TTS?.applyVoice(u3); speechSynthesis.speak(u1); setTimeout(()=>speechSynthesis.speak(u2),600); setTimeout(()=>speechSynthesis.speak(u3),1100); i++; }, prefersReduce?2200:1800); btnStop.disabled=false; }));
+        btnStop.addEventListener("click",()=>{ clearInterval(loop); try{ speechSynthesis.cancel(); }catch{} btnStop.disabled=true; endAndDyslexia(); });
+        btnCam.addEventListener("click",()=>beginTraining("soundStudio", root, async ()=>{ try{ const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"user"},audio:false}); mirror.srcObject=stream; mirrorWrap.style.display="block"; btnCamOff.disabled=false; }catch(e){ out.textContent="Camera permission not granted."; } }));
+        btnCamOff.addEventListener("click",()=>{ if (mirror.srcObject) mirror.srcObject.getTracks().forEach(t=>t.stop()); mirror.srcObject=null; mirrorWrap.style.display="none"; btnCamOff.disabled=true; });
+      })();
+
+      /* ===== Pronunciation Lab ===== */
+      (function () {
+        const root=document.getElementById("pronLab"); if (!root) return;
+        const btnWrap=root.querySelector(".grid"); const out=document.getElementById("pronOut"); const btnPractice=document.getElementById("pronPractice"); const btnStop=document.getElementById("pronStop");
+        const SETS=[{g:"a",ex:["apple","able"]},{g:"e",ex:["egg","even"]},{g:"i",ex:["ink","idea"]},{g:"o",ex:["odd","open"]},{g:"u",ex:["up","unit"]},{g:"sh",ex:["ship","brush"]},{g:"ch",ex:["chip","teacher"]},{g:"th",ex:["thin","this"]},{g:"ph",ex:["phone","graph"]},{g:"wh",ex:["when","whale"]},{g:"ai",ex:["rain","train"]},{g:"ee",ex:["seen","green"]},{g:"ea",ex:["team","leave"]},{g:"oa",ex:["boat","coast"]},{g:"ow",ex:["slow","grow"]},{g:"oi",ex:["coin","point"]},{g:"oy",ex:["boy","enjoy"]},{g:"ou",ex:["out","sound"]},{g:"aw",ex:["saw","dawn"]},{g:"au",ex:["cause","launch"]},{g:"ar",ex:["car","sharp"]},{g:"er",ex:["her","fern"]},{g:"ir",ex:["bird","shirt"]},{g:"or",ex:["for","storm"]},{g:"ur",ex:["turn","nurse"]},{g:"igh",ex:["high","night"]},{g:"tch",ex:["catch","match"]},{g:"dge",ex:["bridge","edge"]},{g:"kn",ex:["knock","knee"]},{g:"wr",ex:["write","wrap"]},{g:"mb",ex:["thumb","comb"]}];
+        let current=null, speakOn="speechSynthesis" in window, t0=0, loop=null, idx=0;
+        function speak(text,rate){ if (!speakOn) return; try{ const u=new SpeechSynthesisUtterance(text); window.__MSHARE__?.TTS?.applyVoice(u); u.rate=rate||.95; speechSynthesis.cancel(); speechSynthesis.speak(u);}catch{} }
+        SETS.forEach(s=>{ const b=document.createElement("button"); b.className="btn"; b.type="button"; b.textContent=s.g; b.style.minWidth="72px"; b.addEventListener("click",()=>beginTraining("pronLab", root, ()=>{ current=s; out.innerHTML="<strong>"+s.g+"</strong>: "+s.ex.join(", "); btnPractice.disabled=false; btnStop.disabled=false; speak(s.g,.8); setTimeout(()=>s.ex.forEach((w,i)=>setTimeout(()=>speak(w,1),700*(i+1))),500); })); btnWrap.appendChild(b); });
+        btnPractice.addEventListener("click",()=>beginTraining("pronLab", root, ()=>{ if (!current) return; if (loop) clearInterval(loop); idx=0; t0=performance.now(); loop=setInterval(()=>{ speak(current.ex[idx%current.ex.length],1); idx++; },1200); }));
+        btnStop.addEventListener("click",()=>{ if (loop) clearInterval(loop); try{ speechSynthesis.cancel(); }catch{} const secs=Math.max(0,(performance.now()-t0)/1000); window.__MSHARE__.Stats.add({tool:"pronLab",seconds:secs,score:idx||0}); endAndDyslexia(); });
+      })();
+
+      /* ===== Letter / Number Search ===== */
+      (function () {
+        const card=document.getElementById("searchTool"); const grid=document.getElementById("sGrid"); if (!grid||!card) return;
+        const targets=document.getElementById("targets"); const sizeSel=document.getElementById("size"); const mix=document.getElementById("mix"); const info=document.getElementById("sInfo"); const start=document.getElementById("sStart"); const stopBtn=document.getElementById("sStop"); const again=document.getElementById("sAgain"); const bestEl=document.getElementById("sBest");
+        let targetSet=new Set(), remain=0, score=0, clicks=0, startTime=0, timer=null, running=false;
+        function key(){ return "mshare_search_best_"+sizeSel.value+"_"+(targets.value||"")+"_"+mix.value; }
+        function showBest(){ const best=localStorage.getItem(key()); bestEl.textContent = best? "Best time: "+best+"s" : ""; }
+        function randChar(mode){ const letters="abcdefghijklmnopqrstuvwxyz", digits="0123456789"; if (mode==="letters") return letters[Math.floor(Math.random()*letters.length)]; if (mode==="digits") return digits[Math.floor(Math.random()*digits.length)]; return Math.random()<0.7? randChar("letters"): randChar("digits"); }
+        function refresh(){ const secs=Math.round((Date.now()-startTime)/1000); info.textContent="Score: "+score+" • Remaining: "+remain+" • Time: "+secs+"s • Clicks: "+clicks; }
+        function finish(byUser){ running=false; clearInterval(timer); Array.from(grid.children).forEach(c=>c.disabled=true); stopBtn.disabled=true; again.disabled=false; const secs=Math.round((Date.now()-startTime)/1000); if (remain===0){ const b=parseInt(localStorage.getItem(key())||"9999",10); if (secs<b) localStorage.setItem(key(), String(secs)); showBest(); } window.__MSHARE__.Stats.add({tool:"search",seconds:secs,score:score}); refresh(); if (byUser) endAndDyslexia(); }
+        function build(){ beginTraining("search", card, ()=>{ grid.innerHTML=""; score=0; clicks=0; startTime=Date.now(); remain=0; targetSet=new Set(targets.value.split(",").map(s=>s.trim().toLowerCase()).filter(Boolean)); const n=parseInt(sizeSel.value,10)||10; grid.style.gridTemplateColumns="repeat("+n+",1fr)"; for (let i=0;i<n*n;i++){ const ch=randChar(mix.value); const cell=document.createElement("button"); cell.type="button"; cell.className="btn"; cell.textContent=ch; cell.style.padding="10px"; cell.style.fontWeight="700"; cell.style.minWidth="0"; cell.dataset.hit=targetSet.has(ch)?"1":"0"; if (cell.dataset.hit==="1") remain++; cell.addEventListener("click",()=>{ if (!running||cell.disabled) return; clicks++; if (cell.dataset.hit==="1"){ score++; remain--; cell.style.opacity=".45"; } cell.disabled=true; refresh(); if (remain===0) finish(false); }); grid.appendChild(cell); } again.disabled=true; stopBtn.disabled=false; running=true; clearInterval(timer); timer=setInterval(refresh,500); refresh(); showBest(); }); }
+        start.addEventListener("click", build); again.addEventListener("click", build); stopBtn.addEventListener("click",()=>finish(true));
+      })();
+
+      /* ===== Schulte Mini ===== */
+      (function () {
+        const card=document.getElementById("schulte"); const grid=document.getElementById("schGrid"); if (!grid||!card) return;
+        const start=document.getElementById("schStart"); const stop=document.getElementById("schStop"); const stats=document.getElementById("schStats"); const BEST_KEY="mshare_schulte_best";
+        let next=1, t0=0, running=false, rafId=null;
+        function tick(){ if (!running) return; const s=((performance.now()-t0)/1000).toFixed(1); const best=localStorage.getItem(BEST_KEY)||"—"; stats.textContent="Time: "+s+"s • Best: "+best+" • "+(next-1)+"/25"; rafId=requestAnimationFrame(tick); }
+        function shuffle(arr){ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; }
+        function stopRun(finalize, byUser){ if (!running) return; running=false; cancelAnimationFrame(rafId); Array.from(grid.children).forEach(b=>b.disabled=true); let elapsed=(performance.now()-t0)/1000; if (finalize){ const time=elapsed.toFixed(1); const best=parseFloat(localStorage.getItem(BEST_KEY)||"9999"); if (next===26 && parseFloat(time)<best) localStorage.setItem(BEST_KEY, time); const showBest=localStorage.getItem(BEST_KEY)||"—"; stats.textContent="Time: "+time+"s • Best: "+showBest+" • "+(next-1)+"/25"; } window.__MSHARE__.Stats.add({tool:"schulte",seconds:elapsed,score:next-1}); if (byUser) endAndDyslexia(); stop.disabled=true; }
+        function build(){ beginTraining("schulte", card, ()=>{ grid.innerHTML=""; next=1; running=true; t0=performance.now(); cancelAnimationFrame(rafId); tick(); stop.disabled=false; const arr=shuffle(Array.from({length:25},(_,i)=>i+1)); arr.forEach(n=>{ const b=document.createElement("button"); b.className="btn"; b.type="button"; b.textContent=n; b.style.padding="14px"; b.style.fontWeight="800"; b.addEventListener("click",()=>{ if (!running) return; if (n===next){ b.style.opacity=".5"; b.disabled=true; next++; if (next===26) stopRun(true,false); } }); grid.appendChild(b); }); }); }
+        start.addEventListener("click", build); stop.addEventListener("click",()=>stopRun(true,true));
+      })();
+
+      /* ===== RAN Strip ===== */
+      (function () {
+        const root=document.getElementById("ran"); if (!root) return; const ranSet=document.getElementById("ranSet"); const speed=document.getElementById("ranSpeed"); const rows=document.getElementById("ranRows"); const go=document.getElementById("ranGo"); const stop=document.getElementById("ranStop"); const wrap=document.getElementById("ranGrid"); const stat=document.getElementById("ranStat"); const BEST="mshare_ran_best_count";
+        let timer=null, order=[], ptr=0, count=0, t0=0;
+        function bestText(){ const b=localStorage.getItem(BEST); return b? " • Best: "+b : " • Best: —"; }
+        function build(){ wrap.innerHTML=""; const items=ranSet.value.split(",").map(s=>s.trim()).filter(Boolean); const c=5, r=parseInt(rows.value,10)||4; wrap.style.gridTemplateColumns="repeat("+c+",1fr)"; for (let i=0;i<c*r;i++){ const b=document.createElement("button"); b.className="btn"; b.type="button"; b.textContent=items[i%items.length]; b.style.padding="12px"; b.style.fontWeight="700"; b.disabled=true; wrap.appendChild(b); } }
+        function start(){ beginTraining("ran", root, ()=>{ build(); const cells=Array.from(wrap.children); order=Array.from({length:cells.length},(_,i)=>i).sort(()=>Math.random()-.5); ptr=0; count=0; t0=performance.now(); stop.disabled=false; go.disabled=true; const interval=1000/parseFloat(speed.value||1.5); stat.textContent="Items: 0"+bestText(); timer=setInterval(()=>{ cells.forEach(c=>c.style.outline="none"); const idx=order[ptr%order.length]; const cell=cells[idx]; cell.style.outline="3px solid var(--b)"; ptr++; count++; stat.textContent="Items: "+count+bestText(); }, prefersReduce?interval*1.5:interval); }); }
+        function halt(byUser){ clearInterval(timer); go.disabled=false; stop.disabled=true; Array.from(wrap.children).forEach(c=>c.style.outline="none"); const b=parseInt(localStorage.getItem(BEST)||"0",10); if (count>b) localStorage.setItem(BEST,String(count)); const secs=Math.max(0,(performance.now()-t0)/1000); window.__MSHARE__.Stats.add({tool:"ran",seconds:secs,score:count}); stat.textContent="Items: "+count+bestText(); if (byUser) endAndDyslexia(); }
+        go.addEventListener("click", start); stop.addEventListener("click",()=>halt(true)); build(); stat.textContent="Items: 0"+bestText();
+      })();
+
+      /* ===== Fluency Pacer (enhanced + fix visibility) ===== */
+      (function () {
+        const card=document.getElementById("pacer"); const pText=document.getElementById("pText"); if (!pText||!card) return;
+        const wpm=document.getElementById("wpm"); const chunkInp=document.getElementById("pChunk"); const modeSel=document.getElementById("pMode"); const fontRange=document.getElementById("pFont"); const fontVal=document.getElementById("pFontVal"); const lineRange=document.getElementById("pLine"); const lineVal=document.getElementById("pLineVal"); const letRange=document.getElementById("pLet"); const letVal=document.getElementById("pLetVal"); const overlaySel=document.getElementById("pOverlay"); const beepChk=document.getElementById("pBeep"); const countChk=document.getElementById("pCount"); const fullChk=document.getElementById("pFull"); const timingEl=document.getElementById("pTiming"); const pSamples=document.getElementById("pSamples"); const pPaste=document.getElementById("pPaste"); const pImport=document.getElementById("pImport"); const pExport=document.getElementById("pExport"); const pClear=document.getElementById("pClear");
+        const startBtn=document.getElementById("pStart"); const pauseBtn=document.getElementById("pPause"); const stopBtn=document.getElementById("pStop"); const out=document.getElementById("pOut"); const outWrap=document.getElementById("pOutWrap"); const overlay=document.getElementById("pCountOverlay"); const stat=document.getElementById("pStat"); const meta=document.getElementById("pMeta");
+        let words=[], idx=0, chunk=1, tickTimer=null, t0=0, pausedAt=0, running=false, paused=false, audioCtx=null;
+        const overlayMap={ none:'transparent', yellow:'rgba(255,237,166,.22)', blue:'rgba(166,206,255,.22)', grey:'rgba(200,200,200,.12)' };
+        function esc(s){ return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+        function clamp(n,a,b){ n=Number(n); if (isNaN(n)) n=a; return Math.min(b, Math.max(a,n)); }
+        function intervalMs(){ const w=clamp(parseInt(wpm.value||110,10),40,300); const c=clamp(parseInt(chunkInp.value||1,10),1,5); return Math.round((60000*c)/w); }
+        function applyStyles(){ out.style.fontSize=fontRange.value+'px'; out.style.lineHeight=parseFloat(lineRange.value).toFixed(2); out.style.letterSpacing=parseFloat(letRange.value).toFixed(2)+'em'; out.style.background=overlayMap[overlaySel.value]||'transparent'; out.classList.toggle('pacer-masked', modeSel.value==='mask'); fontVal.textContent=fontRange.value+'px'; lineVal.textContent=parseFloat(lineRange.value).toFixed(2); letVal.textContent=parseFloat(letRange.value).toFixed(2)+'em'; timingEl.textContent='Interval: '+intervalMs()+' ms • Chunk: '+clamp(chunkInp.value,1,5); }
+        function beep(){ if (!beepChk.checked) return; try{ audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)(); const o=audioCtx.createOscillator(); const g=audioCtx.createGain(); o.type='sine'; o.frequency.value=880; g.gain.value=0.0001; o.connect(g); g.connect(audioCtx.destination); o.start(); g.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime+0.01); g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime+0.09); o.stop(audioCtx.currentTime+0.1); }catch{} }
+        function fmtTime(ms){ const t=Math.max(0,Math.round(ms/1000)); const m=String((t/60)|0).padStart(2,'0'); const s=String(t%60).padStart(2,'0'); return m+':'+s; }
+        function render(){ const start=idx, end=Math.min(words.length, idx+chunk); const prev=words.slice(0,start).join(' '); const curr=words.slice(start,end).join(' '); const rest=words.slice(end).join(' '); out.innerHTML=`<span class="pacer-prev">${esc(prev)}</span> <span class="pacer-current">${esc(curr)}</span> <span class="pacer-muted">${esc(rest)}</span>`; const elapsed=running ? (performance.now()-t0-pausedAt) : 0; const shown=Math.min(start, words.length); const mins=Math.max(0, elapsed/60000); const liveWpm=mins>0 ? (shown/mins) : 0; meta.textContent = `${shown}/${words.length} words • ${fmtTime(elapsed)} • ${Math.round(liveWpm)} wpm`; }
+        function countInThen(fn){ if (!countChk.checked){ fn(); return; } overlay.style.display='flex'; const num=overlay.querySelector('div'); let n=3; num.textContent=n; const iv=setInterval(()=>{ n--; if (n>0){ num.textContent=n; } else { clearInterval(iv); overlay.style.display='none'; fn(); } }, prefersReduce?500:800); }
+        function start(){ beginTraining("pacer", card, ()=>{ words=(pText.value||'').replace(/\s+/g,' ').trim().split(' ').filter(Boolean); if (!words.length){ stat.textContent='Add some text above to begin.'; Focus.exit(); return; } chunk=clamp(chunkInp.value,1,5); idx=0; paused=false; pausedAt=0; stat.textContent='Running…'; startBtn.disabled=true; pauseBtn.disabled=false; stopBtn.disabled=false; applyStyles(); render(); try{ audioCtx && audioCtx.resume && audioCtx.resume(); }catch{} outWrap.scrollIntoView({behavior:'smooth'}); countInThen(()=>{ t0=performance.now(); running=true; clearInterval(tickTimer); tickTimer=setInterval(()=>{ if (!running||paused) return; beep(); idx=Math.min(words.length, idx+chunk); render(); if (idx>=words.length){ halt(false); } }, intervalMs()); }); }); }
+        function halt(byUser){ clearInterval(tickTimer); running=false; const elapsed=Math.max(0,(performance.now()-t0-pausedAt)/1000); window.__MSHARE__.Stats.add({tool:"pacer",seconds:elapsed,score:words.length||0}); stat.textContent=byUser?'Stopped':'Finished'; startBtn.disabled=false; pauseBtn.disabled=true; stopBtn.disabled=true; if (byUser) endAndDyslexia(); }
+        function togglePause(){ if (!running) return; if (!paused){ paused=true; clearInterval(tickTimer); pauseBtn.textContent='Resume'; stat.textContent='Paused'; pausedAt = performance.now() - t0 - pausedAt; } else { paused=false; pauseBtn.textContent='Pause'; stat.textContent='Running…'; clearInterval(tickTimer); tickTimer=setInterval(()=>{ if (!running||paused) return; beep(); idx=Math.min(words.length, idx+chunk); render(); if (idx>=words.length) halt(false); }, intervalMs()); } }
+        function refreshTiming(){ applyStyles(); chunk=clamp(chunkInp.value,1,5); if (running && !paused){ clearInterval(tickTimer); tickTimer=setInterval(()=>{ if (!running||paused) return; beep(); idx=Math.min(words.length, idx+chunk); render(); if (idx>=words.length) halt(false); }, intervalMs()); } }
+        // content helpers
+        const samples={ affirm:"I read at a pace that feels kind to my mind. I breathe softly and let each line arrive. My eyes notice patterns and my brain turns effort into ease. Small wins add up every day.", story:"The bus hummed like a warm radiator. I traced each word on the poster by the door—two lines, then a pause. The river outside blinked silver. When I looked back, the sentence felt lighter.", work:"Hi team, quick update: the feature ships on Friday. I’ll share a simple guide and a one minute demo. Thanks for the steady feedback—small steps, clean progress." };
+        pSamples.addEventListener('change',()=>{ if (pSamples.value==='custom') return; pText.value=samples[pSamples.value]||pText.value; });
+        pPaste.addEventListener('click',async ()=>{ try{ const t=await navigator.clipboard.readText(); if (t) pText.value=t; }catch{ alert('Clipboard blocked by browser. Paste manually into the box.'); }});
+        pImport.addEventListener('change',e=>{ const f=e.target.files && e.target.files[0]; if (!f) return; const r=new FileReader(); r.onload=()=>{ pText.value=String(r.result||''); }; r.readAsText(f); });
+        pExport.addEventListener('click',()=>{ const blob=new Blob([pText.value||''],{type:'text/plain'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='pacer_text.txt'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),8000); });
+        pClear.addEventListener('click',()=>{ pText.value=''; out.innerHTML='<span class="pacer-muted">Text cleared. Add some lines and press <strong>Start</strong>.</span>'; stat.textContent='Idle'; });
+        // fullscreen
+        fullChk.addEventListener('change',()=>{ outWrap.classList.toggle('fullscreen', fullChk.checked); });
+        // controls
+        startBtn.addEventListener('click', start); stopBtn.addEventListener('click',()=>halt(true)); pauseBtn.addEventListener('click', togglePause);
+        [wpm,chunkInp,modeSel,overlaySel].forEach(el=>el.addEventListener('input', refreshTiming)); [fontRange,lineRange,letRange].forEach(el=>el.addEventListener('input', applyStyles));
+        // keyboard shortcuts
+        document.addEventListener('keydown',(e)=>{ if (!card) return; if (e.key===' '){ e.preventDefault(); if (running) togglePause(); else start(); } if (e.key==='Escape'){ e.preventDefault(); if (running) halt(true); } if (e.key==='+' || e.key==='='){ wpm.value = Math.min(300, (parseInt(wpm.value||110,10)+10)); refreshTiming(); } if (e.key==='-' || e.key==='_'){ wpm.value = Math.max(40, (parseInt(wpm.value||110,10)-10)); refreshTiming(); } if (e.key===']'){ chunkInp.value = Math.min(5, (parseInt(chunkInp.value||1,10)+1)); refreshTiming(); } if (e.key==='['){ chunkInp.value = Math.max(1, (parseInt(chunkInp.value||1,10)-1)); refreshTiming(); } });
+        // initial paint
+        applyStyles(); out.innerHTML = `<span class="pacer-muted">Press <strong>Start</strong> to begin.</span>`; stat.textContent='Idle';
+      })();
+
+      /* ===== Resources PDF (try asset else build dynamically) ===== */
+      (function () {
+        const btn=document.getElementById("downloadResourcesPdf"); if (!btn) return;
+        const ASSET_PATH="assets/dyslexia_adult_resources.pdf";
+        const RESOURCES=[{name:"Twinkl – adult dyslexia resources",url:"https://www.twinkl.com.sg/search?q=dyslexia+resources+adult&c=244&r=parent&fco=0&n=30&fa=9"},{name:"British Dyslexia Association – Adults",url:"https://www.bdadyslexia.org.uk/advice/adults"},{name:"International Dyslexia Association",url:"https://dyslexiaida.org/"},{name:"Yale Center for Dyslexia & Creativity – Adults",url:"https://dyslexia.yale.edu/resources/adults/"},{name:"Understood.org – Dyslexia in adults",url:"https://www.understood.org/en/articles/dyslexia-in-adults"},{name:"National Center on Improving Literacy",url:"https://improvingliteracy.org/"},{name:"Reading Rockets",url:"https://readingrockets.org/"},{name:"NIH / NIDCD",url:"https://www.nidcd.nih.gov/health/voice-speech-and-language"},{name:"Dyslexia Scotland – Adults",url:"https://www.dyslexia-scotland.org.uk/adults/"}];
+        async function tryDirect(path){ try{ const r=await fetch(path,{method:"HEAD"}); if (r.ok){ const a=document.createElement("a"); a.href=path; a.download=path.split("/").pop()||"dyslexia_adult_resources.pdf"; document.body.appendChild(a); a.click(); a.remove(); return true; } }catch(e){} return false; }
+        function base64ToBytes(b64){ const bin=atob(b64.replace(/^data:.*;base64,/,"")); const len=bin.length, out=new Uint8Array(len); for(let i=0;i<len;i++) out[i]=bin.charCodeAt(i); return out; }
+        function parseJpegSize(bytes){ let i=2; while(i<bytes.length){ if(bytes[i]!==0xFF){ i++; continue; } const marker=bytes[i+1]; const len=(bytes[i+2]<<8)|bytes[i+3]; if(marker>=0xC0&&marker<=0xC3){ return {h:(bytes[i+5]<<8)|bytes[i+6], w:(bytes[i+7]<<8)|bytes[i+8]}; } i+=2+len; } return {w:1224,h:1584}; }
+        async function pdfFromCanvasWithLinks({fromCanvas,links=[]}){ const jpeg=fromCanvas.toDataURL("image/jpeg",.92); const imgBytes=base64ToBytes(jpeg); const dim=parseJpegSize(imgBytes); const PW=595,PH=842; const content=`q\n${PW} 0 0 ${PH} 0 0 cm\n/Im0 Do\nQ\n`; const enc=new TextEncoder(); const chunks=[]; const offs=[]; let off=0; function push(b){ const a=(typeof b==="string")?enc.encode(b):b; offs.push(off); chunks.push(a); off+=a.length; } function obj(n,body){ push(`${n} 0 obj\n`); push(body); push(`\nendobj\n`);} const annots=links.map(a=>{ const sx=PW/1224, sy=PH/1584; const x1=a.x*sx, y1=PH-(a.y+a.h)*sy, x2=(a.x+a.w)*sx, y2=PH-(a.y)*sy; return {rect:[x1,y1,x2,y2],url:a.url||""}; }); push("%PDF-1.4\n%\xC2\xB5\xC2\xB7\n"); obj(1,`<< /Type /Catalog /Pages 2 0 R >>`); obj(2,`<< /Type /Pages /Count 1 /Kids [3 0 R] >>`); const annRefs=annots.map((_,i)=>`${6+i} 0 R`).join(" "); obj(3,`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${PW} ${PH}] /Resources << /XObject << /Im0 5 0 R >> /ProcSet [/PDF /ImageC] >> /Contents 4 0 R ${annots.length?('/Annots ['+annRefs+']'):''} >>`); const contentBytes=enc.encode(content); obj(4,`<< /Length ${contentBytes.length} >>\nstream\n${content}endstream`); obj(5,`<< /Type /XObject /Subtype /Image /Name /Im0 /Width ${dim.w} /Height ${dim.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imgBytes.length} >>\nstream\n`); push(imgBytes); push(`\nendstream\nendobj\n`); annots.forEach((a,i)=>{ const rect=a.rect.map(v=>v.toFixed(2)).join(' '); obj(6+i,`<< /Type /Annot /Subtype /Link /Border [0 0 0] /Rect [${rect}] /A << /S /URI /URI (${a.url.replace(/[()]/g,'\\$&')}) >> >>`); }); const xrefStart=off; push("xref\n"); const count=6+annots.length; push(`0 ${count+1}\n`); push("0000000000 65535 f \n"); for(let i=0;i<count;i++){ push(String(offs[i]).padStart(10,'0')+" 00000 n \n"); } push(`trailer << /Size ${count+1} /Root 1 0 R >>\nstartxref\n${xrefStart}\n%%EOF`); return new Blob(chunks.map(a=>a.buffer?a:new Uint8Array(a)),{type:"application/pdf"}); }
+        function loadImg(src){ return new Promise(res=>{ const i=new Image(); i.crossOrigin='anonymous'; i.onload=()=>res(i); i.onerror=()=>res(null); i.src=src; }); }
+        async function buildCanvas(){ const W=1224,H=1584; const cnv=Object.assign(document.createElement('canvas'),{width:W,height:H}); const ctx=cnv.getContext('2d'); ctx.fillStyle='#0a1020'; ctx.fillRect(0,0,W,H); ctx.fillStyle='#fff'; ctx.font='bold 48px ui-sans-serif,system-ui,Segoe UI,Roboto'; ctx.fillText('Dyslexia Adult Resources',72,100); ctx.font='500 24px ui-sans-serif,system-ui,Segoe UI,Roboto'; ctx.fillStyle='rgba(255,255,255,.85)'; ctx.fillText('Generated by M Share • '+new Date().toLocaleDateString(),72,136); ctx.font='600 28px ui-sans-serif,system-ui,Segoe UI,Roboto'; let y=190; const links=[]; RESOURCES.forEach((r,idx)=>{ ctx.fillStyle='rgba(255,255,255,.94)'; const bullet=(idx+1)+'. '; ctx.fillText(bullet+r.name,72,y); y+=34; ctx.font='500 24px ui-sans-serif,system-ui,Segoe UI,Roboto'; const linkX=92, linkY=y-24; const text=r.url; ctx.fillStyle='#bfe6ff'; ctx.fillText(text, linkX, y); const w=ctx.measureText(text).width; links.push({x:linkX,y:linkY,w:Math.max(220,w),h:30,url:r.url}); ctx.font='600 28px ui-sans-serif,system-ui,Segoe UI,Roboto'; y+=40; }); return {canvas:cnv, links}; }
+        async function handler(){ const ok=await tryDirect(ASSET_PATH); if (ok) return; try{ const built=await buildCanvas(); const blob=await pdfFromCanvasWithLinks({fromCanvas:built.canvas, links:built.links}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='dyslexia_adult_resources.pdf'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(url),8000); }catch(e){ alert('Could not generate the PDF.'); } }
+        btn.addEventListener("click", handler);
+      })();
+    </script>
+<script src="app.js"></script>
+<script src="coach.js"></script>
+<script src="assets/js/ux-fixes.js"></script>
+<script src="assets/js/paylinks.js"></script>
+<script src="assets/js/site-core.js"></script>
+<script src="assets/js/a11y-fix.js"></script>
+<script src="assets/js/start-fix.js"></script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
+<script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
+<script src="assets/header/header.js"></script>
+<script src="assets/footer/footer.js"></script>
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+</body>
+</html>
