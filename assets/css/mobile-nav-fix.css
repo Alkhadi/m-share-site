@@ -1,0 +1,50 @@
+/* Mobile navigation fix — scoped to header.site-header
+   * This stylesheet only applies rules on small/medium viewports and
+   * within the header to avoid affecting other components.  It hides
+   * elements using the native hidden attribute and animates submenu
+   * heights for a smooth open/close experience.  Chevron buttons are
+   * positioned inline next to their labels and rotate on open.
+ */
+@media (max-width:1024px) {
+  /* Hide nav and submenu via [hidden] attribute */
+  header.site-header #mainNav[hidden] {
+    display: none !important;
+  }
+  header.site-header .submenu[hidden] {
+    display: none !important;
+  }
+
+  /* Animated container for submenus. JS toggles .is-open on this wrapper */
+  header.site-header .mnav-subwrap {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.24s ease;
+  }
+  header.site-header .mnav-subwrap.is-open {
+    max-height: 100vh; /* Enough to display any submenu */
+  }
+
+  /* Chevron button inserted by JS */
+  header.site-header .mnav-chevron {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.5rem;
+    margin-left: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+  }
+  header.site-header .mnav-chevron svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.18s ease;
+  }
+  header.site-header .mnav-chevron[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+}
+/* No desktop styles defined here; desktop remains untouched. */

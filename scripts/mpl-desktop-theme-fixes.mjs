@@ -1,0 +1,549 @@
+// scripts/mpl-desktop-theme-fixes.mjs
+// MindPayLink — Global Footer + Theme Explorer + Footer Explore Menu (chevrons)
+// ESM, no dependencies. Run from project root:
+//    node scripts/mpl-desktop-theme-fixes.mjs
+
+import { promises as fs } from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = process.cwd();
+
+// ---- configuration ---------------------------------------------------------
+
+const EXCLUDE_DIRS = new Set([
+  'node_modules', '.git', '.next', '.cache', '.vercel', '.netlify',
+  'dist', 'build', 'out', '.parcel-cache', 'coverage'
+]);
+
+// Known earlier injected block ids to auto-clean (old versions / noise)
+const REMOVE_IDS_ENDING = ['-v1', '-v2'];
+const ALSO_REMOVE_IDS_EXPLICIT = [
+  // legacy noisy patches occasionally present
+  'menu-chevron-fix', 'nav-chevrons-patch-v2', 'focus-overlay-dedupe-v2',
+  'mpl-mobile-nav-patch-v3', 'mpl-vc-patch-v1', 'mpl-gp-patch-v1', 'mpl-tts-patch-v1',
+  'mpl-focus-dedupe-v3', 'mpl-mobile-nav-patch-v4', 'mpl-vc-patch-v2', 'mpl-gp-patch-v2',
+  'mpl-tts-patch-v2', 'mpl-focus-dedupe-v4'
+];
+
+// ---- footer blocks to inject (v3) ------------------------------------------
+
+const FOOTER_STYLE = `
+<style id="mpl-footer-css-v3">
+/* Scoped footer styles (safe, minimal) */
+#footer2025.mpl-footer-v3{border-top:1px solid var(--b,rgba(0,0,0,.12));font:inherit}
+#footer2025.mpl-footer-v3 .mpl-footer-wrap{max-width:min(1220px,96vw);margin:0 auto;padding:20px 12px}
+#footer2025.mpl-footer-v3 .mpl-footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:start}
+#footer2025.mpl-footer-v3 .brandline{display:flex;align-items:center;gap:.65rem}
+#footer2025.mpl-footer-v3 .brandline .logo{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:6px;background:currentColor;color:#fff;font-weight:700}
+#footer2025.mpl-footer-v3 .muted{color:var(--muted,#6b7280)}
+#footer2025.mpl-footer-v3 .mpl-pay{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+#footer2025.mpl-footer-v3 .mpl-pay a{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .55rem;border:1px solid var(--b,rgba(0,0,0,.12));border-radius:.4rem;text-decoration:none}
+#footer2025.mpl-footer-v3 .mpl-pay a:focus{outline:2px solid currentColor;outline-offset:2px}
+#footer2025.mpl-footer-v3 .mpl-theme-host details{border:1px solid var(--b,rgba(0,0,0,.12));border-radius:.5rem;padding:.35rem .5rem}
+#footer2025.mpl-footer-v3 .mpl-theme-host summary{cursor:pointer;user-select:none}
+#footer2025.mpl-footer-v3 .mpl-theme-host label{margin-right:.25rem}
+#footer2025.mpl-footer-v3 .mpl-theme-host input{margin:.25rem .5rem .25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-explore h4{margin:0 0 .25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-explore section{margin:.25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-toggle{display:flex;justify-content:space-between;align-items:center;width:100%;background:transparent;border:1px solid var(--b,rgba(0,0,0,.12));padding:.4rem .6rem;border-radius:.4rem;cursor:pointer}
+#footer2025.mpl-footer-v3 .mpl-footer-toggle:focus{outline:2px solid currentColor;outline-offset:2px}
+#footer2025.mpl-footer-v3 [data-mpl-footer-list]{margin:.35rem 0 0 0;padding-left:1rem}
+#footer2025.mpl-footer-v3 [data-mpl-footer-list] li{margin:.2rem 0}
+#footer2025.mpl-footer-v3 .bottom{display:flex;justify-content:space-between;gap:1rem;margin-top:16px;padding-top:12px;border-top:1px solid var(--b,rgba(0,0,0,.12))}
+@media (max-width:900px){
+  #footer2025.mpl-footer-v3 .mpl-footer-grid{grid-template-columns:1fr}
+  #footer2025.mpl-footer-v3 .bottom{flex-direction:column}
+}
+</style>
+`.trim();
+
+const THEME_VARS = `
+<style id="mpl-theme-vars-css-v3">
+:root{
+  --bg:#f7f7fb; --fg:#111111; --muted:#6b7280; --b:rgba(0,0,0,.12); --brightness:1;
+  color-scheme: light dark;
+}
+html{background:var(--bg);color:var(--fg);filter:brightness(var(--brightness));}
+body{background:transparent}
+</style>
+`.trim();
+
+const THEME_SCRIPT = `
+<script id="mpl-theme-auto-js-v3">
+(() => {
+  const KEY='mpl.theme.v2';
+  const DAY_START=7, DAY_END=19; // local time
+  const state = (()=>{ try{ return Object.assign({auto:true,color:null,brightness:1}, JSON.parse(localStorage.getItem(KEY)||'{}')); }catch{ return {auto:true,color:null,brightness:1}; }})();
+
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{} }
+  function hexToRgb(hex){ if(!hex) return {r:255,g:255,b:255}; const s=hex.replace('#',''); const v=s.length===3? s.split('').map(c=>c+c).join(''):s; const n=parseInt(v,16); return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
+  function luminance({r,g,b}){ const toL=c=>{c/=255; return c<=.03928? c/12.92 : Math.pow((c+.055)/1.055,2.4)}; const [R,G,B]=[toL(r),toL(g),toL(b)]; return .2126*R+.7152*G+.0722*B; }
+  function derivePalette(baseHex){ const rgb=hexToRgb(baseHex); const L=luminance(rgb); const fg=(1-L)>0.45?'#ffffff':'#111111'; const muted=(L>0.5)?'#6b7280':'#9ca3af'; const border=(L>0.5)?'rgba(0,0,0,.12)':'rgba(255,255,255,.18)'; return {bg:baseHex,fg,muted,b:border}; }
+  function isDay(){ const h=new Date().getHours(); return (h>=DAY_START && h<DAY_END); }
+
+  function applyTheme(){
+    const root=document.documentElement;
+    let bg,fg,muted,b; let brightness=Number(state.brightness||1)||1;
+    if(state.auto){
+      const base=isDay()? '#f7f7fb' : '#0b0b10';
+      const pal=derivePalette(base); ({bg,fg,muted,b}=pal);
+      root.dataset.mplTheme=isDay()?'day-auto':'night-auto';
+    }else{
+      const base=state.color||'#f7f7fb'; const pal=derivePalette(base); ({bg,fg,muted,b}=pal); delete root.dataset.mplTheme;
+    }
+    root.style.setProperty('--bg',bg);
+    root.style.setProperty('--fg',fg);
+    root.style.setProperty('--muted',muted);
+    root.style.setProperty('--b',b);
+    root.style.setProperty('--brightness',String(brightness));
+  }
+
+  function ensureUI(){
+    // Prefer dedicated slot inside the new footer
+    let slot = document.getElementById('mpl-theme-slot');
+    if(!slot){
+      // Create minimal host inside footer if missing
+      let footer = document.getElementById('footer2025') || document.querySelector('.footer-2025') || document.querySelector('footer');
+      if(!footer){ footer=document.createElement('footer'); document.body.appendChild(footer); }
+      slot = document.createElement('div'); slot.id='mpl-theme-slot'; footer.appendChild(slot);
+    }
+    // Build controls only once
+    if(slot.querySelector('.mpl-theme-host')) return;
+    const host=document.createElement('div'); host.className='mpl-theme-host';
+    const details=document.createElement('details'); details.open=false;
+    const summary=document.createElement('summary'); summary.textContent='Theme';
+    details.appendChild(summary);
+    const wrap=document.createElement('div');
+
+    // Auto
+    const autoId='mpl-theme-auto'; const autoL=document.createElement('label'); autoL.setAttribute('for',autoId); autoL.textContent='Auto';
+    const auto=document.createElement('input'); auto.type='checkbox'; auto.id=autoId;
+
+    // Color
+    const colorId='mpl-theme-color'; const colorL=document.createElement('label'); colorL.setAttribute('for',colorId); colorL.textContent='Color';
+    const color=document.createElement('input'); color.type='color'; color.id=colorId; color.value=state.color || '#f7f7fb';
+
+    // Brightness
+    const brId='mpl-theme-brightness'; const brL=document.createElement('label'); brL.setAttribute('for',brId); brL.textContent='Brightness';
+    const br=document.createElement('input'); br.type='range'; br.min='0.85'; br.max='1.25'; br.step='0.01'; br.id=brId; br.value=String(state.brightness||1);
+
+    const reset=document.createElement('button'); reset.type='button'; reset.textContent='Reset';
+
+    function reflect(){
+      auto.checked=!!state.auto;
+      color.disabled=!!state.auto; br.disabled=!!state.auto;
+      if(!state.color) color.value='#f7f7fb';
+    }
+
+    wrap.append(autoL,auto,colorL,color,brL,br,reset);
+    details.appendChild(wrap); host.appendChild(details); slot.appendChild(host);
+
+    reflect();
+
+    auto.addEventListener('change', ()=>{ state.auto=auto.checked; save(); applyTheme(); reflect(); });
+    color.addEventListener('input', ()=>{ if(state.auto) return; state.color=color.value; save(); applyTheme(); });
+    br.addEventListener('input', ()=>{ if(state.auto) return; state.brightness=Number(br.value)||1; save(); applyTheme(); });
+    reset.addEventListener('click', ()=>{ state.auto=true; state.color=null; state.brightness=1; save(); applyTheme(); reflect(); });
+  }
+
+  function scheduleMinuteTicks(){
+    if(!state.auto) return;
+    const now=new Date();
+    const ms=(60-now.getSeconds())*1000 - now.getMilliseconds();
+    setTimeout(()=>{ applyTheme(); setInterval(()=>{ if(state.auto) applyTheme(); }, 60000); }, Math.max(0,ms));
+  }
+
+  function init(){ applyTheme(); ensureUI(); scheduleMinuteTicks(); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init, {once:true}); else init();
+
+})();
+</script>
+`.trim();
+
+const FOOTER_MENU_SCRIPT = `
+<script id="mpl-footer-menu-js-v3">
+(() => {
+  const q = (sel,ctx=document)=> Array.from(ctx.querySelectorAll(sel));
+  function findSubmenu(el){ return el.querySelector(':scope > .submenu, :scope > [role="menu"], :scope > ul, :scope > .dropdown-menu, :scope > ol'); }
+  function topNavGroups(){
+    const navs = q('header nav, nav[role="navigation"], nav.primary, .navbar nav, nav');
+    const groups = new Set();
+    navs.forEach(nav=>{
+      const ul = nav.querySelector(':scope > ul');
+      const kids = ul ? Array.from(ul.children) : Array.from(nav.children);
+      kids.forEach(node=>{ const sub = findSubmenu(node); if(sub) groups.add(node); });
+    });
+    return Array.from(groups);
+  }
+  function container(){
+    // Prefer explicit mount point inside new footer
+    const slot = document.getElementById('mpl-footer-explore');
+    if (slot) return slot;
+    const footer = document.getElementById('footer2025') || document.querySelector('.footer-2025') || document.querySelector('footer');
+    let mount = footer && footer.querySelector('.mpl-footer-explore');
+    if (!mount && footer) { mount = document.createElement('nav'); mount.className='mpl-footer-explore'; footer.appendChild(mount); }
+    return mount || document.body;
+  }
+
+  function build(){
+    const mount = container();
+    if (!mount) return;
+    // Avoid duplicating if already built
+    if (mount.__mpl_built) return; mount.__mpl_built = true;
+    mount.innerHTML = '';
+
+    const title = document.createElement('h4'); title.textContent = 'Explore';
+    mount.appendChild(title);
+
+    const groups = topNavGroups();
+    if (!groups.length){ mount.style.display='none'; return; }
+
+    function closeOthers(exceptBtn){
+      q('.mpl-footer-toggle[aria-expanded="true"]', mount).forEach(btn=>{
+        if (btn===exceptBtn) return;
+        btn.setAttribute('aria-expanded','false');
+        const nxt = btn.nextElementSibling; if (nxt) nxt.style.display = 'none';
+      });
+    }
+
+    groups.forEach((g,idx)=>{
+      const sec = document.createElement('section');
+      const btn = document.createElement('button');
+      btn.type='button'; btn.className='mpl-footer-toggle'; btn.setAttribute('aria-expanded','false');
+
+      let labelNode = g.querySelector(':scope > a, :scope > button, :scope > [role="button"], :scope > .label, :scope > .menu-label');
+      const labelText = (labelNode && (labelNode.textContent||'').trim()) || ('Menu '+(idx+1));
+      btn.innerHTML = labelText + ' <span aria-hidden="true">▾</span>';
+
+      const list = document.createElement('ul'); list.setAttribute('data-mpl-footer-list',''); list.style.display='none';
+      const submenu = findSubmenu(g);
+      if (submenu){
+        q('a[href], [data-href]', submenu).forEach(a=>{
+          const href = a.getAttribute('href') || a.getAttribute('data-href') || '#';
+          const text = (a.textContent||'').trim() || href;
+          const li  = document.createElement('li');
+          const cl  = document.createElement('a'); cl.href=href; cl.textContent=text;
+          li.appendChild(cl); list.appendChild(li);
+        });
+      }
+
+      const toggle = () => {
+        const open = btn.getAttribute('aria-expanded')==='true';
+        closeOthers(btn);
+        btn.setAttribute('aria-expanded', String(!open));
+        list.style.display = open ? 'none' : '';
+      };
+      btn.addEventListener('click', toggle);
+      btn.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } if(e.key==='Escape'){ btn.setAttribute('aria-expanded','false'); list.style.display='none'; btn.focus(); } });
+
+      sec.appendChild(btn);
+      sec.appendChild(list);
+      mount.appendChild(sec);
+    });
+  }
+
+  if (document.readyState==='loading') document.addEventListener('DOMContentLoaded', build, {once:true}); else build();
+})();
+</script>
+`.trim();
+
+// ---- helpers ---------------------------------------------------------------
+
+async function walk(dir, files = []) {
+  const entries = await fs.readdir(dir, { withFileTypes: true });
+  for (const ent of entries) {
+    if (EXCLUDE_DIRS.has(ent.name)) continue;
+    if (ent.isDirectory() && ent.name.startsWith('.')) continue;
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      await walk(full, files);
+    } else if (ent.isFile() && ent.name.toLowerCase().endsWith('.html')) {
+      files.push(full);
+    }
+  }
+  return files;
+}
+
+function removeBlocksById(html, ids) {
+  let out = html;
+  for (const id of ids) {
+    out = removeOneBlock(out, id);
+  }
+  return out;
+}
+
+function removeOneBlock(html, id) {
+  // Remove <script|style ... id="id">...</script|style> robustly
+  let out = html;
+  const idEsc = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const reOpen = new RegExp(`<\\s*(script|style)[^>]*?\\bid\\s*=\\s*["']${idEsc}["'][^>]*>`, 'i');
+  let m = reOpen.exec(out);
+  while (m) {
+    const start = m.index;
+    const tag = m[1].toLowerCase();
+    const closeHtml = `</${tag}>`;
+    const closeAlt = `<\\/${tag}>`; // literal-escaped legacy
+    const afterOpen = out.slice(m.index + m[0].length);
+    let endRel = afterOpen.toLowerCase().indexOf(closeHtml);
+    if (endRel === -1) endRel = afterOpen.toLowerCase().indexOf(closeAlt);
+    let end = endRel !== -1 ? (m.index + m[0].length + endRel + closeHtml.length) : out.length;
+    out = out.slice(0, start) + out.slice(end);
+    m = reOpen.exec(out);
+  }
+  return out;
+}
+
+function removeVersionedBlocks(html) {
+  let out = html;
+  // remove any id ending in -v1 or -v2 (script/style)
+  for (const suffix of REMOVE_IDS_ENDING) {
+    const re = new RegExp(`<\\s*(script|style)[^>]*?\\bid\\s*=\\s*["'][^"']*${suffix}["'][^>]*>[\\s\\S]*?<\\/(?:\\1)>`, 'gi');
+    out = out.replace(re, '');
+    // also try to close literal-escaped </script>
+    const reAlt = new RegExp(`<\\s*(script|style)[^>]*?\\bid\\s*=\\s*["'][^"']*${suffix}["'][^>]*>[\\s\\S]*?<\\\\/(?:\\1)>`, 'gi');
+    out = out.replace(reAlt, '');
+  }
+  // remove explicit noisy ids regardless of version
+  out = removeBlocksById(out, ALSO_REMOVE_IDS_EXPLICIT);
+  return out;
+}
+
+function upsertHeadBlock(html, tagId, block) {
+  const exists = new RegExp(`<\\s*(?:style|script)[^>]*\\bid=["']${tagId}["']`, 'i').test(html);
+  let out = removeOneBlock(html, tagId);
+  if (exists) {
+    // replace in place (we removed old); insert near end of head to keep precedence
+    out = insertBeforeClosing(out, '</head>', block + '\n');
+  } else {
+    out = insertBeforeClosing(out, '</head>', block + '\n');
+  }
+  return out;
+}
+
+function upsertBodyBlock(html, tagId, block) {
+  const exists = new RegExp(`<\\s*(?:style|script)[^>]*\\bid=["']${tagId}["']`, 'i').test(html);
+  let out = removeOneBlock(html, tagId);
+  if (exists) {
+    out = insertBeforeClosing(out, '</body>', block + '\n');
+  } else {
+    out = insertBeforeClosing(out, '</body>', block + '\n');
+  }
+  return out;
+}
+
+function insertBeforeClosing(html, needle, insert) {
+  const idx = html.toLowerCase().lastIndexOf(needle.toLowerCase());
+  if (idx !== -1) return html.slice(0, idx) + insert + html.slice(idx);
+  // no needle: append
+  return html + '\n' + insert;
+}
+
+function stripExistingFooter(html) {
+  let out = html;
+  // Prefer removing #footer2025 or .footer-2025
+  const reFooter = /<footer\b[^>]*>([\s\S]*?)<\/footer>/gi;
+  // Keep last <footer> removed, or if it contains id/class markers
+  out = out.replace(reFooter, (m) => {
+    if (/\b(id\s*=\s*["']footer2025["']|class\s*=\s*["'][^"']*\bfooter-2025\b[^"']*["'])/i.test(m)) {
+      return ''; // remove our target footer
+    }
+    return m; // keep other footers (e.g., within article) — rare
+  });
+  // also remove any empty lines left
+  out = out.replace(/\n{3,}/g, '\n\n');
+  return out;
+}
+
+function buildFooterHtml(paymentLinksHtml) {
+  const payHtml = paymentLinksHtml?.trim() ? paymentLinksHtml.trim() :
+    `<a href="coffee.html">Support Us</a>`;
+
+  return `
+<footer id="footer2025" class="footer-2025 mpl-footer-v3">
+  <div class="mpl-footer-wrap">
+    <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
+      <section class="col brand">
+        <div class="brandline">
+          <span class="logo" aria-hidden="true">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="mpl-pay" aria-label="Support links">
+          ${payHtml}
+        </div>
+      </section>
+
+      <section class="col center">
+        <!-- Theme Explorer (center) -->
+        <div id="mpl-theme-slot" aria-label="Theme controls"></div>
+      </section>
+
+      <section class="col right">
+        <!-- Explore menu (chevrons) -->
+        <nav class="mpl-footer-explore" aria-label="Explore">
+          <h4>Explore</h4>
+          <div id="mpl-footer-explore"></div>
+        </nav>
+      </section>
+    </div>
+
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>(function(){var y=document.getElementById('yearFooter'); if(y) y.textContent=(new Date).getFullYear();})();</script>
+</footer>`.trim();
+}
+
+function uniqueLinks(arr) {
+  const seen = new Set();
+  return arr.filter(x => {
+    const k = (x.href || '').trim().toLowerCase();
+    if (!k || seen.has(k)) return false;
+    seen.add(k); return true;
+  });
+}
+
+async function findPaymentLinks(projectRoot) {
+  // Preferred source: profile_card_clickable.html (as per instruction)
+  const candFiles = await findFiles(projectRoot, f =>
+    /profile_card_clickable\.html$/i.test(f) ||
+    /coffee\.html$/i.test(f) || /about\.html$/i.test(f) || /support\.html$/i.test(f)
+  );
+  let htmlSrc = '';
+  for (const f of candFiles) {
+    try {
+      htmlSrc = await fs.readFile(f, 'utf8');
+      if (htmlSrc && /paypal|buymeacoffee|ko-fi|cash\.app|venmo|patreon|stripe|square\.link|donate/i.test(htmlSrc)) {
+        break;
+      }
+    } catch { }
+  }
+  if (!htmlSrc) return '';
+
+  const links = [];
+  const aRe = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
+  let m;
+  while ((m = aRe.exec(htmlSrc))) {
+    const href = m[1].trim();
+    const label = m[2].replace(/<[^>]*>/g, '').trim();
+    if (!href) continue;
+    if (/(paypal\.me|paypal\.com)/i.test(href)) links.push({ href, label: label || 'PayPal' });
+    else if (/(buymeacoffee\.com)/i.test(href)) links.push({ href, label: label || 'Buy Me a Coffee' });
+    else if (/(ko-fi\.com)/i.test(href)) links.push({ href, label: label || 'Ko‑fi' });
+    else if (/(cash\.app)/i.test(href)) links.push({ href, label: label || 'Cash App' });
+    else if (/(venmo\.com)/i.test(href)) links.push({ href, label: label || 'Venmo' });
+    else if (/(patreon\.com)/i.test(href)) links.push({ href, label: label || 'Patreon' });
+    else if (/(square\.link)/i.test(href)) links.push({ href, label: label || 'Square' });
+    else if (/(stripe\.)/i.test(href)) links.push({ href, label: label || 'Stripe' });
+    else if (/(donate|support|coffee)/i.test(label + href)) links.push({ href, label: label || 'Donate' });
+  }
+  const uniq = uniqueLinks(links);
+  if (!uniq.length) return '';
+
+  return uniq.map(l => `<a class="pay-link" href="${l.href}" target="_blank" rel="noopener">${escapeHtml(l.label)}</a>`).join('\n          ');
+}
+
+async function findFiles(dir, predicate, out = []) {
+  const ents = await fs.readdir(dir, { withFileTypes: true });
+  for (const e of ents) {
+    if (EXCLUDE_DIRS.has(e.name)) continue;
+    if (e.isDirectory() && e.name.startsWith('.')) continue;
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) {
+      await findFiles(full, predicate, out);
+    } else if (e.isFile()) {
+      if (predicate(full)) out.push(full);
+    }
+  }
+  return out;
+}
+
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// ---- patcher ---------------------------------------------------------------
+
+async function patchFile(file, paymentLinksHtml) {
+  let orig = await fs.readFile(file, 'utf8');
+  let html = orig;
+
+  // step 0: remove old versioned blocks & noisy legacy ids
+  html = removeVersionedBlocks(html);
+
+  // step 1: ensure <head> exists (if missing, create minimal)
+  if (!/<\/head>/i.test(html)) {
+    html = html.replace(/<html[^>]*>/i, m => m + '\n<head></head>');
+  }
+
+  // step 2: ensure <body> exists
+  if (!/<\/body>/i.test(html)) {
+    html = html.replace(/<\/head>/i, '</head>\n<body>');
+    html = html.replace(/<\/html>/i, '</body>\n</html>');
+    if (!/<\/body>/i.test(html)) html = html + '\n</body>';
+    if (!/<\/html>/i.test(html)) html = html + '\n</html>';
+  }
+
+  // step 3: replace existing footer with our global footer
+  html = stripExistingFooter(html);
+  const footerHtml = buildFooterHtml(paymentLinksHtml);
+  html = insertBeforeClosing(html, '</body>', '\n' + footerHtml + '\n');
+
+  // step 4: upsert footer CSS + theme CSS + theme JS + footer-menu JS
+  html = upsertHeadBlock(html, 'mpl-footer-css-v3', FOOTER_STYLE);
+  html = upsertHeadBlock(html, 'mpl-theme-vars-css-v3', THEME_VARS);
+  html = upsertBodyBlock(html, 'mpl-theme-auto-js-v3', THEME_SCRIPT);
+  html = upsertBodyBlock(html, 'mpl-footer-menu-js-v3', FOOTER_MENU_SCRIPT);
+
+  const changed = html !== orig;
+  if (changed) {
+    // backup
+    const bak = file + '.bak';
+    try { await fs.writeFile(bak, orig, 'utf8'); } catch { }
+    await fs.writeFile(file, html, 'utf8');
+  }
+  return changed;
+}
+
+async function main() {
+  // Build payment links once (from uploaded support/profile page if present)
+  const payHtml = await findPaymentLinks(ROOT);
+
+  const files = await walk(ROOT);
+  if (!files.length) {
+    console.log('No HTML files found. Nothing to do.');
+    return;
+  }
+
+  let added = 0, updated = 0, skipped = 0;
+  for (const f of files) {
+    try {
+      const changed = await patchFile(f, payHtml);
+      if (changed) {
+        // Differentiate initial add vs update heuristically by checking if our footer exists in original
+        // (quick scan)
+        const orig = await fs.readFile(f + '.bak', 'utf8').catch(() => '');
+        const had = /id\s*=\s*["']footer2025["']/i.test(orig);
+        console.log((had ? 'UPDATED ' : 'ADDED   ') + path.relative(ROOT, f));
+        had ? updated++ : added++;
+      } else {
+        console.log('SKIPPED ' + path.relative(ROOT, f));
+        skipped++;
+      }
+    } catch (e) {
+      console.log('ERROR   ' + path.relative(ROOT, f) + ' — ' + e.message);
+    }
+  }
+
+  console.log(`\nDone. HTML files: ${files.length}. Added: ${added}. Updated: ${updated}. Skipped: ${skipped}.`);
+}
+
+main().catch(err => {
+  console.error(err);
+  process.exit(1);
+});

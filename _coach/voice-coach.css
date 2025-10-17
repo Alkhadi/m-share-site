@@ -1,0 +1,28 @@
+
+/* ============ Voice Coach (single panel) ============ */
+#vc-panel{position:fixed;right:24px;bottom:24px;z-index:999999;background:#0b1220;color:#e5e7eb;
+  border:1px solid rgba(255,255,255,.14);border-radius:14px;box-shadow:0 10px 26px rgba(0,0,0,.35);
+  padding:14px 16px;width:320px;max-width:94vw;font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial}
+#vc-panel *{box-sizing:border-box}
+#vc-panel h3{margin:0 0 8px;font-size:16px;font-weight:700}
+#vc-panel .row{display:flex;align-items:center;justify-content:space-between;margin:8px 0}
+#vc-panel .pill{background:#1a2440;color:#e5e7eb;border-radius:999px;padding:6px 10px;font-size:12px}
+#vc-panel .btn{cursor:pointer;border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,.16);background:#0e1730;color:#e5e7eb}
+#vc-panel .btn:hover{background:#121e3b}
+#vc-panel .group{display:flex;gap:8px}
+#vc-panel select,#vc-panel input[type="range"]{width:180px;background:#0e1730;color:#e5e7eb;border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:6px 8px}
+#vc-panel .mini{opacity:.75;font-size:12px}
+
+/* Focus overlay (no Start/Pause/Stop buttons here) */
+#vc-focus{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(6,10,16,.72);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);z-index:999998}
+#vc-focus.visible{display:flex}
+#vc-focus .card{width:min(900px,92vw);height:min(620px,88vh);background:radial-gradient(ellipse at center,#0f172a 15%,#0b1324 60%,#0a0f1a 100%);
+  border:1px solid rgba(255,255,255,.08);border-radius:22px;box-shadow:0 20px 60px rgba(0,0,0,.55);position:relative;overflow:hidden;color:#e5e7eb}
+#vc-focus .title{position:absolute;top:18px;left:0;right:0;text-align:center;font-size:20px;font-weight:700;letter-spacing:.3px}
+#vc-focus .ring{position:absolute;inset:70px;border-radius:50%;background:conic-gradient(#6ee7b7 var(--deg,0deg),transparent 0)}
+#vc-focus .inner{position:absolute;inset:120px;border-radius:50%;background:rgba(255,255,255,.04)}
+#vc-focus .state{position:absolute;left:0;right:0;bottom:110px;text-align:center;font-size:40px;font-weight:800}
+#vc-focus .sub{position:absolute;left:0;right:0;bottom:80px;text-align:center;font-size:14px;opacity:.85}
+#vc-focus .back{position:absolute;right:18px;top:14px}

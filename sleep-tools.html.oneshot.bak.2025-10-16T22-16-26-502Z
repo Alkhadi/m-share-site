@@ -1,0 +1,451 @@
+<!doctype html>
+    <html class="gpt5-typography" lang="en">
+    <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Sleep Tools • M Share</title>
+      <meta name="description" content="CBT‑i‑style checklists, a simple sleep window helper and a wind‑down coach." />
+      <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+
+      <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+<link rel="stylesheet" href="assets/css/responsive-fixes.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/nav-unified.css">
+  <link rel="stylesheet" href="assets/css/voice-coach-pro.css">
+  <link rel="stylesheet" href="voice-coach-fix.css">
+
+<style id="mpl-mobile-nav-style-v4">
+  /* Ensure [hidden] truly hides dropdowns in any theme */
+  nav .menu[hidden], nav .submenu[hidden] { display:none !important; }
+
+  /* Small/medium behavior only */
+  @media (max-width: 1024px) {
+    /* Collapsible whole nav */
+    #mainNav[hidden] { display: none !important; }
+    /* Group baseline */
+    .nav-group, .menu-group { position: relative; }
+    /* When marked open, reveal child menu block / list */
+    .nav-group.open > .menu,
+    .menu-group.open > .submenu { display:block; }
+
+    /* Clickable targets (chevrons/toggles) */
+    .nav-group > .menu-toggle,
+    .nav-group > .chevron,
+    .nav-group [data-chevron],
+    .menu-group > .menu-toggle,
+    .menu-group > .chevron,
+    .menu-group [data-chevron] { cursor:pointer; touch-action: manipulation; }
+
+    /* A11y focus rings on triggers */
+    .nav-group > a:focus,
+    .nav-group > button:focus,
+    .nav-group > .menu-toggle:focus,
+    .nav-group > .chevron:focus,
+    .menu-group > a:focus,
+    .menu-group > button:focus,
+    .menu-group > .menu-toggle:focus,
+    .menu-group > .chevron:focus { outline:2px solid currentColor; outline-offset:2px; }
+  }
+
+  /* Hamburger is hidden on desktop */
+  @media (min-width: 1025px) { #navToggle{ display:none !important; } }
+</style>
+
+<style id="mpl-desktop-nav-css-v3">
+/* Desktop-only navigation helpers (visibility + a11y) */
+@media (min-width:1025px){
+  .mpl-nav-toggle{display:inline-flex;align-items:center;gap:.25rem;background:none;border:0;padding:.25rem;margin-left:.25rem;cursor:pointer;line-height:1}
+  .mpl-nav-toggle:focus,.mpl-nav-toggle:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+  [data-mpl-submenu]{display:none;visibility:hidden}
+  [data-mpl-open="true"] > [data-mpl-submenu]{display:block;visibility:visible}
+  .mpl-chevron{display:inline-block;transform:rotate(0deg);transition:transform .2s ease}
+  [data-mpl-open="true"] .mpl-chevron{transform:rotate(180deg)}
+  .mpl-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+}
+</style>
+
+<script id="mpl-desktop-nav-js-v3">
+/* Desktop submenu behavior — hover or click, one open, ESC/Outside close, a11y */
+(() => {
+  const mq = window.matchMedia('(min-width:1025px)');
+  let enabled = false;
+  let cleanups = [];
+  const q = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+  function findSubmenu(el){
+    return el.querySelector(':scope > .submenu, :scope > [role="menu"], :scope > ul, :scope > .dropdown-menu, :scope > ol');
+  }
+
+  function findTopNavGroups(){
+    const navs = q('header nav, nav[role="navigation"], nav.primary, .navbar nav, nav');
+    const groups = new Set();
+    navs.forEach(nav => {
+      const topChildren = [];
+      const ul = nav.querySelector(':scope > ul');
+      if (ul) topChildren.push(...Array.from(ul.children));
+      else topChildren.push(...Array.from(nav.children));
+      topChildren.forEach(node => {
+        const sub = findSubmenu(node);
+        if (sub) groups.add(node);
+      });
+    });
+    return Array.from(groups);
+  }
+
+  function closeAll(except){
+    q('[data-mpl-open="true"]').forEach(g=>{
+      if (except && g === except) return;
+      g.setAttribute('data-mpl-open','false');
+      const t = g.querySelector(':scope > .mpl-nav-toggle');
+      if (t) t.setAttribute('aria-expanded','false');
+    });
+  }
+
+  function enhance(){
+    if (enabled) return;
+    enabled = true;
+
+    const groups = findTopNavGroups();
+    if (!groups.length) return;
+
+    groups.forEach(group=>{
+      const submenu = findSubmenu(group);
+      if (!submenu) return;
+      submenu.setAttribute('data-mpl-submenu','true');
+      group.setAttribute('data-mpl-nav-group','true');
+      if (!group.hasAttribute('data-mpl-open')) group.setAttribute('data-mpl-open','false');
+
+      // Label is the first focusable/control on the group (but outside submenu)
+      let label = group.querySelector(':scope > a, :scope > button, :scope > [role="button"], :scope > .label, :scope > .menu-label');
+      if (!label) label = group.firstElementChild;
+
+      // Toggle button (desktop-only)
+      let toggle = group.querySelector(':scope > .mpl-nav-toggle');
+      if (!toggle) {
+        toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'mpl-nav-toggle';
+        toggle.setAttribute('aria-haspopup','menu');
+        toggle.setAttribute('aria-expanded','false');
+        toggle.setAttribute('title','Toggle submenu');
+        toggle.innerHTML = '<span class="mpl-chevron" aria-hidden="true">▾</span><span class="mpl-sr-only">Toggle submenu</span>';
+        if (label && label.nextSibling) group.insertBefore(toggle, label.nextSibling);
+        else group.appendChild(toggle);
+      }
+
+      const open = () => {
+        if (!mq.matches) return;
+        closeAll(group);
+        group.setAttribute('data-mpl-open','true');
+        toggle.setAttribute('aria-expanded','true');
+      };
+      const close = () => {
+        if (!mq.matches) return;
+        group.setAttribute('data-mpl-open','false');
+        toggle.setAttribute('aria-expanded','false');
+      };
+
+      const onEnter = () => open();
+      const onLeave = (e) => {
+        // close only when leaving group entirely
+        const rel = e.relatedTarget;
+        if (rel && group.contains(rel)) return;
+        close();
+      };
+      const onToggle = (e) => {
+        if (!mq.matches) return;
+        e.preventDefault();
+        const isOpen = group.getAttribute('data-mpl-open') === 'true';
+        if (isOpen) close(); else open();
+      };
+      const onKeys = (e) => {
+        if (!mq.matches) return;
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(e); }
+        else if (e.key === 'Escape') { e.preventDefault(); close(); toggle.focus(); }
+      };
+
+      group.addEventListener('mouseenter', onEnter);
+      group.addEventListener('mouseleave', onLeave);
+      toggle.addEventListener('click', onToggle);
+      toggle.addEventListener('keydown', onKeys);
+
+      cleanups.push(()=> {
+        group.removeEventListener('mouseenter', onEnter);
+        group.removeEventListener('mouseleave', onLeave);
+        toggle.removeEventListener('click', onToggle);
+        toggle.removeEventListener('keydown', onKeys);
+      });
+    });
+
+    const onDocClick = (e) => {
+      if (!mq.matches) return;
+      const openEl = document.querySelector('[data-mpl-open="true"]');
+      if (!openEl) return;
+      if (openEl.contains(e.target)) return;
+      openEl.setAttribute('data-mpl-open','false');
+      const t = openEl.querySelector(':scope > .mpl-nav-toggle');
+      if (t) t.setAttribute('aria-expanded','false');
+    };
+    const onDocEsc = (e) => {
+      if (!mq.matches) return;
+      if (e.key === 'Escape') {
+        const openEl = document.querySelector('[data-mpl-open="true"]');
+        if (!openEl) return;
+        openEl.setAttribute('data-mpl-open','false');
+        const t = openEl.querySelector(':scope > .mpl-nav-toggle');
+        if (t) { t.setAttribute('aria-expanded','false'); t.focus(); }
+      }
+    };
+    document.addEventListener('click', onDocClick);
+    document.addEventListener('keydown', onDocEsc);
+    cleanups.push(()=>{ document.removeEventListener('click', onDocClick); document.removeEventListener('keydown', onDocEsc); });
+  }
+
+  function teardown(){
+    if (!enabled) return;
+    closeAll();
+    cleanups.forEach(fn => { try { fn(); } catch(_){} });
+    cleanups = [];
+    enabled = false;
+  }
+
+  const react = () => { mq.matches ? enhance() : teardown(); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', react);
+  else react();
+  mq.addEventListener('change', react);
+})();
+</script>
+
+<style id="mpl-footer-css-v3">
+/* Scoped footer styles (safe, minimal) */
+#footer2025.mpl-footer-v3{border-top:1px solid var(--b,rgba(0,0,0,.12));font:inherit}
+#footer2025.mpl-footer-v3 .mpl-footer-wrap{max-width:min(1220px,96vw);margin:0 auto;padding:20px 12px}
+#footer2025.mpl-footer-v3 .mpl-footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:start}
+#footer2025.mpl-footer-v3 .brandline{display:flex;align-items:center;gap:.65rem}
+#footer2025.mpl-footer-v3 .brandline .logo{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:6px;background:currentColor;color:#fff;font-weight:700}
+#footer2025.mpl-footer-v3 .muted{color:var(--muted,#6b7280)}
+#footer2025.mpl-footer-v3 .mpl-pay{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+#footer2025.mpl-footer-v3 .mpl-pay a{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .55rem;border:1px solid var(--b,rgba(0,0,0,.12));border-radius:.4rem;text-decoration:none}
+#footer2025.mpl-footer-v3 .mpl-pay a:focus{outline:2px solid currentColor;outline-offset:2px}
+#footer2025.mpl-footer-v3 .mpl-theme-host details{border:1px solid var(--b,rgba(0,0,0,.12));border-radius:.5rem;padding:.35rem .5rem}
+#footer2025.mpl-footer-v3 .mpl-theme-host summary{cursor:pointer;user-select:none}
+#footer2025.mpl-footer-v3 .mpl-theme-host label{margin-right:.25rem}
+#footer2025.mpl-footer-v3 .mpl-theme-host input{margin:.25rem .5rem .25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-explore h4{margin:0 0 .25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-explore section{margin:.25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-toggle{display:flex;justify-content:space-between;align-items:center;width:100%;background:transparent;border:1px solid var(--b,rgba(0,0,0,.12));padding:.4rem .6rem;border-radius:.4rem;cursor:pointer}
+#footer2025.mpl-footer-v3 .mpl-footer-toggle:focus{outline:2px solid currentColor;outline-offset:2px}
+#footer2025.mpl-footer-v3 [data-mpl-footer-list]{margin:.35rem 0 0 0;padding-left:1rem}
+#footer2025.mpl-footer-v3 [data-mpl-footer-list] li{margin:.2rem 0}
+#footer2025.mpl-footer-v3 .bottom{display:flex;justify-content:space-between;gap:1rem;margin-top:16px;padding-top:12px;border-top:1px solid var(--b,rgba(0,0,0,.12))}
+@media (max-width:900px){
+  #footer2025.mpl-footer-v3 .mpl-footer-grid{grid-template-columns:1fr}
+  #footer2025.mpl-footer-v3 .bottom{flex-direction:column}
+}
+</style>
+<style id="mpl-theme-vars-css-v3">
+:root{
+  --bg:#f7f7fb; --fg:#111111; --muted:#6b7280; --b:rgba(0,0,0,.12); --brightness:1;
+  color-scheme: light dark;
+}
+html{background:var(--bg);color:var(--fg);filter:brightness(var(--brightness));}
+body{background:transparent}
+</style>
+  <link rel="stylesheet" href="assets/css/chatgpt5-typography.css">
+                      <link rel="stylesheet" href="assets/css/nav-contrast-fix.css">
+  <link rel="stylesheet" href="assets/css/readability-contrast.css">
+  <link rel="stylesheet" href="assets/css/readability-professional.css">
+</head>
+    <body>
+<a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
+      <header class="site-header">
+    <div class="container navbar">
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> <span
+          class="brand-text">M Share</span></a>
+
+      <nav class="main-nav" id="mainNav">
+        <a data-href="index.html">Wellbeing</a>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Neurodevelopmental</div>
+            <a data-href="autism.html">Autism</a>
+            <a data-href="adhd.html">ADHD</a>
+            <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+            <div class="menu-label">Mental Health</div>
+            <a data-href="anxiety.html">Anxiety</a>
+            <a data-href="depression.html">Depression</a>
+            <a data-href="stress.html">Stress</a>
+            <a data-href="sleep.html">Sleep</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Guides</div>
+            <a data-href="breath.html">Breath (how-to)</a>
+            <a data-href="focus.html">Focus</a>
+            <a data-href="mindfulness.html">Mindfulness</a>
+            <div class="menu-label">Techniques</div>
+            <a data-href="sos-60.html">60-second Reset</a>
+            <a data-href="box-breathing.html">Box Breathing</a>
+            <a data-href="4-7-8-breathing.html">4-7-8 Breathing</a>
+            <a data-href="coherent-5-5.html">Coherent 5-5</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">General</div>
+            <a data-href="sleep-tools.html">Sleep Tools</a>
+            <a data-href="breath-tools.html">Breath Tools</a>
+            <a data-href="mood-tools.html">Mood Tools</a>
+            <div class="menu-label">Condition-specific</div>
+            <a data-href="adhd-tools.html">ADHD Tools</a>
+            <a data-href="autism-tools.html">Autism Tools</a>
+            <a data-href="depression-tools.html">Depression Tools</a>
+            <a data-href="anxiety-tools.html">Anxiety Tools</a>
+            <a data-href="stress-tools.html">Stress Tools</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+          <div class="submenu">
+            <a data-href="about.html">About</a>
+            <a data-href="coffee.html">Support Us</a>
+            <a data-href="contact.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+      <main class="container">
+
+      <h1>Sleep Tools</h1>
+      <div class="grid cols-3">
+  <div class="card">
+    <h3>Stimulus Control Checklist</h3>
+    <ul>
+      <li>Out of bed if not asleep within ~20 min.</li>
+      <li>Bed only for sleep & sex; do wind‑down elsewhere.</li>
+      <li>Wake time fixed daily; light early.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Sleep Window Helper</h3>
+    <p class="muted">Enter your <em>average actual sleep</em> over the last week (hours) and set your time‑in‑bed to match (≥6h).</p>
+    <div class="kv-grid">
+      <div><label>Average sleep (h)</label><input id="avgSleep" type="number" min="4" max="9" step="0.25" value="6.5" / title="Input" placeholder=" "></div>
+      <div><label>Time‑in‑bed target</label><output id="tibOut">6.5 h</output></div>
+    </div>
+    <script>
+      (function(){ const i=document.getElementById('avgSleep'), o=document.getElementById('tibOut'); function calc(){ const v=Math.max(6, Math.min(9, parseFloat(i.value||'6.5'))); o.textContent = v.toFixed(2)+' h'; } i.addEventListener('input',calc); calc(); })();
+    </script>
+  </div>
+  <div class="card">
+    <h3>Wind‑down Breathing</h3>
+    <div id="breathSleepTools"></div>
+    <script>document.addEventListener('DOMContentLoaded',()=>MSCoach.mountBreath('#breathSleepTools',{pattern:[4,0,6,0],minutes:3,title:'In 4 • Out 6'}));</script>
+  </div>
+</div>
+      <div class="card">
+        <h3>Evidence & UK resources</h3>
+        <ul>
+          <li><a href="https://www.nhsinform.scot/illnesses-and-conditions/mental-health/mental-health-self-help-guides/sleep-problems-and-insomnia-self-help-guide/" target="_blank" rel="noopener">NHS Inform — Sleep problems & insomnia guide</a></li><li><a href="https://www.nice.org.uk/guidance/mtg70" target="_blank" rel="noopener">NICE — Sleepio recommended for insomnia (MTG70)</a></li><li><a href="https://www.nhs.uk/mental-health/talking-therapies-medicine-treatments/talking-therapies-and-counselling/cognitive-behavioural-therapy-cbt/" target="_blank" rel="noopener">NHS — CBT (overview)</a></li><li><a href="https://remedy.bnssg.icb.nhs.uk/adults/sleep-medicine/insomnia/" target="_blank" rel="noopener">BNSSG ICB — Insomnia: CBT‑i overview</a></li>
+        </ul>
+
+      <div class="actions" style="margin-top:10px">
+        <button class="btn btn-success" id="resPdf_sleep" type="button">Download: Sleep Tools — Resources (PDF)</button>
+      </div>
+      <script>
+        (function(){
+          const btn = document.getElementById('resPdf_sleep');
+          if(!btn) return;
+          btn.addEventListener('click', function(){
+            MSCoach.downloadLinksPdf('Sleep Tools — Resources', window.__RES__ && window.__RES__['sleep'] ? window.__RES__['sleep'] : []);
+          });
+        })();
+      </script>
+
+      </div>
+      <script src="res.manifest.js"></script>
+
+        <div class="card">
+          <h3>Emergency & urgent help (UK)</h3>
+          <p class="muted">
+            If you are at immediate risk of harming yourself or someone else, call <strong>999</strong> or go to A&amp;E.
+            For urgent mental health support call <strong>NHS 111</strong> (select the mental health option).
+            You can talk 24/7 to <strong>Samaritans on 116 123</strong> (free). This site is educational and is <em>not</em> medical advice.
+          </p>
+        </div>
+      </main>
+
+<script src="app.js"></script>
+<script src="coach.js"></script>
+<script src="assets/js/ux-fixes.js"></script>
+<script src="assets/js/paylinks.js"></script>
+<script src="assets/js/site-core.js"></script>
+<script src="assets/js/a11y-fix.js"></script>
+<script src="assets/js/start-fix.js"></script><script src="assets/js/nav-core.js"></script>
+<script src="assets/js/sound-kit.js"></script>
+<script src="assets/js/core/nav-autofix.js"></script>
+<script src="assets/js/core/nav-core.js"></script>
+<script src="assets/js/core/sound-kit.js"></script>
+<script src="assets/header/header.js"></script>
+
+  <script defer src="assets/js/nav-unified.js"></script>
+  <script defer src="assets/js/voice-coach-pro.js"></script>
+  <script defer src="voice-coach-fix.js"></script>
+
+<script defer src="assets/js/voice-coach-draggable.js"></script>
+<script defer src="assets/js/hide-static-voicecoach.js"></script>
+
+
+
+
+<script defer src="assets/js/mobile-nav-final.js"></script>
+<script defer src="assets/js/footer-explore.js"></script>
+
+
+<footer id="footer2025" class="footer-2025 mpl-footer-v3">
+    <div class="mpl-footer-wrap">
+      <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
+        <section class="col brand">
+          <div class="brandline"> <span class="logo" aria-hidden="true">M</span>
+            <div><b>M Share</b>
+              <div class="muted">Quiet, practical tools for mental health and wellbeing.</div>
+            </div>
+          </div>
+          <div class="mpl-pay" aria-label="Support links"> <a class="pay-link" href="coffee.html" target="_blank"
+              rel="noopener">Support Us</a> <a class="pay-link" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00"
+              target="_blank" rel="noopener">☕ Support Us</a> </div>
+        </section>
+        <section class="col center"> <!-- Theme Explorer (center) -->
+          <div id="mpl-theme-slot" aria-label="Theme controls"></div>
+        </section>
+        <section class="col right"> <!-- Explore menu (chevrons) -->
+          <nav class="mpl-footer-explore" aria-label="Explore">
+            <h4>Explore</h4>
+            <div id="mpl-footer-explore"></div>
+          </nav>
+        </section>
+      </div>
+      <div class="bottom">
+        <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+        <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+      </div>
+    </div>
+    <script>(function () { var y = document.getElementById('yearFooter'); if (y) y.textContent = (new Date).getFullYear(); })();</script>
+  </footer>
+</body>
+</html>

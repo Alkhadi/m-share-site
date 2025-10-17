@@ -1,0 +1,18 @@
+/* Readability defaults:
+   - Default body text black for contrast on light sections
+   - Buttons and chips: white text
+   - Common "colored" sections: white text
+*/
+html, body { color: #111; }
+main, section, article, .container, .card { color: #111; }
+
+/* Buttons and chips as white text */
+.btn, button.btn, button, a.btn, .badge, .chip { color: #fff !important; }
+
+/* Common colored sections (override to white text) */
+.hero, .banner, .oncolor, .on-color, .section.oncolor, .section.on-color,
+[class*="bg-"], [data-colored], .card.dark, .section.dark, .sheet-card.dark { color: #fff !important; }
+
+/* Ensure links inside dark/colored sections are readable */
+.hero a, .banner a, .oncolor a, .on-color a, [class*="bg-"] a, [data-colored] a { color: #fff; }
+.hero a:focus, .banner a:focus, .oncolor a:focus, .on-color a:focus { outline: 2px solid #fff; outline-offset: 2px; }

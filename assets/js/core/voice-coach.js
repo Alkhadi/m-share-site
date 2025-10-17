@@ -1,81 +1,10 @@
-(()=>{
-  // Guard against multiple initialisations
-  if (window.__VOICE_COACH__) return;
-  window.__VOICE_COACH__ = true;
-  const S = 'vc_on', G = 'vc_gender', V = 'vc_voice', R = 'vc_rate';
-  // Load persisted preferences
-  let on = (localStorage.getItem(S) || 'on') !== 'off';
-  let gender = localStorage.getItem(G) || 'any';
-  let pick = localStorage.getItem(V) || '';
-  let rate = parseFloat(localStorage.getItem(R) || '1') || 1;
-  // Create floating UI
-  const ui = document.createElement('div');
-  ui.className = 'voice-coach';
-  ui.innerHTML = '<h4>Voice Coach</h4>' +
-    '<div class="row"><label style="display:flex;gap:6px;align-items:center"><input id="vcOn" type="checkbox"> On</label></div>' +
-    '<div class="row"><select id="vcGender"><option value="any">Any</option><option value="female">Female</option><option value="male">Male</option></select></div>' +
-    '<div class="row"><select id="vcVoice"></select></div>' +
-    '<div class="row"><label>Speed</label><input id="vcRate" type="range" min="0.7" max="1.3" step="0.05"></div>';
-  document.body.appendChild(ui);
-  const onEl = ui.querySelector('#vcOn');
-  const gEl  = ui.querySelector('#vcGender');
-  const vEl  = ui.querySelector('#vcVoice');
-  const rEl  = ui.querySelector('#vcRate');
-  onEl.checked = on;
-  gEl.value    = gender;
-  rEl.value    = String(rate);
-  // Populate available voices based on gender preference
-  function listVoices() {
-    if (typeof speechSynthesis === 'undefined') return;
-    const all = speechSynthesis.getVoices();
-    const uk  = all.filter(v => /en-GB/i.test(v.lang || v.name));
-    const females = uk.filter(v => /(Female|Femail|Siri|Martha|Kate|Alice|Fiona|Victoria)/i.test(v.name)).slice(0, 5);
-    const males   = uk.filter(v => /(Male|Daniel|Tom|Oliver|Alex|Arthur|George|James|Brian)/i.test(v.name)).slice(0, 5);
-    let pool = [];
-    if (gender === 'female') pool = females.length ? females : uk;
-    else if (gender === 'male') pool = males.length ? males : uk;
-    else pool = uk.length ? uk : all;
-    vEl.innerHTML = '';
-    pool.forEach(v => {
-      const o = document.createElement('option');
-      o.value = v.name;
-      o.textContent = `${v.name} (${v.lang})`;
-      vEl.appendChild(o);
-    });
-    if (pick) {
-      const f = Array.from(vEl.options).find(o => o.value === pick);
-      if (f) vEl.value = pick;
-      else pick = vEl.value;
-    } else {
-      pick = vEl.value;
-    }
-  }
-  // Initialize voices list when available
-  if (typeof speechSynthesis !== 'undefined') {
-    speechSynthesis.onvoiceschanged = listVoices;
-    listVoices();
-  }
-  // Save preferences when toggles change
-  onEl.addEventListener('change', () => {
-    on = onEl.checked;
-    try {
-      localStorage.setItem(S, on ? 'on' : 'off');
-    } catch {}
-    if (!on && typeof speechSynthesis !== 'undefined') {
-      try { speechSynthesis.cancel(); } catch {}
-    }
-  });
-  gEl.addEventListener('change', () => {
-    gender = gEl.value;
-    try { localStorage.setItem(G, gender); } catch {}
-    listVoices();
-  });
-  vEl.addEventListener('change', () => {
-    pick = vEl.value;
-    try { localStorage.setItem(V, pick); } catch {}
-  });
-  rEl.addEventListener('input', () => {
-    rate = parseFloat(rEl.value || '1') || 1;
-    try { localStorage.setItem(R, String(rate)); } catch {}
-  });
-})();
+(()=>{if(window.__VOICE__)return;window.__VOICE__=true;const VC={on:false,rate:1,gender:'any',voiceName:'',voices:[],ready:false};function loadVoices(){VC.voices=window.speechSynthesis?window.speechSynthesis.getVoices():[];VC.ready=true;}if(window.speechSynthesis){window.speechSynthesis.onvoiceschanged=loadVoices;loadVoices();}
+function pickVoices(){const all=VC.voices||[];const uk=all.filter(v=>/en-GB|United Kingdom/i.test(v.lang||v.name||''));const males=uk.filter(v=>/male|daniel|george|brian|hugh/i.test((v.name||'')+' '+(v.voiceURI||'')));const females=uk.filter(v=>/female|amy|emma|victoria|susan|samantha|olivia/i.test((v.name||'')+' '+(v.voiceURI||'')));return {males:males.slice(0,5),females:females.slice(0,5),uk,all};}
+function speak(text){if(!VC.on||!window.speechSynthesis||!text)return;const u=new SpeechSynthesisUtterance(text);u.rate=VC.rate||1;let v=null;const sets=pickVoices();const pool=VC.gender==='male'?sets.males:VC.gender==='female'?sets.females:(sets.uk.length?sets.uk:sets.all);if(VC.voiceName){v=(VC.voices||[]).find(x=>x.name===VC.voiceName)||null;}if(!v&&pool&&pool.length)v=pool[0];if(v)u.voice=v;try{speechSynthesis.cancel();speechSynthesis.speak(u);}catch{}}
+function observePhases(){['.phase','#phase'].forEach(s=>{document.querySelectorAll(s).forEach(el=>{const mo=new MutationObserver(()=>{const t=(el.textContent||'').trim();if(t)speak(t);});mo.observe(el,{childList:true,characterData:true,subtree:true});});});}
+function injectUI(){if(document.getElementById('vcPanel'))return;const wrap=document.createElement('div');wrap.id='vcPanel';wrap.style.cssText='position:fixed;right:14px;bottom:14px;background:rgba(10,14,26,.9);color:#e5e7eb;border:1px solid #1f2937;border-radius:14px;box-shadow:0 14px 36px rgba(0,0,0,.4);padding:10px 12px;z-index:1200;display:grid;gap:8px;min-width:240px;font:14px/1.35 system-ui,-apple-system,Segoe UI,Roboto,sans-serif';
+wrap.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><b>Voice Coach</b><label style="display:inline-flex;align-items:center;gap:6px">On <input id="vcToggle" type="checkbox"></label></div><div style="display:grid;gap:8px"><div style="display:flex;gap:8px;align-items:center;justify-content:space-between"><label>Gender</label><select id="vcGender"><option value="any">Any (UK)</option><option value="female">Female</option><option value="male">Male</option></select></div><div style="display:flex;gap:8px;align-items:center;justify-content:space-between"><label>Voice</label><select id="vcVoice"></select></div><div style="display:flex;gap:8px;align-items:center;justify-content:space-between"><label>Speed</label><input id="vcRate" type="range" min="0.7" max="1.3" step="0.05" value="1"></div></div>';
+document.body.appendChild(wrap);const t=wrap.querySelector('#vcToggle');const g=wrap.querySelector('#vcGender');const v=wrap.querySelector('#vcVoice');const rate=wrap.querySelector('#vcRate');
+t.addEventListener('change',()=>{VC.on=t.checked;});g.addEventListener('change',()=>{VC.gender=g.value;populateVoices();});rate.addEventListener('input',()=>{VC.rate=parseFloat(rate.value||'1')||1;});
+function populateVoices(){const sets=pickVoices();const pool=VC.gender==='male'?sets.males:VC.gender==='female'?sets.females:(sets.uk.length?sets.uk:sets.all);v.innerHTML='';pool.forEach(x=>{const o=document.createElement('option');o.value=x.name;o.textContent=x.name;v.appendChild(o);});if(pool.length){VC.voiceName=pool[0].name;v.value=VC.voiceName;}}v.addEventListener('change',()=>{VC.voiceName=v.value||'';});populateVoices();}
+document.addEventListener('DOMContentLoaded',()=>{observePhases();injectUI();});window.VoiceCoach={speak:(t)=>speak(t),set:(o)=>Object.assign(VC,o)};})();

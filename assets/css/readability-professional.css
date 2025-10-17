@@ -1,0 +1,86 @@
+/* Readability & Contrast — M Share (idempotent) */
+:root{
+  --primary:#0f172a;
+  --primary-contrast:#ffffff;
+  --accent:#14b8a6;
+  --accent-contrast:#0b0b10;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --warning:#f59e0b;
+  --info:#2563eb;
+
+  --ink:#ffffff;
+  --ink-muted:#cbd5e1;
+  --ink-strong:#f8fafc;
+  --ink-dark:#0f172a;
+  --ink-black:#111111;
+
+  --surface:#0b0f1c;
+  --surface-2:#0f172a;
+  --surface-light:#ffffff;
+
+  --border-dark:rgba(255,255,255,.14);
+  --border-light:rgba(17,24,39,.14);
+
+  /* Page background can be customized by Theme panel */
+  --page-bg: var(--surface);
+}
+html, body { color: var(--ink, #fff); background: var(--page-bg); }
+h1,h2,h3,h4,h5,h6, p, li, dt, dd, small, strong, em { color: inherit !important; }
+
+/* Light surfaces → black ink */
+.card:not(.dark), .sheet-card:not(.dark), .paper, .surface, .panel,
+.bg-white, .bg-light, .white, .paper-white,
+section.light, .section.light, .card.light,
+.container.light, .content.light,
+[style*="background:#fff"], [style*="background: #fff"], [style*="rgb(255, 255, 255)"], [data-surface="light"] {
+  color: var(--ink-black) !important;
+}
+
+/* Links */
+a { color: #9dd5ff; text-decoration: none; }
+a:hover { color: #ffffff; text-decoration: underline; }
+a:active { color: #7ac1ff; }
+a:visited { color: #b9c7ff; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+/* Buttons base */
+.btn, button, .button, a.btn, input[type="button"], input[type="submit"]{
+  color:#fff !important; background: var(--primary);
+  border:1px solid color-mix(in srgb, var(--primary), #000 20%);
+  transition: background .15s ease, transform .05s ease, box-shadow .15s ease;
+}
+.btn:hover, button:hover, .button:hover, a.btn:hover{
+  background: color-mix(in srgb, var(--primary), #fff 10%);
+}
+.btn:active, button:active, .button:active, a.btn:active{
+  transform: translateY(1px);
+  background: color-mix(in srgb, var(--primary), #000 8%);
+}
+.btn:visited, a.btn:visited{ color:#fff !important; }
+.btn:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+
+/* Variants */
+.btn-success { background: var(--success) !important; color:#fff !important; }
+.btn-danger  { background: var(--danger) !important; color:#fff !important; }
+.btn-warning { background: var(--warning) !important; color:#111 !important; }
+.btn-info    { background: var(--info)    !important; color:#fff !important; }
+.btn-accent  { background: var(--accent)  !important; color: var(--accent-contrast) !important; }
+
+/* Forms */
+label { color: inherit; }
+input, textarea, select {
+  color: inherit;
+  background-color: color-mix(in srgb, currentColor, transparent 94%);
+  border: 1px solid color-mix(in srgb, currentColor, #000 75%);
+}
+input::placeholder, textarea::placeholder { color: color-mix(in srgb, currentColor, #000 65%); }
+
+/* Focus rings */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid currentColor; outline-offset: 2px;
+}
+
+/* Spacing */
+section, .section, .card { margin-bottom: 2% !important; }
+.grid > * { margin-bottom: 2% !important; }

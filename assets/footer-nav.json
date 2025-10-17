@@ -1,0 +1,72 @@
+{
+    "Explore": [
+        {
+            "title": "Conditions",
+            "links": [
+                {
+                    "label": "Anxiety",
+                    "href": "/conditions/anxiety"
+                },
+                {
+                    "label": "Depression",
+                    "href": "/conditions/depression"
+                },
+                {
+                    "label": "Insomnia",
+                    "href": "/conditions/insomnia"
+                }
+            ]
+        },
+        {
+            "title": "Breathing & Focus",
+            "links": [
+                {
+                    "label": "Box Breathing",
+                    "href": "/breathing/box"
+                },
+                {
+                    "label": "4-7-8 Breathing",
+                    "href": "/breathing/478"
+                },
+                {
+                    "label": "Pomodoro",
+                    "href": "/focus/pomodoro"
+                }
+            ]
+        },
+        {
+            "title": "Toolkits",
+            "links": [
+                {
+                    "label": "Grounding",
+                    "href": "/toolkits/grounding"
+                },
+                {
+                    "label": "Journaling",
+                    "href": "/toolkits/journaling"
+                },
+                {
+                    "label": "Sleep",
+                    "href": "/toolkits/sleep"
+                }
+            ]
+        },
+        {
+            "title": "About",
+            "links": [
+                {
+                    "label": "About Us",
+                    "href": "/about"
+                },
+                {
+                    "label": "Privacy",
+                    "href": "/privacy"
+                },
+                {
+                    "label": "Contact",
+                    "href": "/contact"
+                }
+            ]
+        }
+    ]
+}

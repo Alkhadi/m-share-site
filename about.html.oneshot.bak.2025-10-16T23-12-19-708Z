@@ -1,0 +1,565 @@
+<!doctype html>
+<html class="gpt5-typography" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>About • M Share</title>
+  <meta name="description" content="About Alkhadi Koroma and the M Share project." /> <!-- Your styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="assets/css/ux-fixes.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/footer-2025.css" /> <!-- Page-local styles (small, scoped) -->
+  <style>
+    .profile-card {
+      text-align: center;
+      padding: 18px
+    }
+
+    .profile-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255, 255, 255, .9);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .25);
+      margin: 0 auto 10px
+    }
+
+    .profile-name {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin: .2rem 0
+    }
+
+    .profile-title {
+      opacity: .9;
+      margin: .2rem 0 .6rem
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap
+    }
+
+    .profile-actions .btn {
+      min-width: 140px
+    }
+
+    .about-intro {
+      max-width: 78ch;
+      margin: 0 auto
+    }
+  </style> <!-- Navigation visibility/accessibility helpers --> <!-- Footer grid polish (non-intrusive) -->
+  <style id="footer-fix-2025">
+    .footer-2025 .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width:640px) {
+      .footer-2025 .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width:960px) {
+      .footer-2025 .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (min-width:1200px) {
+      .footer-2025 .grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+
+    .footer-2025 .col h4 {
+      margin: 0 0 8px;
+    }
+
+    .footer-2025 .col p {
+      margin: .4rem 0;
+    }
+
+    .footer-2025 nav.pay .btn {
+      display: inline-block;
+      margin: 4px 8px 4px 0;
+    }
+  </style>
+  <style id="mpl-mobile-nav-style-v4">
+    /* Ensure [hidden] truly hides dropdowns in any theme */
+    nav .menu[hidden],
+    nav .submenu[hidden] {
+      display: none !important;
+    }
+
+    /* Small/medium behavior only */
+    @media (max-width: 1024px) {
+
+      /* Collapsible whole nav */
+      #mainNav[hidden] {
+        display: none !important;
+      }
+
+      /* Group baseline */
+      .nav-group,
+      .menu-group {
+        position: relative;
+      }
+
+      /* When marked open, reveal child menu block / list */
+      .nav-group.open>.menu,
+      .menu-group.open>.submenu {
+        display: block;
+      }
+
+      /* Clickable targets (chevrons/toggles) */
+      .nav-group>.menu-toggle,
+      .nav-group>.chevron,
+      .nav-group [data-chevron],
+      .menu-group>.menu-toggle,
+      .menu-group>.chevron,
+      .menu-group [data-chevron] {
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+
+      /* A11y focus rings on triggers */
+      .nav-group>a:focus,
+      .nav-group>button:focus,
+      .nav-group>.menu-toggle:focus,
+      .nav-group>.chevron:focus,
+      .menu-group>a:focus,
+      .menu-group>button:focus,
+      .menu-group>.menu-toggle:focus,
+      .menu-group>.chevron:focus {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+      }
+    }
+
+    /* Hamburger is hidden on desktop */
+    @media (min-width: 1025px) {
+      #navToggle {
+        display: none !important;
+      }
+    }
+  </style>
+  <style id="mpl-desktop-nav-css-v3">
+    /* Desktop-only navigation helpers (visibility + a11y) */
+    @media (min-width:1025px) {
+      .mpl-nav-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: .25rem;
+        background: none;
+        border: 0;
+        padding: .25rem;
+        margin-left: .25rem;
+        cursor: pointer;
+        line-height: 1
+      }
+
+      .mpl-nav-toggle:focus,
+      .mpl-nav-toggle:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px
+      }
+
+      [data-mpl-submenu] {
+        display: none;
+        visibility: hidden
+      }
+
+      [data-mpl-open="true"]>[data-mpl-submenu] {
+        display: block;
+        visibility: visible
+      }
+
+      .mpl-chevron {
+        display: inline-block;
+        transform: rotate(0deg);
+        transition: transform .2s ease
+      }
+
+      [data-mpl-open="true"] .mpl-chevron {
+        transform: rotate(180deg)
+      }
+
+      .mpl-sr-only {
+        position: absolute !important;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0
+      }
+    }
+  </style>
+  <script
+    id="mpl-desktop-nav-js-v3"> /* Desktop submenu behavior — hover or click, one open, ESC/Outside close, a11y */ (() => {
+        const mq = window.matchMedia('(min-width:1025px)'); let enabled = false; let cleanups = []; const q = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel)); function findSubmenu(el) { return el.querySelector(':scope > .submenu, :scope > [role="menu"], :scope > ul, :scope > .dropdown-menu, :scope > ol'); } function findTopNavGroups() { const navs = q('header nav, nav[role="navigation"], nav.primary, .navbar nav, nav'); const groups = new Set(); navs.forEach(nav => { const topChildren = []; const ul = nav.querySelector(':scope > ul'); if (ul) topChildren.push(...Array.from(ul.children)); else topChildren.push(...Array.from(nav.children)); topChildren.forEach(node => { const sub = findSubmenu(node); if (sub) groups.add(node); }); }); return Array.from(groups); } function closeAll(except) { q('[data-mpl-open="true"]').forEach(g => { if (except && g === except) return; g.setAttribute('data-mpl-open', 'false'); const t = g.querySelector(':scope > .mpl-nav-toggle'); if (t) t.setAttribute('aria-expanded', 'false'); }); } function enhance() {
+          if (enabled) return; enabled = true; const groups = findTopNavGroups(); if (!groups.length) return; groups.forEach(group => {
+            const submenu = findSubmenu(group); if (!submenu) return; submenu.setAttribute('data-mpl-submenu', 'true'); group.setAttribute('data-mpl-nav-group', 'true'); if (!group.hasAttribute('data-mpl-open')) group.setAttribute('data-mpl-open', 'false'); // Label is the first focusable/control on the group (but outside submenu) let label = group.querySelector(':scope > a, :scope > button, :scope > [role="button"], :scope > .label, :scope > .menu-label'); if (!label) label = group.firstElementChild; // Toggle button (desktop-only) let toggle = group.querySelector(':scope > .mpl-nav-toggle'); if (!toggle) { toggle = document.createElement('button'); toggle.type = 'button'; toggle.className = 'mpl-nav-toggle'; toggle.setAttribute('aria-haspopup','menu'); toggle.setAttribute('aria-expanded','false'); toggle.setAttribute('title','Toggle submenu'); toggle.innerHTML = '<span class="mpl-chevron" aria-hidden="true">▾</span><span class="mpl-sr-only">Toggle submenu</span>'; if (label && label.nextSibling) group.insertBefore(toggle, label.nextSibling); else group.appendChild(toggle); } const open = () => { if (!mq.matches) return; closeAll(group); group.setAttribute('data-mpl-open','true'); toggle.setAttribute('aria-expanded','true'); }; const close = () => { if (!mq.matches) return; group.setAttribute('data-mpl-open','false'); toggle.setAttribute('aria-expanded','false'); }; const onEnter = () => open(); const onLeave = (e) => { // close only when leaving group entirely const rel = e.relatedTarget; if (rel && group.contains(rel)) return; close(); }; const onToggle = (e) => { if (!mq.matches) return; e.preventDefault(); const isOpen = group.getAttribute('data-mpl-open') === 'true'; if (isOpen) close(); else open(); }; const onKeys = (e) => { if (!mq.matches) return; if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(e); } else if (e.key === 'Escape') { e.preventDefault(); close(); toggle.focus(); } }; group.addEventListener('mouseenter', onEnter); group.addEventListener('mouseleave', onLeave); toggle.addEventListener('click', onToggle); toggle.addEventListener('keydown', onKeys); cleanups.push(()=> { group.removeEventListener('mouseenter', onEnter); group.removeEventListener('mouseleave', onLeave); toggle.removeEventListener('click', onToggle); toggle.removeEventListener('keydown', onKeys); }); }); const onDocClick = (e) => { if (!mq.matches) return; const openEl = document.querySelector('[data-mpl-open="true"]'); if (!openEl) return; if (openEl.contains(e.target)) return; openEl.setAttribute('data-mpl-open','false'); const t = openEl.querySelector(':scope > .mpl-nav-toggle'); if (t) t.setAttribute('aria-expanded','false'); }; const onDocEsc = (e) => { if (!mq.matches) return; if (e.key === 'Escape') { const openEl = document.querySelector('[data-mpl-open="true"]'); if (!openEl) return; openEl.setAttribute('data-mpl-open','false'); const t = openEl.querySelector(':scope > .mpl-nav-toggle'); if (t) { t.setAttribute('aria-expanded','false'); t.focus(); } } }; document.addEventListener('click', onDocClick); document.addEventListener('keydown', onDocEsc); cleanups.push(()=>{ document.removeEventListener('click', onDocClick); document.removeEventListener('keydown', onDocEsc); }); } function teardown(){ if (!enabled) return; closeAll(); cleanups.forEach(fn => { try { fn(); } catch(_){} }); cleanups = []; enabled = false; } const react = () => { mq.matches ? enhance() : teardown(); }; if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', react); else react(); mq.addEventListener('change', react); })(); </script>
+  <style id="mpl-footer-css-v3">
+    /* Scoped footer styles (safe, minimal) */
+    #footer2025.mpl-footer-v3 {
+      border-top: 1px solid var(--b, rgba(0, 0, 0, .12));
+      font: inherit
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-footer-wrap {
+      max-width: min(1220px, 96vw);
+      margin: 0 auto;
+      padding: 20px 12px
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      align-items: start
+    }
+
+    #footer2025.mpl-footer-v3 .brandline {
+      display: flex;
+      align-items: center;
+      gap: .65rem
+    }
+
+    #footer2025.mpl-footer-v3 .brandline .logo {
+      display: inline-grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: currentColor;
+      color: #fff;
+      font-weight: 700
+    }
+
+    #footer2025.mpl-footer-v3 .muted {
+      color: var(--muted, #6b7280)
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-pay {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .5rem
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-pay a {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .35rem .55rem;
+      border: 1px solid var(--b, rgba(0, 0, 0, .12));
+      border-radius: .4rem;
+      text-decoration: none
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-pay a:focus {
+      outline: 2px solid currentColor;
+      outline-offset: 2px
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-theme-host details {
+      border: 1px solid var(--b, rgba(0, 0, 0, .12));
+      border-radius: .5rem;
+      padding: .35rem .5rem
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-theme-host summary {
+      cursor: pointer;
+      user-select: none
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-theme-host label {
+      margin-right: .25rem
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-theme-host input {
+      margin: .25rem .5rem .25rem 0
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-footer-explore h4 {
+      margin: 0 0 .25rem 0
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-footer-explore section {
+      margin: .25rem 0
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-footer-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--b, rgba(0, 0, 0, .12));
+      padding: .4rem .6rem;
+      border-radius: .4rem;
+      cursor: pointer
+    }
+
+    #footer2025.mpl-footer-v3 .mpl-footer-toggle:focus {
+      outline: 2px solid currentColor;
+      outline-offset: 2px
+    }
+
+    #footer2025.mpl-footer-v3 [data-mpl-footer-list] {
+      margin: .35rem 0 0 0;
+      padding-left: 1rem
+    }
+
+    #footer2025.mpl-footer-v3 [data-mpl-footer-list] li {
+      margin: .2rem 0
+    }
+
+    #footer2025.mpl-footer-v3 .bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--b, rgba(0, 0, 0, .12))
+    }
+
+    @media (max-width:900px) {
+      #footer2025.mpl-footer-v3 .mpl-footer-grid {
+        grid-template-columns: 1fr
+      }
+
+      #footer2025.mpl-footer-v3 .bottom {
+        flex-direction: column
+      }
+    }
+  </style>
+  <style id="mpl-theme-vars-css-v3">
+    :root {
+      --bg: #f7f7fb;
+      --fg: #111111;
+      --muted: #6b7280;
+      --b: rgba(0, 0, 0, .12);
+      --brightness: 1;
+      color-scheme: light dark;
+    }
+
+    html {
+      background: var(--bg);
+      color: var(--fg);
+      filter: brightness(var(--brightness));
+    }
+
+    body {
+      background: transparent
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/chatgpt5-typography.css">
+      <link rel="stylesheet" href="assets/css/nav-contrast-fix.css">
+  <link rel="stylesheet" href="assets/css/readability-contrast.css">
+  <link rel="stylesheet" href="assets/css/readability-professional.css">
+</head>
+
+<body> <!-- HEADER (mirrors live site structure) -->
+  <header class="site-header">
+    <div class="container navbar">
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> <span
+          class="brand-text">M Share</span></a>
+
+      <nav class="main-nav" id="mainNav">
+        <a data-href="index.html">Wellbeing</a>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Neurodevelopmental</div>
+            <a data-href="autism.html">Autism</a>
+            <a data-href="adhd.html">ADHD</a>
+            <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+            <div class="menu-label">Mental Health</div>
+            <a data-href="anxiety.html">Anxiety</a>
+            <a data-href="depression.html">Depression</a>
+            <a data-href="stress.html">Stress</a>
+            <a data-href="sleep.html">Sleep</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Guides</div>
+            <a data-href="breath.html">Breath (how-to)</a>
+            <a data-href="focus.html">Focus</a>
+            <a data-href="mindfulness.html">Mindfulness</a>
+            <div class="menu-label">Techniques</div>
+            <a data-href="sos-60.html">60-second Reset</a>
+            <a data-href="box-breathing.html">Box Breathing</a>
+            <a data-href="4-7-8-breathing.html">4-7-8 Breathing</a>
+            <a data-href="coherent-5-5.html">Coherent 5-5</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">General</div>
+            <a data-href="sleep-tools.html">Sleep Tools</a>
+            <a data-href="breath-tools.html">Breath Tools</a>
+            <a data-href="mood-tools.html">Mood Tools</a>
+            <div class="menu-label">Condition-specific</div>
+            <a data-href="adhd-tools.html">ADHD Tools</a>
+            <a data-href="autism-tools.html">Autism Tools</a>
+            <a data-href="depression-tools.html">Depression Tools</a>
+            <a data-href="anxiety-tools.html">Anxiety Tools</a>
+            <a data-href="stress-tools.html">Stress Tools</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+          <div class="submenu">
+            <a data-href="about.html">About</a>
+            <a data-href="coffee.html">Support Us</a>
+            <a data-href="contact.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header> <!-- MAIN content (unchanged) -->
+  <main class="container">
+    <div class="card about-intro" data-excerpt="5">
+      <h1>About</h1>
+      <p>Hello, I’m Alkhadi Koroma, London‑based and proudly dyslexic. Growing up as one of fifteen children, I wrestled
+        with words but fell in love with problem‑solving. These tools—colour overlays, chunked reading drills, paced
+        breathing, focus timers, and gentle reminders—helped me graduate and become the first in my family to earn a
+        Computer Science degree. I built M Share to pass that lifeline to every neurodivergent learner—and to parents
+        seeking understanding and calm—to help us co‑exist. If this space helps you breathe easier, learn faster, or
+        feel seen, please tap “Support Us.” Your support funds new features, guides, and access.</p>
+      <details>
+        <summary>Read more</summary>
+        <div style="margin-top:8px">
+          <p>I live in Southwark, London, where double‑decker buses hum like metronomes and the Thames reminds you to
+            keep moving. For years, my days started early—coding in the quiet, building small tools I needed myself—then
+            driving private hire across the city, picking up stories from people heading to interviews, hospitals,
+            schools, and first dates. Dyslexia shaped my routes as surely as any sat‑nav: I take the road that gives me
+            time to think, the one with cleaner signage, the one that lets me rehearse a conversation twice before I say
+            a word. M Share began as a folder of these hacks—little bridges over noisy gaps in attention and
+            memory—because I believed what carried me could carry others, too.</p>
+          <p>At school I learned to measure progress in breaths, not pages. Breathing tools became my first lifeline:
+            four seconds in, six out, repeated until the letters stopped shaking. When revision turned to fog, I used
+            colour overlays and the screen settled down. Chunked reading taught me to trust small wins—three lines, then
+            a break; one paragraph, then a note to future me. I wrote scripts that nudged me kindly: “Stand, breathe,
+            blink, sip water.” The first time those prompts ran on my phone, I cried—not because the code was clever,
+            but because the compassion was. M Share is the public version of that private kindness.</p>
+          <p>University was a landslide and a lighthouse at once. Lectures moved fast; assignment briefs felt like
+            riddles dropped in a storm. But the tools worked. A dyslexia trainer I prototyped made words behave: spacing
+            widened, backgrounds shifted to a calmer blue, and exercises gamified the practice of decoding shape before
+            sound. A focus timer turned ninety minutes into a train of gentle stops—work, pause, breathe, repeat—until
+            the track ran out exactly at submission. On the day I graduated—first in a family of fifteen to hold a
+            Computer Science degree—I recognised the real certificate was a mindset: there are many legitimate ways to
+            learn, and each deserves an app that meets it halfway.</p>
+          <p>That belief is why M Share is both toolbox and table. Toolbox, because you will find practical,
+            low‑friction helpers: breathing sequences that open on a tap; reading modes that shift contrast and spacing
+            instantly; a mood page that treats emotions like weather—real, passing, and worthy of a forecast; gentle
+            reminders that respect dignity. Table, because community matters: parents can sit beside their
+            neurodivergent children and try settings together; teachers can borrow templates for accessible handouts;
+            students can share what actually works at 2 a.m. before a deadline. I built the interface to be quiet,
+            roomy, and forgiving—the way I wish every classroom had felt.</p>
+          <p>London taught me another lesson: synergy. The city only functions because millions of differences
+            coordinate. Neurodivergence is not a malfunction; it is a different form of coordination. When we tune the
+            environment—fonts, colours, timing, feedback—the person doesn’t change; the world meets them where they are.
+            M Share, in its best moments, is a tuning fork. Switch to the dyslexia‑friendly overlay, and your eyes
+            exhale. Start the paced‑breathing guide, and your mind re‑enters the room. Use the chunked‑reading trainer,
+            and paragraphs become stepping stones instead of waves. I cannot promise miracles, but I can promise craft,
+            iteration, and a listening ear.</p>
+          <p>Your support does concrete things. A coffee funds hosting, accessibility audits, and the small design
+            details that make the difference between “usable” and “I can finally do this.” It pays for expert
+            consultations so I can translate best practice into friendly defaults. It turns ideas into features: a
+            parent view with plain‑language guides; printable worksheets that mirror the on‑screen trainers; an offline
+            mode for low‑connectivity households; gentle analytics that help you see which settings helped most. I test
+            every addition with one question: would this have helped teenage me finish that page without shame?</p>
+          <p>I also need your feedback. Tell me what feels clumsy, what took too many taps, what wording made you
+            hesitate. Request features shamelessly. If you’re a parent, say which parts helped you understand your
+            child’s day. If you’re a student, describe the moment something clicked. If you’re a teacher or therapist,
+            lend the phrases you use when you explain dyslexia to a nervous family—I will bake them into the product.
+            This is a living project; your notes are blueprints.</p>
+          <p>Most nights, after a late shift, I still open the builder and refine a corner: a focus ring brighter here,
+            a label kinder there. I do it because I remember the library desk where I nearly gave up, and the bus ride
+            where a stranger said, “Try changing the background—you’ll be surprised.” They were right. If M Share
+            surprises you into a calmer breath, a completed paragraph, a kinder day, then it is working. If it earns
+            your trust, please tap Support Us. You will help me help the next person breathe, read, finish, and feel
+            seen.</p>
+        </div>
+      </details>
+    </div>
+    <div class="card profile-card"> <img class="profile-photo" src="assets/alkhadi.png"
+        alt="Profile photo of Alkhadi Koroma" />
+      <div class="profile-name">Alkhadi Koroma</div>
+      <div class="profile-title">Professional Title · Flutter Developer</div>
+      <div class="profile-actions"> <a id="callMe" class="btn" href="tel:07736806367">📞 Call</a> <a id="mailMe"
+          class="btn" href="mailto:info@mindpaylink.com">✉️ Email</a> <a id="toSite" class="btn"
+          href="https://mindpaylink.com" target="_blank" rel="noopener">🌐 Website</a> <button id="downloadProfilePdf"
+          class="btn">⬇ Download Profile PDF</button> </div>
+    </div>
+  </main> <!-- FOOTER (layout fixed; full site links; payments kept) --> <!-- Your scripts -->
+  <script src="app.js"></script>
+  <script src="assets/js/paylinks.js"></script>
+  <script src="assets/js/ux-fixes.js"></script>
+  <script src="assets/js/site-core.js"></script> <!-- Small, robust nav controller (desktop + mobile) -->
+  <!-- Small utility: wire profile buttons if globals are present -->
+  <script> (function () { var M = window.__MSHARE__ || {}; var d = M.data || { name: 'Alkhadi Koroma', title: 'Professional Title · Flutter Developer', phone: '07736806367', email: 'info@mindpaylink.com', site: 'https://mindpaylink.com' }; var c = document.getElementById('callMe'); if (c && d.phone) c.href = 'tel:' + d.phone; var m = document.getElementById('mailMe'); if (m && d.email) m.href = 'mailto:' + d.email; var s = document.getElementById('toSite'); if (s && d.site) s.href = d.site; var pdf = document.getElementById('downloadProfilePdf'); if (pdf && window.__MSHARE__ && window.__MSHARE__.quickDownloadPdf) { pdf.addEventListener('click', function () { window.__MSHARE__.quickDownloadPdf(); }); } })(); </script>
+  
+  
+  
+  <script defer src="assets/js/voice-coach-draggable.js"></script>
+  <script defer src="assets/js/hide-static-voicecoach.js"></script>
+  
+  
+
+
+<script defer src="assets/js/mobile-nav-final.js"></script>
+<script defer src="assets/js/footer-explore.js"></script>
+
+
+
+<footer id="footer2025" class="footer-2025 mpl-footer-v3">
+    <div class="mpl-footer-wrap">
+      <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
+        <section class="col brand">
+          <div class="brandline"> <span class="logo" aria-hidden="true">M</span>
+            <div><b>M Share</b>
+              <div class="muted">Quiet, practical tools for mental health and wellbeing.</div>
+            </div>
+          </div>
+          <div class="mpl-pay" aria-label="Support links"> <a class="pay-link" href="coffee.html" target="_blank"
+              rel="noopener">Support Us</a> <a class="pay-link" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00"
+              target="_blank" rel="noopener">☕ Support Us</a> </div>
+        </section>
+        <section class="col center"> <!-- Theme Explorer (center) -->
+          <div id="mpl-theme-slot" aria-label="Theme controls"></div>
+        </section>
+        <section class="col right"> <!-- Explore menu (chevrons) -->
+          <nav class="mpl-footer-explore" aria-label="Explore">
+            <h4>Explore</h4>
+            <div id="mpl-footer-explore"></div>
+          </nav>
+        </section>
+      </div>
+      <div class="bottom">
+        <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+        <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+      </div>
+    </div>
+    <script>(function () { var y = document.getElementById('yearFooter'); if (y) y.textContent = (new Date).getFullYear(); })();</script>
+  </footer>
+</body>
+</html>

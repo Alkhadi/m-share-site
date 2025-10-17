@@ -32,100 +32,18 @@
     list.forEach(v => { const sc = score(v); if (sc > bestScore) { best = v; bestScore = sc; } });
     return best;
   }
-  /**
-   * Speak text using the Web Speech API. Uses optional overrides and
-   * stored preferences from the voice coach UI (localStorage keys vc_on,
-   * vc_gender, vc_voice, vc_rate). If speech synthesis is unavailable
-   * or disabled, this function simply returns without error.
-   *
-   * @param {string} text The text to speak.
-   * @param {Object} [opts] Optional overrides for voice, gender, rate or pitch.
-   */
-  function speak(text, opts) {
+  function speak(text, {rate=1, pitch=1} = {}){
+    if (typeof speechSynthesis === 'undefined') return;
     try {
-      // Guard: no text or speech synthesis available
-      if (!text || typeof speechSynthesis === 'undefined' || typeof SpeechSynthesisUtterance === 'undefined') {
-        return;
-      }
-      const t = String(text).trim();
-      if (!t) return;
-      opts = opts || {};
-      // Check global on/off flag from voice coach UI
-      let vcOn = 'on';
-      try {
-        const stored = localStorage.getItem('vc_on');
-        if (stored) vcOn = stored;
-      } catch (e) {
-        // ignore
-      }
-      if (vcOn === 'off') return;
-      const utter = new SpeechSynthesisUtterance(t);
-      const voices = speechSynthesis.getVoices ? speechSynthesis.getVoices() : [];
-      // Determine preferred voice name and gender from options or localStorage
-      let gender = opts.gender || null;
-      let voiceName = opts.voice || null;
-      let rate = opts.rate;
-      try {
-        if (!gender) {
-          const g = localStorage.getItem('vc_gender');
-          if (g) gender = g;
-        }
-      } catch (e) {}
-      try {
-        if (!voiceName) {
-          const n = localStorage.getItem('vc_voice');
-          if (n) voiceName = n;
-        }
-      } catch (e) {}
-      try {
-        if (!rate) {
-          const r = parseFloat(localStorage.getItem('vc_rate'));
-          if (!isNaN(r) && r > 0) rate = r;
-        }
-      } catch (e) {}
-      if (!rate) rate = 1;
-      let selected = null;
-      // Try to match exact voice name
-      if (voiceName && voices.length) {
-        selected = voices.find(v => v.name === voiceName);
-      }
-      // Otherwise pick based on gender and language
-      if (!selected && voices.length) {
-        // Filter voices to English variants
-        let pool = voices.filter(v => /en/i.test(v.lang));
-        if (gender && gender !== 'any') {
-          const g = gender.toLowerCase();
-          pool = pool.filter(v => {
-            const n = (v.name || '').toLowerCase();
-            if (g === 'male') {
-              return !/female/.test(n);
-            }
-            if (g === 'female') {
-              return !/male/.test(n);
-            }
-            return true;
-          });
-        }
-        if (pool.length) {
-          selected = pool[0];
-        } else {
-          selected = voices[0];
-        }
-      }
-      if (selected) utter.voice = selected;
-      utter.rate = rate;
-      utter.pitch = (opts.pitch !== undefined ? opts.pitch : 1);
-      try {
-        speechSynthesis.cancel();
-        speechSynthesis.speak(utter);
-      } catch (e) {
-        // ignore errors
-      }
-    } catch (e) {
-      // swallow all other errors
-    }
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      const want = getVoicePref();
+      const v = pickVoice(want);
+      if (v) u.voice = v;
+      u.rate = rate; u.pitch = pitch;
+      speechSynthesis.speak(u);
+    } catch {}
   }
-  // Expose helpers
   Coach.speak = speak;
   Coach.getVoicePref = getVoicePref;
   Coach.setVoicePref = setVoicePref;

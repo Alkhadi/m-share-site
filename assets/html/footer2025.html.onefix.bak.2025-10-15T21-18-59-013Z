@@ -1,0 +1,234 @@
+<!doctype html>
+<head>
+    <link rel="stylesheet" href="assets/css/footer-2025.css">
+              <link rel="stylesheet" href="assets/css/mobile-nav-final.css">
+</head>
+<!doctype html>
+<!doctype html>
+<!doctype html>
+<link rel="stylesheet" href="assets/css/chatgpt5-typography.css">
+
+  <link rel="stylesheet" href="../css/nav-unified.css">
+  <link rel="stylesheet" href="../css/voice-coach-pro.css">
+  <script defer src="../js/nav-unified.js"></script>
+  <script defer src="../js/voice-coach-pro.js"></script>
+
+<style id="mpl-vc-drag-css-v3">
+/* Voice Coach draggable panel + pin/unpin (desktop & mobile) */
+[data-mpl-vc]{position:fixed;z-index:2147483646;max-width:min(90vw,480px)}
+#mpl-vc-handle{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.5rem .75rem;font-weight:600;cursor:move;user-select:none}
+#mpl-vc-handle:focus,#mpl-vc-handle:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+#mpl-vc-pin{border:1px solid currentColor;background:transparent;padding:.25rem .5rem;border-radius:.25rem;cursor:pointer}
+#mpl-vc-pin:focus,#mpl-vc-pin:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+[data-mpl-vc][data-pinned="true"] #mpl-vc-handle{cursor:default;opacity:.95}
+.mpl-vc-hidden{display:none!important}
+</style>
+
+<script id="mpl-vc-drag-js-v3">
+/* Voice Coach panel: add handle, drag/pin with persistence (mpl.vc.pref.v1) */
+(() => {
+  const KEY='mpl.vc.pref.v1';
+  const sel = '#voiceCoachPanel, #voiceCoach, #vcPanel, .voice-coach, #vc-focus-panel';
+  const panel = document.querySelector(sel);
+  if (!panel) return;
+
+  try {
+    panel.setAttribute('data-mpl-vc','');
+    panel.style.touchAction = 'none';
+
+    // Insert handle if missing
+    let handle = panel.querySelector('#mpl-vc-handle');
+    if (!handle) {
+      handle = document.createElement('div');
+      handle.id = 'mpl-vc-handle';
+      handle.tabIndex = 0;
+      handle.setAttribute('role','toolbar');
+      const title = document.createElement('span');
+      title.textContent = 'Voice Coach';
+      const pin = document.createElement('button');
+      pin.id = 'mpl-vc-pin';
+      pin.type = 'button';
+      pin.setAttribute('aria-pressed','false');
+      pin.textContent = 'Pin';
+      handle.appendChild(title);
+      handle.appendChild(pin);
+      panel.prepend(handle);
+    }
+    const pinBtn = handle.querySelector('#mpl-vc-pin');
+
+    // Load / apply state
+    const state = (() => {
+      try { return Object.assign({x: null, y: null, pinned: false}, JSON.parse(localStorage.getItem(KEY) || '{}')); }
+      catch { return {x:null,y:null,pinned:false}; }
+    })();
+
+    function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(_){} }
+
+    function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+
+    function applyPosition(){
+      const vw = window.innerWidth, vh = window.innerHeight;
+      const rect = panel.getBoundingClientRect();
+      const w = rect.width || 320, h = rect.height || 180;
+
+      // Defaults: bottom-right 24px
+      let x = state.x ?? (vw - w - 24);
+      let y = state.y ?? (vh - h - 24);
+      x = clamp(x, 8, Math.max(8, vw - w - 8));
+      y = clamp(y, 8, Math.max(8, vh - h - 8));
+
+      // NOTE: avoid backticks inside outer template literal
+      panel.style.left = (x + 'px');
+      panel.style.top  = (y + 'px');
+    }
+
+    function applyPinned(){
+      panel.setAttribute('data-pinned', String(!!state.pinned));
+      pinBtn.setAttribute('aria-pressed', String(!!state.pinned));
+      pinBtn.textContent = state.pinned ? 'Unpin' : 'Pin';
+    }
+
+    applyPosition(); applyPinned();
+    window.addEventListener('resize', applyPosition);
+
+    // Dragging
+    let dragging = false, startX=0, startY=0, originX=0, originY=0;
+
+    const startDrag = (clientX, clientY) => {
+      if (state.pinned) return;
+      dragging = true;
+      const rect = panel.getBoundingClientRect();
+      originX = rect.left; originY = rect.top;
+      startX = clientX; startY = clientY;
+      document.body.style.userSelect = 'none';
+    };
+    const moveDrag = (clientX, clientY) => {
+      if (!dragging) return;
+      const dx = clientX - startX, dy = clientY - startY;
+      state.x = Math.round(originX + dx);
+      state.y = Math.round(originY + dy);
+      applyPosition();
+    };
+    const endDrag = () => {
+      if (!dragging) return;
+      dragging = false;
+      document.body.style.userSelect = '';
+      save();
+    };
+
+    // Mouse
+    handle.addEventListener('mousedown', (e)=>{
+      if (e.target === pinBtn) return; // allow click on pin
+      e.preventDefault();
+      startDrag(e.clientX, e.clientY);
+    });
+    document.addEventListener('mousemove', (e)=> moveDrag(e.clientX, e.clientY));
+    document.addEventListener('mouseup', endDrag);
+
+    // Touch
+    handle.addEventListener('touchstart', (e)=>{
+      if (e.target === pinBtn) return;
+      const t = e.touches[0]; if (!t) return;
+      startDrag(t.clientX, t.clientY);
+    }, {passive:true});
+    document.addEventListener('touchmove', (e)=>{
+      if (!dragging) return;
+      const t = e.touches[0]; if (!t) return;
+      moveDrag(t.clientX, t.clientY);
+    }, {passive:true});
+    document.addEventListener('touchend', endDrag);
+
+    // Keyboard on handle
+    handle.addEventListener('keydown', (e)=>{
+      const step = (e.shiftKey?20:10);
+      if (e.key === 'Enter') { e.preventDefault(); state.pinned = !state.pinned; applyPinned(); save(); }
+      if (state.pinned) return;
+      if (e.key === 'ArrowLeft'){ e.preventDefault(); state.x = (state.x ?? panel.getBoundingClientRect().left) - step; applyPosition(); save(); }
+      if (e.key === 'ArrowRight'){ e.preventDefault(); state.x = (state.x ?? panel.getBoundingClientRect().left) + step; applyPosition(); save(); }
+      if (e.key === 'ArrowUp'){ e.preventDefault(); state.y = (state.y ?? panel.getBoundingClientRect().top) - step; applyPosition(); save(); }
+      if (e.key === 'ArrowDown'){ e.preventDefault(); state.y = (state.y ?? panel.getBoundingClientRect().top) + step; applyPosition(); save(); }
+      if (e.key === 'Escape'){ e.preventDefault(); state.pinned = true; applyPinned(); save(); }
+    });
+
+    // Pin button
+    pinBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      state.pinned = !state.pinned;
+      applyPinned(); save();
+    });
+  } catch (err) {
+    try { panel.classList.add('mpl-vc-hidden'); panel.style.display='none'; } catch(_){}
+  }
+})();
+</script>
+
+<script defer src="assets/js/mobile-nav-final.js"></script>
+<script defer src="assets/js/footer-explore.js"></script>
+<footer id="footer2025" class="footer-2025 mpl-footer-v3">
+    <div class="mpl-footer-wrap">
+      <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
+        <section class="col brand">
+          <div class="brandline"> <span class="logo" aria-hidden="true">M</span>
+            <div><b>M Share</b>
+              <div class="muted">Quiet, practical tools for mental health and wellbeing.</div>
+            </div>
+          </div>
+          <div class="mpl-pay" aria-label="Support links"> <a class="pay-link" href="coffee.html" target="_blank"
+              rel="noopener">Support Us</a> <a class="pay-link" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00"
+              target="_blank" rel="noopener">☕ Support Us</a> </div>
+        </section>
+        <section class="col center"> <!-- Theme Explorer (center) -->
+          <div id="mpl-theme-slot" aria-label="Theme controls"></div>
+        </section>
+        <section class="col right"> <!-- Explore menu (chevrons) -->
+          <nav class="mpl-footer-explore" aria-label="Explore">
+            <h4>Explore</h4>
+            <div id="mpl-footer-explore"></div>
+          </nav>
+        </section>
+      </div>
+      <div class="bottom">
+        <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+        <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+      </div>
+    </div>
+    <script>(function () { var y = document.getElementById('yearFooter'); if (y) y.textContent = (new Date).getFullYear(); })();</script>
+  </footer>
+</body>
+</html>
+<style id="mpl-footer-css-v3">
+/* Scoped footer styles (safe, minimal) */
+#footer2025.mpl-footer-v3{border-top:1px solid var(--b,rgba(0,0,0,.12));font:inherit}
+#footer2025.mpl-footer-v3 .mpl-footer-wrap{max-width:min(1220px,96vw);margin:0 auto;padding:20px 12px}
+#footer2025.mpl-footer-v3 .mpl-footer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:start}
+#footer2025.mpl-footer-v3 .brandline{display:flex;align-items:center;gap:.65rem}
+#footer2025.mpl-footer-v3 .brandline .logo{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:6px;background:currentColor;color:#fff;font-weight:700}
+#footer2025.mpl-footer-v3 .muted{color:var(--muted,#6b7280)}
+#footer2025.mpl-footer-v3 .mpl-pay{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+#footer2025.mpl-footer-v3 .mpl-pay a{display:inline-flex;align-items:center;gap:.35rem;padding:.35rem .55rem;border:1px solid var(--b,rgba(0,0,0,.12));border-radius:.4rem;text-decoration:none}
+#footer2025.mpl-footer-v3 .mpl-pay a:focus{outline:2px solid currentColor;outline-offset:2px}
+#footer2025.mpl-footer-v3 .mpl-theme-host details{border:1px solid var(--b,rgba(0,0,0,.12));border-radius:.5rem;padding:.35rem .5rem}
+#footer2025.mpl-footer-v3 .mpl-theme-host summary{cursor:pointer;user-select:none}
+#footer2025.mpl-footer-v3 .mpl-theme-host label{margin-right:.25rem}
+#footer2025.mpl-footer-v3 .mpl-theme-host input{margin:.25rem .5rem .25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-explore h4{margin:0 0 .25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-explore section{margin:.25rem 0}
+#footer2025.mpl-footer-v3 .mpl-footer-toggle{display:flex;justify-content:space-between;align-items:center;width:100%;background:transparent;border:1px solid var(--b,rgba(0,0,0,.12));padding:.4rem .6rem;border-radius:.4rem;cursor:pointer}
+#footer2025.mpl-footer-v3 .mpl-footer-toggle:focus{outline:2px solid currentColor;outline-offset:2px}
+#footer2025.mpl-footer-v3 [data-mpl-footer-list]{margin:.35rem 0 0 0;padding-left:1rem}
+#footer2025.mpl-footer-v3 [data-mpl-footer-list] li{margin:.2rem 0}
+#footer2025.mpl-footer-v3 .bottom{display:flex;justify-content:space-between;gap:1rem;margin-top:16px;padding-top:12px;border-top:1px solid var(--b,rgba(0,0,0,.12))}
+@media (max-width:900px){
+  #footer2025.mpl-footer-v3 .mpl-footer-grid{grid-template-columns:1fr}
+  #footer2025.mpl-footer-v3 .bottom{flex-direction:column}
+}
+</style>
+
+<style id="mpl-theme-vars-css-v3">
+:root{
+  --bg:#f7f7fb; --fg:#111111; --muted:#6b7280; --b:rgba(0,0,0,.12); --brightness:1;
+  color-scheme: light dark;
+}
+html{background:var(--bg);color:var(--fg);filter:brightness(var(--brightness));}
+body{background:transparent}
+</style>

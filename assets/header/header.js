@@ -1,1 +1,1 @@
-(()=>{const link=document.getElementById('brandLink');link&&link.addEventListener('click',e=>{const href=link.getAttribute('data-href')||link.getAttribute('href');if(href){e.preventDefault();location.href=href;}});})();
+(()=>{if(window.__HDR__)return;window.__HDR__=true;const y=document.getElementById('year');if(y)y.textContent=new Date().getFullYear();})();

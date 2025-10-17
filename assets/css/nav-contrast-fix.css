@@ -1,0 +1,17 @@
+/* Force white text on colored header/nav */
+header.site-header, header.site-header .navbar{ color:#fff; }
+header.site-header .brand, header.site-header .brand .brand-text, header.site-header .logo{ color:#fff !important; }
+header.site-header .main-nav > a,
+header.site-header .main-nav .nav-button,
+header.site-header .main-nav .menu-toggle,
+header.site-header .nav-group > a,
+header.site-header .menu-group > a,
+header.site-header #navToggle { color:#fff !important; }
+header.site-header .menu-label, header.site-header .menu-title { color:#fff !important; }
+header.site-header .main-nav > a:focus,
+header.site-header .nav-button:focus,
+header.site-header .menu-toggle:focus,
+header.site-header #navToggle:focus { outline:2px solid #fff; outline-offset:2px; }
+header.site-header .nav-group .icon, header.site-header .menu-group .icon { color:#fff !important; }
+/* Keep dropdown link color readable; comment next line if your submenu background is light */
+header.site-header .submenu a{ color:#fff; }

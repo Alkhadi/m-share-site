@@ -1,0 +1,30 @@
+/* Mobile nav final — scoped to header.site-header */
+@media (max-width:1024px){
+  header.site-header #mainNav[hidden],
+  header.site-header .menu[hidden],
+  header.site-header .submenu[hidden],
+  header.site-header ul[hidden]{ display:none!important; }
+
+  header.site-header #navToggle,
+  header.site-header .nav-toggle{
+    position:relative; z-index:10010;
+    -webkit-tap-highlight-color:transparent;
+    color:#fff !important;
+  }
+
+  header.site-header .mnav-subwrap{ overflow:hidden; max-height:0; transition:max-height .24s ease; }
+  header.site-header .mnav-subwrap.is-open{ max-height:2000px; }
+
+  header.site-header .mnav-chevron{
+    background:none; border:0; cursor:pointer; padding:.25rem; margin-left:.4rem;
+    display:inline-flex; align-items:center; justify-content:center; line-height:1; color:#fff;
+  }
+  header.site-header .mnav-chevron svg{ width:16px; height:16px; transition:transform .18s ease; }
+  header.site-header .mnav-chevron[aria-expanded="true"] svg{ transform:rotate(180deg); }
+
+  header.site-header .menu-group, header.site-header .nav-group{ display:block; width:100%; }
+  header.site-header nav.main-nav{ background:inherit; padding:.5rem 0; }
+  header.site-header .submenu{ display:block; }
+  header.site-header .submenu[hidden]{ display:none!important; }
+}
+@media (min-width:1025px){ #navToggle{ display:none!important; } }

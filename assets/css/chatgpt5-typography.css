@@ -1,0 +1,43 @@
+/* ChatGPT-style typography (scoped by .gpt5-typography on <html>) */
+html.gpt5-typography, html.gpt5-typography body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, "Noto Sans",
+               "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  color: var(--gpt5-text, #e6e8ec);
+}
+
+/* Responsive type scale (headings & body). Uses clamp to avoid layout shifts. */
+html.gpt5-typography { 
+  --gpt5-text:  #e6e8ec;      /* high-contrast neutral for dark UIs */
+  --gpt5-muted: #a7afbc;      /* secondary text */
+  --gpt5-link:  #8ab4ff;      /* link tint like ChatGPT dark */
+  --step--1: clamp(12px, .83vw, 14px);
+  --step-0:  clamp(14px, 1.00vw, 16px);   /* body */
+  --step-1:  clamp(16px, 1.15vw, 18px);
+  --step-2:  clamp(18px, 1.45vw, 22px);
+  --step-3:  clamp(22px, 1.90vw, 26px);
+  --step-4:  clamp(26px, 2.35vw, 32px);
+}
+
+html.gpt5-typography body { font-size: var(--step-0); line-height: 1.55; }
+html.gpt5-typography p, html.gpt5-typography li { font-size: var(--step-0); }
+html.gpt5-typography small, html.gpt5-typography .muted { 
+  color: var(--gpt5-muted);
+  font-size: var(--step--1);
+}
+html.gpt5-typography a { color: var(--gpt5-link); text-underline-offset: 3px; }
+html.gpt5-typography h1 { font-weight: 700; font-size: var(--step-4); line-height: 1.2; }
+html.gpt5-typography h2 { font-weight: 700; font-size: var(--step-3); line-height: 1.25; }
+html.gpt5-typography h3 { font-weight: 700; font-size: var(--step-2); line-height: 1.3; }
+html.gpt5-typography h4, html.gpt5-typography h5, html.gpt5-typography h6 { 
+  font-weight: 600; font-size: var(--step-1); line-height: 1.35; 
+}
+
+/* Nav text inherits scale/weights without touching layout or background */
+html.gpt5-typography nav, html.gpt5-typography .navbar, html.gpt5-typography .menu, 
+html.gpt5-typography .submenu { font-family: inherit; font-size: var(--step-0); }
+
+/* Do not alter existing backgrounds/borders – text only. */
