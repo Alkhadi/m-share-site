@@ -332,7 +332,7 @@ body{background:transparent}
   <main class="container">
     <div class="card">
       <h1>Measured Breathing. Measurable Relief.</h1>
-      <p class="muted">
+      <p>
         Free, evidence-based breathing & mindfulness techniques designed to reduce stress and anxiety in minutes.
         Track progress and keep a streak. Export a one-page, clickable PDF of my profile to share anywhere.
       </p>
@@ -353,7 +353,7 @@ body{background:transparent}
     <div class="grid cols-3">
       <div class="card">
         <h3>Box Breathing</h3>
-        <p class="muted">Square breathing (inhale–hold–exhale–hold) with equal counts for pressure, resets, and focus.
+        <p>Square breathing (inhale–hold–exhale–hold) with equal counts for pressure, resets, and focus.
         </p>
         <div class="badge">Stress Relief</div>
         <div class="badge">Clarity</div>
@@ -363,7 +363,7 @@ body{background:transparent}
       </div>
       <div class="card">
         <h3>4-7-8 Breathing</h3>
-        <p class="muted">Inhale 4s, hold 7s, exhale 8s. The long exhale cues the relaxation response—great for sleep.
+        <p>Inhale 4s, hold 7s, exhale 8s. The long exhale cues the relaxation response—great for sleep.
         </p>
         <div class="badge">Calm</div>
         <div class="badge">Sleep Aid</div>
@@ -373,7 +373,7 @@ body{background:transparent}
       </div>
       <div class="card">
         <h3>Coherent 5-5</h3>
-        <p class="muted">In 5s, out 5s (≈5–6 BPM). Resonant pace supports HRV stability and autonomic calm.</p>
+        <p>In 5s, out 5s (≈5–6 BPM). Resonant pace supports HRV stability and autonomic calm.</p>
         <div class="badge">HRV</div>
         <div class="badge">Focus</div>
         <div class="badge">Recovery</div>
@@ -395,7 +395,7 @@ body{background:transparent}
 
     <div class="card">
       <h2>Share this site</h2>
-      <p class="muted">Share via link, text, PNG card, or a one-page PDF with active links.</p>
+      <p>Share via link, text, PNG card, or a one-page PDF with active links.</p>
       <div class="actions">
         <button id="shareOpen" class="btn" type="button">🔗 Quick Share</button>
       </div>
@@ -527,7 +527,7 @@ body{background:transparent}
 (() => {
   const KEY='mpl.theme.v2';
   const DAY_START=7, DAY_END=19; // local time
-  const state = (()=>{ try{ return Object.assign({auto:true,color:null,brightness:1}, JSON.parse(localStorage.getItem(KEY)||'{}')); }catch{ return {auto:true,color:null,brightness:1}; }})();
+  const state = (()=>{ try{ return Object.assign({auto:false,color:'#1e293b',brightness:1}, JSON.parse(localStorage.getItem(KEY)||'{}')); }catch{ return {auto:false,color:'#1e293b',brightness:1}; }})();
 
   function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch{} }
   function hexToRgb(hex){ if(!hex) return {r:255,g:255,b:255}; const s=hex.replace('#',''); const v=s.length===3? s.split('').map(c=>c+c).join(''):s; const n=parseInt(v,16); return {r:(n>>16)&255,g:(n>>8)&255,b:n&255}; }
@@ -575,7 +575,7 @@ body{background:transparent}
 
     // Color
     const colorId='mpl-theme-color'; const colorL=document.createElement('label'); colorL.setAttribute('for',colorId); colorL.textContent='Color';
-    const color=document.createElement('input'); color.type='color'; color.id=colorId; color.value=state.color || '#f7f7fb';
+    const color=document.createElement('input'); color.type='color'; color.id=colorId; color.value=state.color || '#1e293b';
 
     // Brightness
     const brId='mpl-theme-brightness'; const brL=document.createElement('label'); brL.setAttribute('for',brId); brL.textContent='Brightness';
@@ -586,7 +586,7 @@ body{background:transparent}
     function reflect(){
       auto.checked=!!state.auto;
       color.disabled=!!state.auto; br.disabled=!!state.auto;
-      if(!state.color) color.value='#f7f7fb';
+      if(!state.color) color.value='#1e293b';
     }
 
     wrap.append(autoL,auto,colorL,color,brL,br,reset);
@@ -597,7 +597,7 @@ body{background:transparent}
     auto.addEventListener('change', ()=>{ state.auto=auto.checked; save(); applyTheme(); reflect(); });
     color.addEventListener('input', ()=>{ if(state.auto) return; state.color=color.value; save(); applyTheme(); });
     br.addEventListener('input', ()=>{ if(state.auto) return; state.brightness=Number(br.value)||1; save(); applyTheme(); });
-    reset.addEventListener('click', ()=>{ state.auto=true; state.color=null; state.brightness=1; save(); applyTheme(); reflect(); });
+    reset.addEventListener('click', ()=>{ state.auto=false; state.color='#1e293b'; state.brightness=1; save(); applyTheme(); reflect(); });
   }
 
   function scheduleMinuteTicks(){

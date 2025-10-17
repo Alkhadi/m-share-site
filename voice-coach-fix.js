@@ -195,6 +195,78 @@
         document.body.textContent;
       if (candidate) VC.speak(candidate, { clear: true });
     });
+
+    // Make panel draggable
+    makeDraggable(panel);
+  }
+
+  // ---------- DRAGGABLE FUNCTIONALITY ----------
+  function makeDraggable(element) {
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    // Create a drag handle (title bar or entire panel)
+    element.style.cursor = 'move';
+    element.style.touchAction = 'none';
+
+    element.addEventListener('mousedown', dragStart);
+    element.addEventListener('touchstart', dragStart);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('touchmove', drag);
+    document.addEventListener('mouseup', dragEnd);
+    document.addEventListener('touchend', dragEnd);
+
+    function dragStart(e) {
+      // Don't start dragging if clicking on interactive elements
+      if (e.target.matches('button, input, select, a, label')) return;
+      
+      if (e.type === 'touchstart') {
+        initialX = e.touches[0].clientX - xOffset;
+        initialY = e.touches[0].clientY - yOffset;
+      } else {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+      }
+
+      if (e.target === element || element.contains(e.target)) {
+        isDragging = true;
+      }
+    }
+
+    function drag(e) {
+      if (!isDragging) return;
+      
+      e.preventDefault();
+      
+      if (e.type === 'touchmove') {
+        currentX = e.touches[0].clientX - initialX;
+        currentY = e.touches[0].clientY - initialY;
+      } else {
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+      }
+
+      xOffset = currentX;
+      yOffset = currentY;
+
+      // Update position
+      element.style.right = 'auto';
+      element.style.bottom = 'auto';
+      element.style.left = '0';
+      element.style.top = '0';
+      element.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    }
+
+    function dragEnd() {
+      initialX = currentX;
+      initialY = currentY;
+      isDragging = false;
+    }
   }
 
   // ---------- HEADPHONE BUTTONS ----------
