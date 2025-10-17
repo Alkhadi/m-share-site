@@ -1,22 +1,16 @@
-<<<<<<< HEAD
-.DS_Store
-.DS_Store
-=======
-
 .DS_Store
 *.log
-
 
 node_modules/
 **/node_modules/
 dist/
 build/
-
-
 tmp/
->>>>>>> d626c59 (Initial publish: pages, breathing tools, Dyslexia trainer, Mood page, assets)
+
 /m-share.zip
 /_backup_mindpaylink/
 /_backup_ux/
-.DS_Store
-*.log
+
+# Backup files from one-shot scripts
+*.oneshot.bak.*
+*.bak

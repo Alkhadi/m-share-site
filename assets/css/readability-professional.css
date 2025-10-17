@@ -1,0 +1,145 @@
+/* Readability & Contrast — M Share (idempotent) */
+
+/* Calm palette aligned to site theme */
+:root{
+  --primary:#0f172a;              /* slate-900 */
+  --primary-contrast:#ffffff;
+  --accent:#14b8a6;               /* teal-500 */
+  --accent-contrast:#0b0b10;
+  --success:#16a34a;              /* green-600 */
+  --danger:#dc2626;               /* red-600 */
+  --warning:#f59e0b;              /* amber-500 */
+  --info:#2563eb;                 /* blue-600 */
+
+  --ink:#ffffff;                  /* default text on dark */
+  --ink-muted:#cbd5e1;            /* slate-300 */
+  --ink-strong:#f8fafc;           /* slate-50 */
+  --ink-dark:#0f172a;             /* deep readable ink */
+  --ink-black:#111111;            /* high contrast on white */
+
+  --surface:#0b0f1c;              /* dark base */
+  --surface-2:#0f172a;            /* header/nav surface */
+  --surface-light:#ffffff;        /* white/light */
+
+  --border-dark:rgba(255,255,255,.14);
+  --border-light:rgba(17,24,39,.14);
+}
+
+/* Default: white text on dark backgrounds */
+html, body { color: var(--ink, #fff); }
+
+/* Titles/body/list inherit surface color for proper readability */
+h1,h2,h3,h4,h5,h6,
+p, li, dt, dd, small, strong, em { color: inherit !important; }
+
+/* Common LIGHT/WHITE surfaces: switch to black ink if background is 100 percent white */
+.card:not(.dark),
+.sheet-card:not(.dark),
+.paper, .surface, .panel,
+.bg-white, .bg-light, .white, .paper-white,
+section.light, .section.light, .card.light,
+.container.light, .content.light,
+[style*="background:#fff"], [style*="background: #fff"], [style*="background:#ffffff"], [style*="background: #ffffff"], [style*="rgb(255, 255, 255)"],
+[data-surface="light"] {
+  color: var(--ink-black) !important;
+}
+
+/* Muted text */
+.muted, .text-muted, .subtle { color: var(--ink-muted) !important; }
+
+/* Links (professional states) */
+a { color: #9dd5ff; text-decoration: none; }
+a:hover { color: #cfe8ff; text-decoration: underline; }
+a:active { color: #7ac1ff; }
+a:visited { color: #b9c7ff; }
+a:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+/* Buttons: white text everywhere; solid contrast backgrounds */
+.btn, button, .button, a.btn, input[type="button"], input[type="submit"]{
+  color:#fff !important;
+  background: var(--primary);
+  border:2px solid color-mix(in srgb, var(--primary), #000 20%);
+  transition: background .15s ease, transform .05s ease, box-shadow .15s ease;
+}
+.btn:hover, button:hover, .button:hover, a.btn:hover{
+  background: color-mix(in srgb, var(--primary), #fff 10%);
+}
+.btn:active, button:active, .button:active, a.btn:active{
+  transform: translateY(1px);
+  background: color-mix(in srgb, var(--primary), #000 8%);
+}
+.btn:visited, a.btn:visited{ color:#fff !important; }
+.btn:focus-visible, button:focus-visible, .button:focus-visible, a.btn:focus-visible{
+  outline:4px solid #fff; outline-offset:2px;
+}
+
+/* Button variants (if present) */
+.btn-success, .badge.ok { background: var(--success) !important; color:#fff !important; }
+.btn-danger  { background: var(--danger) !important; color:#fff !important; }
+.btn-warning { background: var(--warning) !important; color:#111 !important; }
+.btn-info    { background: var(--info)    !important; color:#fff !important; }
+.btn-accent  { background: var(--accent)  !important; color: var(--accent-contrast) !important; }
+
+/* Badges/chips readable */
+.badge, .chip { color:#fff !important; background: color-mix(in srgb, var(--primary), #fff 10%); border:1px solid var(--border-dark); }
+
+/* Header/nav on colored background: enforce white */
+header.site-header, header.site-header .navbar { color:#fff; background: var(--surface-2); }
+header.site-header .brand, header.site-header .brand .brand-text, header.site-header .logo { color:#fff !important; }
+header.site-header .main-nav > a,
+header.site-header .menu-toggle,
+header.site-header .nav-button,
+header.site-header .icon,
+header.site-header #navToggle { color:#fff !important; }
+header.site-header .main-nav > a:hover,
+header.site-header .menu-toggle:hover,
+header.site-header .nav-button:hover { text-decoration: underline; }
+header.site-header .submenu a{ color:#fff; }
+
+/* DARK/COLORED sections: make text white automatically */
+.hero, .banner, .oncolor, .on-color, .section.oncolor, .section.on-color,
+[class*="bg-"], [data-colored], [class*="dark"], .dark,
+.card.dark, .section.dark, .sheet-card.dark, .panel.dark, .surface.dark {
+  color:#fff !important;
+}
+.hero a, .banner a, .oncolor a, .on-color a, [class*="bg-"] a, [data-colored] a,
+[class*="dark"] a, .dark a, .card.dark a, .section.dark a, .sheet-card.dark a { color:#fff; }
+
+/* Forms readable on dark surfaces */
+label { color: inherit; }
+input, textarea, select {
+  color: inherit;
+  background-color: color-mix(in srgb, currentColor, transparent 94%);
+  border: 2px solid color-mix(in srgb, currentColor, #000 75%);
+}
+input::placeholder, textarea::placeholder { color: color-mix(in srgb, currentColor, #000 65%); }
+
+/* Focus rings globally */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 4px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* Spacing: 2% bottom margin so blocks/cards never touch */
+section, .section, .card { margin-bottom: 2% !important; }
+.grid > * { margin-bottom: 2% !important; }
+
+/* Cards: visible borders */
+.card, .sheet-card, .panel, .surface {
+  border: 2px solid var(--border-dark);
+  border-radius: 8px;
+}
+.card.light, .sheet-card.light, .panel.light, .surface.light,
+.card:not(.dark), .sheet-card:not(.dark), .panel:not(.dark), .surface:not(.dark) {
+  border: 2px solid var(--border-light);
+}
+
+/* Footer readability */
+#footer2025.mpl-footer-v3{
+  color: var(--ink);
+  background: color-mix(in srgb, var(--surface), #000 0%);
+  border-top:1px solid var(--border-dark);
+}
+#footer2025 .muted{ color: #94a3b8 !important; }
+#footer2025 a{ color:#e5f0ff; }
+#footer2025 a:hover{ color:#ffffff; text-decoration: underline; }

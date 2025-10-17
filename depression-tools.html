@@ -1,5 +1,5 @@
 <!doctype html>
-    <html lang="en">
+    <html lang="en" class="gpt5-typography">
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -257,13 +257,17 @@
 html{background:var(--bg);color:var(--fg);filter:brightness(var(--brightness));}
 body{background:transparent}
 </style>
+  <link rel="stylesheet" href="assets/css/chatgpt5-typography.css">
+  <link rel="stylesheet" href="assets/css/readability-professional.css">
 </head>
     <body>
 <a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
       <header class="site-header">
-  <div class="container navbar">
-    <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span><span class="brand-text">M Share</span></a>
-    <nav class="main-nav" id="mainNav">
+    <div class="container navbar">
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> <span
+          class="brand-text">M Share</span></a>
+
+      <nav class="main-nav" id="mainNav">
   <a data-href="index.html">Wellbeing</a>
   <div class="menu-group">
     <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
@@ -317,9 +321,11 @@ body{background:transparent}
     </div>
   </div>
 </nav>
-    <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
-  </div>
-</header>
+
+      <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
 
       <main class="container">
 
@@ -411,42 +417,7 @@ body{background:transparent}
   <script defer src="voice-coach-fix.js"></script>
 
 
-<footer id="footer2025" class="footer-2025 mpl-footer-v3">
-  <div class="mpl-footer-wrap">
-    <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
-      <section class="col brand">
-        <div class="brandline">
-          <span class="logo" aria-hidden="true">M</span>
-          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
-        </div>
-        <div class="mpl-pay" aria-label="Support links">
-          <a class="pay-link" href="coffee.html" target="_blank" rel="noopener">Support Us</a>
-          <a class="pay-link" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00" target="_blank" rel="noopener">☕
-              Support Us</a>
-        </div>
-      </section>
 
-      <section class="col center">
-        <!-- Theme Explorer (center) -->
-        <div id="mpl-theme-slot" aria-label="Theme controls"></div>
-      </section>
-
-      <section class="col right">
-        <!-- Explore menu (chevrons) -->
-        <nav class="mpl-footer-explore" aria-label="Explore">
-          <h4>Explore</h4>
-          <div id="mpl-footer-explore"></div>
-        </nav>
-      </section>
-    </div>
-
-    <div class="bottom">
-      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
-      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
-    </div>
-  </div>
-  <script>(function(){var y=document.getElementById('yearFooter'); if(y) y.textContent=(new Date).getFullYear();})();</script>
-</footer>
 <script id="mpl-theme-auto-js-v3">
 (() => {
   const KEY='mpl.theme.v2';
@@ -620,5 +591,42 @@ body{background:transparent}
   if (document.readyState==='loading') document.addEventListener('DOMContentLoaded', build, {once:true}); else build();
 })();
 </script>
+
+<footer id="footer2025" class="footer-2025 mpl-footer-v3">
+  <div class="mpl-footer-wrap">
+    <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
+      <section class="col brand">
+        <div class="brandline">
+          <span class="logo" aria-hidden="true">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="mpl-pay" aria-label="Support links">
+          <a class="pay-link" href="coffee.html" target="_blank" rel="noopener">Support Us</a>
+          <a class="pay-link" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00" target="_blank" rel="noopener">☕
+              Support Us</a>
+        </div>
+      </section>
+
+      <section class="col center">
+        <!-- Theme Explorer (center) -->
+        <div id="mpl-theme-slot" aria-label="Theme controls"></div>
+      </section>
+
+      <section class="col right">
+        <!-- Explore menu (chevrons) -->
+        <nav class="mpl-footer-explore" aria-label="Explore">
+          <h4>Explore</h4>
+          <div id="mpl-footer-explore"></div>
+        </nav>
+      </section>
+    </div>
+
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>(function(){var y=document.getElementById('yearFooter'); if(y) y.textContent=(new Date).getFullYear();})();</script>
+</footer>
 </body>
 </html>

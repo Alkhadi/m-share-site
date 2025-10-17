@@ -1,77 +1,109 @@
+<!doctype html>
+<head>
+  <link rel="stylesheet" href="assets/css/chatgpt5-typography.css">
+  <link rel="stylesheet" href="assets/css/readability-professional.css">
+</head>
 <header class="site-header">
-  <div class="container navbar">
-    <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span><span class="brand-text">M Share</span></a>
-    <nav class="main-nav" id="mainNav" aria-label="Primary">
-      <a data-href="index.html" href="index.html" class="no-soft">Wellbeing</a>
+    <div class="container navbar">
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> <span
+          class="brand-text">M Share</span></a>
 
-      <div class="nav-group">
-        <button class="nav-button" type="button" aria-expanded="false" aria-controls="menu-conditions" aria-haspopup="true">Conditions</button>
-        <div id="menu-conditions" class="menu" role="menu">
-          <div class="menu-col">
-            <div class="menu-title">Neurodevelopmental</div>
-            <a role="menuitem" data-href="autism.html" href="autism.html" class="no-soft">Autism</a>
-            <a role="menuitem" data-href="adhd.html" href="adhd.html" class="no-soft">ADHD</a>
-            <a role="menuitem" data-href="dyslexia-reading-training.html" href="dyslexia-reading-training.html" class="no-soft">Dyslexia</a>
-          </div>
-          <div class="menu-col">
-            <div class="menu-title">Mental Health</div>
-            <a role="menuitem" data-href="anxiety.html" href="anxiety.html" class="no-soft">Anxiety</a>
-            <a role="menuitem" data-href="depression.html" href="depression.html" class="no-soft">Depression</a>
-            <a role="menuitem" data-href="stress.html" href="stress.html" class="no-soft">Stress</a>
-            <a role="menuitem" data-href="sleep.html" href="sleep.html" class="no-soft">Sleep</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="nav-group">
-        <button class="nav-button" type="button" aria-expanded="false" aria-controls="menu-breath" aria-haspopup="true">Breathing &amp; Focus</button>
-        <div id="menu-breath" class="menu menu-wide" role="menu">
-          <div class="menu-col">
-            <div class="menu-title">Guides</div>
-            <a role="menuitem" data-href="breath.html" href="breath.html" class="no-soft">Breath (how‑to)</a>
-            <a role="menuitem" data-href="focus.html" href="focus.html" class="no-soft">Focus</a>
-            <a role="menuitem" data-href="mindfulness.html" href="mindfulness.html" class="no-soft">Mindfulness</a>
-          </div>
-          <div class="menu-col">
-            <div class="menu-title">Techniques</div>
-            <a role="menuitem" data-href="sos.html" href="sos.html" class="no-soft">60‑second Reset</a>
-            <a role="menuitem" data-href="box-breathing.html" href="box-breathing.html" class="no-soft">Box Breathing</a>
-            <a role="menuitem" data-href="4-7-8-breathing.html" href="4-7-8-breathing.html" class="no-soft">4‑7‑8 Breathing</a>
-            <a role="menuitem" data-href="coherent-5-5.html" href="coherent-5-5.html" class="no-soft">Coherent 5‑5</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="nav-group">
-        <button class="nav-button" type="button" aria-expanded="false" aria-controls="menu-tools" aria-haspopup="true">Toolkits</button>
-        <div id="menu-tools" class="menu menu-wide" role="menu">
-          <div class="menu-col">
-            <div class="menu-title">General</div>
-            <a role="menuitem" data-href="sleep-tools.html" href="sleep-tools.html" class="no-soft">Sleep Tools</a>
-            <a role="menuitem" data-href="breath-tools.html" href="breath-tools.html" class="no-soft">Breath Tools</a>
-            <a role="menuitem" data-href="mood-tools.html" href="mood-tools.html" class="no-soft">Mood Tools</a>
-          </div>
-          <div class="menu-col">
-            <div class="menu-title">Condition‑specific</div>
-            <a role="menuitem" data-href="adhd-tools.html" href="adhd-tools.html" class="no-soft">ADHD Tools</a>
-            <a role="menuitem" data-href="autism-tools.html" href="autism-tools.html" class="no-soft">Autism Tools</a>
-            <a role="menuitem" data-href="depression-tools.html" href="depression-tools.html" class="no-soft">Depression Tools</a>
-            <a role="menuitem" data-href="anxiety-tools.html" href="anxiety-tools.html" class="no-soft">Anxiety Tools</a>
-            <a role="menuitem" data-href="stress-tools.html" href="stress-tools.html" class="no-soft">Stress Tools</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="nav-group">
-        <button class="nav-button" type="button" aria-expanded="false" aria-controls="menu-about" aria-haspopup="true">About</button>
-        <div id="menu-about" class="menu" role="menu">
-          <a role="menuitem" data-href="about.html" href="about.html" class="no-soft">About</a>
-          <a role="menuitem" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00" target="_blank" rel="noopener" class="no-soft">Support Us</a>
-          <a role="menuitem" data-href="contact.html" href="contact.html" class="no-soft">Contact</a>
-        </div>
-      </div>
-    </nav>
-    <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
+      <nav class="main-nav" id="mainNav">
+  <a data-href="index.html">Wellbeing</a>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Neurodevelopmental</div>
+      <a data-href="autism.html">Autism</a>
+      <a data-href="adhd.html">ADHD</a>
+      <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+      <div class="menu-label">Mental Health</div>
+      <a data-href="anxiety.html">Anxiety</a>
+      <a data-href="depression.html">Depression</a>
+      <a data-href="stress.html">Stress</a>
+      <a data-href="sleep.html">Sleep</a>
+    </div>
   </div>
-</header>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">Guides</div>
+      <a data-href="breath.html">Breath (how‑to)</a>
+      <a data-href="focus.html">Focus</a>
+      <a data-href="mindfulness.html">Mindfulness</a>
+      <div class="menu-label">Techniques</div>
+      <a data-href="sos-60.html">60‑second Reset</a>
+      <a data-href="box-breathing.html">Box Breathing</a>
+      <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+      <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+    <div class="submenu">
+      <div class="menu-label">General</div>
+      <a data-href="sleep-tools.html">Sleep Tools</a>
+      <a data-href="breath-tools.html">Breath Tools</a>
+      <a data-href="mood-tools.html">Mood Tools</a>
+      <div class="menu-label">Condition‑specific</div>
+      <a data-href="adhd-tools.html">ADHD Tools</a>
+      <a data-href="autism-tools.html">Autism Tools</a>
+      <a data-href="depression-tools.html">Depression Tools</a>
+      <a data-href="anxiety-tools.html">Anxiety Tools</a>
+      <a data-href="stress-tools.html">Stress Tools</a>
+    </div>
+  </div>
+  <div class="menu-group">
+    <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+    <div class="submenu">
+      <a data-href="about.html">About</a>
+      <a data-href="coffee.html">Support Us</a>
+      <a data-href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
 
+      <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+
+
+
+<footer id="footer2025" class="footer-2025 mpl-footer-v3">
+  <div class="mpl-footer-wrap">
+    <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
+      <section class="col brand">
+        <div class="brandline">
+          <span class="logo" aria-hidden="true">M</span>
+          <div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div>
+        </div>
+        <div class="mpl-pay" aria-label="Support links">
+          <a class="pay-link" href="coffee.html" target="_blank" rel="noopener">Support Us</a>
+          <a class="pay-link" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00" target="_blank" rel="noopener">☕
+              Support Us</a>
+        </div>
+      </section>
+
+      <section class="col center">
+        <!-- Theme Explorer (center) -->
+        <div id="mpl-theme-slot" aria-label="Theme controls"></div>
+      </section>
+
+      <section class="col right">
+        <!-- Explore menu (chevrons) -->
+        <nav class="mpl-footer-explore" aria-label="Explore">
+          <h4>Explore</h4>
+          <div id="mpl-footer-explore"></div>
+        </nav>
+      </section>
+    </div>
+
+    <div class="bottom">
+      <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+      <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+    </div>
+  </div>
+  <script>(function(){var y=document.getElementById('yearFooter'); if(y) y.textContent=(new Date).getFullYear();})();</script>
+</footer>
