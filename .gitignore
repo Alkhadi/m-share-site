@@ -1,22 +1,21 @@
-<<<<<<< HEAD
+# OS files
 .DS_Store
-.DS_Store
-=======
 
-.DS_Store
+# Logs
 *.log
 
-
+# Dependencies
 node_modules/
 **/node_modules/
+
+# Build artifacts
 dist/
 build/
 
-
+# Temporary files
 tmp/
->>>>>>> d626c59 (Initial publish: pages, breathing tools, Dyslexia trainer, Mood page, assets)
+
+# Project-specific
 /m-share.zip
 /_backup_mindpaylink/
 /_backup_ux/
-.DS_Store
-*.log
