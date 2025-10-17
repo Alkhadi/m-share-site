@@ -1,0 +1,64 @@
+===========================================
+USAGE EXAMPLE - Copy and paste this!
+===========================================
+
+# Navigate to your project
+cd /home/runner/work/m-share-site/m-share-site
+
+# Preview changes first (safe - no modifications)
+node fix-readability-apply-from-index.mjs --dry-run
+
+# Apply changes
+node fix-readability-apply-from-index.mjs
+
+===========================================
+EXPECTED OUTPUT:
+===========================================
+
+One-shot: Replace header/footer from index.html + readability/typography 
+Patched: 4-7-8-breathing.html backup-> 4-7-8-breathing.html.oneshot.bak.2025-10-17T07-03-08-756Z
+Patched: about.html backup-> about.html.oneshot.bak.2025-10-17T07-03-08-757Z
+Patched: adhd-tools.html backup-> adhd-tools.html.oneshot.bak.2025-10-17T07-03-08-758Z
+...
+(33 files total)
+
+Summary:
+  HTML files modified: 33
+  Done.
+
+===========================================
+WHAT CHANGED:
+===========================================
+
+✅ All HTML files now have:
+   - Professional footer with Explorer section
+   - Theme controls (color picker, brightness)
+   - ChatGPT 5 Pro typography
+   - Professional readability CSS
+
+✅ Text visibility:
+   - White text on dark surfaces
+   - Black text on white surfaces
+   - All buttons have white text
+   - All cards have visible borders
+
+✅ Spacing:
+   - 2% margin between sections/cards
+   - Cards never touch
+
+✅ Backups created:
+   - Every file: filename.html.oneshot.bak.TIMESTAMP
+   - Safely excluded from git
+
+===========================================
+VERIFY YOUR CHANGES:
+===========================================
+
+1. Open any HTML file in browser
+2. Scroll to footer - see Explorer section
+3. Click "Theme" - see color picker
+4. Check text visibility on all backgrounds
+5. Verify cards have visible borders
+6. Check spacing between sections
+
+===========================================
