@@ -2,11 +2,7 @@
   "terminal.integrated.cwd": "/Users/akoroma/m-share",
   "files.insertFinalNewline": true,
   "editor.formatOnSave": true,
-<<<<<<< HEAD
   "liveServer.settings.port": 5501,
-=======
-  "liveServer.settings.port": 5502,
->>>>>>> f4c36ed (Fix: 2025 header/footer, remove Wellbeing, hamburger nav, restore Voice Coach)
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.profiles.osx": {
     "zsh": {

@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>M Share — Storage (Admin)</title>
     <link rel="icon" href="icons/icon-192.png" />
     <style>
@@ -110,14 +110,103 @@
             color: inherit;
         }
     </style>
+  <link rel="stylesheet" href="assets/css/responsive-fixes.css" />
+<!-- mshare-seo-start -->
+  <link rel="canonical" href="https://www.mindpaylink.com/storage.html" />
+  <meta name="description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="M Share" />
+  <meta property="og:title" content="M Share — Storage (Admin)" />
+  <meta property="og:description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta property="og:url" content="https://www.mindpaylink.com/storage.html" />
+  <meta property="og:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="M Share — Storage (Admin)" />
+  <meta name="twitter:description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta name="twitter:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "M Share",
+      "url": "https://www.mindpaylink.com/"
+    }
+  </script>
+<!-- mshare-seo-end -->
 </head>
 
 <body>
+<header class="site-header">
+    <div class="container navbar">
+      <!-- Added logo-blue class to get the blue background -->
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html">
+        <span class="logo logo-blue">M</span><span class="brand-text">M Share</span>
+      </a>
+
+      <!-- UPDATED NAV (dropdown groups) -->
+      <nav class="main-nav" id="mainNav">
+        <a data-href="index.html">Wellbeing</a>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Neurodevelopmental</div>
+            <a data-href="autism.html">Autism</a>
+            <a data-href="autism-parent.html">Autism Parent</a>
+            <a data-href="adhd.html">ADHD</a>
+            <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+            <div class="menu-label">Mental Health</div>
+            <a data-href="anxiety.html">Anxiety</a>
+            <a data-href="depression.html">Depression</a>
+            <a data-href="stress.html">Stress</a>
+            <a data-href="sleep.html">Sleep</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Guides</div>
+            <a data-href="breath.html">Breath (how‑to)</a>
+            <a data-href="focus.html">Focus</a>
+            <a data-href="mindfulness.html">Mindfulness</a>
+            <div class="menu-label">Techniques</div>
+            <a data-href="sos-60.html">60‑second Reset</a>
+            <a data-href="box-breathing.html">Box Breathing</a>
+            <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+            <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">General</div>
+            <a data-href="sleep-tools.html">Sleep Tools</a>
+            <a data-href="breath-tools.html">Breath Tools</a>
+            <a data-href="mood-tools.html">Mood Tools</a>
+            <div class="menu-label">Condition‑specific</div>
+            <a data-href="adhd-tools.html">ADHD Tools</a>
+            <a data-href="autism-tools.html">Autism Tools</a>
+            <a data-href="depression-tools.html">Depression Tools</a>
+            <a data-href="anxiety-tools.html">Anxiety Tools</a>
+            <a data-href="stress-tools.html">Stress Tools</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+          <div class="submenu">
+            <a data-href="about.html">About</a>
+            <a data-href="coffee.html">Support Us</a>
+            <a data-href="contact.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
     <div class="wrap">
-        <header>
-            <h1>Storage console <span class="muted">(Admin)</span></h1>
-            <div class="muted">Upload PDFs to Cloudflare R2 and share links. This page is passcode‑gated.</div>
-        </header>
+        
 
         <section id="gate" class="card">
             <p>Admin check in progress…</p>
@@ -136,6 +225,13 @@
             <div class="muted">Bucket: mshare-profiles (recommended). You can change the key prefix per upload below.
             </div>
             <div id="cfgStatus" class="status muted"></div>
+            <div class="row" style="margin:10px 0 0 0">
+                <input id="r2PublicBase" type="url"
+                    placeholder="https://<your-public-bucket-domain> (optional public base for downloads)"
+                    style="flex:1; min-width:320px" />
+                <button id="saveBase" class="secondary">Set as downloads base</button>
+            </div>
+            <div class="muted" id="baseInfo" style="margin-top:6px"></div>
         </section>
 
         <section id="uploadBox" class="card" style="display:none">
@@ -183,6 +279,9 @@
             const saveBtn = document.getElementById('saveCfg');
             const testBtn = document.getElementById('testCfg');
             const cfgStatus = document.getElementById('cfgStatus');
+            const publicBaseInput = document.getElementById('r2PublicBase');
+            const saveBaseBtn = document.getElementById('saveBase');
+            const baseInfo = document.getElementById('baseInfo');
 
             const fileInput = document.getElementById('fileInput');
             const keyPrefix = document.getElementById('keyPrefix');
@@ -193,6 +292,9 @@
             const cfgKey = 'mshare_r2_cfg_v1';
             function loadCfg() { try { return JSON.parse(localStorage.getItem(cfgKey) || '{}'); } catch { return {}; } }
             function saveCfg(cfg) { try { localStorage.setItem(cfgKey, JSON.stringify(cfg)); } catch { } }
+            // PDF base for link resolution on site
+            function setPdfBase(url) { try { if (url) localStorage.setItem('mshare_pdf_base', url); else localStorage.removeItem('mshare_pdf_base'); } catch { } }
+            function getPdfBase() { try { return localStorage.getItem('mshare_pdf_base') || ''; } catch { return ''; } }
 
             function setStatus(el, msg, ok) { el.textContent = msg || ''; el.style.color = ok ? '#10b981' : '#e5e7eb'; el.style.opacity = msg ? 1 : .7; }
 
@@ -201,7 +303,7 @@
                 catch { gate.innerHTML = '<p>Admin check failed.</p>'; return false; }
             }
 
-            function initCfg() { const cfg = loadCfg(); if (cfg.endpoint) epInput.value = cfg.endpoint; if (cfg.token) tokInput.value = cfg.token; keyPrefix.value = cfg.prefix || '' }
+            function initCfg() { const cfg = loadCfg(); if (cfg.endpoint) epInput.value = cfg.endpoint; if (cfg.token) tokInput.value = cfg.token; keyPrefix.value = cfg.prefix || ''; if (cfg.publicBase) publicBaseInput.value = cfg.publicBase; const pb = getPdfBase(); baseInfo.textContent = pb ? ('Current downloads base: ' + pb) : 'No downloads base set (will use page meta or local assets).'; }
 
             function buildKey(name) { const pre = (keyPrefix.value || '').trim(); if (!pre) return name; return pre.replace(/(^\/+|\/+$)/g, '') + '/' + name.replace(/^\/+/, ''); }
 
@@ -223,8 +325,14 @@
             }
 
             saveBtn.addEventListener('click', () => {
-                const cfg = { endpoint: epInput.value.trim(), token: tokInput.value.trim(), prefix: keyPrefix.value.trim() };
-                saveCfg(cfg); setStatus(cfgStatus, 'Saved.', true);
+                const cfg = { endpoint: epInput.value.trim(), token: tokInput.value.trim(), prefix: keyPrefix.value.trim(), publicBase: publicBaseInput.value.trim() };
+                saveCfg(cfg);
+                if (cfg.publicBase) { setPdfBase(cfg.publicBase); baseInfo.textContent = 'Current downloads base: ' + cfg.publicBase; }
+                setStatus(cfgStatus, 'Saved.', true);
+            });
+            saveBaseBtn.addEventListener('click', () => {
+                const url = publicBaseInput.value.trim(); setPdfBase(url); const cfg = loadCfg(); cfg.publicBase = url; saveCfg(cfg);
+                baseInfo.textContent = url ? ('Current downloads base: ' + url) : 'Downloads base cleared.'; MS.toast(url ? 'Downloads base set' : 'Downloads base cleared');
             });
             testBtn.addEventListener('click', async () => {
                 const cfg = loadCfg(); if (!epInput.value && !cfg.endpoint) { setStatus(cfgStatus, 'Set endpoint first.', false); return; }
@@ -262,6 +370,52 @@
             })();
         })();
     </script>
+
+
+<footer id="footer2025" class="footer-2025 mpl-footer-v3">
+    <div class="mpl-footer-wrap">
+      <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
+        <section class="col brand">
+          <div class="brandline">
+            <span class="logo" aria-hidden="true">M</span>
+            <div><b>M Share</b>
+              <div class="muted">Quiet, practical tools for mental health and wellbeing.</div>
+            </div>
+          </div>
+          <div class="mpl-pay" aria-label="Support links">
+            <a class="pay-link" href="coffee.html" target="_blank" rel="noopener">Support Us</a>
+            <a class="pay-link" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00" target="_blank" rel="noopener">☕
+              Support Us</a>
+          </div>
+        </section>
+
+        <section class="col center">
+          <!-- Theme Explorer (center) -->
+          <div id="mpl-theme-slot" aria-label="Theme controls"></div>
+        </section>
+
+        <section class="col right">
+          <!-- Explore (accordion) -->
+          <nav class="mpl-footer-explore" aria-label="Explore" data-exclude="support,coffee">
+            <details class="explore" open>
+              <summary>
+                <span class="title">Explore</span>
+                <span class="subheading">Top‑level navigation</span>
+              </summary>
+              <div id="mpl-footer-explore"></div>
+            </details>
+          </nav>
+        </section>
+      </div>
+
+      <div class="bottom">
+        <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
+        <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
+      </div>
+    </div>
+    <script>(function () { var y = document.getElementById('yearFooter'); if (y) y.textContent = (new Date).getFullYear(); })();</script>
+    <script defer src="assets/js/footer-explore.js"></script>
+  </footer>
 </body>
 
 </html>

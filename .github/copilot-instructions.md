@@ -14,7 +14,8 @@ This repo is a static, vanilla HTML/CSS/JS website (no bundler, no npm). Pages a
   - Stats: `MS.Stats.addSession({techId, seconds, breaths})`, `MS.Stats.summary()` and `MS.drawWeeklyChart()` (draws to element id "weeklyChart").
   - Utilities: `MS.toast(msg)`, `MS.bankDetailsString()`, `MS.openAppOrStore(url, bank)`.
   - Admin: `MS.requireAdmin()` prompts for a passcode (SHA-256 checked inline in `app.js`).
-- `apply-mshare-fixes.mjs` is a one‑shot patcher that injects Voice Coach assets and GP‑mapping content across HTML files. Only run intentionally from the repo root.
+- PDF locker: `MS.DeviceLocker.{addBlob,remove,export,import,mount}` stores PDFs locally (20 MB quota, `mshare_pdf_locker_v2`).
+- `apply-mshare-fixes.mjs` or `mshare-voicecoach-one-shot.mjs` are one‑shot patchers that inject the universal Voice Coach assets and related fixes across HTML files. Only run intentionally from the repo root.
 - `deploy.sh` pushes a branch and opens a PR to publish via GitHub Pages (CNAME set to `www.mindpaylink.com`). Requires `gh` for the fast path.
 
 ## Project conventions that matter
@@ -32,6 +33,30 @@ This repo is a static, vanilla HTML/CSS/JS website (no bundler, no npm). Pages a
 - Web Share API and Clipboard are used for sharing; gracefully degrades to copy-to-clipboard.
 - PDF generation uses Canvas → JPEG → minimal PDF writer (no external library). QR codes load from https://api.qrserver.com.
 - The site includes additional nav/footer/theme scripts under `assets/` that auto-enhance markup; keep ids like footer2025, mpl-theme-slot, and class footer-2025 when changing layout.
+
+## Guardrails and conventions
+- Do not introduce bundlers/modules. Load scripts directly with `<script>` tags.
+- Preserve IDs/classes referenced by `app.js` and `assets/js/*`. Avoid breaking `.menu-group > .menu-toggle + .submenu` structure.
+- Prefer `data-href` links (no `href`) so query params propagate across pages.
+- Avoid editing `*.bak` files (snapshots). Keep edits idempotent—patchers may run multiple times.
+
+## Whole‑Site Value Booster macro (for AI agents)
+You are a compact product team (UX writer, front-end engineer, accessibility specialist, performance/SEO engineer). Audit and improve the entire website. Return precise, minimal, production‑ready code patches plus upgraded copy—no generic advice.
+Inputs
+- Brand & context: “M Share” — quiet, practical mental‑health tools for UK audiences (educational info only; not medical advice).
+- Target outcomes: calmer UX, faster loads, clearer navigation, stronger SEO/EEAT, excellent accessibility (incl. dyslexia‑friendly), zero broken links, measurable value for visitors.
+- Site root: vanilla HTML/CSS/JS, no frameworks; keep folder structure; assets under `assets/`.
+Hard constraints
+1) No breaking changes; keep existing IDs/classes; minimal diffs. 2) Accessibility first (WCAG 2.2 AA). 3) Performance: no heavy libs; defer/async; lazy‑load; dedupe; preconnect when useful. 4) UK tone & compliance. 5) Edits must be idempotent.
+Scope
+A) Navigation & footer — unify mobile/desktop; one open submenu; ESC/outside‑click close; remove duplicate nav scripts; ensure a single global footer element (id: footer2025). The Explore section mirrors top-level nav.
+B) Voice Coach — draggable panel with “Move” handle; bounded; persist position (localStorage); “Reset position”; system‑voice fallback; respects `prefers-reduced-motion`; keyboard move (arrows; Shift=10x).
+C) Buttons/IDs — remove duplicate IDs; convert repeated actions to classes (e.g., `.downloadPdfBtn`) and use event delegation; ensure VCF/PDF/Share work anywhere.
+D) Layout/readability — global spacing var `--s`; ensure edges have padding; one `<h1>`; landmarks `<main>`/`role="navigation">`; aria‑expanded; visible focus.
+E) Content (EEAT) — tighten hero and cards in UK tone; compact trust blurb; one‑line “How to use this page”; clear CTAs.
+F) SEO — intent‑driven titles/descriptions; JSON‑LD (WebSite, BreadcrumbList, Article/FAQPage where apt); canonical + OG/Twitter; complete alts.
+G) Performance — dedupe imports; convert sync scripts to `defer` where safe; lazy‑load below‑fold media; `fetchpriority="high"` for hero when present; preconnect to fonts/origin.
+H) Reliability/QA — defensive `window.__MSHARE__` checks; fallbacks for share/SOS; console clean (no errors).
 
 ## Voice Coach and technique pages
 - If you add or adjust technique pages (e.g., Box/4‑7‑8/Coherent), sessions should call `MS.Stats.addSession({techId:'tech-key', seconds, breaths})` when a run completes.

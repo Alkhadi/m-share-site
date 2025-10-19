@@ -1,5 +1,6 @@
 /* M Share • Pro — 2025 global styles */
 :root {
+  /* Site-wide background base */
   --bg: #B0B0CD;
   --surface: #0b1220;
   --elev: #101827;
@@ -32,16 +33,123 @@ body {
   height: 100%
 }
 
-html {
-  background: var(--bg);
-}
-
 body {
   margin: 0;
-  background: transparent;
+  /* Remove decorative gradients so the requested background shows consistently */
+  background: var(--bg);
   color: var(--fg);
   font-family: ui-sans-serif, system-ui, -apple-system, "Inter", "Segoe UI", Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   line-height: 1.45;
+}
+
+/* Prevent background scroll when mobile nav overlay is open */
+body.nav-open {
+  overflow: hidden;
+}
+
+/* Focus mode: immersive, responsive dark canvas */
+body.focus-mode {
+  background: radial-gradient(1200px 800px at 20% 15%, rgba(15, 23, 42, .92), rgba(2, 6, 23, 1)) !important;
+  min-height: 100vh;
+}
+
+/* Hide header/footer and non-session cards in focus mode for immersion */
+body.focus-mode header.site-header,
+body.focus-mode .footer-2025,
+body.focus-mode .site-footer,
+body.focus-mode #footer2025,
+body.focus-mode .stage-nav {
+  display: none !important;
+}
+
+/* Expand the session card into a framed canvas */
+body.focus-mode main.container {
+  max-width: none;
+  padding: clamp(8px, 2vw, 18px);
+}
+
+body.focus-mode .card.session {
+  width: 100%;
+  min-height: calc(100vh - clamp(8px, 2vw, 18px) * 2);
+  background: linear-gradient(180deg, rgba(8, 13, 22, .95), rgba(8, 13, 22, .92));
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: clamp(14px, 2.4vw, 28px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, .35);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(14px, 2.4vw, 24px);
+}
+
+/* Place orb area centrally with generous scaling */
+body.focus-mode .orb-wrap {
+  width: min(94vw, 560px);
+  margin: 0 auto;
+}
+
+/* On wide screens, give the orb breathing room to the left */
+@media (min-width: 1200px) {
+  body.focus-mode .card.session {
+    grid-template-columns: 1.1fr 1fr;
+    grid-template-rows: auto 1fr auto;
+    align-items: center;
+  }
+
+  body.focus-mode .card.session h2 {
+    grid-column: 1 / -1;
+  }
+
+  body.focus-mode .orb-wrap {
+    justify-self: start;
+  }
+
+  body.focus-mode .card.session .btn-row {
+    grid-column: 1 / 2;
+  }
+}
+
+/* Keep setup/done hidden in focus mode */
+body.focus-mode .card.setup,
+body.focus-mode #done {
+  display: none !important;
+}
+
+/* Hard override to ensure every page uses the requested background even if inline theme blocks set their own */
+html,
+body {
+  background: #B0B0CD !important;
+}
+
+/* Force header/footer/menu text to white site‑wide */
+header.site-header,
+header.site-header *,
+.footer-2025,
+.footer-2025 *,
+nav.main-nav,
+nav.main-nav *,
+.submenu,
+.submenu * {
+  color: #ffffff !important;
+}
+
+/* Ensure submenu and header backgrounds remain readable against white text */
+.site-header {
+  background: rgba(8, 12, 24, .75);
+}
+
+.main-nav>a,
+.menu-toggle {
+  background: rgba(8, 12, 24, .95);
+  border-color: rgba(255, 255, 255, .18);
+}
+
+.submenu {
+  background: rgba(10, 14, 24, .98);
+  border-color: rgba(255, 255, 255, .18);
+}
+
+.footer-2025 {
+  background: rgba(8, 12, 24, .85);
+  border-top-color: rgba(255, 255, 255, .18);
 }
 
 a {
@@ -625,4 +733,77 @@ details.accordion summary {
 
 details.accordion .content {
   margin-top: 8px
+}
+
+/* ========== Responsive polish for cards/sections/typography ========== */
+@media (max-width: 680px) {
+  .container {
+    padding: 14px;
+  }
+
+  .card {
+    padding: 14px;
+    border-radius: var(--radius-md);
+  }
+
+  .grid {
+    gap: 10px;
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .canvas-wrap {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: clamp(1.4rem, 5.5vw, 1.8rem);
+  }
+
+  h2 {
+    font-size: clamp(1.1rem, 4.8vw, 1.4rem);
+  }
+
+  h3 {
+    font-size: clamp(1rem, 4.4vw, 1.2rem);
+  }
+
+  .card {
+    padding: 12px;
+    border-radius: var(--radius-sm);
+  }
+
+  .actions {
+    gap: 6px;
+  }
+
+  .badge {
+    font-size: 0.85rem;
+  }
+
+  .canvas-wrap {
+    height: 135px;
+  }
+}
+
+/* Optional helpers if pages use header/footer regions inside cards */
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
 }

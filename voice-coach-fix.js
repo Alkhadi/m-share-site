@@ -17,136 +17,6 @@
   window.__VC_FIX_ACTIVE = true;
 
   // ---------- SPEECH ENGINE ----------
-  // Optional API-backed TTS (disabled by default). Configure via the Voice Coach panel.
-  class ApiTTS {
-    constructor() {
-      this._audio = null;
-      this._queue = [];
-      this._playing = false;
-      this._cfg = this._load();
-    }
-
-    _load() {
-      try {
-        return {
-          enabled: localStorage.getItem('vc.api.enabled') === 'true',
-          base: localStorage.getItem('vc.api.base') || '', // e.g. https://your-endpoint/tts?voice={voice}&text={text}
-          voice: localStorage.getItem('vc.api.voice') || 'en-GB',
-          auth: localStorage.getItem('vc.api.auth') || '', // optional Authorization header (e.g. Bearer ...)
-          mode: localStorage.getItem('vc.api.mode') || 'get-template', // get-template | post-json
-          format: localStorage.getItem('vc.api.format') || 'audio/mpeg',
-        };
-      } catch { return { enabled: false, base: '', voice: 'en-GB', auth: '', mode: 'get-template', format: 'audio/mpeg' }; }
-    }
-    _save() {
-      try {
-        localStorage.setItem('vc.api.enabled', String(!!this._cfg.enabled));
-        localStorage.setItem('vc.api.base', this._cfg.base || '');
-        localStorage.setItem('vc.api.voice', this._cfg.voice || '');
-        localStorage.setItem('vc.api.auth', this._cfg.auth || '');
-        localStorage.setItem('vc.api.mode', this._cfg.mode || 'get-template');
-        localStorage.setItem('vc.api.format', this._cfg.format || 'audio/mpeg');
-      } catch { }
-    }
-    get enabled() { return !!this._cfg.enabled && !!this._cfg.base; }
-    setEnabled(on) { this._cfg.enabled = !!on; this._save(); }
-    setVoice(v) { this._cfg.voice = v || this._cfg.voice; this._save(); }
-    async speakChunks(chunks, opts = {}) {
-      if (!this.enabled) return false;
-      // Stop any current
-      this.stop();
-      for (const part of chunks) {
-        const ok = await this._playOne(part, opts).catch(() => false);
-        if (!ok) return false; // abort on failure
-      }
-      return true;
-    }
-    stop() {
-      try {
-        if (this._audio) { this._audio.pause(); this._audio.src = ''; this._audio = null; }
-      } catch { }
-      this._playing = false;
-    }
-    async _playOne(text, opts) {
-      const url = this._makeUrl(text);
-      if (!url && this._cfg.mode !== 'post-json') return false;
-      const headers = {};
-      if (this._cfg.auth) headers['Authorization'] = this._cfg.auth;
-      let res;
-      try {
-        if (this._cfg.mode === 'post-json') {
-          res = await fetch(this._cfg.base, {
-            method: 'POST',
-            headers: { 'content-type': 'application/json', ...headers },
-            body: JSON.stringify({ text, voice: this._cfg.voice, format: this._cfg.format })
-          });
-        } else {
-          res = await fetch(url, { headers });
-        }
-      } catch (e) {
-        console.warn('API TTS fetch failed', e);
-        return false;
-      }
-      if (!res || !res.ok) return false;
-      // Try common response shapes: direct audio, JSON with base64 or URL
-      const ct = (res.headers.get('content-type') || '').toLowerCase();
-      try {
-        if (ct.startsWith('audio') || ct.includes('octet-stream')) {
-          const blob = await res.blob();
-          return await this._playBlob(blob);
-        } else {
-          const data = await res.json();
-          if (data && data.url) {
-            return await this._playUrl(data.url);
-          }
-          const b64 = data.audio || data.audioBase64 || data.audioContent;
-          const mime = data.contentType || this._cfg.format || 'audio/mpeg';
-          if (b64) {
-            const blob = this._b64ToBlob(b64, mime);
-            return await this._playBlob(blob);
-          }
-        }
-      } catch (e) {
-        console.warn('API TTS parse/play failed', e);
-        return false;
-      }
-      return false;
-    }
-    _makeUrl(text) {
-      if (!this._cfg.base) return '';
-      if (this._cfg.mode === 'get-template') {
-        return this._cfg.base
-          .replace('{voice}', encodeURIComponent(this._cfg.voice || ''))
-          .replace('{text}', encodeURIComponent(text));
-      }
-      return this._cfg.base;
-    }
-    _b64ToBlob(b64, mime) {
-      try {
-        const bin = atob(b64.replace(/^data:[^,]+,/, ''));
-        const len = bin.length; const arr = new Uint8Array(len);
-        for (let i = 0; i < len; i++) arr[i] = bin.charCodeAt(i);
-        return new Blob([arr], { type: mime || 'audio/mpeg' });
-      } catch { return new Blob(); }
-    }
-    _playUrl(url) { return this._playWithAudio(url); }
-    async _playBlob(blob) {
-      const url = URL.createObjectURL(blob);
-      try { return await this._playWithAudio(url); } finally { setTimeout(() => URL.revokeObjectURL(url), 4000); }
-    }
-    _playWithAudio(url) {
-      return new Promise((resolve) => {
-        try { if (this._audio) { this._audio.pause(); this._audio.src = ''; } } catch { }
-        const audio = new Audio();
-        this._audio = audio; this._playing = true;
-        audio.src = url; audio.preload = 'auto'; audio.crossOrigin = 'anonymous';
-        audio.onended = () => { this._playing = false; resolve(true); };
-        audio.onerror = () => { this._playing = false; resolve(false); };
-        audio.play().catch(() => resolve(false));
-      });
-    }
-  }
-
   class SpeechEngine {
     constructor() {
       this.voices = [];
@@ -158,8 +28,6 @@
       this.rate = parseFloat(localStorage.getItem('vc.rate') || '1') || 1;
       this.pitch = parseFloat(localStorage.getItem('vc.pitch') || '1') || 1;
       this.langPref = localStorage.getItem('vc.lang') || 'en';
-      this.engine = localStorage.getItem('vc.engine') || 'system'; // system | api
-      this.api = new ApiTTS();
     }
 
     _initVoices() {
@@ -168,10 +36,13 @@
           const list = window.speechSynthesis.getVoices();
           if (list && list.length) {
             this.voices = list;
+            try { document.dispatchEvent(new CustomEvent('vc:voiceschanged', { detail: { voices: list } })); } catch { }
             resolve(list);
           } else {
+            // Chrome: voices often load async after first getVoices() call
             setTimeout(() => {
               this.voices = window.speechSynthesis.getVoices() || [];
+              try { document.dispatchEvent(new CustomEvent('vc:voiceschanged', { detail: { voices: this.voices } })); } catch { }
               resolve(this.voices);
             }, 300);
           }
@@ -187,131 +58,112 @@
     _chooseVoice() {
       const list = this.voices;
       if (!list || !list.length) return null;
+      // Preferred exact name
       let v = list.find(v => v.name === this.voiceNamePref);
       if (v) return v;
+      // Smart fallbacks by common Chrome voices
       const fallbacks = [
         'Google UK English Male',
         'Google US English',
         'Google UK English Female',
-        'Samantha', 'Alex', 'Victoria', 'Fred',
+        'Samantha', 'Alex', 'Victoria', 'Fred', // macOS voices
       ];
       v = list.find(v => fallbacks.includes(v.name));
       if (v) return v;
+      // Language fallback
       v = list.find(v => (v.lang || '').toLowerCase().startsWith(this.langPref.toLowerCase()));
       return v || list[0];
     }
 
     _sanitizeText(t) {
       if (!t) return '';
+      // collapse whitespace
       let s = String(t).replace(/\s+/g, ' ').trim();
-      // Remove URLs and emails
+      // remove URLs/emails
       s = s.replace(/https?:\/\/\S+/gi, '');
       s = s.replace(/\b[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}\b/g, '');
-      // Remove emoji/pictographs
-      try { s = s.replace(/[\u{1F000}-\u{1FAFF}\u{1F300}-\u{1F6FF}\u{1F900}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]/gu, ''); }
-      catch { s = s.replace(/[\u2600-\u27BF]/g, ''); }
-      // Strip extra symbols, keep sentence punctuation
-      s = s.replace(/[~`^_*#@<>{}\[\]|\\/+=]+/g, ' ');
-      // Skip tokens without letters
-      s = s.split(/\s+/).filter(tok => /[A-Za-z]/.test(tok)).join(' ');
-      // Normalize punctuation/space
+      // strip noisy symbols (keep basic punctuation for prosody)
+      s = s.replace(/[•·●►▶▪︎▸▹▻▵▿§©®™¤€£¥°≠≈±×÷=+*_#@^<>\[\]{}()\|\\]/g, ' ');
+      // collapse multiple punctuation to one
       s = s.replace(/[.,!?;:]{2,}/g, (m) => m[m.length - 1]);
-      s = s.replace(/\s{2,}/g, ' ').trim();
+      // clean leftover doublespaces
+      s = s.replace(/\s{2,}/g, ' ');
       return s;
     }
 
-    _splitText(s, maxLen = 180) {
-      if (!s) return [];
-      const out = [];
-      // Split by sentences first
-      const sentences = s.match(/[^.!?;]+[.!?;]?/g) || [s];
-      let buf = '';
-      for (const part of sentences) {
-        const next = (buf ? (buf + ' ' + part.trim()) : part.trim());
-        if (next.length <= maxLen) {
-          buf = next;
-        } else {
-          if (buf) out.push(buf.trim());
-          // If a single sentence is too long, chunk by words
-          if (part.length > maxLen) {
-            const words = part.trim().split(/\s+/);
-            let chunk = '';
-            for (const w of words) {
-              const cand = chunk ? (chunk + ' ' + w) : w;
-              if (cand.length > maxLen) { out.push(chunk); chunk = w; }
-              else { chunk = cand; }
-            }
-            if (chunk) out.push(chunk);
-            buf = '';
-          } else {
-            buf = part.trim();
-          }
-        }
-      }
-      if (buf) out.push(buf.trim());
-      return out;
-    }
-
     async speak(text, opts = {}) {
-      const cleaned = this._sanitizeText(text);
-      const parts = this._splitText(cleaned);
-
-      // Prefer API when engine is set to api or when SpeechSynthesis is unavailable
-      const wantApi = (this.engine === 'api') || !('speechSynthesis' in window);
-      if (wantApi && this.api.enabled) {
-        const ok = await this.api.speakChunks(parts, opts).catch(() => false);
-        if (ok) return;
-        // If API fails, fall back to system
-        console.warn('API TTS failed, falling back to system voice');
-      }
-
       if (!('speechSynthesis' in window)) {
-        console.warn('SpeechSynthesis not supported and API not configured.');
+        console.warn('SpeechSynthesis not supported.');
         return;
       }
       await this.ready;
       try { window.speechSynthesis.resume(); } catch { }
-      if (opts.clear !== false) {
-        try { window.speechSynthesis.cancel(); } catch { }
-      }
+      // Stop any current speech if requested (default true on explicit speak buttons)
+      if (opts.clear !== false) window.speechSynthesis.cancel();
+
+      const cleaned = this._sanitizeText(text);
+      // Split long text into shorter utterances to avoid Chrome truncation
+      const parts = this._splitText(cleaned);
       for (const part of parts) {
         const u = new SpeechSynthesisUtterance(part);
         const v = this._chooseVoice();
-        if (v) u.voice = v;
+        if (v) u.voice = v; // first try with chosen voice
         u.rate = (opts.rate ?? this.rate);
         u.pitch = (opts.pitch ?? this.pitch);
         u.lang = (opts.lang ?? v?.lang ?? 'en-US');
+        // Retry without explicit voice if Chrome ends instantly (rare voice bug)
         await this._speakOneWithRetry(u, v);
       }
+    }
+
+    _splitText(t) {
+      const s = (t || '').replace(/\s+/g, ' ').trim();
+      if (!s) return [];
+      // split by sentence stops but keep it robust
+      const raw = s.split(/(?<=[\.\?!])\s+(?=[A-Z0-9])/g);
+      const out = [];
+      for (const r of raw) {
+        if (r.length <= 220) { out.push(r); continue; }
+        // chunk very long sentences
+        for (let i = 0; i < r.length; i += 220) out.push(r.slice(i, i + 220));
+      }
+      return out;
+    }
+
+    _speakOne(u) {
+      return new Promise((resolve) => {
+        u.onend = () => { this._speaking = false; resolve(); };
+        u.onerror = () => { this._speaking = false; resolve(); }; // don't block
+        this._speaking = true;
+        window.speechSynthesis.speak(u);
+      });
     }
 
     _speakOneWithRetry(u, v) {
       return new Promise((resolve) => {
         let startedAt = 0;
-        const finalize = () => {
+        const onEnd = async () => {
           this._speaking = false;
-          resolve();
-        };
-        const onEnd = () => {
           const dur = startedAt ? (performance.now() - startedAt) : 0;
-          if (dur < 200 && v) {
-            // Retry without explicit voice (Chrome quick-end bug)
+          // If it ended almost immediately and we set a specific voice, retry using default voice
+          if (dur < 80 && v) {
             try { window.speechSynthesis.cancel(); } catch { }
             const u2 = new SpeechSynthesisUtterance(u.text);
             u2.rate = u.rate; u2.pitch = u.pitch; u2.lang = u.lang;
-            u2.onend = finalize; u2.onerror = finalize;
+            u2.onend = () => resolve();
+            u2.onerror = () => resolve();
             try { window.speechSynthesis.resume(); } catch { }
             this._speaking = true;
-            try { window.speechSynthesis.speak(u2); } catch { finalize(); }
+            try { window.speechSynthesis.speak(u2); } catch { resolve(); }
             return;
           }
-          finalize();
+          resolve();
         };
         u.onstart = () => { startedAt = performance.now(); };
         u.onend = onEnd;
-        u.onerror = onEnd;
+        u.onerror = onEnd; // treat error same as quick end → resolve or retry path
         this._speaking = true;
-        try { window.speechSynthesis.speak(u); } catch { finalize(); }
+        try { window.speechSynthesis.speak(u); } catch { resolve(); }
       });
     }
 
@@ -321,10 +173,11 @@
 
     setRate(x) { this.rate = x; localStorage.setItem('vc.rate', String(x)); }
     setVoiceByName(name) { this.voiceNamePref = name; localStorage.setItem('vc.voice', name); }
-    setEngine(name) { this.engine = name === 'api' ? 'api' : 'system'; try { localStorage.setItem('vc.engine', this.engine); } catch { } }
   }
 
   const VC = new SpeechEngine();
+  // Default Voice Coach ON across the site if not set
+  try { if (localStorage.getItem('vc.enabled') === null) localStorage.setItem('vc.enabled', 'true'); } catch { }
 
   // Prime/unlock speech on first user gesture (iOS/Safari policies)
   let __vc_unlocked = false;
@@ -341,10 +194,8 @@
       setTimeout(() => { try { window.speechSynthesis.cancel(); } catch { } }, 60);
     } catch { }
   }
-  ['pointerdown', 'pointerup', 'mousedown', 'click', 'touchstart', 'touchend', 'keydown'].forEach((evt) => {
-    window.addEventListener(evt, unlockSpeechOnce, { once: true, passive: true });
-  });
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') unlockSpeechOnce(); });
+  window.addEventListener('pointerdown', unlockSpeechOnce, { once: true, passive: true });
+  window.addEventListener('keydown', unlockSpeechOnce, { once: true });
 
   // ---------- BUILD / WIRE THE VOICE COACH PANEL ----------
   function ensureVoiceCoachPanel() {
@@ -364,19 +215,6 @@
             <div class="vc-value"><button class="vc-btn" id="vc-toggle" aria-pressed="true">On</button></div>
           </div>
           <div class="vc-row">
-            <div class="vc-label">Engine</div>
-            <div class="vc-value"><span id="vc-engine-status">System</span></div>
-          </div>
-          <div class="vc-row">
-            <label class="vc-label" for="vc-engine">Engine</label>
-            <div class="vc-value">
-              <select id="vc-engine" style="min-width:160px">
-                <option value="system">System</option>
-                <option value="api">API</option>
-              </select>
-            </div>
-          </div>
-          <div class="vc-row">
             <label class="vc-label" for="vc-voice">Voice</label>
             <div class="vc-value"><select id="vc-voice" style="min-width:160px"></select></div>
           </div>
@@ -386,19 +224,11 @@
               <input id="vc-rate" type="range" min="0.7" max="1.4" step="0.05" value="${VC.rate}" />
             </div>
           </div>
-          <div class="vc-row" id="vc-api-voice-row" style="display:none">
-            <label class="vc-label" for="vc-api-voice">API Voice</label>
-            <div class="vc-value">
-              <input id="vc-api-voice" type="text" placeholder="e.g. en-GB" style="min-width:160px" />
-            </div>
-          </div>
           <div class="vc-controls">
             <button class="vc-btn" id="vc-start">Start</button>
             <button class="vc-btn" id="vc-pause">Pause</button>
             <button class="vc-btn" id="vc-stop">Stop</button>
             <button class="vc-btn" id="vc-reset" title="Reset position">Reset</button>
-            <button class="vc-btn" id="vc-api" title="Configure API TTS">API ⚙</button>
-            <button class="vc-btn" id="vc-test" title="Test current voice">Test</button>
             <button class="vc-btn" id="vc-diag" title="Toggle tap diagnostic">Diag</button>
             <button class="vc-btn" id="vc-hide" title="Hide panel">Hide</button>
           </div>
@@ -432,18 +262,25 @@
     const savedEnabled = (() => { try { return localStorage.getItem('vc.enabled'); } catch { return null; } })();
     const enabledDefault = (savedEnabled == null) ? true : (savedEnabled === 'true');
 
-    // Populate voices (async-safe)
-    VC.ready.then(() => {
+    // Populate voices (async-safe) with System default and repopulate when voices arrive
+    function populateVcVoices() {
       const sel = $('#vc-voice', panel);
       if (!sel) return;
-      const voices = VC.voices.filter(v => /en/i.test(v.lang || 'en'));
-      if (!voices.length) return;
-      sel.innerHTML = voices.map(v => `<option value="${v.name}">${v.name}</option>`).join('');
-      const match = voices.find(v => v.name === VC.voiceNamePref) ? VC.voiceNamePref : voices[0].name;
-      sel.value = match;
-      VC.setVoiceByName(sel.value);
+      const voices = (VC.voices || []).filter(v => /en/i.test(v.lang || 'en'));
+      sel.innerHTML = '';
+      // System default first
+      const def = document.createElement('option'); def.value = ''; def.textContent = 'System default'; sel.appendChild(def);
+      // Add available voices if any
+      voices.forEach(v => { const o = document.createElement('option'); o.value = v.name; o.textContent = v.name; sel.appendChild(o); });
+      // Choose saved or default
+      const pref = (VC.voiceNamePref || '');
+      const hasPref = Array.from(sel.options).some(o => o.value === pref);
+      sel.value = hasPref ? pref : '';
+      VC.setVoiceByName(sel.value); // empty string means let browser choose
       sel.onchange = () => VC.setVoiceByName(sel.value);
-    });
+    }
+    VC.ready.then(populateVcVoices);
+    document.addEventListener('vc:voiceschanged', populateVcVoices);
 
     // Buttons
     const $toggle = $('#vc-toggle', panel);
@@ -452,11 +289,6 @@
     const $pause = $('#vc-pause', panel);
     const $stop = $('#vc-stop', panel);
     const $reset = $('#vc-reset', panel);
-    const $engine = $('#vc-engine', panel);
-    const $apiBtn = $('#vc-api', panel);
-    const $apiVoice = $('#vc-api-voice', panel);
-    const $engineStatus = $('#vc-engine-status', panel);
-    const $test = $('#vc-test', panel);
     const $diag = $('#vc-diag', panel);
     const $hide = $('#vc-hide', panel);
 
@@ -487,44 +319,6 @@
         document.querySelector('main, [role="main"]')?.textContent ||
         document.body.textContent;
       if (candidate) VC.speak(candidate, { clear: true });
-    });
-
-    // Engine toggle + API voice reflect
-    if ($engine) {
-      $engine.value = VC.engine;
-      const reflect = () => {
-        const apiOn = $engine.value === 'api';
-        $('#vc-api-voice-row', panel).style.display = apiOn ? '' : 'none';
-        if ($engineStatus) $engineStatus.textContent = apiOn ? 'API' : 'System';
-      };
-      reflect();
-      $engine.addEventListener('change', () => { VC.setEngine($engine.value); reflect(); });
-    }
-    if ($apiVoice) {
-      // load saved
-      try { $apiVoice.value = VC.api._cfg.voice || ''; } catch { }
-      $apiVoice.addEventListener('change', () => VC.api.setVoice($apiVoice.value.trim()));
-    }
-    $apiBtn?.addEventListener('click', () => {
-      // Minimal config prompts to avoid heavy UI
-      const base = prompt('Enter API base URL (use {voice} and {text} placeholders)\nExample: https://example.com/tts?voice={voice}&text={text}', VC.api._cfg.base || '');
-      if (base == null) return; VC.api._cfg.base = base.trim();
-      const mode = prompt('Mode: get-template or post-json', VC.api._cfg.mode || 'get-template');
-      if (mode) VC.api._cfg.mode = (/post/i.test(mode) ? 'post-json' : 'get-template');
-      const auth = prompt('Optional Authorization header (e.g. Bearer ...). Leave blank if not needed', VC.api._cfg.auth || '');
-      if (auth != null) VC.api._cfg.auth = auth.trim();
-      const voice = prompt('API voice id/name (used as {voice})', VC.api._cfg.voice || 'en-GB');
-      if (voice) { VC.api._cfg.voice = voice; if ($apiVoice) $apiVoice.value = voice; }
-      const on = confirm('Enable API TTS now? (OK = yes, Cancel = no)');
-      VC.api._cfg.enabled = !!on; VC.setEngine(on ? 'api' : 'system');
-      VC.api._save();
-      if ($engine) $engine.value = on ? 'api' : 'system';
-      if ($engineStatus) $engineStatus.textContent = on ? 'API' : 'System';
-      alert('Saved API TTS settings. Engine: ' + (on ? 'API' : 'System'));
-    });
-    $test?.addEventListener('click', () => {
-      const sample = 'Testing voice coach. This is a sample sentence.';
-      VC.speak(sample, { clear: true });
     });
 
     // Hide panel -> show mini toggle
@@ -780,40 +574,9 @@
   }
 
   // ---------- PER-CARD NARRATOR BUTTONS ----------
-  function ensureCardNarrators() {
-    const cards = Array.from(document.querySelectorAll('.card, section.card, article.card'));
-    cards.forEach((card) => {
-      if (card.querySelector('.vc-auto-bar')) return;
-      const bar = document.createElement('div');
-      bar.className = 'vc-auto-bar';
-      bar.style.cssText = 'display:flex;gap:8px;align-items:center;margin:8px 0 0;flex-wrap:wrap';
-      const sayBtn = document.createElement('button');
-      sayBtn.type = 'button';
-      sayBtn.className = 'btn vc-speak';
-      sayBtn.innerHTML = '🎧 Start';
-      const stopBtn = document.createElement('button');
-      stopBtn.type = 'button';
-      stopBtn.className = 'btn';
-      stopBtn.textContent = '■ Stop';
-      bar.appendChild(sayBtn); bar.appendChild(stopBtn);
-      // Insert after heading if present
-      const anchor = card.querySelector('h2, h3, header') || card.firstElementChild || card;
-      anchor.after(bar);
-      sayBtn.addEventListener('click', (ev) => {
-        ev.preventDefault();
-        unlockSpeechOnce();
-        const toggle = document.getElementById('vc-toggle');
-        if (toggle?.getAttribute('aria-pressed') === 'false') {
-          toggle.setAttribute('aria-pressed', 'true');
-          toggle.textContent = 'On';
-          try { localStorage.setItem('vc.enabled', 'true'); } catch { }
-        }
-        const txt = (card.textContent || '').trim();
-        if (txt) VC.speak(txt, { clear: true });
-      });
-      stopBtn.addEventListener('click', () => VC.stop());
-    });
-  }
+  // Removed per user request: do NOT inject extra Start/Stop buttons into cards.
+  // Keep function present as a no-op to avoid breaking existing init flow.
+  function ensureCardNarrators() { /* no-op (duplicate controls removed site-wide) */ }
 
   // ---------- FOCUS SCREEN FIX (controls + duplicate cleanup) ----------
   function fixFocusScreens() {
@@ -830,46 +593,17 @@
       screens.forEach(s => { if (s !== keep) s.classList.add('vc-hide'); });
     }
 
-    // Add Start/Pause/Stop chips inside the visible focus/player container
+    // Identify the visible focus/player container (for potential non-button cleanups)
     const host = $('.focus-screen:not(.vc-hide), .breathing-focus:not(.vc-hide), .breath-player:not(.vc-hide), .breathing-viewport:not(.vc-hide), #focus:not(.vc-hide), .focus:not(.vc-hide)') || screens[0];
     if (!host) return;
 
-    // Remove Back-to-hub/section button
+    // Remove Back-to-hub/section button if present inside the focus container
     $$('a,button', host).forEach(b => {
       const t = byText(b);
       if (t === 'back to hub/section' || t === 'back to hub' || t === 'back') b.remove();
     });
 
-    if (!$('.vc-focus-controls', host)) {
-      const box = document.createElement('div');
-      box.className = 'vc-focus-controls';
-      box.innerHTML = `
-        <button type="button" class="vc-chip" data-vc="start">Start</button>
-        <button type="button" class="vc-chip" data-vc="pause">Pause</button>
-        <button type="button" class="vc-chip" data-vc="stop">Stop</button>`;
-      host.style.position = host.style.position || 'relative';
-      host.appendChild(box);
-
-      box.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-vc]');
-        if (!btn) return;
-        const kind = btn.getAttribute('data-vc');
-        if (kind === 'start') {
-          // Try to narrate visible instruction (Inhale/Hold/Exhale) if present
-          const visible = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2);
-          const maybeText = (visible?.textContent || '').trim();
-          const program = detectBreathingProgram(host) || defaultBoxProgram();
-          narrateBreathing(program);
-          if (maybeText) VC.speak(maybeText, { clear: false });
-        } else if (kind === 'pause') {
-          VC.pause();
-          document.dispatchEvent(new CustomEvent('breathing:pause'));
-        } else if (kind === 'stop') {
-          VC.stop();
-          document.dispatchEvent(new CustomEvent('breathing:stop'));
-        }
-      });
-    }
+    // Do NOT add Start/Pause/Stop chips here; pages already provide their own controls.
   }
 
   function defaultBoxProgram() {
@@ -975,18 +709,9 @@
     bindHeadphoneButtons();
     ensureCardNarrators();
     fixFocusScreens();
-    // Skip Voice Coach's own mobile overlay if a dedicated nav override is present
-    if (!window.__NAV_OVERRIDE__) ensureMobileOverlay();
-
-    // Expose a tiny global so pages can reuse unified TTS (merge, don't clobber existing helpers)
-    window.__MSHARE__ = window.__MSHARE__ || {};
-    const prevTTS = (window.__MSHARE__.TTS && typeof window.__MSHARE__.TTS === 'object') ? window.__MSHARE__.TTS : {};
-    window.__MSHARE__.TTS = Object.assign({}, prevTTS, {
-      speak: (t, opts) => VC.speak(String(t || ''), opts || {}),
-      stop: () => VC.stop(),
-      pause: () => VC.pause(),
-      setEngine: (name) => VC.setEngine(name)
-    });
+    ensureMobileOverlay();
+    // Force any page-level TTS select to 'on' so narration is enabled by default
+    try { const ttsSel = document.getElementById('tts'); if (ttsSel) ttsSel.value = 'on'; } catch { }
 
     // If pages are dynamically swapped, keep us alive
     const ro = new MutationObserver((muts) => {

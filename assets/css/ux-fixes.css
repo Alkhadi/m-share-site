@@ -81,7 +81,7 @@ html {
 }
 
 :root {
-  --bg: #0f172a;
+  --bg: #B0B0CD;
   --bg-bright: #eaf4ff;
   --text: #e5e7eb;
   --ink: #0b1220;
@@ -376,28 +376,4 @@ main {
   display: grid;
   gap: 12px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-/* Tips grid and downloads row */
-.tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-  margin-top: 6px;
-}
-
-.tips-grid .tip.tile {
-  padding: 8px 10px;
-}
-
-.downloads-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.downloads-row strong {
-  margin-right: 6px;
 }

@@ -1,57 +1,10 @@
-<<<<<<< HEAD
-:root{--nav-bg:#0b1020;--nav-fg:#e5e7eb;--nav-muted:#9aa4b2;--nav-b:#1f2937;--chip:#3b82f6;--chip-fg:#0b1020}
-.site-header{position:sticky;top:0;z-index:100;backdrop-filter:saturate(1.2) blur(8px);background:rgba(8,12,24,.75);border-bottom:1px solid rgba(255,255,255,.06)}
-.navbar{display:flex;align-items:center;gap:14px;padding:14px 16px}
-.brand{display:flex;align-items:center;gap:10px;color:var(--nav-fg);font-weight:800;text-decoration:none}
-.brand .logo{background:var(--chip)!important;color:var(--chip-fg)!important;border-radius:12px;display:inline-grid;place-items:center;width:36px;height:36px;font-weight:800;box-shadow:0 10px 24px rgba(59,130,246,.45)}
-.brand .brand-text{font-size:1.25rem}
-.main-nav{display:flex;gap:16px;align-items:center}
-.main-nav>a,.menu-toggle{border:1px solid var(--nav-b);background:var(--nav-bg);color:var(--nav-fg);padding:12px 18px;border-radius:18px;font-weight:900;display:inline-flex;align-items:center;gap:10px}
-.menu-toggle .icon{opacity:.75}
-.menu-group{position:relative}
-.submenu{display:none;position:absolute;left:0;top:calc(100% + 10px);min-width:340px;background:rgba(10,14,24,.98);color:var(--nav-fg);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 18px 42px rgba(0,0,0,.45);padding:12px;z-index:1000}
-.menu-group.open>.submenu{display:block}
-.submenu .menu-label{opacity:.65;font-weight:900;font-size:.88rem;letter-spacing:.12em;text-transform:uppercase;margin:8px 10px 6px}
-.submenu a{display:block;padding:12px 14px;border-radius:12px;color:var(--nav-fg);text-decoration:none}
-.submenu a:hover{background:rgba(255,255,255,.06)}
-.nav-toggle{margin-left:auto;border:1px solid var(--nav-b);background:var(--nav-bg);color:var(--nav-fg);padding:10px 14px;border-radius:12px;display:none}
-@media(max-width:760px){
-  .main-nav{display:none;position:absolute;right:16px;top:64px;flex-direction:column;gap:10px;background:rgba(8,12,24,.98);border:1px solid var(--nav-b);border-radius:16px;box-shadow:0 18px 42px rgba(0,0,0,.45);width:min(96vw,380px);padding:12px;z-index:1100}
-  .main-nav.open{display:flex}
-  .submenu{position:static;display:none;border-radius:14px;margin:6px 0}
-  .menu-group.open>.submenu{display:block}
-  .nav-toggle{display:inline-block}
-}
-.footer-2025{margin-top:22px;border-top:1px solid rgba(255,255,255,.06);background:rgba(8,12,24,.75)}
-.footer-2025 .wrap{max-width:1200px;margin:0 auto;padding:24px 28px}
-@media(min-width:1024px){.footer-2025 .wrap{padding:28px 40px}}
-.footer-2025 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
-@media(max-width:760px){.footer-2025 .grid{grid-template-columns:1fr}}
-.footer-2025 .brandline{display:flex;gap:10px;align-items:center}
-.footer-2025 .brandline .logo{background:var(--chip)!important;color:var(--chip-fg)!important;border-radius:12px;width:36px;height:36px;display:grid;place-items:center;font-weight:800;box-shadow:0 10px 24px rgba(59,130,246,.45)}
-.footer-2025 .bottom{margin-top:16px;display:flex;justify-content:space-between;gap:12px;color:#9aa4b2}
-.voice-coach{position:fixed;right:14px;bottom:14px;background:rgba(10,14,24,.92);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px;z-index:1200;box-shadow:0 14px 28px rgba(0,0,0,.4);color:#e5e7eb;display:grid;gap:8px;min-width:240px}
-.voice-coach h4{margin:0;font-size:.95rem}
-.voice-coach .row{display:flex;gap:8px;align-items:center}
-.voice-coach select,.voice-coach input[type=range]{width:100%}
-=======
-/*
- * Navigation and footer styling for MindPayLink
- *
- * This stylesheet defines the visual appearance of the unified navigation
- * bar and footer. It uses CSS custom properties to allow easy theming and
- * includes responsive breakpoints for a smooth mobile experience. The
- * responsive behaviour (showing/hiding the main navigation and dropdowns)
- * is handled by JavaScript in nav-autofix.js.
- */
-
 :root {
   --nav-bg: #0b1020;
-  --nav-fg: #e5e7eb;
-  --nav-muted: #9aa4b2;
+  --nav-fg: #ffffff;
+  --nav-muted: #cbd5e1;
   --nav-b: #1f2937;
   --chip: #3b82f6;
-  --chip-fg: #0b1020;
+  --chip-fg: #0b1020
 }
 
 .site-header {
@@ -59,15 +12,15 @@
   top: 0;
   z-index: 100;
   backdrop-filter: saturate(1.2) blur(8px);
-  background: rgba(8, 12, 24, 0.75);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(8, 12, 24, .75);
+  border-bottom: 1px solid rgba(255, 255, 255, .06)
 }
 
 .navbar {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 16px;
+  padding: 14px 16px
 }
 
 .brand {
@@ -76,7 +29,7 @@
   gap: 10px;
   color: var(--nav-fg);
   font-weight: 800;
-  text-decoration: none;
+  text-decoration: none
 }
 
 .brand .logo {
@@ -88,20 +41,20 @@
   width: 36px;
   height: 36px;
   font-weight: 800;
-  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.45);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, .45)
 }
 
 .brand .brand-text {
-  font-size: 1.25rem;
+  font-size: 1.25rem
 }
 
 .main-nav {
   display: flex;
   gap: 16px;
-  align-items: center;
+  align-items: center
 }
 
-.main-nav > a,
+.main-nav>a,
 .menu-toggle {
   border: 1px solid var(--nav-b);
   background: var(--nav-bg);
@@ -111,16 +64,15 @@
   font-weight: 900;
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  cursor: pointer;
+  gap: 10px
 }
 
 .menu-toggle .icon {
-  opacity: 0.75;
+  opacity: .75
 }
 
 .menu-group {
-  position: relative;
+  position: relative
 }
 
 .submenu {
@@ -129,41 +81,40 @@
   left: 0;
   top: calc(100% + 10px);
   min-width: 340px;
-  background: rgba(10, 14, 24, 0.98);
+  background: rgba(10, 14, 24, .98);
   color: var(--nav-fg);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, .08);
   border-radius: 16px;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .45);
   padding: 12px;
-  z-index: 1000;
+  z-index: 1000
 }
 
-.menu-group.open > .submenu {
-  display: block;
+.menu-group.open>.submenu {
+  display: block
 }
 
 .submenu .menu-label {
-  opacity: 0.65;
+  opacity: .65;
   font-weight: 900;
-  font-size: 0.88rem;
-  letter-spacing: 0.12em;
+  font-size: .88rem;
+  letter-spacing: .12em;
   text-transform: uppercase;
-  margin: 8px 10px 6px;
+  margin: 8px 10px 6px
 }
 
 .submenu a {
   display: block;
   padding: 12px 14px;
   border-radius: 12px;
-  color: var(--nav-fg);
-  text-decoration: none;
+  color: #ffffff;
+  text-decoration: none
 }
 
 .submenu a:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, .06)
 }
 
-/* Hamburger toggle defaults off on wide screens */
 .nav-toggle {
   margin-left: auto;
   border: 1px solid var(--nav-b);
@@ -171,11 +122,10 @@
   color: var(--nav-fg);
   padding: 10px 14px;
   border-radius: 12px;
-  display: none;
-  cursor: pointer;
+  display: none
 }
 
-@media (max-width: 760px) {
+@media(max-width:760px) {
   .main-nav {
     display: none;
     position: absolute;
@@ -183,66 +133,69 @@
     top: 64px;
     flex-direction: column;
     gap: 10px;
-    background: rgba(8, 12, 24, 0.98);
+    background: rgba(8, 12, 24, .98);
     border: 1px solid var(--nav-b);
     border-radius: 16px;
-    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, .45);
     width: min(96vw, 380px);
     padding: 12px;
-    z-index: 1100;
+    z-index: 1100
   }
+
   .main-nav.open {
-    display: flex;
+    display: flex
   }
+
   .submenu {
     position: static;
     display: none;
     border-radius: 14px;
-    margin: 6px 0;
+    margin: 6px 0
   }
-  .menu-group.open > .submenu {
-    display: block;
+
+  .menu-group.open>.submenu {
+    display: block
   }
+
   .nav-toggle {
-    display: inline-block;
+    display: inline-block
   }
 }
 
-/* Footer styling */
 .footer-2025 {
   margin-top: 22px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(8, 12, 24, 0.75);
+  border-top: 1px solid rgba(255, 255, 255, .06);
+  background: rgba(8, 12, 24, .75)
 }
 
 .footer-2025 .wrap {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 24px 28px;
+  padding: 24px 28px
 }
 
-@media (min-width: 1024px) {
+@media(min-width:1024px) {
   .footer-2025 .wrap {
-    padding: 28px 40px;
+    padding: 28px 40px
   }
 }
 
 .footer-2025 .grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 16px
 }
 
-@media (max-width: 760px) {
+@media(max-width:760px) {
   .footer-2025 .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr
   }
 }
 
 .footer-2025 .brandline {
   display: flex;
   gap: 10px;
-  align-items: center;
+  align-items: center
 }
 
 .footer-2025 .brandline .logo {
@@ -254,15 +207,45 @@
   display: grid;
   place-items: center;
   font-weight: 800;
-  box-shadow: 0 10px 24px rgba(59, 130, 246, 0.45);
+  box-shadow: 0 10px 24px rgba(59, 130, 246, .45)
 }
 
 .footer-2025 .bottom {
   margin-top: 16px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   gap: 12px;
-  color: #9aa4b2;
+  color: #ffffff
 }
->>>>>>> f4c36ed (Fix: 2025 header/footer, remove Wellbeing, hamburger nav, restore Voice Coach)
+
+.voice-coach {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  background: rgba(10, 14, 24, .92);
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 12px;
+  padding: 10px;
+  z-index: 1200;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, .4);
+  color: #e5e7eb;
+  display: grid;
+  gap: 8px;
+  min-width: 240px
+}
+
+.voice-coach h4 {
+  margin: 0;
+  font-size: .95rem
+}
+
+.voice-coach .row {
+  display: flex;
+  gap: 8px;
+  align-items: center
+}
+
+.voice-coach select,
+.voice-coach input[type=range] {
+  width: 100%
+}
