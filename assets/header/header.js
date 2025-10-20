@@ -320,10 +320,15 @@
                         });
                     }
                     btn.setAttribute('aria-expanded', String(!open));
-                    list.style.display = open ? 'none' : '';
+                    // Inline style must override CSS [data-mm-list]{display:none}; use block when opened
+                    list.style.display = open ? 'none' : 'block';
                 };
+                // Allow clicking anywhere on the toggle (label or chevron) to open/close
                 btn.addEventListener('click', (e) => { e.preventDefault(); toggleOne(); });
-                btn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOne(); } else if (e.key === 'Escape') { e.preventDefault(); btn.setAttribute('aria-expanded', 'false'); list.style.display = 'none'; btn.focus(); } });
+                btn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOne(); }
+                    else if (e.key === 'Escape') { e.preventDefault(); btn.setAttribute('aria-expanded', 'false'); list && (list.style.display = 'none'); btn.focus(); }
+                });
                 // Explicitly make chevron also a hit target (inside button already, but ensure for AT/analytics)
                 btn.querySelector('.mm-chevron')?.addEventListener('click', (e) => { e.preventDefault(); toggleOne(); });
                 sec.appendChild(btn); sec.appendChild(list); mount.appendChild(sec);
