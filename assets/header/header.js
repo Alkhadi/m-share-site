@@ -4,8 +4,7 @@
 		<div class="container navbar">
 			<a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> <span class="brand-text">M Share</span></a>
 
-			<nav class="main-nav" id="mainNav">
-	<a data-href="index.html">Wellbeing</a>
+            <nav class="main-nav" id="mainNav">
 	<div class="menu-group">
 		<button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
 		<div class="submenu">
