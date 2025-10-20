@@ -232,8 +232,25 @@
         function wireMobile() {
             const toggle = document.getElementById('navToggle'); if (!toggle) return;
             ensureMobileOverlay();
-            const open = () => { const ov = document.getElementById('mpl-mobile-overlay'); ov.setAttribute('open', ''); toggle.setAttribute('aria-expanded', 'true'); document.body.classList.add('nav-open'); buildMobileMenu(); };
-            const close = () => { const ov = document.getElementById('mpl-mobile-overlay'); ov.removeAttribute('open'); toggle.setAttribute('aria-expanded', 'false'); document.body.classList.remove('nav-open'); toggle.focus && toggle.focus(); };
+            const open = () => {
+                const ov = document.getElementById('mpl-mobile-overlay');
+                ov.setAttribute('open', '');
+                toggle.setAttribute('aria-expanded', 'true');
+                document.body.classList.add('nav-open');
+                const nav = document.getElementById('mainNav');
+                if (nav && !mq.matches) nav.setAttribute('hidden', '');
+                buildMobileMenu();
+            };
+            const close = () => {
+                const ov = document.getElementById('mpl-mobile-overlay');
+                ov.removeAttribute('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('nav-open');
+                // Keep header nav hidden on mobile; the overlay is the nav
+                const nav = document.getElementById('mainNav');
+                if (nav && !mq.matches) nav.setAttribute('hidden', '');
+                toggle.focus && toggle.focus();
+            };
 
             const onToggle = (e) => { e.preventDefault(); const openNow = toggle.getAttribute('aria-expanded') === 'true'; if (openNow) close(); else open(); };
             const onBackdropClick = (e) => { const ov = document.getElementById('mpl-mobile-overlay'); if (!ov) return; if (ov.hasAttribute('open') && e.target === ov) close(); };
@@ -273,11 +290,15 @@
                 const t = document.getElementById('navToggle');
                 if (t) t.setAttribute('aria-expanded', 'false');
                 document.body.classList.remove('nav-open');
+                const nav = document.getElementById('mainNav');
+                if (nav && !mq.matches) nav.setAttribute('hidden', '');
             });
         }
 
         function buildMobileMenu() {
             const mount = document.getElementById('mpl-mobile-body'); if (!mount) return; mount.innerHTML = '';
+            const nav = document.getElementById('mainNav');
+            if (nav && !mq.matches) nav.setAttribute('hidden', '');
             const groups = findTopNavGroups();
             groups.forEach((g, idx) => {
                 const sec = document.createElement('section');
@@ -333,7 +354,20 @@
                 sec.appendChild(btn); sec.appendChild(list); mount.appendChild(sec);
             });
         }
-        const react = () => { if (mq.matches) { wireMobileCleanup(); enhanceDesktop(); } else { teardownDesktop(); wireMobile(); } };
+        const react = () => {
+            const nav = document.getElementById('mainNav');
+            if (mq.matches) {
+                // Desktop: ensure header nav is visible
+                if (nav) nav.removeAttribute('hidden');
+                wireMobileCleanup();
+                enhanceDesktop();
+            } else {
+                // Mobile: hide header nav; we use the full-screen overlay menu instead
+                if (nav) nav.setAttribute('hidden', '');
+                teardownDesktop();
+                wireMobile();
+            }
+        };
         let mobileCleanupFns = []; function wireMobileCleanup() { mobileCleanupFns.forEach(fn => { try { fn(); } catch { } }); mobileCleanupFns = []; }
         if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', react, { once: true }); else react();
         mq.addEventListener('change', react);
