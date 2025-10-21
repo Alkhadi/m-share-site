@@ -466,6 +466,29 @@
       color: #0b0d10 !important;
     }
   </style>
+  <!-- Dyslexia-specific readability tuning -->
+  <style id="dlx-accessibility-vars">
+    :root {
+      --dlx-line-height: 1.6;
+      --dlx-letter-spacing: 0.05em;
+      --dlx-word-spacing: 0.12em;
+    }
+
+    body {
+      line-height: var(--dlx-line-height);
+      letter-spacing: var(--dlx-letter-spacing);
+      word-spacing: var(--dlx-word-spacing);
+      font-family: 'Open Dyslexic', Arial, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+
+    .dlx-standard-text {
+      /* opt-out zone if needed */
+      line-height: 1.5;
+      letter-spacing: normal;
+      word-spacing: normal;
+      font-family: inherit;
+    }
+  </style>
 </head>
 
 <body>
@@ -854,6 +877,88 @@
         </div>
         <div id="vcLadderOut" class="muted" style="margin-top:6px"></div>
       </div>
+    </div>
+
+    <!-- Advanced training (comprehension, memory, focus) -->
+    <div class="card" id="sec-advanced">
+      <h2>Advanced Training: Comprehension, Memory &amp; Focus</h2>
+      <div class="card">
+        <h4>Active Comprehension: Creating mental movies</h4>
+        <ol>
+          <li><strong>Read and pause:</strong> two or three sentences, then stop.</li>
+          <li><strong>Visualise:</strong> what did you see/hear/smell/feel? Name details.</li>
+          <li><strong>Verbalise:</strong> say the image out loud to anchor it.</li>
+          <li><strong>Connect:</strong> link the next bit to your last image.</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h4>Memory &amp; Focus tools</h4>
+        <div class="grid-2-cols">
+          <div class="tile">
+            <h5>Working memory: Chunking</h5>
+            <p>Group information into manageable chunks to aid retention.</p>
+            <button class="btn" id="btnChunkDrill" type="button">Start Chunking Drill (In‑App)</button>
+          </div>
+          <div class="tile">
+            <h5>Sustained focus: Visual Pomodoro</h5>
+            <p>Focused bursts with short breaks to avoid fatigue.</p>
+            <button class="btn" id="btnFocusTimer" type="button">Open Visual Focus Timer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- M Share app tools (trainer) -->
+    <div class="card card-brand-mshare" id="sec-mshare-app">
+      <h2 style="color:#007BFF;">M Share App Tools</h2>
+      <div class="grid-3-cols">
+        <div class="tile">
+          <h5>Focus Filter Mode</h5>
+          <p>Applies a soft colour overlay; some readers find this steadies text.</p>
+        </div>
+        <div class="tile">
+          <h5>Text‑to‑Speech with tracking</h5>
+          <p>Reads aloud while highlighting the current word.</p>
+        </div>
+        <div class="tile">
+          <h5>Distraction‑Free Writer</h5>
+          <p>Minimal interface to keep writing flow.</p>
+        </div>
+      </div>
+
+      <h4 id="mshareTrainerTitle">➡️ M Share Trainer: Multi‑modal paced reading</h4>
+      <div class="card">
+        <div class="grid-3-cols" style="align-items:end;">
+          <div class="tile">
+            <label for="trainerText">Reading text (short)</label>
+            <textarea id="trainerText"
+              rows="3">The quick brown fox jumps over the lazy dog. Reading with a consistent pace reduces regression and builds fluency.</textarea>
+          </div>
+          <div class="tile">
+            <label for="trainerPace">Speed (WPM)</label>
+            <input id="trainerPace" type="number" value="120" min="60" max="400">
+          </div>
+          <div class="tile">
+            <label>&nbsp;</label>
+            <div class="actions">
+              <button id="startTrainer" class="btn btn-success" type="button">▶️ Start Paced Reading</button>
+              <button id="stopTrainer" class="btn" type="button" disabled>⏹ Stop Trainer</button>
+            </div>
+          </div>
+        </div>
+        <div id="trainerDisplay"
+          style="margin-top:15px;padding:10px;border:1px solid var(--b);min-height:80px;border-radius:8px;background:#f0f0f0;font-size:1.1em;">
+          <p class="muted">Trainer will display text here, highlighting words at the chosen pace.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- General reading speed training -->
+    <div class="card dlx-standard-text" id="sec-speedread">
+      <h2>General Reading Speed Training (for everyone)</h2>
+      <h4>The Pointer Method: Smooth pacing</h4>
+      <p>Use a finger/pen/stylus to steadily underline text as you read.</p>
+      <div class="actions"><button class="btn" id="btnOpenPacer" type="button">Start Digital Pacer Tool</button></div>
     </div>
 
     <!-- 4) Fluency lines with pacer -->
@@ -1508,6 +1613,89 @@
           if (!MQ.matches) return;
           var hit = e.target.closest('.menu-group'); if (!hit) closeOthers(null);
         }, { passive: true });
+      })();
+    })();
+  </script>
+
+  <!-- New feature wiring for Advanced/M Share trainer/speed tools -->
+  <script>
+    (function () {
+      // Helper: smooth scroll to an element and focus its first button
+      function scrollToAndFocus(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        try { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch { }
+        var btn = el.querySelector('button, [role="button"], input, select, textarea');
+        if (btn) setTimeout(() => btn.focus(), 300);
+      }
+
+      // Chunking Drill: simple guided overlay showing grouping
+      var btnChunk = document.getElementById('btnChunkDrill');
+      if (btnChunk) {
+        btnChunk.addEventListener('click', function () {
+          var sample = '1485392';
+          var grouped = '148-539-2';
+          Modal.show({
+            title: 'Chunking Drill',
+            html: '<p><strong>Remember this:</strong></p>' +
+              '<div style="font-size:2rem;font-weight:800;letter-spacing:.08em">' + sample + '</div>' +
+              '<p class="muted" style="margin:.5rem 0 0">Now group into chunks, then say each chunk:</p>' +
+              '<div style="font-size:1.6rem;font-weight:700;letter-spacing:.12em">' + grouped + '</div>',
+            okText: 'Done'
+          });
+        });
+      }
+
+      // Visual Focus Timer: use Pomodoro micro with classic 25/5 by default
+      var btnFocusTimer = document.getElementById('btnFocusTimer');
+      if (btnFocusTimer) {
+        btnFocusTimer.addEventListener('click', function () {
+          try { Pomo.start({ work: 25 * 60, break: 5 * 60 }); } catch { }
+        });
+      }
+
+      // Open existing Fluency Pacer section
+      var btnOpenPacer = document.getElementById('btnOpenPacer');
+      if (btnOpenPacer) {
+        btnOpenPacer.addEventListener('click', function () { scrollToAndFocus('pacer'); });
+      }
+
+      // Lightweight Trainer (separate from full pacer)
+      var trainer = (function () {
+        var textEl = document.getElementById('trainerText');
+        var paceEl = document.getElementById('trainerPace');
+        var start = document.getElementById('startTrainer');
+        var stop = document.getElementById('stopTrainer');
+        var display = document.getElementById('trainerDisplay');
+        if (!textEl || !paceEl || !start || !stop || !display) return;
+        var words = [], idx = 0, timer = null, t0 = 0;
+        function esc(s) {
+          return String(s || '').replace(/[&<>"']/g, function (m) {
+            var map = {
+              "&": "&amp;", "<": "&lt;",
+              ">": "&gt;", "\"": "&quot;", "'": "&#39;"
+            };
+            return map[m] || m;
+          });
+        }
+        function interval() { var wpm = Math.max(60, Math.min(400, parseInt(paceEl.value || 120, 10))); return Math.round(60000 / wpm); }
+        function render() {
+          var prev = words.slice(0, idx).join(' '); var curr = words[idx] || ''; var rest = words.slice(idx + 1).join(' ');
+          display.innerHTML = '<span class="pacer-prev">' + esc(prev) + '</span> <span class="pacer-current">' + esc(curr) + '</span> <span class="pacer-muted">' + esc(rest) + '</span>';
+        }
+        function begin() {
+          words = (textEl.value || '').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
+          if (!words.length) { display.innerHTML = '<p class="muted">Add some text above to start.</p>'; return; }
+          idx = 0; start.disabled = true; stop.disabled = false; t0 = performance.now(); render();
+          clearInterval(timer);
+          timer = setInterval(function () { idx++; if (idx >= words.length) { end(false); return; } render(); }, interval());
+        }
+        function end(byUser) {
+          clearInterval(timer); start.disabled = false; stop.disabled = true; try { window.__MSHARE__ && window.__MSHARE__.Stats && window.__MSHARE__.Stats.add({ tool: 'trainer', seconds: (performance.now() - t0) / 1000, score: words.length || 0 }); } catch { }
+          if (byUser) endAndDyslexia();
+        }
+        start.addEventListener('click', function () { beginTraining('trainer', document.getElementById('sec-mshare-app') || display, begin); });
+        stop.addEventListener('click', function () { end(true); });
       })();
     })();
   </script>

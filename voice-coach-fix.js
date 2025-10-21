@@ -436,6 +436,9 @@
     let panelX = 0, panelY = 0; // panel top-left
     const dragTarget = handle || panel; // default to whole panel
 
+    // Avoid double-binding if called multiple times (idempotent)
+    if (dragTarget.__vc_drag_bound) return; dragTarget.__vc_drag_bound = true;
+
     const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
     function save(x, y) {
@@ -492,6 +495,59 @@
       save(r.left, r.top);
     }
 
+    // Mouse fallbacks (for older browsers / when Pointer Events are unavailable)
+    function onMouseDown(e) {
+      // If pointer events fired, skip duplicate work
+      if (window.PointerEvent) return;
+      if (e.button !== undefined && e.button !== 0) return;
+      if (isInteractive(e.target)) return;
+      e.preventDefault();
+      toFixedPosition();
+      const r = rect(); dragging = true; startX = e.clientX; startY = e.clientY; panelX = r.left; panelY = r.top;
+      window.addEventListener('mousemove', onMouseMove, { passive: false });
+      window.addEventListener('mouseup', onMouseUp, { passive: true, once: true });
+    }
+    function onMouseMove(e) {
+      if (!dragging) return;
+      e.preventDefault();
+      const dx = e.clientX - startX; const dy = e.clientY - startY;
+      const r = rect(); const maxX = window.innerWidth - r.width; const maxY = window.innerHeight - r.height;
+      const nx = panelX + dx; const ny = panelY + dy;
+      const cx = clamp(nx, 6, Math.max(6, maxX - 6)); const cy = clamp(ny, 6, Math.max(6, maxY - 6));
+      panel.style.left = cx + 'px'; panel.style.top = cy + 'px';
+    }
+    function onMouseUp() {
+      if (!dragging) return; dragging = false;
+      const r = rect(); save(r.left, r.top);
+      window.removeEventListener('mousemove', onMouseMove);
+    }
+
+    // Touch fallbacks
+    function onTouchStart(e) {
+      if (window.PointerEvent) return; // pointer will handle
+      const t = e.touches && e.touches[0]; if (!t) return;
+      if (isInteractive(e.target)) return;
+      e.preventDefault();
+      toFixedPosition();
+      const r = rect(); dragging = true; startX = t.clientX; startY = t.clientY; panelX = r.left; panelY = r.top;
+      window.addEventListener('touchmove', onTouchMove, { passive: false });
+      window.addEventListener('touchend', onTouchEnd, { passive: true, once: true });
+      window.addEventListener('touchcancel', onTouchEnd, { passive: true, once: true });
+    }
+    function onTouchMove(e) {
+      if (!dragging) return; const t = e.touches && e.touches[0]; if (!t) return;
+      e.preventDefault();
+      const dx = t.clientX - startX; const dy = t.clientY - startY;
+      const r = rect(); const maxX = window.innerWidth - r.width; const maxY = window.innerHeight - r.height;
+      const nx = panelX + dx; const ny = panelY + dy;
+      const cx = clamp(nx, 6, Math.max(6, maxX - 6)); const cy = clamp(ny, 6, Math.max(6, maxY - 6));
+      panel.style.left = cx + 'px'; panel.style.top = cy + 'px';
+    }
+    function onTouchEnd() {
+      if (!dragging) return; dragging = false; const r = rect(); save(r.left, r.top);
+      window.removeEventListener('touchmove', onTouchMove);
+    }
+
     // Improve drag UX
     dragTarget.style.touchAction = 'none';
     // Optional: show move cursor for the panel background (don’t override when inside form controls)
@@ -500,6 +556,12 @@
     dragTarget.addEventListener('pointerdown', onPointerDown, { passive: false });
     window.addEventListener('pointermove', onPointerMove, { passive: true });
     window.addEventListener('pointerup', onPointerUp, { passive: true });
+
+    // Fallback bindings
+    dragTarget.addEventListener('mousedown', onMouseDown, { passive: false });
+    // mousemove/up added dynamically on mousedown
+    dragTarget.addEventListener('touchstart', onTouchStart, { passive: false });
+    // touchmove/end added dynamically on touchstart
 
     // Keep the panel within viewport on resize/rotation
     window.addEventListener('resize', () => {
@@ -846,6 +908,36 @@
     handle.addEventListener('pointerdown', onDown, { passive: false });
     window.addEventListener('pointermove', onMove, { passive: true });
     window.addEventListener('pointerup', onUp, { passive: true });
+
+    // Mouse fallbacks
+    function onMouseDown(e) {
+      if (window.PointerEvent) return;
+      if (e.button !== undefined && e.button !== 0) return;
+      e.preventDefault(); toFixed(dlg); const r = rect(); dragging = true; sx = e.clientX; sy = e.clientY; px = r.left; py = r.top;
+      window.addEventListener('mousemove', onMouseMove, { passive: false });
+      window.addEventListener('mouseup', onMouseUp, { passive: true, once: true });
+    }
+    function onMouseMove(e) {
+      if (!dragging) return; e.preventDefault(); const dx = e.clientX - sx, dy = e.clientY - sy; const r = rect(); let nx = px + dx, ny = py + dy; const maxX = window.innerWidth - r.width; const maxY = window.innerHeight - r.height; nx = clamp(nx, 6, Math.max(6, maxX - 6)); ny = clamp(ny, 6, Math.max(6, maxY - 6)); dlg.style.left = nx + 'px'; dlg.style.top = ny + 'px';
+    }
+    function onMouseUp() { if (!dragging) return; dragging = false; const r = rect(); savePos(r.left, r.top); window.removeEventListener('mousemove', onMouseMove); }
+
+    // Touch fallbacks
+    function onTouchStart(e) {
+      if (window.PointerEvent) return;
+      const t = e.touches && e.touches[0]; if (!t) return; e.preventDefault(); toFixed(dlg);
+      const r = rect(); dragging = true; sx = t.clientX; sy = t.clientY; px = r.left; py = r.top;
+      window.addEventListener('touchmove', onTouchMove, { passive: false });
+      window.addEventListener('touchend', onTouchEnd, { passive: true, once: true });
+      window.addEventListener('touchcancel', onTouchEnd, { passive: true, once: true });
+    }
+    function onTouchMove(e) {
+      if (!dragging) return; const t = e.touches && e.touches[0]; if (!t) return; e.preventDefault(); const dx = t.clientX - sx, dy = t.clientY - sy; const r = rect(); let nx = px + dx, ny = py + dy; const maxX = window.innerWidth - r.width; const maxY = window.innerHeight - r.height; nx = clamp(nx, 6, Math.max(6, maxX - 6)); ny = clamp(ny, 6, Math.max(6, maxY - 6)); dlg.style.left = nx + 'px'; dlg.style.top = ny + 'px';
+    }
+    function onTouchEnd() { if (!dragging) return; dragging = false; const r = rect(); savePos(r.left, r.top); window.removeEventListener('touchmove', onTouchMove); }
+
+    handle.addEventListener('mousedown', onMouseDown, { passive: false });
+    handle.addEventListener('touchstart', onTouchStart, { passive: false });
 
     // Keyboard move on handle
     handle.addEventListener('keydown', (e) => {
