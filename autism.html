@@ -864,6 +864,8 @@
       addEventListener('resize', () => { const el = getPanel(); if (!el) return; const r = el.getBoundingClientRect(); const b = { maxX: innerWidth - r.width, maxY: innerHeight - r.height }; if (r.right > innerWidth || r.bottom > innerHeight) applyPos(el, { x: clamp(r.left, 0, b.maxX), y: clamp(r.top, 0, b.maxY) }); });
     })();
   </script>
+
+  <script defer src="assets/js/contrast-fix.js"></script>
 </body>
 
 </html>

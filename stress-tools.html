@@ -415,8 +415,7 @@ body{background:transparent}
         </section>
         <section class="col">
           <h4>Contact</h4>
-          <p><a data-href="contact.html" href="contact.html">Contact</a> • <a
-              href="mailto:info@mindpaylink.com">info@mindpaylink.com</a></p>
+          <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info.com">info.com</a></p>
         </section>
       </div>
       <div class="bottom">
@@ -424,12 +423,7 @@ body{background:transparent}
         <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
       </div>
     </div>
-    <script>
-      const yf = document.getElementById("yearFooter");
-      if (yf) yf.textContent = (new Date).getFullYear();
-      const btt = document.getElementById("backToTop");
-      if (btt) btt.addEventListener("click", function (e) { e.preventDefault(); try { (document.getElementById("top") || document.body).scrollIntoView({ behavior: "smooth", block: "start" }) } catch { location.hash = "#top" } });
-    </script>
+    <script>document.getElementById("yearFooter") && (document.getElementById("yearFooter").textContent = (new Date).getFullYear()); document.getElementById("backToTop") && document.getElementById("backToTop").addEventListener("click", function (e) { e.preventDefault(); try { (document.getElementById("top") || document.body).scrollIntoView({ behavior: "smooth", block: "start" }) } catch { location.hash = "#top" } })</script>
   </footer>
 >>>>>>> f4c36ed (Fix: 2025 header/footer, remove Wellbeing, hamburger nav, restore Voice Coach)
 
@@ -799,6 +793,8 @@ body{background:transparent}
 <script src="assets/js/core/voice-coach.js"></script>
 <script src="assets/js/core/sound-kit.js"></script>
 >>>>>>> f4c36ed (Fix: 2025 header/footer, remove Wellbeing, hamburger nav, restore Voice Coach)
+
+  <script defer src="assets/js/contrast-fix.js"></script>
 </body>
 
 </html>
