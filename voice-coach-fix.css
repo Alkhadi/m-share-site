@@ -259,6 +259,40 @@ button.vc-speak,
   overflow: hidden;
 }
 
+/* -------- Coach Runner (modal) readability + drag handle -------- */
+#coachRunnerDialog.card {
+  background: #ffffff !important;
+  color: #0b1220 !important;
+  border: 1px solid rgba(0, 0, 0, .12) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .25) !important;
+}
+
+#coachRunnerDialog .muted {
+  color: #334155 !important;
+}
+
+/* Inserted Move handle (idempotent in JS) */
+#coachRunnerDialog .cr-drag {
+  cursor: move;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  background: rgba(2, 6, 23, .06);
+  color: inherit;
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 10px;
+  padding: 6px 10px;
+  margin: -2px -2px 10px -2px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#coachRunnerDialog .cr-drag:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
 /* Compact sizing on small screens to keep panel out of the way */
 @media (max-width: 520px) {
 

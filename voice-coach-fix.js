@@ -206,9 +206,9 @@
       panel.className = 'voice-coach';
       panel.innerHTML = `
         <div class="vc-grid" role="group" aria-label="Voice Coach">
-          <div class="vc-drag" id="vc-drag" style="cursor:move;touch-action:none;user-select:none;-webkit-user-select:none;background:rgba(255,255,255,.06);border-radius:10px;padding:6px 10px;margin:-2px -2px 8px -2px;display:flex;align-items:center;gap:8px">
+          <div class="vc-drag" id="vc-drag" role="button" tabindex="0" aria-label="Move Voice Coach; use arrow keys to move; hold Shift for larger steps" style="cursor:move;touch-action:none;user-select:none;-webkit-user-select:none;background:rgba(255,255,255,.06);border-radius:10px;padding:6px 10px;margin:-2px -2px 8px -2px;display:flex;align-items:center;gap:8px">
             <span aria-hidden="true">⋮⋮</span>
-            <span class="vc-label" style="font-size:12px;opacity:.8">Drag me</span>
+            <span class="vc-label" style="font-size:12px;opacity:.8">Move</span>
           </div>
           <div class="vc-row">
             <div class="vc-label">Status</div>
@@ -356,8 +356,41 @@
     // Lock initial size so it doesn't grow when dragging
     lockPanelSize(panel);
 
-    // ----- Draggable behavior (whole panel) -----
-    makeDraggable(panel); // allow dragging from anywhere; interactive controls are ignored
+    // ----- Draggable behavior (handle + keyboard) -----
+    const handle = $('#vc-drag', panel);
+    makeDraggable(panel, handle);
+    // Keyboard move on handle
+    if (handle) {
+      const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+      const save = (x, y) => { try { localStorage.setItem('vc.pos', JSON.stringify({ x: Math.round(x), y: Math.round(y) })); } catch { } };
+      function toFixedPosition() {
+        const r = panel.getBoundingClientRect();
+        panel.style.left = r.left + 'px';
+        panel.style.top = r.top + 'px';
+        panel.style.right = '';
+        panel.style.bottom = '';
+      }
+      handle.addEventListener('keydown', (e) => {
+        const ARROWS = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+        if (!ARROWS.includes(e.key)) return;
+        e.preventDefault();
+        toFixedPosition();
+        const step = e.shiftKey ? 10 : 2;
+        const r = panel.getBoundingClientRect();
+        let x = r.left; let y = r.top;
+        if (e.key === 'ArrowLeft') x -= step;
+        if (e.key === 'ArrowRight') x += step;
+        if (e.key === 'ArrowUp') y -= step;
+        if (e.key === 'ArrowDown') y += step;
+        const maxX = Math.max(0, window.innerWidth - r.width);
+        const maxY = Math.max(0, window.innerHeight - r.height);
+        x = clamp(x, 6, Math.max(6, maxX - 6));
+        y = clamp(y, 6, Math.max(6, maxY - 6));
+        panel.style.left = x + 'px';
+        panel.style.top = y + 'px';
+        save(x, y);
+      });
+    }
   }
 
   function lockPanelSize(panel) {
@@ -710,6 +743,7 @@
     ensureCardNarrators();
     fixFocusScreens();
     ensureMobileOverlay();
+    try { if (typeof window.enhanceCoachRunner === 'function') window.enhanceCoachRunner(); else setTimeout(() => { if (typeof window.enhanceCoachRunner === 'function') window.enhanceCoachRunner(); }, 0); } catch { }
     // Force any page-level TTS select to 'on' so narration is enabled by default
     try { const ttsSel = document.getElementById('tts'); if (ttsSel) ttsSel.value = 'on'; } catch { }
 
@@ -723,6 +757,7 @@
         bindHeadphoneButtons();
         ensureCardNarrators();
         fixFocusScreens();
+        try { if (typeof window.enhanceCoachRunner === 'function') window.enhanceCoachRunner(); } catch { }
       }
     });
     ro.observe(document.documentElement, { childList: true, subtree: true });
@@ -733,4 +768,95 @@
   } else {
     init();
   }
+})();
+
+// -------- Coach Runner enhancements: readability + drag/persist --------
+(function () {
+  const KEY = 'vc.runner.pos';
+
+  function ensureDragHandle(dlg) {
+    if (!dlg) return null;
+    let h = dlg.querySelector('.cr-drag');
+    if (!h) {
+      h = document.createElement('div');
+      h.className = 'cr-drag';
+      h.id = 'coachRunnerDrag';
+      h.setAttribute('role', 'button');
+      h.setAttribute('tabindex', '0');
+      h.setAttribute('aria-label', 'Move coach window; use arrow keys to move; hold Shift for larger steps');
+      h.innerHTML = '<span aria-hidden="true">⋮⋮</span><span class="vc-label" style="font-size:12px;opacity:.8">Move</span>';
+      // Insert at top of dialog
+      const first = dlg.firstElementChild;
+      dlg.insertBefore(h, first || null);
+    }
+    return h;
+  }
+
+  function savePos(x, y) { try { localStorage.setItem(KEY, JSON.stringify({ x: Math.round(x), y: Math.round(y) })); } catch { } }
+  function loadPos() { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } }
+
+  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+  function toFixed(dlg) {
+    const r = dlg.getBoundingClientRect();
+    dlg.style.left = r.left + 'px';
+    dlg.style.top = r.top + 'px';
+    dlg.style.right = '';
+    dlg.style.bottom = '';
+    dlg.style.position = 'fixed';
+  }
+
+  function makeDialogDraggable(dlg, handle) {
+    if (!dlg || !handle) return;
+    // Avoid double-binding
+    if (handle.__vc_bound) return; handle.__vc_bound = true;
+    handle.style.touchAction = 'none';
+    let dragging = false, sx = 0, sy = 0, px = 0, py = 0;
+    function rect() { return dlg.getBoundingClientRect(); }
+    function onDown(e) {
+      e.preventDefault();
+      if (e.button !== undefined && e.button !== 0) return;
+      toFixed(dlg);
+      const r = rect(); dragging = true; sx = e.clientX; sy = e.clientY; px = r.left; py = r.top;
+      handle.setPointerCapture?.(e.pointerId || 0);
+    }
+    function onMove(e) { if (!dragging) return; const dx = e.clientX - sx, dy = e.clientY - sy; const r = rect(); let nx = px + dx, ny = py + dy; const maxX = window.innerWidth - r.width; const maxY = window.innerHeight - r.height; nx = clamp(nx, 6, Math.max(6, maxX - 6)); ny = clamp(ny, 6, Math.max(6, maxY - 6)); dlg.style.left = nx + 'px'; dlg.style.top = ny + 'px'; }
+    function onUp(e) { if (!dragging) return; dragging = false; handle.releasePointerCapture?.(e.pointerId || 0); const r = rect(); savePos(r.left, r.top); }
+    handle.addEventListener('pointerdown', onDown, { passive: false });
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerup', onUp, { passive: true });
+
+    // Keyboard move on handle
+    handle.addEventListener('keydown', (e) => {
+      const AR = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
+      if (!AR.includes(e.key)) return; e.preventDefault(); toFixed(dlg);
+      const step = e.shiftKey ? 10 : 2; const r = rect(); let x = r.left, y = r.top;
+      if (e.key === 'ArrowLeft') x -= step; if (e.key === 'ArrowRight') x += step; if (e.key === 'ArrowUp') y -= step; if (e.key === 'ArrowDown') y += step;
+      const maxX = Math.max(0, window.innerWidth - r.width); const maxY = Math.max(0, window.innerHeight - r.height);
+      x = clamp(x, 6, Math.max(6, maxX - 6)); y = clamp(y, 6, Math.max(6, maxY - 6));
+      dlg.style.left = x + 'px'; dlg.style.top = y + 'px'; savePos(x, y);
+    });
+  }
+
+  function restoreDialogPos(dlg) {
+    const p = loadPos(); if (!p) return;
+    dlg.style.position = 'fixed'; dlg.style.left = p.x + 'px'; dlg.style.top = p.y + 'px'; dlg.style.right = ''; dlg.style.bottom = '';
+  }
+
+  function enhance() {
+    const dlg = document.getElementById('coachRunnerDialog');
+    if (!dlg) return;
+    // Force readable theme (CSS already ensures); ensure role and tabindex for focus trap friendliness
+    dlg.setAttribute('role', dlg.getAttribute('role') || 'dialog');
+    dlg.setAttribute('tabindex', dlg.getAttribute('tabindex') || '-1');
+    restoreDialogPos(dlg);
+    const handle = ensureDragHandle(dlg);
+    makeDialogDraggable(dlg, handle);
+  }
+
+  // Public for reuse in init/mutation
+  window.enhanceCoachRunner = enhance;
+
+  // If dialog already present on load, enhance once
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance, { once: true }); else enhance();
 })();

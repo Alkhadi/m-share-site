@@ -425,17 +425,19 @@
     }
   </style>
   <link rel="stylesheet" href="assets/css/responsive-fixes.css" />
-<!-- mshare-seo-start -->
+  <!-- mshare-seo-start -->
   <link rel="canonical" href="https://www.mindpaylink.com/dyslexia-reading-training.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="M Share" />
   <meta property="og:title" content="Dyslexia Reading Training • M Share" />
-  <meta property="og:description" content="Free, structured reading practice ideas paired with calming breath tools and adult‑friendly micro‑exercises." />
+  <meta property="og:description"
+    content="Free, structured reading practice ideas paired with calming breath tools and adult‑friendly micro‑exercises." />
   <meta property="og:url" content="https://www.mindpaylink.com/dyslexia-reading-training.html" />
   <meta property="og:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Dyslexia Reading Training • M Share" />
-  <meta name="twitter:description" content="Free, structured reading practice ideas paired with calming breath tools and adult‑friendly micro‑exercises." />
+  <meta name="twitter:description"
+    content="Free, structured reading practice ideas paired with calming breath tools and adult‑friendly micro‑exercises." />
   <meta name="twitter:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
   <script type="application/ld+json">
     {
@@ -445,7 +447,8 @@
       "url": "https://www.mindpaylink.com/"
     }
   </script>
-<!-- mshare-seo-end -->
+  <!-- mshare-seo-end -->
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
 </head>
 
 <body>
@@ -518,14 +521,20 @@
     </div>
   </header>
 
+  
+
   <a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
 
   <!-- ===== Header (consistent with mindpaylink.com) ===== -->
-  
 
   <!-- ===== Page content ===== -->
   <main class="container" id="dlxPage">
     <h1>Dyslexia: Reading Training</h1>
+    <div class="row-actions" style="margin:6px 0 12px">
+      <button class="btn btn-success" id="btnAddCoachDys" type="button">➕ Add to app</button>
+      <button class="btn" id="btnOpenCoachDys" type="button">▶️ Open coach now</button>
+      <a class="btn" data-href="coach.html">Coach hub</a>
+    </div>
 
     <div class="card">
       <p>These are practical, low‑pressure routines that blend <strong>paced breathing</strong> with <strong>sound,
@@ -1677,7 +1686,6 @@
     })();
   </script>
 
-  
   <script id="mpl-theme-auto-js-v3">
     (() => {
       const KEY = 'mpl.theme.v2';
@@ -1852,51 +1860,27 @@
     })();
   </script>
 
+  
+  <script>
+    (function () {
+      var COACH_KEY = 'mshare_coach_modules_v1';
+      function loadModules() { try { return JSON.parse(localStorage.getItem(COACH_KEY) || '{}') || {}; } catch { return {}; } }
+      function saveModules(m) { try { localStorage.setItem(COACH_KEY, JSON.stringify(m)); } catch { } }
+      var add = document.getElementById('btnAddCoachDys');
+      var open = document.getElementById('btnOpenCoachDys');
+      add && add.addEventListener('click', function () {
+        var mods = loadModules();
+        if (!mods.autism) { alert('Add the Autism coach first on the Autism page.'); return; }
+        mods.dyslexia = { id: 'dyslexia', name: 'Dyslexia Coach', flows: mods.autism.flows, addedAt: Date.now() };
+        saveModules(mods);
+        alert('Dyslexia Coach added (using current flows). You can refine this module later.');
+      });
+      open && open.addEventListener('click', function () { location.href = 'autism.html#open-coach'; });
+    })();
+  </script>
 
-<footer id="footer2025" class="footer-2025 mpl-footer-v3">
-    <div class="mpl-footer-wrap">
-      <div class="mpl-footer-grid" role="navigation" aria-label="Site footer">
-        <section class="col brand">
-          <div class="brandline">
-            <span class="logo" aria-hidden="true">M</span>
-            <div><b>M Share</b>
-              <div class="muted">Quiet, practical tools for mental health and wellbeing.</div>
-            </div>
-          </div>
-          <div class="mpl-pay" aria-label="Support links">
-            <a class="pay-link" href="coffee.html" target="_blank" rel="noopener">Support Us</a>
-            <a class="pay-link" href="https://buy.stripe.com/28E4gy5j6cmD2wu3pk4Rq00" target="_blank" rel="noopener">☕
-              Support Us</a>
-          </div>
-        </section>
-
-        <section class="col center">
-          <!-- Theme Explorer (center) -->
-          <div id="mpl-theme-slot" aria-label="Theme controls"></div>
-        </section>
-
-        <section class="col right">
-          <!-- Explore (accordion) -->
-          <nav class="mpl-footer-explore" aria-label="Explore" data-exclude="support,coffee">
-            <details class="explore" open>
-              <summary>
-                <span class="title">Explore</span>
-                <span class="subheading">Top‑level navigation</span>
-              </summary>
-              <div id="mpl-footer-explore"></div>
-            </details>
-          </nav>
-        </section>
-      </div>
-
-      <div class="bottom">
-        <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
-        <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
-      </div>
-    </div>
-    <script>(function () { var y = document.getElementById('yearFooter'); if (y) y.textContent = (new Date).getFullYear(); })();</script>
-    <script defer src="assets/js/footer-explore.js"></script>
-  </footer>
+<footer class="footer-2025" id="footer2025"> <div class="wrap"> <div class="grid"> <section class="col brand"> <div class="brandline"><span class="logo">M</span><div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div></div> <div class="theme-controls"> <label>Background<input id="themeColor" type="color" value="#0f172a" title="Input" placeholder=" "></label> <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1" title="Input" placeholder=" "></label> </div> <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div> </section> <section class="col"> <h4>Explore</h4> <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p> </section> <section class="col"> <h4>Toolkits</h4> <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p> </section> <section class="col"> <h4>Contact</h4> <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info@mindpaylink.com">info@mindpaylink.com</a></p> </section> </div> <div class="bottom"> <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div> <div class="credit">Designed by <b>Alkhadi M Koroma</b></div> </div> </div> <script>document.getElementById('yearFooter')&&(document.getElementById('yearFooter').textContent=(new Date).getFullYear());document.getElementById('backToTop')&&document.getElementById('backToTop').addEventListener('click',function(e){e.preventDefault();try{(document.getElementById('top')||document.body).scrollIntoView({behavior:'smooth',block:'start'})}catch{location.hash='#top'}})</script>
+</footer>
 </body>
 
 </html>

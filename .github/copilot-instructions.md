@@ -32,7 +32,7 @@ This repo is a static, vanilla HTML/CSS/JS website (no bundler, no npm). Pages a
 ## Integration points
 - Web Share API and Clipboard are used for sharing; gracefully degrades to copy-to-clipboard.
 - PDF generation uses Canvas → JPEG → minimal PDF writer (no external library). QR codes load from https://api.qrserver.com.
-- The site includes additional nav/footer/theme scripts under `assets/` that auto-enhance markup; keep ids like footer2025, mpl-theme-slot, and class footer-2025 when changing layout.
+- The site includes additional nav/footer/theme scripts under `assets/` that auto-enhance markup; keep ids like `footer2025`, `mpl-theme-slot`, and class `footer-2025` when changing layout.
 
 ## Guardrails and conventions
 - Do not introduce bundlers/modules. Load scripts directly with `<script>` tags.
@@ -49,7 +49,7 @@ Inputs
 Hard constraints
 1) No breaking changes; keep existing IDs/classes; minimal diffs. 2) Accessibility first (WCAG 2.2 AA). 3) Performance: no heavy libs; defer/async; lazy‑load; dedupe; preconnect when useful. 4) UK tone & compliance. 5) Edits must be idempotent.
 Scope
-A) Navigation & footer — unify mobile/desktop; one open submenu; ESC/outside‑click close; remove duplicate nav scripts; ensure a single global footer element (id: footer2025). The Explore section mirrors top-level nav.
+A) Navigation & footer — unify mobile/desktop; one open submenu; ESC/outside‑click close; remove duplicate nav scripts; ensure a single global footer element (id: `footer2025`). The Explore section mirrors top-level nav.
 B) Voice Coach — draggable panel with “Move” handle; bounded; persist position (localStorage); “Reset position”; system‑voice fallback; respects `prefers-reduced-motion`; keyboard move (arrows; Shift=10x).
 C) Buttons/IDs — remove duplicate IDs; convert repeated actions to classes (e.g., `.downloadPdfBtn`) and use event delegation; ensure VCF/PDF/Share work anywhere.
 D) Layout/readability — global spacing var `--s`; ensure edges have padding; one `<h1>`; landmarks `<main>`/`role="navigation">`; aria‑expanded; visible focus.

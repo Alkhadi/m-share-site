@@ -377,3 +377,36 @@ main {
   gap: 12px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
+
+/* Page hero: give the first card a calm background site-wide */
+/* Overridable via --card-hero-bg and --card-hero-ink if needed per page */
+main .card:first-of-type {
+  /* Use requested hue (#B0B0CD) with a subtle dark overlay for white text contrast */
+  background: linear-gradient(0deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)), var(--card-hero-bg, #B0B0CD) !important;
+  color: var(--card-hero-ink, #ffffff);
+}
+
+/* Maintain readable links/buttons inside the hero when using a light bg */
+main .card:first-of-type a.btn,
+main .card:first-of-type button.btn {
+  color: inherit;
+}
+
+/* Ensure card and button text is white and readable site-wide */
+.card {
+  color: #ffffff !important;
+}
+
+.card .muted {
+  color: rgba(255, 255, 255, .85) !important;
+}
+
+.card a {
+  color: #ffffff !important;
+}
+
+.btn,
+.main-nav a,
+.main-nav button {
+  color: #ffffff !important;
+}
