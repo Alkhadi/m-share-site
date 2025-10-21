@@ -1,0 +1,412 @@
+/* Site-wide interactive and visibility fixes for embedded/vehicle browsers */
+/* Ensure buttons/links remain tappable and visible across layers */
+
+/* Tappable targets: size + highlight removal */
+button,
+[role="button"],
+.btn,
+.menu-toggle,
+.mpl-footer-toggle,
+summary {
+  min-height: 40px;
+  min-width: 44px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* Prevent overlays from blocking clicks invisibly */
+[aria-hidden="true"],
+.hidden,
+[hidden] {
+  pointer-events: none !important;
+}
+
+/* Ensure nav and footer interactive elements are clickable */
+header,
+header * {
+  pointer-events: auto;
+}
+
+footer,
+footer * {
+  pointer-events: auto;
+}
+
+/* Theme control visibility: enforce contrast and clickability */
+#mpl-theme-slot,
+.mpl-theme-host,
+.mpl-theme-host * {
+  color: var(--fg, #e5e7eb) !important;
+}
+
+.mpl-theme-host input[type="checkbox"],
+.mpl-theme-host input[type="range"],
+.mpl-theme-host input[type="color"],
+.mpl-theme-host button {
+  pointer-events: auto !important;
+}
+
+/* Gray/disabled appearance fix: ensure not disabled by default */
+.menu-group .menu-toggle,
+.mpl-footer-toggle,
+.btn,
+nav a,
+summary {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Better focus indication for keyboard and car browsers */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #a5b4fc;
+  outline-offset: 2px;
+}
+
+/* Avoid accidental text color inheritance that turns text invisible on dark */
+body,
+nav,
+footer,
+.submenu,
+.sheet,
+.sheet-card {
+  color: var(--fg, #e5e7eb);
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+:root {
+  --bg: #B0B0CD;
+  --bg-bright: #eaf4ff;
+  --text: #e5e7eb;
+  --ink: #0b1220;
+  --b: rgba(148, 163, 184, .25);
+  --brand: #38bdf8;
+  --accent: #22c55e;
+  --danger: #ef4444;
+  --footer-bg: linear-gradient(180deg, #0b1020, #0e1a35);
+  --footer-ink: #dbeafe
+}
+
+body {
+  background: var(--bg);
+  color: var(--text)
+}
+
+[data-theme="bright"] body {
+  background: var(--bg-bright);
+  color: var(--ink)
+}
+
+:root {
+  --brightness: 1
+}
+
+body {
+  filter: brightness(var(--brightness))
+}
+
+/* Ensure cards are responsive and never touch each other */
+.card {
+  margin: 12px 0 !important;
+}
+
+.grid .card,
+.cards .card,
+main .card {
+  margin: 12px 0 !important;
+}
+
+@media (min-width:700px) {
+
+  .grid.cards,
+  .cards.grid {
+    gap: 16px !important;
+  }
+}
+
+.no-scroll {
+  position: fixed;
+  overflow: hidden;
+  width: 100%
+}
+
+.nav-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .45);
+  z-index: 49
+}
+
+.main-nav {
+  z-index: 50
+}
+
+@media(max-width:760px) {
+  .main-nav.open {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .35)
+  }
+}
+
+body.is-nav main {
+  opacity: .25;
+  transition: opacity .18s ease
+}
+
+main {
+  transition: opacity .18s ease
+}
+
+.btn,
+.main-nav a,
+.main-nav button {
+  outline: none
+}
+
+.btn:focus-visible,
+.main-nav a:focus-visible,
+.main-nav button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, .55);
+  border-radius: 10px
+}
+
+.actions.is-running [data-act="start"],
+.actions.is-running [data-act="begin"] {
+  opacity: .65
+}
+
+.actions .btn+.btn {
+  margin-left: 8px
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
+}
+
+@media(max-width:640px) {
+  .ellipsis-1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden
+  }
+
+  .ellipsis-2 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden
+  }
+
+  .ellipsis-3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden
+  }
+
+  [data-excerpt].excerpted {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -webkit-line-clamp: var(--excerpt-lines, 3);
+    line-clamp: var(--excerpt-lines, 3)
+  }
+
+  [data-excerpt].excerpt-open {
+    -webkit-line-clamp: unset;
+    line-clamp: unset;
+    display: block
+  }
+
+  .excerpt-toggle {
+    margin-top: 6px
+  }
+
+  .nav-toggle {
+    padding: 10px
+  }
+
+  .main-nav a,
+  .main-nav button {
+    min-height: 40px
+  }
+}
+
+.btn-reset {
+  background: rgba(148, 163, 184, .18);
+  border: 1px solid var(--b);
+  padding: .5rem .7rem;
+  border-radius: 10px
+}
+
+.btn-print {
+  background: rgba(56, 189, 248, .12);
+  border: 1px solid var(--brand);
+  padding: .5rem .7rem;
+  border-radius: 10px
+}
+
+.footer-2025 {
+  margin-top: 18px;
+  background: var(--footer-bg);
+  color: var(--footer-ink);
+  border-top: 1px solid rgba(148, 163, 184, .25)
+}
+
+.footer-2025 a {
+  color: #bfdbfe;
+  text-decoration: none
+}
+
+.footer-2025 a:hover {
+  text-decoration: underline
+}
+
+.footer-2025 .wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px
+}
+
+.footer-2025 .top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 14px;
+  align-items: start
+}
+
+.footer-2025 h4 {
+  margin: .2rem 0 .4rem;
+  font-size: clamp(14px, 1.7vw, 16px)
+}
+
+.footer-2025 .brandline {
+  display: flex;
+  align-items: center;
+  gap: 10px
+}
+
+.footer-2025 .logo {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #0ea5e9;
+  color: white;
+  font-weight: 700
+}
+
+.footer-2025 .controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px
+}
+
+.footer-2025 .controls .ctl {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  border: 1px solid rgba(148, 163, 184, .35);
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(2, 6, 23, .28)
+}
+
+.footer-2025 input[type="color"] {
+  width: 32px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  padding: 0
+}
+
+.footer-2025 input[type="range"] {
+  width: 160px
+}
+
+.footer-2025 .bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  border-top: 1px solid rgba(148, 163, 184, .25);
+  padding-top: 10px;
+  font-size: clamp(12px, 1.6vw, 14px)
+}
+
+@media(max-width:900px) {
+  .footer-2025 .top {
+    grid-template-columns: 1fr 1fr
+  }
+}
+
+@media(max-width:560px) {
+  .footer-2025 .top {
+    grid-template-columns: 1fr
+  }
+}
+
+.footer-2025 .credit b {
+  font-weight: 700
+}
+
+.tech-card:focus {
+  outline: 2px solid rgba(56, 189, 248, .55);
+  outline-offset: 2px
+}
+
+/* Reusable grid utilities */
+/* Two-column grid that collapses to one column on narrow screens */
+.grid-2-cols {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Page hero: give the first card a calm background site-wide */
+/* Overridable via --card-hero-bg and --card-hero-ink if needed per page */
+main .card:first-of-type {
+  /* Use requested hue (#B0B0CD) with a subtle dark overlay for white text contrast */
+  background: linear-gradient(0deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)), var(--card-hero-bg, #B0B0CD) !important;
+  color: var(--card-hero-ink, #ffffff);
+}
+
+/* Maintain readable links/buttons inside the hero when using a light bg */
+main .card:first-of-type a.btn,
+main .card:first-of-type button.btn {
+  color: inherit;
+}
+
+/* Ensure card and button text is white and readable site-wide */
+.card {
+  color: #ffffff !important;
+}
+
+.card .muted {
+  color: rgba(255, 255, 255, .85) !important;
+}
+
+.card a {
+  color: #ffffff !important;
+}
+
+.btn,
+.main-nav a,
+.main-nav button {
+  color: #ffffff !important;
+}

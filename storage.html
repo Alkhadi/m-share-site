@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta charset="utf-8" />
+    <title>M Share — Storage (Admin)</title>
+    <link rel="icon" href="icons/icon-192.png" />
+    <style>
+        :root {
+            color-scheme: light dark;
+        }
+
+        body {
+            font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+            margin: 0;
+            background: var(--bg, #0f172a);
+            color: var(--fg, #e5e7eb);
+        }
+
+        .wrap {
+            max-width: min(1100px, 96vw);
+            margin: 24px auto;
+            padding: 0 8px;
+        }
+
+        header {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .12);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .muted {
+            color: #94a3b8;
+        }
+
+        .card {
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 12px;
+            padding: 14px;
+            margin: 14px 0;
+            background: rgba(0, 0, 0, .1);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="url"],
+        input[type="password"],
+        input[type="file"] {
+            background: transparent;
+            color: inherit;
+            border: 1px solid rgba(255, 255, 255, .2);
+            border-radius: 8px;
+            padding: 8px 10px;
+            min-width: 260px;
+        }
+
+        button {
+            background: #10b981;
+            color: #06251c;
+            border: 0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button.secondary {
+            background: transparent;
+            color: inherit;
+            border: 1px solid rgba(255, 255, 255, .35);
+        }
+
+        .kv {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, .13);
+        }
+
+        .kv:last-child {
+            border-bottom: 0;
+        }
+
+        .status {
+            margin-top: 8px;
+            min-height: 20px;
+        }
+
+        a.btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            padding: .35rem .6rem;
+            border: 1px solid rgba(255, 255, 255, .25);
+            border-radius: .5rem;
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+  <link rel="stylesheet" href="assets/css/responsive-fixes.css" />
+<!-- mshare-seo-start -->
+  <link rel="canonical" href="https://www.mindpaylink.com/storage.html" />
+  <meta name="description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="M Share" />
+  <meta property="og:title" content="M Share — Storage (Admin)" />
+  <meta property="og:description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta property="og:url" content="https://www.mindpaylink.com/storage.html" />
+  <meta property="og:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="M Share — Storage (Admin)" />
+  <meta name="twitter:description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta name="twitter:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "M Share",
+      "url": "https://www.mindpaylink.com/"
+    }
+  </script>
+<!-- mshare-seo-end -->
+  <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+  <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+</head>
+
+<body>
+<header class="site-header">
+    <div class="container navbar">
+      <!-- Added logo-blue class to get the blue background -->
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html">
+        <span class="logo logo-blue">M</span><span class="brand-text">M Share</span>
+      </a>
+
+      <!-- UPDATED NAV (dropdown groups) -->
+      <nav class="main-nav" id="mainNav">
+        <a data-href="index.html">Wellbeing</a>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Neurodevelopmental</div>
+            <a data-href="autism.html">Autism</a>
+            <a data-href="autism-parent.html">Autism Parent</a>
+            <a data-href="adhd.html">ADHD</a>
+            <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+            <div class="menu-label">Mental Health</div>
+            <a data-href="anxiety.html">Anxiety</a>
+            <a data-href="depression.html">Depression</a>
+            <a data-href="stress.html">Stress</a>
+            <a data-href="sleep.html">Sleep</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Guides</div>
+            <a data-href="breath.html">Breath (how‑to)</a>
+            <a data-href="focus.html">Focus</a>
+            <a data-href="mindfulness.html">Mindfulness</a>
+            <div class="menu-label">Techniques</div>
+            <a data-href="sos-60.html">60‑second Reset</a>
+            <a data-href="box-breathing.html">Box Breathing</a>
+            <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+            <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">General</div>
+            <a data-href="sleep-tools.html">Sleep Tools</a>
+            <a data-href="breath-tools.html">Breath Tools</a>
+            <a data-href="mood-tools.html">Mood Tools</a>
+            <div class="menu-label">Condition‑specific</div>
+            <a data-href="adhd-tools.html">ADHD Tools</a>
+            <a data-href="autism-tools.html">Autism Tools</a>
+            <a data-href="depression-tools.html">Depression Tools</a>
+            <a data-href="anxiety-tools.html">Anxiety Tools</a>
+            <a data-href="stress-tools.html">Stress Tools</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+          <div class="submenu">
+            <a data-href="about.html">About</a>
+            <a data-href="coffee.html">Support Us</a>
+            <a data-href="contact.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+    <div class="wrap">
+        
+
+        <section id="gate" class="card">
+            <p>Admin check in progress…</p>
+        </section>
+
+        <section id="ui" class="card" style="display:none">
+            <h2 style="margin:0 0 6px 0">Cloudflare R2 endpoint</h2>
+            <div class="row" style="margin:6px 0 10px 0">
+                <input id="r2Endpoint" type="url" placeholder="https://<your-worker>.<subdomain>.workers.dev/upload"
+                    style="flex:1; min-width:320px" />
+                <input id="r2Token" type="password"
+                    placeholder="Bearer API token (optional if your worker uses cookies)" />
+                <button id="saveCfg">Save</button>
+                <button id="testCfg" class="secondary">Test</button>
+            </div>
+            <div class="muted">Bucket: mshare-profiles (recommended). You can change the key prefix per upload below.
+            </div>
+            <div id="cfgStatus" class="status muted"></div>
+            <div class="row" style="margin:10px 0 0 0">
+                <input id="r2PublicBase" type="url"
+                    placeholder="https://<your-public-bucket-domain> (optional public base for downloads)"
+                    style="flex:1; min-width:320px" />
+                <button id="saveBase" class="secondary">Set as downloads base</button>
+            </div>
+            <div class="muted" id="baseInfo" style="margin-top:6px"></div>
+        </section>
+
+        <section id="uploadBox" class="card" style="display:none">
+            <h2 style="margin:0 0 6px 0">Upload a PDF</h2>
+            <div class="row" style="margin:6px 0 10px 0">
+                <input id="fileInput" type="file" accept="application/pdf" />
+                <input id="keyPrefix" type="text" placeholder="key prefix (e.g. profiles/alkhadi/)" />
+                <button id="uploadBtn">Upload</button>
+                <button id="uploadPlaceholder" class="secondary">Generate profile PDF and upload</button>
+            </div>
+            <div id="upStatus" class="status"></div>
+        </section>
+
+        <section id="locker" class="card" style="display:none">
+            <h2 style="margin:0 0 6px 0">Device locker PDFs</h2>
+            <div id="lockerQuota" class="muted"></div>
+            <div id="lockerList" style="margin-top:10px"></div>
+        </section>
+
+        <section class="card" style="display:none" id="help">
+            <h2 style="margin:0 0 6px 0">How this works</h2>
+            <ol style="margin:0 0 0 1.2rem; padding:0">
+                <li>Deploy the Worker from cloudflare/worker-r2-upload.js with an R2 binding to your bucket (e.g.
+                    mshare-profiles).</li>
+                <li>Paste the Worker upload URL above. Optional: add a Bearer token you validate in the Worker.</li>
+                <li>Pick a PDF or generate one from your profile, then Upload. You’ll get a shareable link if the Worker
+                    returns one.</li>
+            </ol>
+            <p class="muted" style="margin:.6rem 0 0 0">Tip: Save the config. It’s stored only on this device.</p>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        (function () {
+            const MS = window.__MSHARE__;
+            const gate = document.getElementById('gate');
+            const ui = document.getElementById('ui');
+            const uploadBox = document.getElementById('uploadBox');
+            const lockerBox = document.getElementById('locker');
+            const help = document.getElementById('help');
+
+            const epInput = document.getElementById('r2Endpoint');
+            const tokInput = document.getElementById('r2Token');
+            const saveBtn = document.getElementById('saveCfg');
+            const testBtn = document.getElementById('testCfg');
+            const cfgStatus = document.getElementById('cfgStatus');
+            const publicBaseInput = document.getElementById('r2PublicBase');
+            const saveBaseBtn = document.getElementById('saveBase');
+            const baseInfo = document.getElementById('baseInfo');
+
+            const fileInput = document.getElementById('fileInput');
+            const keyPrefix = document.getElementById('keyPrefix');
+            const uploadBtn = document.getElementById('uploadBtn');
+            const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+            const upStatus = document.getElementById('upStatus');
+
+            const cfgKey = 'mshare_r2_cfg_v1';
+            function loadCfg() { try { return JSON.parse(localStorage.getItem(cfgKey) || '{}'); } catch { return {}; } }
+            function saveCfg(cfg) { try { localStorage.setItem(cfgKey, JSON.stringify(cfg)); } catch { } }
+            // PDF base for link resolution on site
+            function setPdfBase(url) { try { if (url) localStorage.setItem('mshare_pdf_base', url); else localStorage.removeItem('mshare_pdf_base'); } catch { } }
+            function getPdfBase() { try { return localStorage.getItem('mshare_pdf_base') || ''; } catch { return ''; } }
+
+            function setStatus(el, msg, ok) { el.textContent = msg || ''; el.style.color = ok ? '#10b981' : '#e5e7eb'; el.style.opacity = msg ? 1 : .7; }
+
+            async function requireAdmin() {
+                try { const ok = await MS.requireAdmin(); if (!ok) { gate.innerHTML = '<p>Admin required.</p>'; return false; } return true; }
+                catch { gate.innerHTML = '<p>Admin check failed.</p>'; return false; }
+            }
+
+            function initCfg() { const cfg = loadCfg(); if (cfg.endpoint) epInput.value = cfg.endpoint; if (cfg.token) tokInput.value = cfg.token; keyPrefix.value = cfg.prefix || ''; if (cfg.publicBase) publicBaseInput.value = cfg.publicBase; const pb = getPdfBase(); baseInfo.textContent = pb ? ('Current downloads base: ' + pb) : 'No downloads base set (will use page meta or local assets).'; }
+
+            function buildKey(name) { const pre = (keyPrefix.value || '').trim(); if (!pre) return name; return pre.replace(/(^\/+|\/+$)/g, '') + '/' + name.replace(/^\/+/, ''); }
+
+            async function uploadBlob(blob, name) {
+                const cfg = loadCfg(); const endpoint = (epInput.value || cfg.endpoint || '').trim(); const token = (tokInput.value || cfg.token || '').trim();
+                if (!endpoint) { setStatus(upStatus, 'Please set the Worker endpoint URL above.', false); return; }
+                const key = buildKey(name || ('document-' + Date.now() + '.pdf'));
+                setStatus(upStatus, 'Uploading…', true);
+                try {
+                    const url = endpoint + (endpoint.includes('?') ? '&' : '?') + new URLSearchParams({ name: key }).toString();
+                    const res = await fetch(url, { method: 'POST', headers: Object.assign({ 'Content-Type': 'application/pdf' }, token ? { 'Authorization': 'Bearer ' + token } : {}), body: blob });
+                    if (!res.ok) { const text = await res.text().catch(() => res.statusText); throw new Error(text || ('HTTP ' + res.status)); }
+                    const out = await res.json().catch(() => ({ ok: true }));
+                    const link = out.url || out.download || out.href || '';
+                    setStatus(upStatus, 'Uploaded ' + key + (link ? ' — link copied to clipboard' : ''), true);
+                    try { if (link) { await navigator.clipboard.writeText(link); MS.toast('Link copied'); } } catch { }
+                    return { key, link, out };
+                } catch (err) { console.error(err); setStatus(upStatus, 'Upload failed: ' + (err.message || String(err)), false); }
+            }
+
+            saveBtn.addEventListener('click', () => {
+                const cfg = { endpoint: epInput.value.trim(), token: tokInput.value.trim(), prefix: keyPrefix.value.trim(), publicBase: publicBaseInput.value.trim() };
+                saveCfg(cfg);
+                if (cfg.publicBase) { setPdfBase(cfg.publicBase); baseInfo.textContent = 'Current downloads base: ' + cfg.publicBase; }
+                setStatus(cfgStatus, 'Saved.', true);
+            });
+            saveBaseBtn.addEventListener('click', () => {
+                const url = publicBaseInput.value.trim(); setPdfBase(url); const cfg = loadCfg(); cfg.publicBase = url; saveCfg(cfg);
+                baseInfo.textContent = url ? ('Current downloads base: ' + url) : 'Downloads base cleared.'; MS.toast(url ? 'Downloads base set' : 'Downloads base cleared');
+            });
+            testBtn.addEventListener('click', async () => {
+                const cfg = loadCfg(); if (!epInput.value && !cfg.endpoint) { setStatus(cfgStatus, 'Set endpoint first.', false); return; }
+                try { const res = await fetch((epInput.value || cfg.endpoint) + '?ping=1', { method: 'GET' }); setStatus(cfgStatus, res.ok ? 'Endpoint reachable.' : 'Endpoint error: ' + res.status, res.ok); }
+                catch { setStatus(cfgStatus, 'Endpoint not reachable.', false); }
+            });
+
+            uploadBtn.addEventListener('click', async () => {
+                const f = fileInput.files && fileInput.files[0]; if (!f) { MS.toast('Choose a PDF'); return; }
+                await uploadBlob(f, f.name);
+            });
+
+            uploadPlaceholder.addEventListener('click', async () => {
+                try {
+                    const canvasPkg = await MS.buildStyledCardCanvas({ includeQR: true });
+                    const pdf = await MS.generateStyledPdf({ fromCanvas: canvasPkg.canvas, links: canvasPkg.links });
+                    await uploadBlob(pdf, 'm_share_profile.pdf');
+                } catch (err) { console.error(err); MS.toast('Could not generate PDF'); }
+            });
+
+            // Mount locker list for manual downloads too
+            function renderLocker() {
+                const list = document.getElementById('lockerList'); const quota = document.getElementById('lockerQuota');
+                MS.DeviceLocker.mount({ listEl: list, quotaEl: quota });
+            }
+
+            (async function start() {
+                if (!(await requireAdmin())) return;
+                gate.style.display = 'none'; ui.style.display = 'block'; uploadBox.style.display = 'block'; lockerBox.style.display = 'block'; help.style.display = 'block';
+                initCfg(); renderLocker();
+                // If URL provides ?endpoint=…&token=… we prefill
+                const sp = new URLSearchParams(location.search);
+                if (sp.get('endpoint')) epInput.value = sp.get('endpoint');
+                if (sp.get('token')) tokInput.value = sp.get('token');
+            })();
+        })();
+    </script>
+
+
+<footer class="footer-2025" id="footer2025"> <div class="wrap"> <div class="grid"> <section class="col brand"> <div class="brandline"><span class="logo">M</span><div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div></div> <div class="theme-controls"> <label>Background<input id="themeColor" type="color" value="#0f172a" title="Input" placeholder=" "></label> <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1" title="Input" placeholder=" "></label> </div> <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div> </section> <section class="col"> <h4>Explore</h4> <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p> </section> <section class="col"> <h4>Toolkits</h4> <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p> </section> <section class="col"> <h4>Contact</h4> <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info@mindpaylink.com">info@mindpaylink.com</a></p> </section> </div> <div class="bottom"> <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div> <div class="credit">Designed by <b>Alkhadi M Koroma</b></div> </div> </div> <script>document.getElementById('yearFooter')&&(document.getElementById('yearFooter').textContent=(new Date).getFullYear());document.getElementById('backToTop')&&document.getElementById('backToTop').addEventListener('click',function(e){e.preventDefault();try{(document.getElementById('top')||document.body).scrollIntoView({behavior:'smooth',block:'start'})}catch{location.hash='#top'}})</script>
+</footer>
+</body>
+
+</html>

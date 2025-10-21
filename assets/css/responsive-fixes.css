@@ -1,0 +1,95 @@
+img,
+video,
+canvas {
+    max-width: 100%;
+    height: auto
+}
+
+/* Containers */
+.container,
+.wrap {
+    max-width: min(1100px, 96vw);
+    margin: 0 auto;
+    padding-left: 16px;
+    padding-right: 16px
+}
+
+/* Cards and sections */
+.card {
+    width: 100%;
+    overflow-wrap: break-word
+}
+
+section.card {
+    display: block
+}
+
+/* Simple responsive grids used across pages */
+.grid {
+    display: grid;
+    gap: 10px
+}
+
+.grid.cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr))
+}
+
+.grid.cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr))
+}
+
+/* Downshift columns on tablets */
+/* Downshift columns earlier (tablet and below):
+       - 3-column grids jump directly to 1 column for readability
+       - 2-column grids stay at 1 column as before */
+@media (max-width:900px) {
+    .grid.cols-3 {
+        grid-template-columns: 1fr
+    }
+
+    .grid.cols-2 {
+        grid-template-columns: 1fr
+    }
+}
+
+/* Stack on small phones */
+@media (max-width:600px) {
+    .grid.cols-3 {
+        grid-template-columns: 1fr
+    }
+}
+
+/* Hero blocks: ensure inner content wraps nicely */
+.hero {
+    display: block
+}
+
+.hero .grid {
+    align-items: center
+}
+
+/* Images within cards should not overflow */
+.card img {
+    height: auto;
+    max-width: 100%;
+    display: block
+}
+
+/* Tables should scroll on small screens */
+.card table {
+    width: 100%;
+    border-collapse: collapse
+}
+
+.card table {
+    display: block;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch
+}
+
+/* Ensure footer grid stacks on narrow screens if not already overridden inline */
+@media (max-width:720px) {
+    #footer2025 .mpl-footer-grid {
+        grid-template-columns: 1fr !important
+    }
+}
