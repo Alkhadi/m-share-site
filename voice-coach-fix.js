@@ -938,7 +938,6 @@
 
     handle.addEventListener('mousedown', onMouseDown, { passive: false });
     handle.addEventListener('touchstart', onTouchStart, { passive: false });
-
     // Keyboard move on handle
     handle.addEventListener('keydown', (e) => {
       const AR = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'];
