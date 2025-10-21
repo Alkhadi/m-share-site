@@ -1,0 +1,135 @@
+/* Autism page palette — scoped, idempotent, no framework */
+/* Base hue provided by you: #B0B0CD (lavender‑grey) */
+.autism-page {
+    --autism-base: #B0B0CD;
+    --autism-light: #E6E6F1;
+    /* lighter panel */
+    --autism-dark: #3D3D63;
+    /* derived dark */
+    --autism-darker: #2A2A47;
+    /* deeper dark */
+    --ink-dark: #0b1220;
+    --ink-light: #ffffff;
+    --muted-dark: #4b5563;
+    --muted-light: rgba(255, 255, 255, .86);
+    --card-radius: 22px;
+}
+
+/* Upgraded card styling: soft radius, subtle border driven by base hue */
+.autism-page main .card {
+    border-radius: var(--card-radius);
+    border: 1px solid color-mix(in oklab, var(--autism-base) 45%, #0000 55%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .20);
+    backdrop-filter: saturate(120%);
+}
+
+/* Hero: keep your hue with a light dark-overlay; white text for strong contrast */
+.autism-page main .card.hero,
+.autism-page main .card:first-of-type {
+    background: linear-gradient(0deg, rgba(0, 0, 0, .40), rgba(0, 0, 0, .32)), var(--autism-base) !important;
+    color: var(--ink-light) !important;
+}
+
+.autism-page main .card.hero .muted,
+.autism-page main .card:first-of-type .muted {
+    color: var(--muted-light) !important;
+}
+
+/* Alternate cards automatically down the page */
+/* Odd (after hero) — light cards with dark text */
+.autism-page main .card:nth-of-type(odd):not(:first-of-type) {
+    background: #ffffff !important;
+    color: var(--ink-dark) !important;
+    border-color: color-mix(in oklab, var(--autism-base) 55%, #ffffff 45%) !important;
+}
+
+.autism-page main .card:nth-of-type(odd):not(:first-of-type) .muted {
+    color: var(--muted-dark) !important;
+}
+
+/* Make inline links readable on light cards (override global white link rule) */
+.autism-page main .card:nth-of-type(odd):not(:first-of-type) a:not(.btn) {
+    color: var(--ink-dark) !important;
+}
+
+/* Even — rich, dark cards with white text */
+.autism-page main .card:nth-of-type(even) {
+    background: linear-gradient(180deg, var(--autism-darker), var(--autism-dark)) !important;
+    color: var(--ink-light) !important;
+    border-color: color-mix(in oklab, var(--autism-base) 25%, #000 75%) !important;
+}
+
+.autism-page main .card:nth-of-type(even) .muted {
+    color: var(--muted-light) !important;
+}
+
+/* Buttons — ensure contrast against their container */
+/* Inside light cards, prefer dark buttons */
+.autism-page main .card:nth-of-type(odd):not(:first-of-type) .btn {
+    background: #0a1020 !important;
+    border-color: rgba(0, 0, 0, .20) !important;
+    color: #ffffff !important;
+}
+
+/* Inside dark/hero cards, prefer subtle light buttons (or existing success style) */
+.autism-page main .card:nth-of-type(even) .btn,
+.autism-page main .card:first-of-type .btn {
+    background: rgba(255, 255, 255, .10) !important;
+    border-color: rgba(255, 255, 255, .22) !important;
+    color: #ffffff !important;
+}
+
+.autism-page main .card .btn:hover {
+    filter: brightness(1.08);
+}
+
+/* Icons follow text colour for guaranteed visibility */
+.autism-page .card .icon {
+    color: currentColor;
+    opacity: .95;
+}
+
+/* Tiles inside light cards stay light; inside dark cards they inherit */
+.autism-page main .card:nth-of-type(odd):not(:first-of-type) .tile {
+    background: color-mix(in oklab, #ffffff 92%, var(--autism-base) 8%);
+    border-radius: 14px;
+    padding: 10px;
+}
+
+/* Small polish: headings slightly stronger on light cards */
+.autism-page main .card:nth-of-type(odd):not(:first-of-type) h2,
+.autism-page main .card:nth-of-type(odd):not(:first-of-type) h3,
+.autism-page main .card:nth-of-type(odd):not(:first-of-type) h4 {
+    color: var(--ink-dark) !important;
+}
+
+/* Download PDFs list: professional spacing for buttons */
+.autism-page section[aria-labelledby="downloadsTitle"] #downloadsTitle {
+    margin-bottom: 8px;
+}
+
+.autism-page section[aria-labelledby="downloadsTitle"] ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+}
+
+.autism-page section[aria-labelledby="downloadsTitle"] li+li {
+    margin-top: 10px;
+}
+
+.autism-page section[aria-labelledby="downloadsTitle"] a.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px !important;
+    border-radius: 14px;
+}
+
+@media (max-width: 520px) {
+    .autism-page section[aria-labelledby="downloadsTitle"] a.btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+}

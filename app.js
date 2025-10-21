@@ -24,7 +24,8 @@
       ev.preventDefault();
       const open = g.classList.toggle('open');
       b.setAttribute('aria-expanded', open ? 'true' : 'false');
-      if (window.innerWidth > 760 && open) {
+      // Accordion behaviour (one open at a time) on all viewports
+      if (open) {
         groups.forEach(o => { if (o !== g) { o.classList.remove('open'); const ob = o.querySelector('.menu-toggle'); ob && ob.setAttribute('aria-expanded', 'false'); } });
       }
     });

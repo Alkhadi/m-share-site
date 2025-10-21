@@ -1,19 +1,214 @@
-.footer-2025{background:#0f172a;color:#e5e7eb;border-top:1px solid #1f2937;filter:brightness(var(--app-bri))}
-.footer-2025 .wrap{max-width:1100px;margin:0 auto;padding:16px}
-.footer-2025 .grid{display:grid;grid-template-columns:1fr;gap:14px}
-.footer-2025 .brandline{display:flex;gap:10px;align-items:center}
-.footer-2025 .logo{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#111827}
-.footer-2025 .muted{opacity:.9}
-.footer-2025 .pay{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;margin-top:8px}
-.footer-2025 .pay .btn{display:inline-flex;align-items:center;justify-content:center;padding:8px 10px;border:1px solid #374151;border-radius:10px;text-decoration:none;color:#e5e7eb}
-.footer-2025 a{color:#dbeafe;text-decoration:none}
-.footer-2025 a:hover{text-decoration:underline}
-.footer-2025 h4{margin:.2rem 0 .4rem;font-size:1rem}
-.footer-2025 .bottom{display:flex;gap:12px;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid #1f2937;flex-wrap:wrap}
-.footer-2025 .theme-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
-.footer-2025 .theme-controls label{display:flex;gap:6px;align-items:center}
-.footer-2025 .brandline .logo{
-  background:#3b82f6 !important;
-  color:#0b1020 !important;
-  box-shadow:0 6px 18px rgba(59,130,246,.45);
+.footer-2025 {
+  background: #0f172a;
+  color: #ffffff;
+  border-top: 1px solid #1f2937;
+  filter: brightness(var(--app-bri))
+}
+
+.footer-2025 .wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  /* Keep content 4% away from both edges site-wide */
+  padding: 16px 4%;
+}
+
+.footer-2025 .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px
+}
+
+.footer-2025 .brandline {
+  display: flex;
+  gap: 10px;
+  align-items: center
+}
+
+.footer-2025 .logo {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #111827
+}
+
+.footer-2025 .muted {
+  opacity: .9
+}
+
+.footer-2025 .pay {
+  display: flex;
+  gap: 8px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: 8px
+}
+
+.footer-2025 .pay .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #e5e7eb
+}
+
+.footer-2025 a {
+  color: #ffffff;
+  text-decoration: none
+}
+
+.footer-2025 a:hover {
+  text-decoration: underline
+}
+
+.footer-2025 h4 {
+  margin: .2rem 0 .4rem;
+  font-size: 1rem
+}
+
+.footer-2025 .bottom {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #1f2937;
+  flex-wrap: wrap
+}
+
+/* Explore (right) */
+.footer-2025 .mpl-footer-explore {
+  display: block;
+}
+
+.footer-2025 .mpl-footer-explore .explore {
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, .45);
+  padding: 6px 10px;
+}
+
+.footer-2025 .mpl-footer-explore .explore>summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.footer-2025 .mpl-footer-explore .explore>summary::after {
+  content: '▾';
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform .2s ease;
+  margin-left: 8px;
+}
+
+.footer-2025 .mpl-footer-explore .explore[open]>summary::after {
+  transform: rotate(180deg);
+}
+
+.footer-2025 .mpl-footer-explore .explore>summary::-webkit-details-marker {
+  display: none;
+}
+
+.footer-2025 .mpl-footer-explore .explore .title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.footer-2025 .mpl-footer-explore .explore .subheading {
+  color: #cbd5e1;
+  font-size: .85rem;
+}
+
+.footer-2025 .mpl-footer-explore .footer-explore-list a {
+  color: #e5e7eb;
+}
+
+.footer-2025 .mpl-footer-explore .footer-explore-list li {
+  margin: 6px 0;
+}
+
+@media (max-width: 767px) {
+  .footer-2025 .mpl-footer-explore .explore {
+    padding: 6px 8px;
+  }
+
+  .footer-2025 .mpl-footer-explore .explore .subheading {
+    font-size: .8rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .footer-2025 .wrap {
+    /* Preserve 4% side padding on small screens while reducing block padding */
+    padding: 14px 4%;
+  }
+
+  .footer-2025 .grid {
+    gap: 10px;
+  }
+
+  .footer-2025 .bottom {
+    gap: 10px;
+  }
+
+  .footer-2025 .brandline .logo {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.footer-2025 .theme-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 8px
+}
+
+.footer-2025 .theme-controls label {
+  display: flex;
+  gap: 6px;
+  align-items: center
+}
+
+.footer-2025 .brandline .logo {
+  background: #3b82f6 !important;
+  color: #0b1020 !important;
+  box-shadow: 0 6px 18px rgba(59, 130, 246, .45);
+}
+
+/* Fallbacks: ensure side padding even if markup varies */
+/* When a page mounts footer as #footer2025 without .wrap */
+#footer2025:not(:has(.wrap)) {
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+/* If a different inner container class is used */
+.footer-2025>.container:not(.wrap) {
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+/* Reduce block padding on very small screens but keep 4% sides */
+@media (max-width: 680px) {
+  #footer2025:not(:has(.wrap)) {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .footer-2025>.container:not(.wrap) {
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
 }

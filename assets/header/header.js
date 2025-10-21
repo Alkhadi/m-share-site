@@ -1,70 +1,70 @@
 (() => {
-    // Signal that a dedicated nav override is active (lets other scripts skip their own menus)
-    try { window.__NAV_OVERRIDE__ = true; } catch { }
     const HEADER_HTML = `
-    <header class="site-header">
-        <div class="container navbar">
-            <a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> <span class="brand-text">M Share</span></a>
+	<header class="site-header">
+		<div class="container navbar">
+			<a id="brandLink" class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> <span class="brand-text">M Share</span></a>
 
-            <nav class="main-nav" id="mainNav" role="navigation" aria-label="Primary">
-                <a data-href="index.html">Wellbeing</a>
-                <div class="menu-group">
-                    <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
-                    <div class="submenu">
-                        <div class="menu-label">Neurodevelopmental</div>
-                        <a data-href="autism.html">Autism</a>
-                        <a data-href="autism-parent.html">Autism Parent</a>
-                        <a data-href="adhd.html">ADHD</a>
-                        <a data-href="dyslexia-reading-training.html">Dyslexia</a>
-                        <div class="menu-label">Mental Health</div>
-                        <a data-href="anxiety.html">Anxiety</a>
-                        <a data-href="depression.html">Depression</a>
-                        <a data-href="stress.html">Stress</a>
-                        <a data-href="sleep.html">Sleep</a>
-                    </div>
-                </div>
-                <div class="menu-group">
-                    <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
-                    <div class="submenu">
-                        <div class="menu-label">Guides</div>
-                        <a data-href="breath.html">Breath (how‑to)</a>
-                        <a data-href="focus.html">Focus</a>
-                        <a data-href="mindfulness.html">Mindfulness</a>
-                        <div class="menu-label">Techniques</div>
-                        <a data-href="sos-60.html">60‑second Reset</a>
-                        <a data-href="box-breathing.html">Box Breathing</a>
-                        <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
-                        <a data-href="coherent-5-5.html">Coherent 5‑5</a>
-                    </div>
-                </div>
-                <div class="menu-group">
-                    <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
-                    <div class="submenu">
-                        <div class="menu-label">General</div>
-                        <a data-href="sleep-tools.html">Sleep Tools</a>
-                        <a data-href="breath-tools.html">Breath Tools</a>
-                        <a data-href="mood-tools.html">Mood Tools</a>
-                        <div class="menu-label">Condition‑specific</div>
-                        <a data-href="adhd-tools.html">ADHD Tools</a>
-                        <a data-href="autism-tools.html">Autism Tools</a>
-                        <a data-href="depression-tools.html">Depression Tools</a>
-                        <a data-href="anxiety-tools.html">Anxiety Tools</a>
-                        <a data-href="stress-tools.html">Stress Tools</a>
-                    </div>
-                </div>
-                <div class="menu-group">
-                    <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
-                    <div class="submenu">
-                        <a data-href="about.html">About</a>
-                        <a data-href="coffee.html">Support Us</a>
-                        <a data-href="contact.html">Contact</a>
-                    </div>
-                </div>
-            </nav>
+            <nav class="main-nav" id="mainNav">
+	<div class="menu-group">
+		<button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+		<div class="submenu">
+			<div class="menu-label">Neurodevelopmental</div>
+			<a data-href="autism.html">Autism</a>
+            <a data-href="autism-parent.html">Autism Parent</a>
+			<a data-href="adhd.html">ADHD</a>
+			<a data-href="dyslexia-reading-training.html">Dyslexia</a>
+			<div class="menu-label">Mental Health</div>
+			<a data-href="anxiety.html">Anxiety</a>
+			<a data-href="depression.html">Depression</a>
+			<a data-href="stress.html">Stress</a>
+			<a data-href="sleep.html">Sleep</a>
+		</div>
+	</div>
+	<div class="menu-group">
+		<button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+		<div class="submenu">
+			<div class="menu-label">Guides</div>
+			<a data-href="breath.html">Breath (how‑to)</a>
+			<a data-href="focus.html">Focus</a>
+			<a data-href="mindfulness.html">Mindfulness</a>
+			<div class="menu-label">Techniques</div>
+			<a data-href="sos-60.html">60‑second Reset</a>
+			<a data-href="box-breathing.html">Box Breathing</a>
+			<a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+			<a data-href="coherent-5-5.html">Coherent 5‑5</a>
+		</div>
+	</div>
+	<div class="menu-group">
+		<button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+		<div class="submenu">
+			<div class="menu-label">General</div>
+			<a data-href="sleep-tools.html">Sleep Tools</a>
+			<a data-href="breath-tools.html">Breath Tools</a>
+			<a data-href="mood-tools.html">Mood Tools</a>
+			<div class="menu-label">Condition‑specific</div>
+			<a data-href="adhd-tools.html">ADHD Tools</a>
+			<a data-href="autism-tools.html">Autism Tools</a>
+			<a data-href="depression-tools.html">Depression Tools</a>
+			<a data-href="anxiety-tools.html">Anxiety Tools</a>
+			<a data-href="stress-tools.html">Stress Tools</a>
+		</div>
+	</div>
+	<div class="menu-group">
+		<button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+		<div class="submenu">
+			<a data-href="about.html">About</a>
+            <a data-href="downloads.html">Downloads</a>
+            <a href="/assets/pdfs/parent-quick-pack.zip">Parent Quick Pack (ZIP)</a>
+			<a data-href="coffee.html">Support Us</a>
+			<a data-href="contact.html">Contact</a>
+		</div>
+	</div>
+</nav>
 
-            <button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mainNav">☰</button>
-        </div>
-    </header>`;
+			<button id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+				aria-controls="mainNav">☰</button>
+		</div>
+	</header>`;
 
     function applyHeader() {
         // Remove any extra headers and inject the canonical one
@@ -142,26 +142,22 @@
             const s = document.createElement('style'); s.id = 'mpl-mobile-overlay-css'; s.textContent = `
 #mpl-mobile-overlay{position:fixed;inset:0;background:rgba(7,11,18,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:9998;display:none}
 #mpl-mobile-overlay[open]{display:block}
-#mpl-mobile-sheet{position:fixed;left:0;right:0;bottom:0;top:auto;height:auto;max-height:min(86vh,720px);background:#0e1726;color:#e5e7ef;border-radius:16px 16px 0 0;border:1px solid rgba(255,255,255,.12);box-shadow:0 -10px 30px rgba(0,0,0,.35);overflow:auto;padding:12px 12px calc(12px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
-#mpl-mobile-body{display:block}
-#mpl-mobile-sheet section:last-of-type{padding-bottom:.25rem;border-bottom:0;margin-bottom:0}
-@media(min-width:480px){#mpl-mobile-sheet{width:min(96vw,640px);left:50%;right:auto;transform:translateX(-50%)}}
-#mpl-mobile-sheet h4{margin:.25rem 0 .5rem}
-#mpl-mobile-sheet section{border-top:1px solid rgba(255,255,255,.08);padding:.25rem 0}
-#mpl-mobile-sheet .mm-toggle{display:flex;justify-content:space-between;align-items:center;width:100%;background:transparent;border:1px solid rgba(255,255,255,.12);padding:.5rem .7rem;border-radius:.5rem;cursor:pointer;margin:.25rem 0}
-#mpl-mobile-sheet [data-mm-list]{margin:.35rem 0 0 0;padding-left:1rem;display:none}
+/* Fill-screen sheet to remove empty space above menu on mobile */
+    #mpl-mobile-sheet{position:absolute;left:0;right:0;top:0;bottom:0;max-height:none;background:#0e1726;color:#ffffff;border-radius:0;border:1px solid rgba(255,255,255,.12);box-shadow:none;overflow:auto;padding:12px 12px 18px}
+    #mpl-mobile-sheet h4{margin:.25rem 0 .5rem}
+    #mpl-mobile-sheet section{border-top:1px solid rgba(255,255,255,.08);padding:.25rem 0}
+#mpl-mobile-sheet section:first-of-type{border-top:0}
+    #mpl-mobile-sheet .mm-toggle{display:flex;justify-content:space-between;align-items:center;gap:.75rem;width:100%;background:transparent;border:1px solid rgba(255,255,255,.12);padding:.7rem .9rem;border-radius:.7rem;cursor:pointer;margin:.3rem 0;min-height:44px}
+    #mpl-mobile-sheet .mm-toggle:focus{outline:2px solid #6AE6B7;outline-offset:2px}
+    #mpl-mobile-sheet .mm-label{flex:1 1 auto;text-align:left}
+    #mpl-mobile-sheet .mm-chevron{display:inline-block;transition:transform .2s ease}
+    #mpl-mobile-sheet .mm-toggle[aria-expanded="true"] .mm-chevron{transform:rotate(180deg)}
+#mpl-mobile-sheet [data-mm-list]{margin:.25rem 0 0 0;padding-left:1rem;display:none}
 #mpl-mobile-sheet [data-mm-list] li{margin:.2rem 0}
 #mpl-mobile-sheet a{color:inherit;text-decoration:none}
-#mpl-mobile-close{position:sticky;top:0;margin-left:auto;display:inline-flex;gap:.35rem;align-items:center;background:#0b1220;border:1px solid rgba(255,255,255,.12);padding:.4rem .6rem;border-radius:.5rem}
+    #mpl-mobile-close{position:sticky;top:0;margin-left:auto;display:inline-flex;gap:.35rem;align-items:center;background:#0b1220;border:1px solid rgba(255,255,255,.12);padding:.5rem .7rem;border-radius:.6rem;min-height:44px}
 `;
             document.head.appendChild(s);
-            // Hardening: ensure interactive elements accept clicks even if a theme applies pointer-events tricks
-            if (!document.getElementById('mpl-mobile-overlay-css-fix')) {
-                const fix = document.createElement('style'); fix.id = 'mpl-mobile-overlay-css-fix'; fix.textContent = `
-#mpl-mobile-overlay, #mpl-mobile-sheet, #mpl-mobile-sheet .mm-toggle, #mpl-mobile-sheet a { pointer-events: auto !important; }
-`;
-                document.head.appendChild(fix);
-            }
         }
     }
 
@@ -240,15 +236,48 @@
                 const ov = document.getElementById('mpl-mobile-overlay');
                 ov.setAttribute('open', '');
                 toggle.setAttribute('aria-expanded', 'true');
+                document.body.classList.add('nav-open');
+                const nav = document.getElementById('mainNav');
+                if (nav && !mq.matches) nav.setAttribute('hidden', '');
                 buildMobileMenu();
-                // Focus first section toggle for accessibility and to signal interactivity
-                const firstBtn = document.querySelector('#mpl-mobile-body .mm-toggle');
-                if (firstBtn) { try { firstBtn.focus(); } catch { } }
             };
-            const close = () => { document.getElementById('mpl-mobile-overlay').removeAttribute('open'); toggle.setAttribute('aria-expanded', 'false'); };
-            toggle.addEventListener('click', (e) => { e.preventDefault(); const openNow = toggle.getAttribute('aria-expanded') === 'true'; if (openNow) close(); else open(); });
-            document.addEventListener('click', (e) => { const ov = document.getElementById('mpl-mobile-overlay'); if (!ov) return; if (ov.hasAttribute('open') && e.target === ov) close(); });
-            document.addEventListener('keydown', (e) => { const ov = document.getElementById('mpl-mobile-overlay'); if (!ov) return; if (!ov.hasAttribute('open')) return; if (e.key === 'Escape') close(); });
+            const close = () => {
+                const ov = document.getElementById('mpl-mobile-overlay');
+                ov.removeAttribute('open');
+                toggle.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('nav-open');
+                // Keep header nav hidden on mobile; the overlay is the nav
+                const nav = document.getElementById('mainNav');
+                if (nav && !mq.matches) nav.setAttribute('hidden', '');
+                toggle.focus && toggle.focus();
+            };
+
+            const onToggle = (e) => { e.preventDefault(); const openNow = toggle.getAttribute('aria-expanded') === 'true'; if (openNow) close(); else open(); };
+            const onBackdropClick = (e) => { const ov = document.getElementById('mpl-mobile-overlay'); if (!ov) return; if (ov.hasAttribute('open') && e.target === ov) close(); };
+            const onEsc = (e) => { if (e.key === 'Escape') { const ov = document.getElementById('mpl-mobile-overlay'); if (ov && ov.hasAttribute('open')) { e.preventDefault(); close(); } } };
+
+            toggle.addEventListener('click', onToggle);
+            document.addEventListener('click', onBackdropClick);
+            document.addEventListener('keydown', onEsc);
+
+            // Delegate link clicks inside the sheet to close the menu
+            const mount = document.getElementById('mpl-mobile-body');
+            if (mount && !mount.hasAttribute('data-delegate')) {
+                const onMountClick = (e) => {
+                    const a = e.target.closest && e.target.closest('a[href],button[data-href]');
+                    if (!a) return;
+                    // Allow normal navigation then close overlay promptly
+                    setTimeout(() => close(), 0);
+                };
+                mount.addEventListener('click', onMountClick);
+                mount.setAttribute('data-delegate', '1');
+                mobileCleanupFns.push(() => { try { mount.removeEventListener('click', onMountClick); mount.removeAttribute('data-delegate'); } catch { } });
+            }
+
+            // Ensure cleanup when switching back to desktop
+            mobileCleanupFns.push(() => { try { toggle.removeEventListener('click', onToggle); } catch { } });
+            mobileCleanupFns.push(() => { try { document.removeEventListener('click', onBackdropClick); } catch { } });
+            mobileCleanupFns.push(() => { try { document.removeEventListener('keydown', onEsc); } catch { } });
         }
 
         function ensureMobileOverlay() {
@@ -256,64 +285,84 @@
             const ov = document.createElement('div'); ov.id = 'mpl-mobile-overlay';
             ov.innerHTML = '<div id="mpl-mobile-sheet" role="dialog" aria-modal="true" aria-label="Site menu"><button id="mpl-mobile-close" type="button" aria-label="Close">Close</button><div id="mpl-mobile-body"></div></div>';
             document.body.appendChild(ov);
-            document.getElementById('mpl-mobile-close').addEventListener('click', () => { ov.removeAttribute('open'); const t = document.getElementById('navToggle'); t && t.setAttribute('aria-expanded', 'false'); });
-            // Prevent clicks inside the sheet from bubbling to any document handlers
-            const sheet = ov.querySelector('#mpl-mobile-sheet');
-            if (sheet) { sheet.addEventListener('click', (e) => { e.stopPropagation(); }); }
-            ov.addEventListener('click', (e) => { if (e.target === ov) { ov.removeAttribute('open'); const t = document.getElementById('navToggle'); t && t.setAttribute('aria-expanded', 'false'); } });
+            document.getElementById('mpl-mobile-close').addEventListener('click', () => {
+                ov.removeAttribute('open');
+                const t = document.getElementById('navToggle');
+                if (t) t.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('nav-open');
+                const nav = document.getElementById('mainNav');
+                if (nav && !mq.matches) nav.setAttribute('hidden', '');
+            });
         }
 
         function buildMobileMenu() {
             const mount = document.getElementById('mpl-mobile-body'); if (!mount) return; mount.innerHTML = '';
+            const nav = document.getElementById('mainNav');
+            if (nav && !mq.matches) nav.setAttribute('hidden', '');
             const groups = findTopNavGroups();
             groups.forEach((g, idx) => {
                 const sec = document.createElement('section');
                 const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'mm-toggle'; btn.setAttribute('aria-expanded', 'false');
                 let labelNode = g.querySelector(':scope > a, :scope > button, :scope > [role="button"], :scope > .label, :scope > .menu-label');
                 const labelText = (labelNode && (labelNode.textContent || '').trim()) || ('Menu ' + (idx + 1));
-                btn.innerHTML = labelText + ' <span aria-hidden="true">▾</span>';
-                const list = document.createElement('ul'); list.setAttribute('data-mm-list', ''); list.style.display = 'none';
-                const listId = 'mpl-mm-list-' + idx; list.id = listId; btn.setAttribute('aria-controls', listId);
+                const listId = 'mm-list-' + idx;
+                btn.setAttribute('aria-controls', listId);
+                btn.innerHTML = `<span class="mm-label">${labelText}</span><span class="mm-chevron" aria-hidden="true">▾</span>`;
+                const list = document.createElement('ul'); list.id = listId; list.setAttribute('data-mm-list', ''); list.style.display = 'none';
                 const submenu = findSubmenu(g);
                 if (submenu) {
                     Array.from(submenu.querySelectorAll('a[href], [data-href]')).forEach(a => {
-                        const href = a.getAttribute('href') || a.getAttribute('data-href') || '#';
+                        let href = a.getAttribute('href') || a.getAttribute('data-href') || '#';
+                        // Merge current query string robustly
+                        const q = (location.search || '');
+                        if (q) {
+                            const hashIndex = href.indexOf('#');
+                            if (hashIndex >= 0) {
+                                const base = href.slice(0, hashIndex);
+                                const hash = href.slice(hashIndex);
+                                href = base + (base.includes('?') ? '&' + q.slice(1) : q) + hash;
+                            } else {
+                                href = href + (href.includes('?') ? '&' + q.slice(1) : q);
+                            }
+                        }
                         const text = (a.textContent || '').trim() || href;
                         const li = document.createElement('li'); const cl = document.createElement('a');
-                        cl.setAttribute('href', href + (location.search || ''));
-                        cl.textContent = text;
+                        cl.setAttribute('href', href); cl.textContent = text;
                         li.appendChild(cl); list.appendChild(li);
                     });
                 }
-                const toggle = () => {
-                    const isOpen = btn.getAttribute('aria-expanded') === 'true';
-                    btn.setAttribute('aria-expanded', String(!isOpen));
-                    list.style.display = isOpen ? 'none' : 'block';
+                const toggleOne = () => {
+                    const open = btn.getAttribute('aria-expanded') === 'true';
+                    if (!open) {
+                        // accordion: close others
+                        mount.querySelectorAll('.mm-toggle[aria-expanded="true"]').forEach(t => {
+                            if (t !== btn) { t.setAttribute('aria-expanded', 'false'); const id = t.getAttribute('aria-controls'); const l = id && document.getElementById(id); if (l) l.style.display = 'none'; }
+                        });
+                    }
+                    btn.setAttribute('aria-expanded', String(!open));
+                    // Inline style must override CSS [data-mm-list]{display:none}; use block when opened
+                    list.style.display = open ? 'none' : 'block';
                 };
-                btn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); toggle(); });
-                btn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } else if (e.key === 'Escape') { e.preventDefault(); btn.setAttribute('aria-expanded', 'false'); list.style.display = 'none'; btn.blur(); } });
+                // Allow clicking anywhere on the toggle (label or chevron) to open/close
+                btn.addEventListener('click', (e) => { e.preventDefault(); toggleOne(); });
+                btn.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOne(); }
+                    else if (e.key === 'Escape') { e.preventDefault(); btn.setAttribute('aria-expanded', 'false'); list && (list.style.display = 'none'); btn.focus(); }
+                });
+                // Explicitly make chevron also a hit target (inside button already, but ensure for AT/analytics)
+                btn.querySelector('.mm-chevron')?.addEventListener('click', (e) => { e.preventDefault(); toggleOne(); });
                 sec.appendChild(btn); sec.appendChild(list); mount.appendChild(sec);
             });
-            // Close the overlay when a link is clicked (let navigation proceed)
-            mount.addEventListener('click', (e) => {
-                const a = e.target.closest('a');
-                if (!a) return;
-                const ov = document.getElementById('mpl-mobile-overlay');
-                if (ov && ov.hasAttribute('open')) {
-                    ov.removeAttribute('open');
-                    const t = document.getElementById('navToggle'); t && t.setAttribute('aria-expanded', 'false');
-                }
-            }, { once: false });
         }
         const react = () => {
             const nav = document.getElementById('mainNav');
             if (mq.matches) {
-                // Desktop: show main nav and desktop behaviors
+                // Desktop: ensure header nav is visible
                 if (nav) nav.removeAttribute('hidden');
                 wireMobileCleanup();
                 enhanceDesktop();
             } else {
-                // Mobile: hide main nav entirely (use bottom sheet only)
+                // Mobile: hide header nav; we use the full-screen overlay menu instead
                 if (nav) nav.setAttribute('hidden', '');
                 teardownDesktop();
                 wireMobile();
@@ -326,4 +375,25 @@
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyHeader, { once: true });
     else applyHeader();
+
+    // Also enforce Voice Coach / narration defaults globally
+    try {
+        localStorage.setItem('vc.enabled', 'true');
+    } catch { }
+    // If a page exposes a TTS select, default it to "on"
+    try {
+        const setTts = () => {
+            const ttsSel = document.getElementById('tts');
+            if (ttsSel) { ttsSel.value = 'on'; }
+        };
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setTts, { once: true });
+        else setTts();
+    } catch { }
+
+    // Ensure PDF helper is available globally for data-pdf links
+    try {
+        if (!document.querySelector('script[src*="assets/js/pdf-links.js"]')) {
+            const s = document.createElement('script'); s.src = 'assets/js/pdf-links.js'; s.async = true; document.head.appendChild(s);
+        }
+    } catch { }
 })();

@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta charset="utf-8" />
+    <title>Downloads • M Share</title>
+    <meta name="description" content="Download free PDFs and resources from M Share." />
+    <!-- Set this to your Cloudflare R2 public base or point to local assets folder -->
+    <meta name="pdf-base" content="/assets/pdfs" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <style>
+        .wrap {
+            max-width: min(1100px, 96vw);
+            margin: 0 auto
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px
+        }
+
+        @media (max-width:800px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid var(--b);
+            border-radius: 12px;
+            padding: 14px
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px;
+            border: 1px solid var(--b);
+            border-radius: 10px;
+            background: rgba(0, 0, 0, .03)
+        }
+
+        .item .meta {
+            display: flex;
+            flex-direction: column
+        }
+
+        .item h3 {
+            margin: 0;
+            font-size: 1.05rem
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .45rem .7rem;
+            border: 1px solid var(--b);
+            border-radius: .5rem;
+            text-decoration: none
+        }
+    </style>
+  <link rel="stylesheet" href="assets/css/responsive-fixes.css" />
+<!-- mshare-seo-start -->
+  <link rel="canonical" href="https://www.mindpaylink.com/downloads.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="M Share" />
+  <meta property="og:title" content="Downloads • M Share" />
+  <meta property="og:description" content="Download free PDFs and resources from M Share." />
+  <meta property="og:url" content="https://www.mindpaylink.com/downloads.html" />
+  <meta property="og:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Downloads • M Share" />
+  <meta name="twitter:description" content="Download free PDFs and resources from M Share." />
+  <meta name="twitter:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "M Share",
+      "url": "https://www.mindpaylink.com/"
+    }
+  </script>
+<!-- mshare-seo-end -->
+  <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
+</head>
+
+<body>
+<header class="site-header">
+    <div class="container navbar">
+      <!-- Added logo-blue class to get the blue background -->
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html">
+        <span class="logo logo-blue">M</span><span class="brand-text">M Share</span>
+      </a>
+
+      <!-- UPDATED NAV (dropdown groups) -->
+      <nav class="main-nav" id="mainNav">
+        <a data-href="index.html">Wellbeing</a>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Neurodevelopmental</div>
+            <a data-href="autism.html">Autism</a>
+            <a data-href="autism-parent.html">Autism Parent</a>
+            <a data-href="adhd.html">ADHD</a>
+            <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+            <div class="menu-label">Mental Health</div>
+            <a data-href="anxiety.html">Anxiety</a>
+            <a data-href="depression.html">Depression</a>
+            <a data-href="stress.html">Stress</a>
+            <a data-href="sleep.html">Sleep</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Guides</div>
+            <a data-href="breath.html">Breath (how‑to)</a>
+            <a data-href="focus.html">Focus</a>
+            <a data-href="mindfulness.html">Mindfulness</a>
+            <div class="menu-label">Techniques</div>
+            <a data-href="sos-60.html">60‑second Reset</a>
+            <a data-href="box-breathing.html">Box Breathing</a>
+            <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+            <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">General</div>
+            <a data-href="sleep-tools.html">Sleep Tools</a>
+            <a data-href="breath-tools.html">Breath Tools</a>
+            <a data-href="mood-tools.html">Mood Tools</a>
+            <div class="menu-label">Condition‑specific</div>
+            <a data-href="adhd-tools.html">ADHD Tools</a>
+            <a data-href="autism-tools.html">Autism Tools</a>
+            <a data-href="depression-tools.html">Depression Tools</a>
+            <a data-href="anxiety-tools.html">Anxiety Tools</a>
+            <a data-href="stress-tools.html">Stress Tools</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+          <div class="submenu">
+            <a data-href="about.html">About</a>
+            <a data-href="coffee.html">Support Us</a>
+            <a data-href="contact.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
+
+    <!-- Header/Footer are injected -->
+    <main class="wrap" style="padding:16px 12px">
+        <h1>Downloads</h1>
+        <p class="muted">These PDFs are free to download and share. Files are hosted on a fast CDN. If a link fails,
+            please refresh or try again later.</p>
+
+        <section class="card">
+            <h2>Autism Resources</h2>
+            <div class="grid">
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Adult Support Guide (UK)</h3>
+                        <div class="muted">Practical advice and services</div>
+                    </div>
+                    <a class="btn" data-pdf="Autism — Adult Support Guide (UK).pdf">Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Clinic Guide &amp; Checklists (UK)</h3>
+                        <div class="muted">Appointment prep + forms</div>
+                    </div>
+                    <a class="btn" data-pdf="Autism — Clinic Guide & Checklists (UK).pdf">Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Later Life &amp; Carer Guide (UK)</h3>
+                        <div class="muted">Support for carers</div>
+                    </div>
+                    <a class="btn" data-pdf="Autism — Later Life & Carer Guide (UK).pdf">Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Parent Quick Guide (UK)</h3>
+                        <div class="muted">At‑a‑glance tips + contacts</div>
+                    </div>
+                    <a class="btn" data-pdf="Autism — Parent Quick Guide (UK).pdf">Download</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top:12px">
+            <h2>Dyslexia Resources</h2>
+            <div class="grid">
+                <div class="item">
+                    <div class="meta">
+                        <h3>Dyslexia — Adult Resources (UK)</h3>
+                        <div class="muted">Support, tools, adjustments</div>
+                    </div>
+                    <a class="btn" data-pdf="Dyslexia — Adult Resources (UK).pdf">Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Dyslexia — Parent Support Guide</h3>
+                        <div class="muted">Home + school strategies</div>
+                    </div>
+                    <a class="btn" data-pdf="Dyslexia — Parent Support Guide.pdf">Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Dyslexia — Practice Pack (templates)</h3>
+                        <div class="muted">Printable practice sheets</div>
+                    </div>
+                    <a class="btn" data-pdf="Dyslexia — Practice Pack (templates).pdf">Download</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top:12px">
+            <h2>Bundles</h2>
+            <div class="grid">
+                <div class="item">
+                    <div class="meta">
+                        <h3>Parent Quick Pack (ZIP)</h3>
+                        <div class="muted">All autism PDFs in one zip</div>
+                    </div>
+                    <a class="btn" data-pdf="parent-quick-pack.zip">Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>All PDFs (dated bundle)</h3>
+                        <div class="muted">Snapshot bundle</div>
+                    </div>
+                    <a class="btn" data-pdf="mshare_pdfs_2025-10-01.zip">Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Parent Quick Pack README</h3>
+                        <div class="muted">What’s inside</div>
+                    </div>
+                    <a class="btn" data-pdf="parent-quick-pack-README.txt">View</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" style="margin-top:12px">
+            <h2>Cloudflare R2 Links</h2>
+            <div class="grid">
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Parent Quick Guide (UK)</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/autism-parent-quick-guide-uk.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Default Profile (PDF)</h3>
+                        <div class="muted">images:default_profile.pdf</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/images%3Adefault_profile.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Adult Support Guide (UK)</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/pdfs%3Aautism-adult-support-guide-uk.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Clinic Guide &amp; Checklists (UK)</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/pdfs%3Aautism-clinic-guide-checklists-uk.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Later Life &amp; Carer Guide (UK)</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/pdfs%3Aautism-later-life-carer-guide-uk.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Autism — Parent Quick Guide (UK)</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/pdfs%3Aautism-parent-quick-guide-uk.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Dyslexia — Adult Resources (UK)</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/pdfs%3Adyslexia-adult-resources-uk.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Dyslexia — Parent Support Guide</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/pdfs%3Adyslexia-parent-support-guide.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Dyslexia — Practice Pack (templates)</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/pdfs%3Adyslexia-practice-pack-templates.pdf"
+                        download>Download</a>
+                </div>
+                <div class="item">
+                    <div class="meta">
+                        <h3>Pastor Gibril — Service Address</h3>
+                        <div class="muted">Direct link (R2)</div>
+                    </div>
+                    <a class="btn" href="https://files.mindpaylink.com/pdf%3Apastor-gibril-service-address.pdf"
+                        download>Download</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/header/header.js"></script>
+    <script src="assets/footer/footer.js"></script>
+    <script src="assets/js/pdf-links.js"></script>
+
+
+<footer class="footer-2025" id="footer2025"> <div class="wrap"> <div class="grid"> <section class="col brand"> <div class="brandline"><span class="logo">M</span><div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div></div> <div class="theme-controls"> <label>Background<input id="themeColor" type="color" value="#0f172a" title="Input" placeholder=" "></label> <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1" title="Input" placeholder=" "></label> </div> <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div> </section> <section class="col"> <h4>Explore</h4> <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p> </section> <section class="col"> <h4>Toolkits</h4> <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p> </section> <section class="col"> <h4>Contact</h4> <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info@mindpaylink.com">info@mindpaylink.com</a></p> </section> </div> <div class="bottom"> <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div> <div class="credit">Designed by <b>Alkhadi M Koroma</b></div> </div> </div> <script>document.getElementById('yearFooter')&&(document.getElementById('yearFooter').textContent=(new Date).getFullYear());document.getElementById('backToTop')&&document.getElementById('backToTop').addEventListener('click',function(e){e.preventDefault();try{(document.getElementById('top')||document.body).scrollIntoView({behavior:'smooth',block:'start'})}catch{location.hash='#top'}})</script>
+</footer>
+</body>
+
+</html>

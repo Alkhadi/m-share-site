@@ -2,30 +2,183 @@
 <html lang="en">
 
 <head>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <title>60-second SOS • M Share</title>
     <meta name="theme-color" content="#2a0b12" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
     <link rel="stylesheet" href="assets/css/pages/sos.inline.css" />
+    <style id="sos-orb-theme">
+        /* Unique SOS theme inspired by box-breathing visuals */
+        .orb-wrap {
+            position: relative;
+            width: min(84vw, 380px);
+            aspect-ratio: 1/1;
+        }
+
+        .orb {
+            background: radial-gradient(120px 180px at 30% 30%, rgba(255, 255, 255, .12), transparent 55%),
+                radial-gradient(100px 100px at 70% 70%, rgba(255, 255, 255, .06), transparent 70%),
+                /* warm amber/rose blend distinct from box page */
+                linear-gradient(180deg, rgba(255, 196, 160, .28), rgba(232, 128, 128, .22));
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, .25), 0 30px 50px rgba(0, 0, 0, .35);
+            border: 1px solid rgba(255, 255, 255, .14);
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            transform: scale(.82);
+            transition: transform 280ms cubic-bezier(.22, .8, .24, 1);
+        }
+
+        .orb.inhale {
+            transform: scale(1.08);
+        }
+
+        .orb.exhale {
+            transform: scale(.78);
+        }
+
+        svg.radial {
+            position: absolute;
+            inset: 0;
+            transform: rotate(-90deg);
+        }
+
+        .ring {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+
+        .ring.base {
+            stroke: rgba(255, 255, 255, .08);
+        }
+
+        .ring.progress {
+            /* soft peach ring distinct from box page's mint */
+            stroke: rgba(255, 210, 190, .95);
+        }
+
+        .phase {
+            font-weight: 800;
+            font-size: clamp(22px, 3.2vw, 28px);
+        }
+
+        .count {
+            font-weight: 900;
+            font-size: clamp(48px, 7.5vw, 56px);
+            line-height: 1;
+            margin-top: 4px;
+            text-shadow: 0 6px 22px rgba(0, 0, 0, .35);
+        }
+
+        .mini {
+            color: var(--muted);
+        }
+    </style>
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
     <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="assets/css/responsive-fixes.css" />
+<!-- mshare-seo-start -->
+  <link rel="canonical" href="https://www.mindpaylink.com/sos.html" />
+  <meta name="description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="M Share" />
+  <meta property="og:title" content="60-second SOS • M Share" />
+  <meta property="og:description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta property="og:url" content="https://www.mindpaylink.com/sos.html" />
+  <meta property="og:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="60-second SOS • M Share" />
+  <meta name="twitter:description" content="Quiet, practical mental-health tools for UK audiences — easy breathing and wellbeing techniques (educational, not medical advice)." />
+  <meta name="twitter:image" content="https://www.mindpaylink.com/icons/logo-wordmark-800x200.png" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "M Share",
+      "url": "https://www.mindpaylink.com/"
+    }
+  </script>
+<!-- mshare-seo-end -->
+  <link rel="stylesheet" href="assets/css/footer-2025.css" />
+  <link rel="stylesheet" href="assets/css/header-2025.css" />
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="container navbar">
-            <a class="brand" data-href="index.html" href="index.html"><span class="logo">M</span> M Share</a>
-            <nav class="main-nav" id="mainNav">
-                <a data-href="index.html" href="index.html">Wellbeing</a>
-                <a data-href="breath.html" href="breath.html">Breath</a>
-            </nav>
-            <button id="navToggle" class="nav-toggle" aria-label="Menu">☰</button>
+<header class="site-header">
+    <div class="container navbar">
+      <!-- Added logo-blue class to get the blue background -->
+      <a id="brandLink" class="brand" data-href="index.html" href="index.html">
+        <span class="logo logo-blue">M</span><span class="brand-text">M Share</span>
+      </a>
+
+      <!-- UPDATED NAV (dropdown groups) -->
+      <nav class="main-nav" id="mainNav">
+        <a data-href="index.html">Wellbeing</a>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Neurodevelopmental</div>
+            <a data-href="autism.html">Autism</a>
+            <a data-href="autism-parent.html">Autism Parent</a>
+            <a data-href="adhd.html">ADHD</a>
+            <a data-href="dyslexia-reading-training.html">Dyslexia</a>
+            <div class="menu-label">Mental Health</div>
+            <a data-href="anxiety.html">Anxiety</a>
+            <a data-href="depression.html">Depression</a>
+            <a data-href="stress.html">Stress</a>
+            <a data-href="sleep.html">Sleep</a>
+          </div>
         </div>
-    </header>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Breathing &amp; Focus <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">Guides</div>
+            <a data-href="breath.html">Breath (how‑to)</a>
+            <a data-href="focus.html">Focus</a>
+            <a data-href="mindfulness.html">Mindfulness</a>
+            <div class="menu-label">Techniques</div>
+            <a data-href="sos-60.html">60‑second Reset</a>
+            <a data-href="box-breathing.html">Box Breathing</a>
+            <a data-href="4-7-8-breathing.html">4‑7‑8 Breathing</a>
+            <a data-href="coherent-5-5.html">Coherent 5‑5</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">Toolkits <span class="icon">▾</span></button>
+          <div class="submenu">
+            <div class="menu-label">General</div>
+            <a data-href="sleep-tools.html">Sleep Tools</a>
+            <a data-href="breath-tools.html">Breath Tools</a>
+            <a data-href="mood-tools.html">Mood Tools</a>
+            <div class="menu-label">Condition‑specific</div>
+            <a data-href="adhd-tools.html">ADHD Tools</a>
+            <a data-href="autism-tools.html">Autism Tools</a>
+            <a data-href="depression-tools.html">Depression Tools</a>
+            <a data-href="anxiety-tools.html">Anxiety Tools</a>
+            <a data-href="stress-tools.html">Stress Tools</a>
+          </div>
+        </div>
+        <div class="menu-group">
+          <button class="menu-toggle" aria-expanded="false">About <span class="icon">▾</span></button>
+          <div class="submenu">
+            <a data-href="about.html">About</a>
+            <a data-href="coffee.html">Support Us</a>
+            <a data-href="contact.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <button type="button" id="navToggle" class="nav-toggle" aria-label="Menu" aria-expanded="false"
+        aria-controls="mainNav">☰</button>
+    </div>
+  </header>
 
     <main class="container wrap">
         <div class="card setup">
@@ -46,6 +199,7 @@
             <h2 style="margin-top:10px">Quick Session</h2>
             <div class="btn-row">
                 <select id="qsPreset" title="Preset">
+                    <option value="4,4,4,4,1,6.0,on,cosmic,0.22,auto,on">Box breathing · 1 min</option>
                     <option value="4,0,4,0,1,6.0,on,cosmic,0.22,auto,on">1 min reset · TTS on</option>
                     <option value="4,0,4,0,3,6.0,off,rain,0.24,auto,on">3 min · rain</option>
                     <option value="4,0,6,0,1,5.0,off,cosmic,0.20,auto,on">1 min · longer exhale</option>
@@ -70,6 +224,10 @@
                             <option value="off">Off</option>
                             <option value="on" selected>On</option>
                         </select>
+                    </div>
+                    <div class="tile"><label>Voice</label>
+                        <select id="ttsVoice"></select>
+                        <button id="ttsTest" class="btn" type="button" style="margin-top:6px">Test voice</button>
                     </div>
                     <div class="tile"><label>Haptics</label>
                         <select id="vib">
@@ -167,6 +325,7 @@
         </div>
     </main>
 
+    <script src="assets/js/core/tts-helper.js"></script>
     <script>
         (function () {
             'use strict';
@@ -207,16 +366,23 @@
             }
             let bgm = null;
 
-            function cleanSpeak(t) { try { return (t || '').replace(/[\uD800-\uDFFF\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu, ' ').replace(/[^a-zA-Z0-9.,;:!?'\u2019()\-\s]/g, ' ').replace(/\s+/g, ' ').trim(); } catch { return t || ''; } }
+            // Chrome-safe TTS helper: waits for voices, primes on user gesture, avoids over-cancel
+            // Use shared TTS helper if present
+            const TTS = (function () { return (window.MS_TTS) ? window.MS_TTS : null; })();
+
             function speak(text) {
-                if (tts.value !== 'on') return;
-                const tx = cleanSpeak(text);
                 try {
-                    if (window.__MSHARE__?.TTS?.speak) { window.__MSHARE__.TTS.speak(tx, { clear: true, rate: 0.95, pitch: 1.0 }); }
-                    else if ('speechSynthesis' in window) { const u = new SpeechSynthesisUtterance(tx); u.rate = 0.95; u.pitch = 1.0; speechSynthesis.cancel(); speechSynthesis.speak(u); }
-                } catch { }
+                    if (!TTS || tts.value !== 'on') return;
+                    const rate = Math.min(1.2, Math.max(0.7, (parseFloat(bpm.value || '6.0') / 6)));
+                    const voiceSel = document.getElementById('ttsVoice');
+                    TTS.speak(text, { rate, selectEl: voiceSel });
+                } catch { /* noop */ }
             }
-            function vibrate(ms) { if (vib.value === 'on' && navigator.vibrate) try { navigator.vibrate(ms); } catch { } }
+            function vibrate(ms) {
+                try {
+                    if (vib.value === 'on' && navigator.vibrate) navigator.vibrate(ms);
+                } catch (e) { /* noop */ }
+            }
             function rmEnabled() { if (rm.value === 'on') return true; if (rm.value === 'off') return false; return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches; }
             function applyFocus(on) { document.body.classList.toggle('focus-mode', !!on); }
 
@@ -239,9 +405,16 @@
             }
 
             function runOne() {
-                step('in', +inS.value || 4, () => step('h1', +h1S.value || 0, () => step('out', +outS.value || 4, () => {
-                    breathIdx++; if (breathIdx <= breathTotal) { idxEl.textContent = String(breathIdx); runOne(); } else finish();
-                })));
+                step('in', +inS.value || 4, () =>
+                    step('h1', +h1S.value || 0, () =>
+                        step('out', +outS.value || 4, () =>
+                            step('h2', +h2S.value || 0, () => {
+                                breathIdx++;
+                                if (breathIdx <= breathTotal) { idxEl.textContent = String(breathIdx); runOne(); } else finish();
+                            })
+                        )
+                    )
+                );
             }
 
             function startSession() {
@@ -249,7 +422,12 @@
                 const rate = Math.min(8, Math.max(4, parseFloat(bpm.value || '6.0')));
                 breathTotal = Math.max(1, Math.round(mins * rate));
                 totalEl.textContent = String(breathTotal); breathIdx = 1; idxEl.textContent = '1';
-                ensureAC(); if (!bgm && bg.value !== 'none') { bgm = new Background(ac); bgm.setType(bg.value); } if (bgm) bgm.setVol(bgv.value);
+                ensureAC();
+                // Prime voices and unlock Chrome TTS on user gesture
+                try {
+                    if (TTS) { TTS.waitForVoices(3000); TTS.prime(); }
+                } catch { }
+                if (!bgm && bg.value !== 'none') { bgm = new Background(ac); bgm.setType(bg.value); } if (bgm) bgm.setVol(bgv.value);
                 running = true; paused = false; setProgress(0); applyFocus(focus.value === 'on'); document.body.classList.toggle('rm', rmEnabled());
                 document.querySelector('.setup').classList.add('hidden'); $('inst').classList.add('hidden'); $('session').classList.remove('hidden');
                 runOne();
@@ -297,6 +475,21 @@
             });
             qsStop.addEventListener('click', stopToSetup);
 
+            // Wire TTS UI + show/hide voice controls when TTS is off
+            (function () {
+                const voiceSel = document.getElementById('ttsVoice');
+                const testBtn = document.getElementById('ttsTest');
+                function reflectTtsUI() {
+                    const show = (tts && tts.value === 'on');
+                    const tile = voiceSel ? voiceSel.closest('.tile') : null;
+                    if (tile) tile.style.display = show ? '' : 'none';
+                    if (testBtn) testBtn.style.display = show ? '' : 'none';
+                }
+                if (window.MS_TTS) { window.MS_TTS.connectUI(voiceSel, testBtn); }
+                else { if (voiceSel) voiceSel.style.display = 'none'; if (testBtn) testBtn.style.display = 'none'; }
+                if (tts) { tts.addEventListener('change', reflectTtsUI); reflectTtsUI(); }
+            })();
+
             (function () {
                 const q = new URLSearchParams(location.search);
                 if (q.get('focus') === '1') focus.value = 'on';
@@ -304,56 +497,14 @@
             })();
         })();
     </script>
-    <script defer src="assets/js/core/sound-kit.js"></script>
-    <script defer src="assets/header/header.js"></script>
-    <script defer src="assets/footer/footer.js"></script>
-    <script defer src="assets/js/voice-coach-pro.js"></script>
-    <script defer src="voice-coach-fix.js"></script>
-<footer class="footer-2025" id="footer2025">
-    <div class="wrap">
-      <div class="grid">
-        <section class="col brand">
-          <div class="brandline"><span class="logo">M</span>
-            <div><b>M Share</b>
-              <div class="muted">Quiet, practical tools for mental health and wellbeing.</div>
-            </div>
-          </div>
-          <div class="theme-controls">
-            <label>Background<input id="themeColor" type="color" value="#0f172a"></label>
-            <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01"
-                value="1"></label>
-          </div>
-          <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div>
-        </section>
-        <section class="col">
-          <h4>Explore</h4>
-          <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html"
-              href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a
-              data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html"
-              href="about.html">About</a></p>
-        </section>
-        <section class="col">
-          <h4>Toolkits</h4>
-          <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html"
-              href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html"
-              href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html"
-              href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html"
-              href="stress-tools.html">Stress</a></p>
-        </section>
-        <section class="col">
-          <h4>Contact</h4>
-          <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info.com">info.com</a></p>
-        </section>
-      </div>
-      <div class="bottom">
-        <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div>
-        <div class="credit">Designed by <b>Alkhadi M Koroma</b></div>
-      </div>
-    </div>
-    <script>document.getElementById("yearFooter") && (document.getElementById("yearFooter").textContent = (new Date).getFullYear()); document.getElementById("backToTop") && document.getElementById("backToTop").addEventListener("click", function (e) { e.preventDefault(); try { (document.getElementById("top") || document.body).scrollIntoView({ behavior: "smooth", block: "start" }) } catch { location.hash = "#top" } })</script>
-  </footer>
+    <script src="assets/header/header.js"></script>
+    <script src="assets/footer/footer.js"></script>
+    <script src="assets/js/core/voice-coach.js"></script>
+    <script src="assets/js/core/sound-kit.js"></script>
 
-  <script defer src="assets/js/contrast-fix.js"></script>
+
+<footer class="footer-2025" id="footer2025"> <div class="wrap"> <div class="grid"> <section class="col brand"> <div class="brandline"><span class="logo">M</span><div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div></div> <div class="theme-controls"> <label>Background<input id="themeColor" type="color" value="#0f172a" title="Input" placeholder=" "></label> <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1" title="Input" placeholder=" "></label> </div> <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div> </section> <section class="col"> <h4>Explore</h4> <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p> </section> <section class="col"> <h4>Toolkits</h4> <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p> </section> <section class="col"> <h4>Contact</h4> <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info@mindpaylink.com">info@mindpaylink.com</a></p> </section> </div> <div class="bottom"> <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div> <div class="credit">Designed by <b>Alkhadi M Koroma</b></div> </div> </div> <script>document.getElementById('yearFooter')&&(document.getElementById('yearFooter').textContent=(new Date).getFullYear());document.getElementById('backToTop')&&document.getElementById('backToTop').addEventListener('click',function(e){e.preventDefault();try{(document.getElementById('top')||document.body).scrollIntoView({behavior:'smooth',block:'start'})}catch{location.hash='#top'}})</script>
+</footer>
 </body>
 
 </html>

@@ -81,7 +81,7 @@ html {
 }
 
 :root {
-  --bg: #0f172a;
+  --bg: #B0B0CD;
   --bg-bright: #eaf4ff;
   --text: #e5e7eb;
   --ink: #0b1220;
@@ -378,26 +378,35 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-/* Tips grid and downloads row */
-.tips-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-  margin-top: 6px;
+/* Page hero: give the first card a calm background site-wide */
+/* Overridable via --card-hero-bg and --card-hero-ink if needed per page */
+main .card:first-of-type {
+  /* Use requested hue (#B0B0CD) with a subtle dark overlay for white text contrast */
+  background: linear-gradient(0deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .35)), var(--card-hero-bg, #B0B0CD) !important;
+  color: var(--card-hero-ink, #ffffff);
 }
 
-.tips-grid .tip.tile {
-  padding: 8px 10px;
+/* Maintain readable links/buttons inside the hero when using a light bg */
+main .card:first-of-type a.btn,
+main .card:first-of-type button.btn {
+  color: inherit;
 }
 
-.downloads-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin-top: 10px;
+/* Ensure card and button text is white and readable site-wide */
+.card {
+  color: #ffffff !important;
 }
 
-.downloads-row strong {
-  margin-right: 6px;
+.card .muted {
+  color: rgba(255, 255, 255, .85) !important;
+}
+
+.card a {
+  color: #ffffff !important;
+}
+
+.btn,
+.main-nav a,
+.main-nav button {
+  color: #ffffff !important;
 }

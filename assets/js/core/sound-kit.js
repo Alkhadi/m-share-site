@@ -1,29 +1,6 @@
 (() => {
-    if (window.__SOUND_KIT__) return; window.__SOUND_KIT__ = true;
-    let AC = null;
-    function ensure() {
-        if (!AC) { const C = window.AudioContext || window.webkitAudioContext; if (C) AC = new C(); }
-        if (AC && AC.state === 'suspended') AC.resume();
-        return AC;
-    }
-    // Aggressive unlock/primer for Chrome/iOS
-    const unlock = () => { try { const ac = ensure(); if (!ac) return; const o = ac.createOscillator(), g = ac.createGain(); g.gain.value = 0; o.connect(g); g.connect(ac.destination); const t = ac.currentTime; o.start(t); o.stop(t + 0.01); } catch { } };
-    ;['pointerdown', 'pointerup', 'mousedown', 'click', 'touchstart', 'touchend', 'keydown'].forEach(evt => {
-        window.addEventListener(evt, unlock, { once: true, passive: true });
-    });
-    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') try { ensure() } catch { } });
-
-    function tone({ freq = 528, dur = .12, type = 'sine', vol = .18 } = {}) {
-        const ac = ensure(); if (!ac) return;
-        const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = freq; g.gain.value = 0; o.connect(g); g.connect(ac.destination);
-        const t = ac.currentTime; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur); o.start(t); o.stop(t + dur + .02);
-    }
-    function click() { tone({ freq: 520, dur: .08, type: 'sine', vol: .14 }); }
-    function start() { tone({ freq: 640, dur: .16, type: 'triangle', vol: .2 }); }
-    function stop() { tone({ freq: 340, dur: .18, type: 'square', vol: .22 }); }
-
-    document.addEventListener('click', e => { const b = e.target.closest('button,.btn,a'); if (!b) return; try { ensure(); click(); } catch { } }, { passive: true });
-    function wire(aSel, sSel) { const a = document.querySelector(aSel), s = document.querySelector(sSel); a && a.addEventListener('click', () => { try { ensure(); start(); } catch { } }, { passive: true }); s && s.addEventListener('click', () => { try { ensure(); stop(); } catch { } }, { passive: true }); }
-    wire('#pbStart', '#pbStop'); wire('#nbStart', '#nbStop'); wire('#stStart', '#stStop');
-    document.addEventListener('keydown', e => { if (e.code === 'Space') { try { ensure(); click(); } catch { } } });
+    if (window.__SOUND_KIT__) return; window.__SOUND_KIT__ = true; let AC = null; function ensure() { if (!AC) { const C = window.AudioContext || window.webkitAudioContext; if (C) AC = new C(); } if (AC && AC.state === 'suspended') AC.resume(); return AC } function tone({ freq = 528, dur = .12, type = 'sine', vol = .18 }) { const ac = ensure(); if (!ac) return; const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = freq; g.gain.value = 0; o.connect(g); g.connect(ac.destination); const t = ac.currentTime; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.0001, t + dur); o.start(t); o.stop(t + dur + .02) } function click() { tone({ freq: 520, dur: .08, type: 'sine', vol: .14 }) } function start() { tone({ freq: 640, dur: .16, type: 'triangle', vol: .2 }) } function stop() { tone({ freq: 340, dur: .18, type: 'square', vol: .22 }) }
+    document.addEventListener('click', e => { const b = e.target.closest('button,.btn,a'); if (!b) return; try { ensure(); click() } catch { } }, { passive: true });
+    function wire(aSel, sSel) { const a = document.querySelector(aSel), s = document.querySelector(sSel); a && a.addEventListener('click', () => { try { ensure(); start() } catch { } }, { passive: true }); s && s.addEventListener('click', () => { try { ensure(); stop() } catch { } }, { passive: true }); }
+    wire('#pbStart', '#pbStop'); wire('#nbStart', '#nbStop'); wire('#stStart', '#stStop'); document.addEventListener('keydown', e => { if (e.code === 'Space') { try { ensure(); click() } catch { } } });
 })();
