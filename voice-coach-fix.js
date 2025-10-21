@@ -258,6 +258,27 @@
         }
       }
     } catch { }
+
+    // Ensure explicit fixed positioning
+    panel.style.position = 'fixed';
+
+    // If overlapping the site header, nudge panel downward within viewport bounds
+    try {
+      const header = document.querySelector('header.site-header, header, .site-header');
+      const pr = panel.getBoundingClientRect();
+      const hr = header ? header.getBoundingClientRect() : null;
+      const needsNudge = hr && pr.top < hr.bottom && pr.right > hr.left && pr.left < hr.right;
+      if (needsNudge) {
+        const dy = Math.ceil(hr.bottom - pr.top + 12);
+        const y = Math.min(Math.max((pr.top + dy), 6), Math.max(6, window.innerHeight - pr.height - 6));
+        const x = Math.min(Math.max(pr.left, 6), Math.max(6, window.innerWidth - pr.width - 6));
+        panel.style.top = y + 'px';
+        panel.style.left = x + 'px';
+        panel.style.right = '';
+        panel.style.bottom = '';
+        try { localStorage.setItem('vc.pos', JSON.stringify({ x: Math.round(x), y: Math.round(y) })); } catch { }
+      }
+    } catch { }
     // Persisted enabled state (default: ON)
     const savedEnabled = (() => { try { return localStorage.getItem('vc.enabled'); } catch { return null; } })();
     const enabledDefault = (savedEnabled == null) ? true : (savedEnabled === 'true');

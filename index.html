@@ -58,15 +58,15 @@
         touch-action: manipulation;
       }
 
-      /* A11y focus rings on triggers */
-      .nav-group>a:focus,
-      .nav-group>button:focus,
-      .nav-group>.menu-toggle:focus,
-      .nav-group>.chevron:focus,
-      .menu-group>a:focus,
-      .menu-group>button:focus,
-      .menu-group>.menu-toggle:focus,
-      .menu-group>.chevron:focus {
+      /* A11y focus rings on triggers (avoid hover outlines) */
+      .nav-group>a:focus-visible,
+      .nav-group>button:focus-visible,
+      .nav-group>.menu-toggle:focus-visible,
+      .nav-group>.chevron:focus-visible,
+      .menu-group>a:focus-visible,
+      .menu-group>button:focus-visible,
+      .menu-group>.menu-toggle:focus-visible,
+      .menu-group>.chevron:focus-visible {
         outline: 2px solid currentColor;
         outline-offset: 2px;
       }
@@ -477,7 +477,6 @@
 
       <!-- UPDATED NAV (dropdown groups) -->
       <nav class="main-nav" id="mainNav">
-        <a data-href="index.html">Wellbeing</a>
         <div class="menu-group">
           <button class="menu-toggle" aria-expanded="false">Conditions <span class="icon">▾</span></button>
           <div class="submenu">

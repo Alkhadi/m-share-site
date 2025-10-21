@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-GB">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page not found · M Share</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="refresh" content="8; url=/">
+    <link rel="preload" href="/assets/css/footer-2025.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="/assets/css/footer-2025.css">
+    </noscript>
+    <style>
+        :root {
+            --s: clamp(12px, 2.5vw, 20px)
+        }
+
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            line-height: 1.5;
+            background: #0f172a;
+            color: #fff;
+        }
+
+        main {
+            padding: calc(var(--s)*2);
+            max-width: 840px;
+            margin: auto
+        }
+
+        a {
+            color: #fff;
+            text-decoration: underline
+        }
+
+        .card {
+            background: #111827;
+            border-radius: 12px;
+            padding: calc(var(--s)*2);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .25)
+        }
+
+        .actions {
+            margin-top: var(--s);
+            display: flex;
+            gap: var(--s);
+            flex-wrap: wrap
+        }
+
+        .btn {
+            background: #2563eb;
+            color: #fff;
+            border: 0;
+            border-radius: 8px;
+            padding: .7em 1em;
+            cursor: pointer
+        }
+
+        .muted {
+            opacity: .8
+        }
+    </style>
+</head>
+
+<body>
+    <main aria-labelledby="h1">
+        <h1 id="h1">We couldn't find that page</h1>
+        <div class="card">
+            <p>Sorry—this link may be out of date or moved. You’ll be redirected to the home page shortly.</p>
+            <p class="muted">If you need a specific tool, try these quick links:</p>
+            <div class="actions" role="navigation" aria-label="Popular links">
+                <a class="btn" href="/">Home</a>
+                <a class="btn" href="/breath.html">Breathing</a>
+                <a class="btn" href="/autism.html">Autism</a>
+                <a class="btn" href="/sleep.html">Sleep</a>
+                <a class="btn" href="/resources.html">Resources</a>
+                <a class="btn" href="/downloads.html">Downloads</a>
+            </div>
+            <p class="muted">No redirect? <a href="/">Go to the homepage</a>.</p>
+        </div>
+    </main>
+    <script defer>
+        // Also push to home after 10s as JS fallback
+        setTimeout(function () { if (location.pathname !== '/') { location.replace('/'); } }, 10000);
+    </script>
+</body>
+
+</html>

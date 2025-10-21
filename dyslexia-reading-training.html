@@ -268,6 +268,9 @@
       mq.addEventListener('change', react);
     })();
   </script>
+  <!-- Canonical header/footer scripts to unify layout across pages -->
+  <script src="assets/header/header.js"></script>
+  <script src="assets/footer/footer.js"></script>
 
   <style id="mpl-footer-css-v3">
     /* Scoped footer styles (safe, minimal) */
@@ -449,10 +452,24 @@
   </script>
   <!-- mshare-seo-end -->
   <link rel="stylesheet" href="assets/css/nav-footer-uni.css" />
+  <style id="dlx-text-fix-v1">
+    /* Dyslexia page: ensure key texts are solid black for readability */
+    #dlxPage>h1 {
+      color: #0b0d10 !important;
+    }
+
+    /* Scope only the "Before practice" block (heading + its list) */
+    #beforePractice,
+    #beforePractice+ul,
+    #beforePractice+ul li,
+    #beforePractice+ul p {
+      color: #0b0d10 !important;
+    }
+  </style>
 </head>
 
 <body>
-<header class="site-header">
+  <header class="site-header">
     <div class="container navbar">
       <!-- Added logo-blue class to get the blue background -->
       <a id="brandLink" class="brand" data-href="index.html" href="index.html">
@@ -521,7 +538,7 @@
     </div>
   </header>
 
-  
+
 
   <a id="top" style="position:absolute;top:0;left:0;width:0;height:0;overflow:hidden"> </a>
 
@@ -544,7 +561,7 @@
     </div>
 
     <!-- 0) Before practice -->
-    <h2>Before practice (1–2 minutes)</h2>
+    <h2 id="beforePractice">Before practice (1–2 minutes)</h2>
     <ul>
       <li>Do one calming breath: <strong>4‑7‑8</strong> (inhale 4s, hold 7s, exhale 8s) or <strong>Coherent 5‑5</strong>
         (inhale 5s, exhale 5s).</li>
@@ -1860,7 +1877,7 @@
     })();
   </script>
 
-  
+
   <script>
     (function () {
       var COACH_KEY = 'mshare_coach_modules_v1';
@@ -1879,8 +1896,7 @@
     })();
   </script>
 
-<footer class="footer-2025" id="footer2025"> <div class="wrap"> <div class="grid"> <section class="col brand"> <div class="brandline"><span class="logo">M</span><div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div></div> <div class="theme-controls"> <label>Background<input id="themeColor" type="color" value="#0f172a" title="Input" placeholder=" "></label> <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1" title="Input" placeholder=" "></label> </div> <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div> </section> <section class="col"> <h4>Explore</h4> <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p> </section> <section class="col"> <h4>Toolkits</h4> <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p> </section> <section class="col"> <h4>Contact</h4> <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info@mindpaylink.com">info@mindpaylink.com</a></p> </section> </div> <div class="bottom"> <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div> <div class="credit">Designed by <b>Alkhadi M Koroma</b></div> </div> </div> <script>document.getElementById('yearFooter')&&(document.getElementById('yearFooter').textContent=(new Date).getFullYear());document.getElementById('backToTop')&&document.getElementById('backToTop').addEventListener('click',function(e){e.preventDefault();try{(document.getElementById('top')||document.body).scrollIntoView({behavior:'smooth',block:'start'})}catch{location.hash='#top'}})</script>
-</footer>
+  <!-- Footer is injected by assets/footer/footer.js -->
 </body>
 
 </html>
