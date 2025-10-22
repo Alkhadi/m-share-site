@@ -807,3 +807,8 @@ details.accordion .content {
   margin-top: 8px;
   flex-wrap: wrap;
 }
+
+/* --- Global override: make all H1 headings black site-wide --- */
+h1 {
+  color: #000 !important;
+}

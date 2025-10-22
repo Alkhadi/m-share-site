@@ -110,14 +110,14 @@
     .menu-group > .menu-toggle,
     .menu-group > .chevron,
     .menu-group [data-chevron] { cursor:pointer; touch-action: manipulation; }
-    .nav-group > a:focus,
-    .nav-group > button:focus,
-    .nav-group > .menu-toggle:focus,
-    .nav-group > .chevron:focus,
-    .menu-group > a:focus,
-    .menu-group > button:focus,
-    .menu-group > .menu-toggle:focus,
-    .menu-group > .chevron:focus { outline:2px solid currentColor; outline-offset:2px; }
+        .nav-group > a:focus-visible,
+        .nav-group > button:focus-visible,
+        .nav-group > .menu-toggle:focus-visible,
+        .nav-group > .chevron:focus-visible,
+        .menu-group > a:focus-visible,
+        .menu-group > button:focus-visible,
+        .menu-group > .menu-toggle:focus-visible,
+        .menu-group > .chevron:focus-visible { outline:2px solid currentColor; outline-offset:2px; }
   }
   @media (min-width: 1025px) { #navToggle{ display:none !important; } }
 `;

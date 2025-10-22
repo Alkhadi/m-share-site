@@ -93,16 +93,6 @@ html {
   --footer-ink: #dbeafe
 }
 
-/* Headings: make top-level page titles black in main content,
-   but keep headings inside cards/nav as-is for readability */
-main h1 {
-  color: #0b0d10;
-}
-
-.card h1 {
-  color: inherit;
-}
-
 body {
   background: var(--bg);
   color: var(--text)
