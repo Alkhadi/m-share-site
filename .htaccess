@@ -1,0 +1,22 @@
+# Deny access to dotfiles (e.g., .cleanup-backup-..., .git, etc.) except .well-known
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # If the request path contains a dotfile (starts with ".") but is not .well-known, forbid
+  RewriteCond %{REQUEST_URI} "/\\.(?!well-known/)"
+  RewriteRule ^ - [F]
+</IfModule>
+
+# Apache 2.4+ fallback (deny any dotfile directly requested)
+<IfModule mod_authz_core.c>
+  <FilesMatch "^\.">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+# Legacy Apache fallback
+<IfModule !mod_authz_core.c>
+  <FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
