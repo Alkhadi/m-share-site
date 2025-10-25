@@ -1,0 +1,13 @@
+{
+  "name": "mshare-paraphraser",
+  "type": "module",
+  "scripts": {
+    "start": "node server/paraphrase-proxy.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "node-fetch": "^3.3.2"
+  }
+}

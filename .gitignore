@@ -1,1 +1,4 @@
+server/
 server/.env
+.deploy-overwrite/
+**/.env

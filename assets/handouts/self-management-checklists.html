@@ -1,0 +1,43 @@
+
+<style id="mshare-voicecoach-hide">
+/* injected by disable-voice-coach.mjs */
+#voice-coach, #mshare-voicecoach, .voice-coach, .voicecoach,
+[data-voicecoach], [data-voice-coach], [data-widget="voice-coach"], [data-role="voice-coach"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+</style>
+
+<!-- voice-coach inline init removed -->
+
+<script id="mshare-voicecoach-kill">
+/* injected by remove-voice-coach.mjs */
+(function () {
+  try {
+    // Signal to any scripts: do not render coach.
+    window.__MShareDisableVoiceCoach = true;
+
+    // Remove existing and future coach UIs.
+    const SELECTORS = [
+      '#voice-coach', '#mshare-voicecoach', '.voice-coach', '.voicecoach',
+      '[id*="voice-coach"]', '[class*="voice-coach"]', '[id*="voicecoach"]', '[class*="voicecoach"]',
+      '[data-voicecoach]', '[data-voice-coach]', '[data-widget="voice-coach"]', '[data-role="voice-coach"]',
+      '[aria-label="Voice Coach"]', 'section[aria-label="Voice Coach"]', 'div[aria-label="Voice Coach"]'
+    ].join(',');
+
+    const nuke = () => document.querySelectorAll(SELECTORS).forEach(el => el.remove());
+    nuke();
+
+    const mo = new MutationObserver(() => nuke());
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    // Provide harmless globals in case anything references them.
+    const MS = (window.__MSHARE__ = window.__MSHARE__ || {});
+    MS.VoiceCoach = MS.VoiceCoach || {
+      init(){}, show(){}, hide(){}, start(){}, pause(){}, resume(){}, stop(){},
+    };
+  } catch (e) { /* no-op */ }
+})();
+</script>

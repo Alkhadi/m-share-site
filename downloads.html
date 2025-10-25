@@ -98,6 +98,16 @@
 <!-- mshare-seo-end -->
   <link rel="stylesheet" href="assets/css/footer-2025.css" />
   <link rel="stylesheet" href="assets/css/header-2025.css" />
+<style id="mshare-voicecoach-hide">
+/* injected by disable-voice-coach.mjs */
+#voice-coach, #mshare-voicecoach, .voice-coach, .voicecoach,
+[data-voicecoach], [data-voice-coach], [data-widget="voice-coach"], [data-role="voice-coach"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+</style>
 </head>
 
 <body>
@@ -358,6 +368,36 @@
 
 <footer class="footer-2025" id="footer2025"> <div class="wrap"> <div class="grid"> <section class="col brand"> <div class="brandline"><span class="logo">M</span><div><b>M Share</b><div class="muted">Quiet, practical tools for mental health and wellbeing.</div></div></div> <div class="theme-controls"> <label>Background<input id="themeColor" type="color" value="#0f172a" title="Input" placeholder=" "></label> <label>Brightness<input id="themeBrightness" type="range" min="0.85" max="1.25" step="0.01" value="1" title="Input" placeholder=" "></label> </div> <div class="actions" style="margin-top:8px"><a class="btn" href="#top" id="backToTop">Back to top ↑</a></div> </section> <section class="col"> <h4>Explore</h4> <p><a data-href="index.html" href="index.html">Wellbeing</a> • <a data-href="breath.html" href="breath.html">Breath</a> • <a data-href="focus.html" href="focus.html">Focus</a> • <a data-href="mindfulness.html" href="mindfulness.html">Mindfulness</a> • <a data-href="about.html" href="about.html">About</a></p> </section> <section class="col"> <h4>Toolkits</h4> <p><a data-href="mood-tools.html" href="mood-tools.html">Mood</a> • <a data-href="breath-tools.html" href="breath-tools.html">Breath Tools</a> • <a data-href="sleep-tools.html" href="sleep-tools.html">Sleep</a> • <a data-href="anxiety-tools.html" href="anxiety-tools.html">Anxiety</a> • <a data-href="stress-tools.html" href="stress-tools.html">Stress</a></p> </section> <section class="col"> <h4>Contact</h4> <p><a data-href="contact.html" href="contact.html">Contact</a> • <a href="mailto:info@mindpaylink.com">info@mindpaylink.com</a></p> </section> </div> <div class="bottom"> <div>© <span id="yearFooter"></span> MindPayLink · Educational information only; not medical advice.</div> <div class="credit">Designed by <b>Alkhadi M Koroma</b></div> </div> </div> <script>document.getElementById('yearFooter')&&(document.getElementById('yearFooter').textContent=(new Date).getFullYear());document.getElementById('backToTop')&&document.getElementById('backToTop').addEventListener('click',function(e){e.preventDefault();try{(document.getElementById('top')||document.body).scrollIntoView({behavior:'smooth',block:'start'})}catch{location.hash='#top'}})</script>
 </footer>
+<!-- voice-coach inline init removed -->
+<script id="mshare-voicecoach-kill">
+/* injected by remove-voice-coach.mjs */
+(function () {
+  try {
+    // Signal to any scripts: do not render coach.
+    window.__MShareDisableVoiceCoach = true;
+
+    // Remove existing and future coach UIs.
+    const SELECTORS = [
+      '#voice-coach', '#mshare-voicecoach', '.voice-coach', '.voicecoach',
+      '[id*="voice-coach"]', '[class*="voice-coach"]', '[id*="voicecoach"]', '[class*="voicecoach"]',
+      '[data-voicecoach]', '[data-voice-coach]', '[data-widget="voice-coach"]', '[data-role="voice-coach"]',
+      '[aria-label="Voice Coach"]', 'section[aria-label="Voice Coach"]', 'div[aria-label="Voice Coach"]'
+    ].join(',');
+
+    const nuke = () => document.querySelectorAll(SELECTORS).forEach(el => el.remove());
+    nuke();
+
+    const mo = new MutationObserver(() => nuke());
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+
+    // Provide harmless globals in case anything references them.
+    const MS = (window.__MSHARE__ = window.__MSHARE__ || {});
+    MS.VoiceCoach = MS.VoiceCoach || {
+      init(){}, show(){}, hide(){}, start(){}, pause(){}, resume(){}, stop(){},
+    };
+  } catch (e) { /* no-op */ }
+})();
+</script>
 </body>
 
 </html>
