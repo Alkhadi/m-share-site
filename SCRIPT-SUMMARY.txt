@@ -1,0 +1,218 @@
+================================================================================
+  M SHARE - FOOTER UPDATE SCRIPT PACKAGE
+================================================================================
+
+📦 PACKAGE CONTENTS:
+--------------------
+
+1. fix-readability-apply-from-index.mjs (14KB)
+   → Main script - One-shot site patcher
+   → Replaces headers/footers across all HTML pages
+   → Adds typography and readability CSS
+   → Creates timestamped backups
+
+2. README-fix-readability.md (5.8KB)
+   → Complete documentation
+   → Detailed feature explanations
+   → Troubleshooting guide
+   → Revert instructions
+
+3. FOOTER-STRUCTURE.md (4.3KB)
+   → Footer architecture overview
+   → Visual layout diagram
+   → Component descriptions
+   → CSS file details
+
+4. QUICK-START.md (4.8KB)
+   → Fast-track usage guide
+   → Step-by-step instructions
+   → Quick reference tables
+   → Checklist
+
+5. SCRIPT-SUMMARY.txt (this file)
+   → Package overview
+   → Quick reference
+
+================================================================================
+  ⚡ QUICK USAGE
+================================================================================
+
+Preview (recommended first):
+  $ node fix-readability-apply-from-index.mjs --dry-run
+
+Apply changes:
+  $ node fix-readability-apply-from-index.mjs
+
+================================================================================
+  ✨ WHAT THE SCRIPT DOES
+================================================================================
+
+✅ Extracts header & footer from index.html
+✅ Replaces them on all HTML pages site-wide
+✅ Adds ChatGPT 5 Pro typography (gpt5-typography class)
+✅ Creates readability CSS with professional contrast
+✅ Ensures footer has Explorer section with all navigation
+✅ Ensures footer has Theme controls for color changes
+✅ Creates timestamped backups (*.oneshot.bak.YYYY-MM-DDTHH-MM-SSZ)
+✅ Idempotent - safe to run multiple times
+
+================================================================================
+  📋 FOOTER FEATURES (FROM INDEX.HTML)
+================================================================================
+
+┌─────────────────────────────────────────────────────────────┐
+│ Brand Section      │ Theme Controls   │ Explorer Navigation│
+│ • M Share logo     │ • Auto mode      │ • Wellbeing        │
+│ • Description      │ • Color picker   │ • Conditions       │
+│ • Support links    │ • Brightness     │ • Breathing & Focus│
+│                    │ • Reset button   │ • Toolkits         │
+│                    │                  │ • About            │
+└─────────────────────────────────────────────────────────────┘
+
+Explorer Section:
+  → Dynamically built from header navigation
+  → Chevron dropdowns for each menu section
+  → Shows all pages and submenus
+  → Keyboard accessible
+
+Theme Controls:
+  → Auto day/night switching (7 AM - 7 PM)
+  → Custom color picker
+  → Brightness slider (0.85 - 1.25)
+  → Settings persist in localStorage
+
+================================================================================
+  🎨 CSS FILES CREATED
+================================================================================
+
+1. assets/css/chatgpt5-typography.css
+   → Professional system fonts
+   → Optimized rendering
+
+2. assets/css/readability-professional.css
+   → Contrast-aware text colors
+   → White on dark, black on light
+   → Professional button/link states
+   → 2% spacing between sections
+   → Form readability
+   → Footer styling
+
+================================================================================
+  🎯 COLOR PALETTE
+================================================================================
+
+Primary:  #0f172a (slate-900)  │  Info:    #2563eb (blue-600)
+Accent:   #14b8a6 (teal-500)   │  Success: #16a34a (green-600)
+Warning:  #f59e0b (amber-500)  │  Danger:  #dc2626 (red-600)
+
+Text colors:
+  → WHITE (#ffffff) on dark/colored surfaces
+  → BLACK (#111111) on light/white surfaces
+  → Headings/paragraphs inherit container color
+
+================================================================================
+  📊 DRY-RUN OUTPUT EXAMPLE
+================================================================================
+
+One-shot: Replace header/footer from index.html + readability/typography (DRY RUN)
+[dry] write assets/css/readability-professional.css
+[dry] write assets/css/chatgpt5-typography.css
+[dry] 4-7-8-breathing.html
+[dry] about.html
+[dry] adhd-tools.html
+... (33 total files)
+
+Summary:
+  HTML files modified: 33
+  DRY RUN complete. No files were written.
+
+================================================================================
+  ⚠️ IMPORTANT NOTES
+================================================================================
+
+✓ Safe to run multiple times (idempotent)
+✓ Creates backups automatically
+✓ Run dry-run first to preview changes
+✓ For LOCAL use only - do NOT run on production server
+✓ Review changes before deploying
+
+================================================================================
+  🔄 REVERTING CHANGES
+================================================================================
+
+Single file:
+  $ cp about.html.oneshot.bak.2025-10-17T09-22-45-678Z about.html
+
+All files (replace timestamp):
+  $ for file in *.oneshot.bak.2025-10-17T09-22-45-*; do
+      original="${file%.oneshot.bak.*}"
+      cp "$file" "$original"
+    done
+
+================================================================================
+  📖 DOCUMENTATION
+================================================================================
+
+Start here:      QUICK-START.md
+Complete guide:  README-fix-readability.md
+Architecture:    FOOTER-STRUCTURE.md
+This file:       SCRIPT-SUMMARY.txt
+Script code:     fix-readability-apply-from-index.mjs
+
+================================================================================
+  🆘 TROUBLESHOOTING
+================================================================================
+
+Problem: "ERROR: index.html not found"
+Solution: Run from site root directory
+
+Problem: Changes not visible
+Solution: Clear browser cache (Ctrl+Shift+R)
+
+Problem: Theme controls not working
+Solution: Check browser console, clear localStorage
+
+Problem: Footer not showing
+Solution: Verify index.html has <footer> element
+
+================================================================================
+  ✅ VERIFICATION CHECKLIST
+================================================================================
+
+Before running:
+  [ ] In site root directory
+  [ ] index.html exists with proper footer
+  [ ] Ran --dry-run to preview
+
+After running:
+  [ ] CSS files in assets/css/
+  [ ] Backup files created
+  [ ] Footer appears on all pages
+  [ ] Theme controls work
+  [ ] Explorer navigation expands/collapses
+  [ ] Tested on multiple pages
+
+Ready to deploy:
+  [ ] All tests passed
+  [ ] Visual appearance correct
+  [ ] No console errors
+  [ ] Mobile/desktop responsive
+
+================================================================================
+  🎓 REFERENCE
+================================================================================
+
+Inspired by: https://mindpaylink.com footer design
+Features:    Explorer section + Theme controls
+Design:      Professional, accessible, responsive
+
+================================================================================
+
+Script created: October 2025
+Version:        1.0
+License:        Per repository license
+
+For questions or issues, please refer to the documentation files or contact
+the repository maintainer.
+
+================================================================================
